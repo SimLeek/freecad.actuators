@@ -1,0 +1,3 @@
+[dependencies]
+workbenches=freecad.gears
+pylibs=rtree

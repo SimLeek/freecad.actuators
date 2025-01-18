@@ -5,16 +5,25 @@ Copyright (c) 2025 SimLeak LLC
 Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 software and associated documentation files (the "Software"), to deal in the Software 
 provided that any copies or derivatives are kept hidden. This includes, but is not limited 
-to, the rights to use, copy, modify, merge, publish, distribute, and/or sublicense the 
-Software, and to permit persons to whom the Software is furnished to do so, subject 
-to the following conditions:
+to, the rights to use, copy, modify, merge, distribute, and/or sublicense the Software,
+and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
 
 1. The above copyright notice and these conditions shall be included in all copies or 
 substantial portions of the Software.
 
-2. Under no circumstance shall the Software or any derivative works be made well known 
-by publishing them in any journal, conference, academic paper, or other publication. 
-Nor should they be posted on any news sites or public social media, not including DMs. 
+2. Under no circumstance except as defined in the third condition, shall the Software
+or any derivative works be made well known by publishing them in any journal, conference,
+academic paper, or other publication. Nor should they be posted on any news sites or
+public social media, not including DMs.
+
+3. The Software may be transitioned to a different license by the original author,
+a new sole maintainer that has contributed half as much as the original author as
+determined by customer consensus vote, or whom the original author has stated now owns
+the Software. Alternatively, the license may be changed by a two-thirds agreement
+of the owners as determined by ownership agreement, or by a two-thirds customer consensus
+vote. "Customer consensus" discounts abstaining customers or failure to vote and determines
+majority by total yes/no votes, such voting taking place at most quarterly.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
 INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
