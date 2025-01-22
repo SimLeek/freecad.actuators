@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="min_max_teeth_page">
     <property name="geometry">
@@ -59,7 +59,7 @@
         <item>
          <widget class="QSpinBox" name="min_sun_teeth_spinbox">
           <property name="minimum">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="maximum">
            <number>99999</number>
@@ -67,14 +67,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="min_sun_teeth_spinbox_lock">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset theme="lock"/>
-          </property>
-         </widget>
+         <widget class="LockUnlockButton" name="min_sun_teeth_spinbox_lock"/>
         </item>
         <item>
          <widget class="QLabel" name="label_2">
@@ -86,7 +79,7 @@
         <item>
          <widget class="QSpinBox" name="max_sun_teeth_spinbox">
           <property name="minimum">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="maximum">
            <number>99999</number>
@@ -94,14 +87,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="max_sun_teeth_spinbox_lock">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset theme="lock"/>
-          </property>
-         </widget>
+         <widget class="LockUnlockButton" name="max_sun_teeth_spinbox_lock"/>
         </item>
        </layout>
       </item>
@@ -117,7 +103,7 @@
         <item>
          <widget class="QSpinBox" name="min_planet_teeth_spinbox">
           <property name="minimum">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="maximum">
            <number>99999</number>
@@ -125,14 +111,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="min_planet_teeth_spinbox_lock">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset theme="lock"/>
-          </property>
-         </widget>
+         <widget class="LockUnlockButton" name="min_planet_teeth_spinbox_lock"/>
         </item>
         <item>
          <widget class="QLabel" name="label_4">
@@ -144,7 +123,7 @@
         <item>
          <widget class="QSpinBox" name="max_planet_teeth_spinbox">
           <property name="minimum">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="maximum">
            <number>99999</number>
@@ -152,14 +131,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="max_planet_teeth_spinbox_lock">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset theme="lock"/>
-          </property>
-         </widget>
+         <widget class="LockUnlockButton" name="max_planet_teeth_spinbox_lock"/>
         </item>
        </layout>
       </item>
@@ -175,7 +147,7 @@
         <item>
          <widget class="QSpinBox" name="min_ring_teeth_spinbox">
           <property name="minimum">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="maximum">
            <number>99999</number>
@@ -183,14 +155,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="min_ring_teeth_spinbox_lock">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset theme="lock"/>
-          </property>
-         </widget>
+         <widget class="LockUnlockButton" name="min_ring_teeth_spinbox_lock"/>
         </item>
         <item>
          <widget class="QLabel" name="label_6">
@@ -202,7 +167,7 @@
         <item>
          <widget class="QSpinBox" name="max_ring_teeth_spinbox">
           <property name="minimum">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="maximum">
            <number>99999</number>
@@ -210,14 +175,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="max_ring_teeth_spinbox_lock">
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset theme="lock"/>
-          </property>
-         </widget>
+         <widget class="LockUnlockButton" name="max_ring_teeth_spinbox_lock"/>
         </item>
        </layout>
       </item>
@@ -241,20 +199,13 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>160</width>
+       <width>177</width>
        <height>89</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="1" column="2">
-       <widget class="QToolButton" name="output_combobox_lock">
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="output_combobox_lock"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_11">
@@ -264,7 +215,23 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="input_combobox"/>
+       <widget class="QComboBox" name="input_combobox">
+        <item>
+         <property name="text">
+          <string>Sun</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Ring</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Carrier</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_14">
@@ -274,17 +241,29 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QComboBox" name="output_combobox"/>
+       <widget class="QComboBox" name="output_combobox">
+        <property name="currentIndex">
+         <number>2</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Sun</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Ring</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Carrier</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QToolButton" name="input_combobo_lock">
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="input_combobo_lock"/>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_15">
@@ -294,17 +273,29 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QComboBox" name="fixed_combobox"/>
+       <widget class="QComboBox" name="fixed_combobox">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Sun</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Ring</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Carrier</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QToolButton" name="fixed_combobox_lock">
-        <property name="text">
-         <string>Fixed:</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="fixed_combobox_lock"/>
       </item>
      </layout>
     </widget>
@@ -332,24 +323,10 @@
        <widget class="QLineEdit" name="planet_clearance_lineedit"/>
       </item>
       <item row="0" column="2">
-       <widget class="QToolButton" name="gear_addendum_lineedit_lock">
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="gear_addendum_lineedit_lock"/>
       </item>
       <item row="1" column="2">
-       <widget class="QToolButton" name="planet_clearance_lineedit_lock">
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="planet_clearance_lineedit_lock"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_34">
@@ -368,7 +345,7 @@
       <item row="2" column="1">
        <widget class="QSpinBox" name="number_of_planets_spinbox">
         <property name="minimum">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="maximum">
          <number>99999</number>
@@ -376,14 +353,7 @@
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QToolButton" name="number_of_planets_spinbox_lock">
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock"/>
       </item>
      </layout>
     </widget>
@@ -398,15 +368,9 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="2">
-       <widget class="QToolButton" name="target_gear_ratio_lineedit_lock">
+       <widget class="LockUnlockButton" name="target_gear_ratio_lineedit_lock">
         <property name="layoutDirection">
-         <enum>Qt::LayoutDirection::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
+         <enum>Qt::LeftToRight</enum>
         </property>
        </widget>
       </item>
@@ -427,7 +391,7 @@
       <item row="1" column="1">
        <widget class="QProgressBar" name="gear_ratio_options_progress">
         <property name="value">
-         <number>24</number>
+         <number>100</number>
         </property>
        </widget>
       </item>
@@ -452,14 +416,7 @@
        <widget class="QComboBox" name="gear_ratio_options_combobox"/>
       </item>
       <item row="2" column="2">
-       <widget class="QToolButton" name="gear_ratio_options_combobox_lock">
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="gear_ratio_options_combobox_lock"/>
       </item>
      </layout>
     </widget>
@@ -541,27 +498,13 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QToolButton" name="yield_strength_lineedit_lock">
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="yield_strength_lineedit_lock"/>
       </item>
       <item row="0" column="1">
        <widget class="QComboBox" name="material_combobox"/>
       </item>
       <item row="0" column="2">
-       <widget class="QToolButton" name="material_combobox_lock">
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="material_combobox_lock"/>
       </item>
       <item row="1" column="1">
        <widget class="QLineEdit" name="yield_strength_lineedit"/>
@@ -577,14 +520,7 @@
        <widget class="QLineEdit" name="sliding_friction_lineedit"/>
       </item>
       <item row="2" column="2">
-       <widget class="QToolButton" name="sliding_friction_lineedit_lock">
-        <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="sliding_friction_lineedit_lock"/>
       </item>
      </layout>
     </widget>
@@ -593,20 +529,13 @@
       <rect>
        <x>0</x>
        <y>100</y>
-       <width>228</width>
+       <width>264</width>
        <height>120</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
       <item row="3" column="2">
-       <widget class="QToolButton" name="pressure_angle_lineedit_lock">
-        <property name="text">
-         <string>Module:</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="pressure_angle_lineedit_lock"/>
       </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="module_lineedit">
@@ -623,24 +552,10 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QToolButton" name="module_lineedit_lock">
-        <property name="text">
-         <string>Module:</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="module_lineedit_lock"/>
       </item>
       <item row="1" column="2">
-       <widget class="QToolButton" name="ring_pitch_circle_diam_lineedit_lock">
-        <property name="text">
-         <string>Module:</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="ring_pitch_circle_diam_lineedit_lock"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_19">
@@ -685,14 +600,7 @@
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QToolButton" name="sun_pitch_circle_diam_lineedit_lock">
-        <property name="text">
-         <string>Module:</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="sun_pitch_circle_diam_lineedit_lock"/>
       </item>
      </layout>
     </widget>
@@ -701,7 +609,7 @@
       <rect>
        <x>0</x>
        <y>230</y>
-       <width>177</width>
+       <width>261</width>
        <height>89</height>
       </rect>
      </property>
@@ -749,14 +657,7 @@
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QToolButton" name="height_lineedit_lock">
-        <property name="text">
-         <string>Fixed:</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="height_lineedit_lock"/>
       </item>
      </layout>
     </widget>
@@ -765,20 +666,13 @@
       <rect>
        <x>0</x>
        <y>330</y>
-       <width>160</width>
+       <width>261</width>
        <height>61</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_8">
       <item row="0" column="2">
-       <widget class="QToolButton" name="beta_lineedit_lock">
-        <property name="text">
-         <string>Module:</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="beta_lineedit_lock"/>
       </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="beta_lineedit">
@@ -809,20 +703,20 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QToolButton" name="double_helix_checkbox_lock">
-        <property name="text">
-         <string>Module:</string>
-        </property>
-        <property name="icon">
-         <iconset theme="lock"/>
-        </property>
-       </widget>
+       <widget class="LockUnlockButton" name="double_helix_checkbox_lock"/>
       </item>
      </layout>
     </widget>
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LockUnlockButton</class>
+   <extends>QToolButton</extends>
+   <header>lock_button_ui</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
