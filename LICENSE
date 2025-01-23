@@ -23,7 +23,8 @@ determined by customer consensus vote, or whom the original author has stated no
 the Software. Alternatively, the license may be changed by a two-thirds agreement
 of the owners as determined by ownership agreement, or by a two-thirds customer consensus
 vote. "Customer consensus" discounts abstaining customers or failure to vote and determines
-majority by total yes/no votes, such voting taking place at most quarterly.
+majority by total yes/no votes, such voting taking place at most quarterly. Once changed,
+the new license applies retroactively to all prior versions.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
 INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 

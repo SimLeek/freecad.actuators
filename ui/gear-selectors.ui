@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>451</width>
-    <height>564</height>
+    <width>1059</width>
+    <height>718</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,8 +23,326 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
+   <widget class="QWidget" name="shape_page">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>431</width>
+      <height>438</height>
+     </rect>
+    </property>
+    <attribute name="label">
+     <string>Shape</string>
+    </attribute>
+    <widget class="QWidget" name="gridLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>260</width>
+       <height>89</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>Yield Strength:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Material:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="LockUnlockButton" name="yield_strength_lineedit_lock"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="material_combobox"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="material_combobox_lock"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="yield_strength_lineedit"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>Sliding Friction Coefficient:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="sliding_friction_lineedit"/>
+      </item>
+      <item row="2" column="2">
+       <widget class="LockUnlockButton" name="sliding_friction_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_7">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>260</y>
+       <width>261</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="height_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_16">
+        <property name="text">
+         <string>Minimum Height:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_18">
+        <property name="text">
+         <string>Height:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="minimum_height_indicator_lineedit">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="LockUnlockButton" name="height_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_8">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>320</y>
+       <width>261</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_8">
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="beta_lineedit_lock"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="beta_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_22">
+        <property name="text">
+         <string>Beta:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_23">
+        <property name="text">
+         <string>Double Helix:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="double_helix_checkbox">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="LockUnlockButton" name="double_helix_checkbox_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_6">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>90</y>
+       <width>261</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_26">
+        <property name="text">
+         <string>=</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_20">
+        <property name="toolTip">
+         <string>If you don't know module and want to define this, set the module to the smallest possible module such as 3d printer resolution*6, then define this once you have teeth counts</string>
+        </property>
+        <property name="text">
+         <string>Ring Pitch Circle Diameter:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="module_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="module_lineedit_2">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="ring_pitch_circle_diam_lineedit">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="module_lineedit_lock"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_25">
+        <property name="text">
+         <string>Circular Pitch:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_19">
+        <property name="text">
+         <string>Module:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_24">
+        <property name="toolTip">
+         <string>If you don't know module and want to define this, set the module to the smallest possible module such as 3d printer resolution*6, then define this once you have teeth counts</string>
+        </property>
+        <property name="text">
+         <string>Sun Pitch Circle Diameter:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLabel" name="label_28">
+        <property name="text">
+         <string>=</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="sun_pitch_circle_diam_lineedit">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_27">
+        <property name="text">
+         <string>=</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_9">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>380</y>
+       <width>261</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_9">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_21">
+        <property name="text">
+         <string>Pressure Angle:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="pressure_angle_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="pressure_angle_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_10">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>230</y>
+       <width>261</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_10">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_17">
+        <property name="text">
+         <string>Highest Torque:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="module_lineedit_3">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="material_combobox_lock_2"/>
+      </item>
+     </layout>
+    </widget>
+   </widget>
    <widget class="QWidget" name="min_max_teeth_page">
     <property name="geometry">
      <rect>
@@ -218,6 +536,11 @@
        <widget class="QComboBox" name="input_combobox">
         <item>
          <property name="text">
+          <string>Any</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Sun</string>
          </property>
         </item>
@@ -243,8 +566,13 @@
       <item row="1" column="1">
        <widget class="QComboBox" name="output_combobox">
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
+        <item>
+         <property name="text">
+          <string>Any</string>
+         </property>
+        </item>
         <item>
          <property name="text">
           <string>Sun</string>
@@ -275,8 +603,13 @@
       <item row="2" column="1">
        <widget class="QComboBox" name="fixed_combobox">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
+        <item>
+         <property name="text">
+          <string>Any</string>
+         </property>
+        </item>
         <item>
          <property name="text">
           <string>Sun</string>
@@ -345,7 +678,7 @@
       <item row="2" column="1">
        <widget class="QSpinBox" name="number_of_planets_spinbox">
         <property name="minimum">
-         <number>1</number>
+         <number>3</number>
         </property>
         <property name="maximum">
          <number>99999</number>
@@ -461,260 +794,13 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="shape_page">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>431</width>
-      <height>438</height>
-     </rect>
-    </property>
-    <attribute name="label">
-     <string>Shape</string>
-    </attribute>
-    <widget class="QWidget" name="gridLayoutWidget_5">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>260</width>
-       <height>89</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_12">
-        <property name="text">
-         <string>Yield Strength:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>Material:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="LockUnlockButton" name="yield_strength_lineedit_lock"/>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="material_combobox"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="material_combobox_lock"/>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="yield_strength_lineedit"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_13">
-        <property name="text">
-         <string>Sliding Friction Coefficient:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="sliding_friction_lineedit"/>
-      </item>
-      <item row="2" column="2">
-       <widget class="LockUnlockButton" name="sliding_friction_lineedit_lock"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_6">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>100</y>
-       <width>264</width>
-       <height>120</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_6">
-      <item row="3" column="2">
-       <widget class="LockUnlockButton" name="pressure_angle_lineedit_lock"/>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="module_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="ring_pitch_circle_diam_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="module_lineedit_lock"/>
-      </item>
-      <item row="1" column="2">
-       <widget class="LockUnlockButton" name="ring_pitch_circle_diam_lineedit_lock"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_19">
-        <property name="text">
-         <string>Module:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_21">
-        <property name="text">
-         <string>Pressure Angle:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="pressure_angle_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_20">
-        <property name="text">
-         <string>Ring Pitch Circle Diameter:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_24">
-        <property name="text">
-         <string>Sun Pitch Circle Diameter:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="sun_pitch_circle_diam_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="LockUnlockButton" name="sun_pitch_circle_diam_lineedit_lock"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_7">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>230</y>
-       <width>261</width>
-       <height>89</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_7">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_16">
-        <property name="text">
-         <string>Minimum Height:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_17">
-        <property name="text">
-         <string>Efficiency:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="efficiency_indicator_lineedit">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_18">
-        <property name="text">
-         <string>Height:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="minimum_height_indicator_lineedit">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="height_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="LockUnlockButton" name="height_lineedit_lock"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_8">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>330</y>
-       <width>261</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_8">
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="beta_lineedit_lock"/>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="beta_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_22">
-        <property name="text">
-         <string>Beta:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_23">
-        <property name="text">
-         <string>Double Helix:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QCheckBox" name="double_helix_checkbox">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="LockUnlockButton" name="double_helix_checkbox_lock"/>
-      </item>
-     </layout>
-    </widget>
-   </widget>
   </widget>
  </widget>
  <customwidgets>
   <customwidget>
    <class>LockUnlockButton</class>
    <extends>QToolButton</extends>
-   <header>lock_button_ui</header>
+   <header>.lock_button_ui</header>
   </customwidget>
  </customwidgets>
  <resources/>

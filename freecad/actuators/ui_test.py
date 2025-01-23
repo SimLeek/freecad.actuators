@@ -28,6 +28,16 @@ class MyDialog(QDialog):
         self.ui.max_ring_teeth_spinbox_lock.lock_state_changed.connect(self.on_max_ring_lock_changed)
         self.ui.max_planet_teeth_spinbox_lock.lock_state_changed.connect(self.on_max_planet_lock_changed)
 
+        self.ui.input_combobox.currentIndexChanged.connect(self.on_combobox_changed)
+        self.ui.output_combobox.currentIndexChanged.connect(self.on_combobox_changed)
+        self.ui.fixed_combobox.currentIndexChanged.connect(self.on_combobox_changed)
+
+        self.ui.input_combobo_lock.lock_state_changed.connect(self.on_combobox_lock_changed)
+        self.ui.output_combobox_lock.lock_state_changed.connect(self.on_combobox_lock_changed)
+        self.ui.fixed_combobox_lock.lock_state_changed.connect(self.on_combobox_lock_changed)
+
+        self.reset_unlocked_comboboxes()
+
     # region min_planetary
 
     def recalculate_min_ring(self):
@@ -217,6 +227,70 @@ class MyDialog(QDialog):
             self.ui.max_planet_teeth_spinbox_lock.is_locked = True
 
     # endregion max_planetary
+
+    # region input_output_fixed
+
+    def get_locked_values(self):
+        """Returns a dictionary of locked combobox values."""
+        locked_values = {}
+        if self.ui.input_combobo_lock.is_locked:
+            locked_values["input"] = self.ui.input_combobox.currentText()
+        if self.ui.output_combobox_lock.is_locked:
+            locked_values["output"] = self.ui.output_combobox.currentText()
+        if self.ui.fixed_combobox_lock.is_locked:
+            locked_values["fixed"] = self.ui.fixed_combobox.currentText()
+        return locked_values
+
+    def reset_unlocked_comboboxes(self):
+        """Sets unlocked comboboxes to 'Any' by default."""
+        self.computing = True
+        if not self.ui.input_combobo_lock.is_locked:
+            self.ui.input_combobox.setCurrentText("Any")
+        if not self.ui.output_combobox_lock.is_locked:
+            self.ui.output_combobox.setCurrentText("Any")
+        if not self.ui.fixed_combobox_lock.is_locked:
+            self.ui.fixed_combobox.setCurrentText("Any")
+        self.computing = False
+
+    def determine_remaining_value(self):
+        """Determines and sets the correct value for an unlocked combobox if two are locked."""
+        locked_values = self.get_locked_values()
+        all_options = {"Sun", "Ring", "Carrier"}
+
+        if len(locked_values) == 2:  # If two are locked, set the remaining one
+            used_values = set(locked_values.values())
+            remaining_value = (all_options - used_values).pop()  # The only remaining valid option
+
+            self.computing = True
+            if not self.ui.input_combobo_lock.is_locked:
+                self.ui.input_combobox.setCurrentText(remaining_value)
+            elif not self.ui.output_combobox_lock.is_locked:
+                self.ui.output_combobox.setCurrentText(remaining_value)
+            elif not self.ui.fixed_combobox_lock.is_locked:
+                self.ui.fixed_combobox.setCurrentText(remaining_value)
+            self.computing = False
+
+        elif len(locked_values) < 2:  # If fewer than 2 are locked, reset unlocked ones to 'Any'
+            self.reset_unlocked_comboboxes()
+
+    def on_combobox_changed(self, _):
+        """Triggered when a combobox value is changed manually."""
+        if not self.computing:
+            sender = self.sender()
+            if sender == self.ui.input_combobox:
+                self.ui.input_combobo_lock.is_locked = True
+            elif sender == self.ui.output_combobox:
+                self.ui.output_combobox_lock.is_locked = True
+            elif sender == self.ui.fixed_combobox:
+                self.ui.fixed_combobox_lock.is_locked = True
+
+            self.determine_remaining_value()
+
+    def on_combobox_lock_changed(self, _):
+        """Triggered when a combobox lock state is changed."""
+        self.determine_remaining_value()
+
+    # endregion input_output_fixed
 
 
 import sys

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'gear-selectorssYjnjI.ui'
+## Form generated from reading UI file 'gear-selectorsjMZQhd.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.16
 ##
@@ -173,6 +173,7 @@ class Ui_Dialog(object):
         self.input_combobox.addItem("")
         self.input_combobox.addItem("")
         self.input_combobox.addItem("")
+        self.input_combobox.addItem("")
         self.input_combobox.setObjectName(u"input_combobox")
 
         self.gridLayout.addWidget(self.input_combobox, 0, 1, 1, 1)
@@ -183,6 +184,7 @@ class Ui_Dialog(object):
         self.gridLayout.addWidget(self.label_14, 1, 0, 1, 1)
 
         self.output_combobox = QComboBox(self.gridLayoutWidget)
+        self.output_combobox.addItem("")
         self.output_combobox.addItem("")
         self.output_combobox.addItem("")
         self.output_combobox.addItem("")
@@ -201,6 +203,7 @@ class Ui_Dialog(object):
         self.gridLayout.addWidget(self.label_15, 2, 0, 1, 1)
 
         self.fixed_combobox = QComboBox(self.gridLayoutWidget)
+        self.fixed_combobox.addItem("")
         self.fixed_combobox.addItem("")
         self.fixed_combobox.addItem("")
         self.fixed_combobox.addItem("")
@@ -290,7 +293,7 @@ class Ui_Dialog(object):
 
         self.gear_ratio_options_progress = QProgressBar(self.gridLayoutWidget_3)
         self.gear_ratio_options_progress.setObjectName(u"gear_ratio_options_progress")
-        self.gear_ratio_options_progress.setValue(24)
+        self.gear_ratio_options_progress.setValue(100)
 
         self.gridLayout_3.addWidget(self.gear_ratio_options_progress, 1, 1, 1, 1)
 
@@ -555,7 +558,9 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
 
-        self.toolBox.setCurrentIndex(2)
+        self.toolBox.setCurrentIndex(1)
+        self.output_combobox.setCurrentIndex(0)
+        self.fixed_combobox.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Dialog)
@@ -571,19 +576,22 @@ class Ui_Dialog(object):
         self.label_6.setText(QCoreApplication.translate("Dialog", u"Max Ring Teeth:", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.min_max_teeth_page), QCoreApplication.translate("Dialog", u"Min/Max Teeth", None))
         self.label_11.setText(QCoreApplication.translate("Dialog", u"Input:", None))
-        self.input_combobox.setItemText(0, QCoreApplication.translate("Dialog", u"Sun", None))
-        self.input_combobox.setItemText(1, QCoreApplication.translate("Dialog", u"Ring", None))
-        self.input_combobox.setItemText(2, QCoreApplication.translate("Dialog", u"Carrier", None))
+        self.input_combobox.setItemText(0, QCoreApplication.translate("Dialog", u"Any", None))
+        self.input_combobox.setItemText(1, QCoreApplication.translate("Dialog", u"Sun", None))
+        self.input_combobox.setItemText(2, QCoreApplication.translate("Dialog", u"Ring", None))
+        self.input_combobox.setItemText(3, QCoreApplication.translate("Dialog", u"Carrier", None))
 
         self.label_14.setText(QCoreApplication.translate("Dialog", u"Output:", None))
-        self.output_combobox.setItemText(0, QCoreApplication.translate("Dialog", u"Carrier", None))
+        self.output_combobox.setItemText(0, QCoreApplication.translate("Dialog", u"Any", None))
         self.output_combobox.setItemText(1, QCoreApplication.translate("Dialog", u"Sun", None))
         self.output_combobox.setItemText(2, QCoreApplication.translate("Dialog", u"Ring", None))
+        self.output_combobox.setItemText(3, QCoreApplication.translate("Dialog", u"Carrier", None))
 
         self.label_15.setText(QCoreApplication.translate("Dialog", u"Fixed:", None))
-        self.fixed_combobox.setItemText(0, QCoreApplication.translate("Dialog", u"Ring", None))
+        self.fixed_combobox.setItemText(0, QCoreApplication.translate("Dialog", u"Any", None))
         self.fixed_combobox.setItemText(1, QCoreApplication.translate("Dialog", u"Sun", None))
-        self.fixed_combobox.setItemText(2, QCoreApplication.translate("Dialog", u"Carrier", None))
+        self.fixed_combobox.setItemText(2, QCoreApplication.translate("Dialog", u"Ring", None))
+        self.fixed_combobox.setItemText(3, QCoreApplication.translate("Dialog", u"Carrier", None))
 
         self.label_35.setText(QCoreApplication.translate("Dialog", u"Gear Addendum:", None))
         self.label_34.setText(QCoreApplication.translate("Dialog", u"Planet Clearance:", None))
