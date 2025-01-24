@@ -70,5 +70,5 @@ class QTorqueEdit(QLineEdit):
 
     def update_display(self):
         """Updates the text to reflect the current Nm value in the chosen display unit."""
-        converted_value = self.internal_nm / eval(self.TORQUE_CONVERSIONS[self.display_unit], {"__builtins__": {}})
+        converted_value = self.internal_nm / eval('1.0'+self.TORQUE_CONVERSIONS[self.display_unit], {"__builtins__": {}})
         self.setText(f"{converted_value:.4f}{self.display_unit}")  # 4 decimal places for small units

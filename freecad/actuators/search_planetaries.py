@@ -108,12 +108,13 @@ def _find_closest_matches(idx, target_value, num_results=1):
     for n in nearest_items_it:
         nearest_items_list.append(n.object)  # Combine the actual value with a, b, x, y values
     nearest_items_list.sort(key=lambda x: abs(x['gear_ratio']-target_value))
+    #print("found closest matches")
     return nearest_items_list
 
 
-def evaluate_and_search_2d(min_planet_2_teeth, max_planet_2_teeth,
-                           min_sun_2_teeth, max_sun_2_teeth,
-                           target_gear_ratio, num_results=1, num_planets = 3,
+def evaluate_and_search_2d(min_planet_teeth, max_planet_teeth,
+                           min_sun_teeth, max_sun_teeth,
+                           target_gear_ratio, update_progress, num_results=1, num_planets = 3,
                            addendum=None, clearance=0.5, circular_pitch=4.0, use_abs=False):
     # Create an R-tree index
     p = index.Property()
@@ -122,18 +123,22 @@ def evaluate_and_search_2d(min_planet_2_teeth, max_planet_2_teeth,
     if addendum is None:
         addendum = circular_pitch/math.pi  # addendum = module typically
 
+    full = (max_planet_teeth + 1 - min_planet_teeth) * (max_sun_teeth + 1 - min_sun_teeth)
     # Evaluate the function and store results in the R-tree
-    for planet_2_teeth in range(min_planet_2_teeth, max_planet_2_teeth + 1):
-        for sun_2_teeth in range(min_sun_2_teeth, max_sun_2_teeth + 1):
-            hom2 = _is_homogeneity_distribution_constraint_satisfied(sun_2_teeth, planet_2_teeth, num_planets)
-            neighbor2 = _is_neighbor_constraint_satisfied(sun_2_teeth, planet_2_teeth, num_planets, addendum, clearance, circular_pitch)
-            if not (hom2 and neighbor2):
+    for planet_teeth in range(min_planet_teeth, max_planet_teeth + 1):
+        for sun_teeth in range(min_sun_teeth, max_sun_teeth + 1):
+            partial = (planet_teeth - min_planet_teeth) * (max_sun_teeth + 1 - min_sun_teeth) + (sun_teeth - min_sun_teeth)
+            if update_progress is not None:
+                update_progress((partial/full)*100.0)
+            is_homo = _is_homogeneity_distribution_constraint_satisfied(sun_teeth, planet_teeth, num_planets)
+            is_good_neighbor = _is_neighbor_constraint_satisfied(sun_teeth, planet_teeth, num_planets, addendum, clearance, circular_pitch)
+            if not (is_homo and is_good_neighbor):
                 continue
-            result = evaluate_all_possible_ratios(planet_2_teeth, sun_2_teeth, 'Any', 'Any', 'Any')
+            result = evaluate_all_possible_ratios(planet_teeth, sun_teeth, 'Any', 'Any', 'Any')
             for r_gear, r_val in result.items():
                 abs_res = abs(r_val) if use_abs else r_val
-                idx.insert(0, (abs_res, 0,abs_res,0), obj={"gear_ratio":abs_res, "Planet Teeth":planet_2_teeth, "Sun Teeth":sun_2_teeth, "Fixed":r_gear[0], "Input":r_gear[1], "Output":r_gear[2]})
-
+                idx.insert(0, (abs_res, 0,abs_res,0), obj={"gear_ratio":abs_res, "Planet Teeth":planet_teeth, "Sun Teeth":sun_teeth, "Fixed":r_gear[0], "Input":r_gear[1], "Output":r_gear[2]})
+    # print("finding closest matches")
     # Perform the search for the closest match
     return _find_closest_matches(idx, target_gear_ratio, num_results)
 
@@ -161,3 +166,49 @@ if __name__ == "__main__":
     for m in closest_match:
         print(f"match: {m}")
     print(f"time:{t1-t0}")
+
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QPushButton, QComboBox, QLineEdit, QProgressBar
+from PySide2.QtCore import QThread, Signal
+from fractions import Fraction
+import time  # Simulating long function
+
+# Placeholder for long-running function
+
+class PlanetarySearchWorker(QThread):
+    """Worker thread for running long_func without freezing UI."""
+    progress_updated = Signal(int)
+    finished = Signal(list)  # Emits the result list when done
+
+    def __init__(self, min_planet_teeth, max_planet_teeth, min_sun_teeth, max_sun_teeth, target_gear_ratio, gear_addendum, planet_clearance, num_results, num_planets, circular_pitch, use_abs):
+        super().__init__()
+        self.min_planet_teeth = min_planet_teeth
+        self.max_planet_teeth = max_planet_teeth
+        self.min_sun_teeth = min_sun_teeth
+        self.max_sun_teeth = max_sun_teeth
+        self.target_gear_ratio = target_gear_ratio
+        self.gear_addendum = gear_addendum
+        self.planet_clearance = planet_clearance
+        self.num_results = num_results
+        self.num_planets = num_planets
+        self.circular_pitch = circular_pitch
+        self.use_abs = use_abs
+        self._abort = False
+
+    def run(self):
+        def update_progress(value):
+            self.progress_updated.emit(value)
+
+        def is_aborted():
+            return self._abort
+
+        results = evaluate_and_search_2d(self.min_planet_teeth, self.max_planet_teeth,
+                           self.min_sun_teeth, self.max_sun_teeth,
+                           self.target_gear_ratio, update_progress, num_results=self.num_results, num_planets = self.num_planets,
+                           addendum=self.gear_addendum, clearance=self.planet_clearance, circular_pitch=self.circular_pitch, use_abs=self.use_abs)
+        if results is not None:
+            self.finished.emit(results)
+
+    def abort(self):
+        """Signals the worker thread to stop."""
+        self._abort = True
+

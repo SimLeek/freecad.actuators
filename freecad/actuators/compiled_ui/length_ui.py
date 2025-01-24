@@ -60,7 +60,7 @@ class QLengthEdit(QLineEdit):
 
     def update_display(self):
         """Updates the text to reflect the current mm value in the chosen display unit."""
-        converted_value = self.internal_mm / eval(self.UNIT_CONVERSIONS[self.display_unit], {"__builtins__": {}})
+        converted_value = self.internal_mm / eval('1.0'+self.UNIT_CONVERSIONS[self.display_unit], {"__builtins__": {}})
         self.setText(f"{converted_value:.2f}{self.display_unit}")
 
 

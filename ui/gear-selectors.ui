@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>447</width>
-    <height>534</height>
+    <width>448</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,11 +19,11 @@
      <x>10</x>
      <y>20</y>
      <width>431</width>
-     <height>501</height>
+     <height>511</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="min_max_teeth_page">
     <property name="geometry">
@@ -31,7 +31,7 @@
       <x>0</x>
       <y>0</y>
       <width>431</width>
-      <height>377</height>
+      <height>387</height>
      </rect>
     </property>
     <attribute name="label">
@@ -41,7 +41,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>100</y>
        <width>431</width>
        <height>111</height>
       </rect>
@@ -185,7 +185,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>120</y>
+       <y>210</y>
        <width>177</width>
        <height>89</height>
       </rect>
@@ -301,77 +301,21 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="gridLayoutWidget_12">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>220</y>
-       <width>251</width>
-       <height>58</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_12">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_40">
-        <property name="text">
-         <string>Min Module:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLengthEdit" name="module_lineedit_6">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="module_lineedit_lock_2"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_41">
-        <property name="text">
-         <string>Min Circular Pitch:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLengthEdit" name="module_lineedit_7">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_42">
-        <property name="toolTip">
-         <string>This entry sets or is set by sun torque</string>
-        </property>
-        <property name="text">
-         <string>  =  </string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QWidget" name="gridLayoutWidget_14">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>280</y>
+       <y>300</y>
        <width>251</width>
        <height>58</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_14">
       <item row="0" column="2">
-       <widget class="LockUnlockButton" name="module_lineedit_lock_4"/>
+       <widget class="LockUnlockButton" name="min_height_lineedit_lock"/>
       </item>
       <item row="0" column="1">
-       <widget class="QLengthEdit" name="module_lineedit_10">
+       <widget class="QLengthEdit" name="min_height_lineedit">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -392,14 +336,70 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLengthEdit" name="module_lineedit_11">
+       <widget class="QLengthEdit" name="max_height_lineedit">
         <property name="enabled">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="LockUnlockButton" name="module_lineedit_lock_5"/>
+       <widget class="LockUnlockButton" name="max_height_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_12">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>251</width>
+       <height>58</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_12">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_40">
+        <property name="text">
+         <string>Min Module:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLengthEdit" name="min_module_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="min_module_lineedit_lock"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_41">
+        <property name="text">
+         <string>Min Circular Pitch:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLengthEdit" name="min_circular_pitch_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_42">
+        <property name="toolTip">
+         <string>This entry sets or is set by sun torque</string>
+        </property>
+        <property name="text">
+         <string>  =  </string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -407,7 +407,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>340</y>
+       <y>10</y>
        <width>251</width>
        <height>31</height>
       </rect>
@@ -424,14 +424,14 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLengthEdit" name="module_lineedit_12">
+       <widget class="QLengthEdit" name="max_ring_diam_lineedit">
         <property name="enabled">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="LockUnlockButton" name="module_lineedit_lock_6"/>
+       <widget class="LockUnlockButton" name="max_ring_diam_lineedit_lock"/>
       </item>
      </layout>
     </widget>
@@ -442,7 +442,7 @@
       <x>0</x>
       <y>0</y>
       <width>431</width>
-      <height>377</height>
+      <height>387</height>
      </rect>
     </property>
     <attribute name="label">
@@ -452,18 +452,45 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>90</y>
-       <width>299</width>
+       <y>140</y>
+       <width>385</width>
        <height>89</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="target_gear_ratio_lineedit_lock">
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Calculating Options:</string>
         </property>
        </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QPushButton" name="gear_ratio_options_abort">
+        <property name="text">
+         <string>Abort</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QProgressBar" name="gear_ratio_options_progress">
+        <property name="value">
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Options:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QComboBox" name="gear_ratio_options_combobox"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QFractionEdit" name="target_cear_ratio_lineedit"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_7">
@@ -472,41 +499,21 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>Calculating Options:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QProgressBar" name="gear_ratio_options_progress">
-        <property name="value">
-         <number>100</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QFractionEdit" name="target_cear_ratio_lineedit"/>
-      </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="gear_ratio_options_progress_abort">
-        <property name="text">
-         <string>Abort</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>Options:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QComboBox" name="gear_ratio_options_combobox"/>
-      </item>
       <item row="2" column="2">
+       <widget class="QPushButton" name="gear_ratio_options_calculate">
+        <property name="text">
+         <string>Calculate</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="target_gear_ratio_lineedit_lock">
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
        <widget class="LockUnlockButton" name="gear_ratio_options_combobox_lock"/>
       </item>
      </layout>
@@ -515,7 +522,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>270</y>
+       <y>320</y>
        <width>301</width>
        <height>61</height>
       </rect>
@@ -556,8 +563,8 @@
       <rect>
        <x>10</x>
        <y>0</y>
-       <width>208</width>
-       <height>90</height>
+       <width>231</width>
+       <height>141</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
@@ -570,6 +577,25 @@
          <string>Planet Clearance:</string>
         </property>
        </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLengthEdit" name="gear_addendum_lineedit"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="num_results_spinbox">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="LockUnlockButton" name="num_results_spinbox_lock"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="gear_addendum_lineedit_lock"/>
       </item>
       <item row="2" column="2">
        <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock"/>
@@ -591,9 +617,6 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLengthEdit" name="planet_clearance_lineedit"/>
-      </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_35">
         <property name="text">
@@ -601,11 +624,29 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLengthEdit" name="gear_addendum_lineedit"/>
+      <item row="1" column="1">
+       <widget class="QLengthEdit" name="planet_clearance_lineedit"/>
       </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="gear_addendum_lineedit_lock"/>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_43">
+        <property name="text">
+         <string>Number of Options:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_44">
+        <property name="text">
+         <string>Use Absolute Value:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="use_abs_checkbox">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -613,7 +654,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>180</y>
+       <y>230</y>
        <width>301</width>
        <height>89</height>
       </rect>
@@ -718,7 +759,7 @@
       <x>0</x>
       <y>0</y>
       <width>431</width>
-      <height>377</height>
+      <height>387</height>
      </rect>
     </property>
     <attribute name="label">

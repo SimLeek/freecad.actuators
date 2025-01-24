@@ -60,5 +60,5 @@ class QAngleEdit(QLineEdit):
 
     def update_display(self):
         """Updates the text to reflect the current degrees value in the chosen display unit."""
-        converted_value = self.internal_degrees / eval(self.UNIT_CONVERSIONS[self.display_unit], {"__builtins__": {}})
+        converted_value = self.internal_degrees / eval('1.0'+self.UNIT_CONVERSIONS[self.display_unit], {"__builtins__": {}})
         self.setText(f"{converted_value:.4f}{self.display_unit}")
