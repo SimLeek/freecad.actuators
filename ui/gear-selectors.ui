@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>448</width>
-    <height>550</height>
+    <width>484</width>
+    <height>622</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,20 +18,20 @@
     <rect>
      <x>10</x>
      <y>20</y>
-     <width>431</width>
-     <height>511</height>
+     <width>461</width>
+     <height>581</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="min_max_teeth_page">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>431</width>
-      <height>387</height>
+      <width>461</width>
+      <height>457</height>
      </rect>
     </property>
     <attribute name="label">
@@ -441,8 +441,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>431</width>
-      <height>387</height>
+      <width>461</width>
+      <height>457</height>
      </rect>
     </property>
     <attribute name="label">
@@ -753,168 +753,327 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="shape_page">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>431</width>
-      <height>387</height>
-     </rect>
-    </property>
+   <widget class="QWidget" name="page_2">
     <attribute name="label">
-     <string>Material and Height Requirements</string>
+     <string>Force Analysis</string>
     </attribute>
-    <widget class="QWidget" name="gridLayoutWidget_5">
+    <widget class="QWidget" name="gridLayoutWidget_7">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>90</y>
-       <width>260</width>
-       <height>89</height>
+       <y>120</y>
+       <width>421</width>
+       <height>151</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_12">
-        <property name="text">
-         <string>Yield Strength:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>Material:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="LockUnlockButton" name="yield_strength_lineedit_lock"/>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="material_combobox"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="material_combobox_lock"/>
-      </item>
+     <layout class="QGridLayout" name="gridLayout_7">
       <item row="1" column="1">
-       <widget class="QPressureEdit" name="yield_strength_lineedit"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_13">
-        <property name="text">
-         <string>Sliding Friction Coefficient:</string>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QEvalEdit" name="sliding_friction_lineedit"/>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEdit_4">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QLabel" name="label_54">
+        <property name="text">
+         <string>Ring Ft</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="7">
+       <widget class="QLineEdit" name="lineEdit_11">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLabel" name="label_61">
+        <property name="text">
+         <string>Planet Fn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QLabel" name="label_57">
+        <property name="text">
+         <string>Carrier Ft</string>
+        </property>
+       </widget>
       </item>
       <item row="2" column="2">
-       <widget class="LockUnlockButton" name="sliding_friction_lineedit_lock"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_9">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>340</y>
-       <width>261</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_9">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_21">
+       <widget class="QLabel" name="label_52">
         <property name="text">
-         <string>Pressure Angle:</string>
+         <string>Planet Fr</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QAngleEdit" name="pressure_angle_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
+      <item row="3" column="6">
+       <widget class="QLabel" name="label_59">
+        <property name="text">
+         <string>Carrier Fa</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="pressure_angle_lineedit_lock"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_6">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>180</y>
-       <width>221</width>
-       <height>89</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_6">
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_26">
-        <property name="toolTip">
-         <string>This entry sets or is set by module</string>
-        </property>
+      <item row="3" column="2">
+       <widget class="QLabel" name="label_53">
         <property name="text">
-         <string>=</string>
+         <string>Planet Fa</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="7">
+       <widget class="QLabel" name="label_64">
+        <property name="text">
+         <string>0</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLengthEdit" name="module_lineedit">
+      <item row="1" column="5">
+       <widget class="QLineEdit" name="lineEdit_8">
         <property name="enabled">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLengthEdit" name="module_lineedit_2">
+      <item row="4" column="5">
+       <widget class="QLineEdit" name="lineEdit_16">
         <property name="enabled">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="module_lineedit_lock"/>
+      <item row="3" column="4">
+       <widget class="QLabel" name="label_56">
+        <property name="text">
+         <string>Ring Fa</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="6">
+       <widget class="QLabel" name="label_58">
+        <property name="text">
+         <string>Carrier Fr</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLineEdit" name="lineEdit_7">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_50">
+        <property name="text">
+         <string>Sun Fa</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineEdit_14">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="7">
+       <widget class="QLineEdit" name="lineEdit_12">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="5">
+       <widget class="QLineEdit" name="lineEdit_10">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="7">
+       <widget class="QLineEdit" name="lineEdit_17">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="4">
+       <widget class="QLabel" name="label_62">
+        <property name="text">
+         <string>Ring Fn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLineEdit" name="lineEdit_5">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5">
+       <widget class="QLineEdit" name="lineEdit_9">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QLabel" name="label_55">
+        <property name="text">
+         <string>Ring Fr</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="label_25">
+       <widget class="QLabel" name="label_16">
         <property name="text">
-         <string>Circular Pitch:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_19">
-        <property name="text">
-         <string>Module:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_18">
-        <property name="text">
-         <string>Height:</string>
+         <string>Sun Ft</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLengthEdit" name="height_lineedit">
+       <widget class="QLineEdit" name="lineEdit_3">
         <property name="enabled">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
-       <widget class="LockUnlockButton" name="height_lineedit_lock"/>
+      <item row="2" column="3">
+       <widget class="QLineEdit" name="lineEdit_6">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_51">
+        <property name="text">
+         <string>Planet Ft</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="6">
+       <widget class="QLabel" name="label_63">
+        <property name="text">
+         <string>Carrier Fn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_49">
+        <property name="text">
+         <string>Sun Fr</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_60">
+        <property name="text">
+         <string>Sun Fn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLineEdit" name="lineEdit_15">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_151">
+        <property name="text">
+         <string>Sun T</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_55">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_152">
+        <property name="text">
+         <string>Planet T</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="lineEdit_56">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_153">
+        <property name="text">
+         <string>Ring T</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QLineEdit" name="lineEdit_57">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLabel" name="label_154">
+        <property name="text">
+         <string>Carrier T</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QLineEdit" name="lineEdit_58">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_13">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_13">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_2"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_45">
+        <property name="text">
+         <string>Max Input Torque:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_2"/>
       </item>
      </layout>
     </widget>
@@ -922,7 +1081,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>270</y>
+       <y>30</y>
        <width>261</width>
        <height>61</height>
       </rect>
@@ -964,94 +1123,507 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="gridLayoutWidget_10">
+    <widget class="QWidget" name="gridLayoutWidget_6">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
-       <width>261</width>
-       <height>89</height>
+       <y>270</y>
+       <width>447</width>
+       <height>61</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout_10">
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_31">
+     <layout class="QGridLayout" name="gridLayout_6">
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_156">
         <property name="text">
-         <string>Ring Torque:</string>
+         <string>Ring Zy</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QLineEdit" name="lineEdit_61">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_155">
+        <property name="text">
+         <string>Planet Zy</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="lineEdit_60">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_59">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_17">
         <property name="text">
-         <string>Sun Torque:</string>
+         <string>Sun Zy</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_18">
+        <property name="text">
+         <string>Sun form factor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_19">
+        <property name="text">
+         <string>Planet form factor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QLabel" name="label_25">
+        <property name="text">
+         <string>Ring form factor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_62">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLineEdit" name="lineEdit_63">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLineEdit" name="lineEdit_64">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_9">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>90</y>
+       <width>261</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_9">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_21">
+        <property name="text">
+         <string>Pressure Angle:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QTorqueEdit" name="module_lineedit_3">
+       <widget class="QAngleEdit" name="pressure_angle_lineedit">
         <property name="enabled">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="LockUnlockButton" name="material_combobox_lock_2"/>
+       <widget class="LockUnlockButton" name="pressure_angle_lineedit_lock"/>
       </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_32">
-        <property name="toolTip">
-         <string>This entry sets or is set by sun torque</string>
-        </property>
-        <property name="text">
-         <string>  =  </string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QTorqueEdit" name="module_lineedit_4">
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="shape_page">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>461</width>
+      <height>457</height>
+     </rect>
+    </property>
+    <attribute name="label">
+     <string>Material and Height Requirements</string>
+    </attribute>
+    <widget class="QWidget" name="gridLayoutWidget_18">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_18">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_19">
         <property name="enabled">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_38">
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_69">
         <property name="text">
-         <string>Carrier Torque:</string>
+         <string>min module</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QTorqueEdit" name="module_lineedit_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_66">
+        <property name="text">
+         <string>Max Module</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="lineEdit_21">
         <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QLabel" name="label_39">
-        <property name="toolTip">
-         <string>This entry sets or is set by sun torque</string>
-        </property>
-        <property name="text">
-         <string>  =  </string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
-   </widget>
-   <widget class="QWidget" name="page">
-    <attribute name="label">
-     <string>Extras</string>
-    </attribute>
+    <widget class="QWidget" name="gridLayoutWidget_17">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_17">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_13"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_67">
+        <property name="text">
+         <string>Max Bend Stress (σb, ~0.66*Yield)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_3"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_21">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>421</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_21">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_25">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="lineEdit_26">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QLineEdit" name="lineEdit_27">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_75">
+        <property name="text">
+         <string>Planet min h</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_76">
+        <property name="text">
+         <string>Sun min h</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_77">
+        <property name="text">
+         <string>Ring min h</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_19">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_19">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_23"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_68">
+        <property name="text">
+         <string>Elastic Modulus:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_4"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_16">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>200</y>
+       <width>421</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_16">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_18">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="lineEdit_20">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QLineEdit" name="lineEdit_22">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_73">
+        <property name="text">
+         <string>Planet min h</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_72">
+        <property name="text">
+         <string>Sun min h</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_74">
+        <property name="text">
+         <string>Ring min h</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_20">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_20">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_24"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_70">
+        <property name="text">
+         <string>Poisson Ratio:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_5"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>329</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Material</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboBox"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="QToolButton" name="number_of_planets_spinbox_lock_11"/>
+      </item>
+      <item row="0" column="3">
+       <widget class="QToolButton" name="number_of_planets_spinbox_lock_12"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>180</y>
+       <width>91</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bending Stress:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>240</y>
+       <width>91</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Contact Stress:</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_10">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>290</y>
+       <width>211</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_10">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_157">
+        <property name="text">
+         <string>Actual Module</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLengthEdit" name="actual_module_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_158">
+        <property name="text">
+         <string>Actual Height</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLengthEdit" name="actual_height_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="actual_module_lineedit_lock"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="LockUnlockButton" name="actual_height_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_43">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>350</y>
+       <width>211</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_43">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_159">
+        <property name="text">
+         <string>Actual Max Input Torque</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_160">
+        <property name="text">
+         <string>Safety Factor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_67">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_68">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
  </widget>
@@ -1070,21 +1642,6 @@
    <class>QFractionEdit</class>
    <extends>QLineEdit</extends>
    <header>.fraction_ui</header>
-  </customwidget>
-  <customwidget>
-   <class>QTorqueEdit</class>
-   <extends>QLineEdit</extends>
-   <header>.torque_ui</header>
-  </customwidget>
-  <customwidget>
-   <class>QPressureEdit</class>
-   <extends>QLineEdit</extends>
-   <header>.pressure_ui</header>
-  </customwidget>
-  <customwidget>
-   <class>QEvalEdit</class>
-   <extends>QLineEdit</extends>
-   <header>.eval_ui</header>
   </customwidget>
   <customwidget>
    <class>QAngleEdit</class>

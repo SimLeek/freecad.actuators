@@ -480,8 +480,8 @@ class MyDialog(QDialog):
         if not self.ui.gear_addendum_lineedit_lock.is_locked:
             self.computing = True
             try:
-                if self.ui.module_lineedit.get_mm_value()!=0:
-                    self.ui.gear_addendum_lineedit.set_mm_value(self.ui.module_lineedit.get_mm_value())
+                if self.ui.actual_module_lineedit.get_mm_value()!=0:
+                    self.ui.gear_addendum_lineedit.set_mm_value(self.ui.actual_module_lineedit.get_mm_value())
                 elif self.ui.min_module_lineedit.get_mm_value()!=0:
                     self.ui.gear_addendum_lineedit.set_mm_value(self.ui.min_module_lineedit.get_mm_value())
             finally:
@@ -491,8 +491,8 @@ class MyDialog(QDialog):
         if not self.ui.planet_clearance_lineedit_lock.is_locked:
             self.computing = True
             try:
-                if self.ui.module_lineedit.get_mm_value()!=0:
-                    self.ui.planet_clearance_lineedit.set_mm_value(self.ui.module_lineedit.get_mm_value()/2.0)
+                if self.ui.actual_module_lineedit.get_mm_value()!=0:
+                    self.ui.planet_clearance_lineedit.set_mm_value(self.ui.actual_module_lineedit.get_mm_value()/2.0)
                 elif self.ui.min_module_lineedit.get_mm_value()!=0:
                     self.ui.planet_clearance_lineedit.set_mm_value(self.ui.min_module_lineedit.get_mm_value()/2.0)
             finally:
