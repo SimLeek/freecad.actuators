@@ -2,6 +2,38 @@ import re
 import traceback
 from fractions import Fraction
 from PySide2.QtWidgets import QLineEdit
+import ast
+import math
+
+class FractionTransformer(ast.NodeTransformer):
+    def visit_Num(self, node):
+        # Convert all numbers to Fraction
+        return ast.copy_location(ast.Call(
+            func=ast.Name(id='Fraction', ctx=ast.Load()),
+            args=[ast.Str(s=str(node.n))],  # Pass as string to avoid float imprecision
+            keywords=[]
+        ), node)
+
+    def visit_Constant(self, node):
+        # Handle Python 3.8+ where numbers are under ast.Constant
+        if isinstance(node.value, (int, float)):
+            return ast.copy_location(ast.Call(
+                func=ast.Name(id='Fraction', ctx=ast.Load()),
+                args=[ast.Str(s=str(node.value))],
+                keywords=[]
+            ), node)
+        return node
+
+def safe_eval(text):
+    tree = ast.parse(text, mode='eval')
+    transformed_tree = FractionTransformer().visit(tree)
+    ast.fix_missing_locations(transformed_tree)
+
+    return eval(
+        compile(transformed_tree, "<string>", mode="eval"),
+        {"__builtins__": math.__dict__},  # Inject local math functions safely
+        {"Fraction": Fraction}
+    )
 
 
 class QFractionEdit(QLineEdit):
@@ -22,7 +54,7 @@ class QFractionEdit(QLineEdit):
         text = number_regex.sub(lambda m: f"Fraction({m.group(0)})", text)
 
         try:
-            return eval(text, {"__builtins__": {}}, {"Fraction": Fraction})  # Safe eval with Fraction
+            return safe_eval(text)  # Safe eval with Fraction
         except Exception:
             return traceback.format_exc()  # Return full error traceback as a string
 
@@ -34,7 +66,12 @@ class QFractionEdit(QLineEdit):
             self.internal_value = result
             self.setToolTip(f"{result.numerator}:{result.denominator}")
         else:
-            self.setToolTip(result)  # Show full error message in tooltip
+            try:
+                self.internal_value = Fraction(result)
+                self.setToolTip(f"{self.internal_value.numerator}:{self.internal_value.denominator}")
+            except (ValueError, TypeError):
+                self.internal_value = Fraction(0)
+
 
     def get_value(self):
         """Returns the stored Fraction value."""

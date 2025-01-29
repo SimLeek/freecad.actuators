@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'gear-selectorsCGFYMC.ui'
+## Form generated from reading UI file 'gear-selectorsgUSjKn.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.16
 ##
@@ -16,6 +16,8 @@ from .lock_button_ui import LockUnlockButton
 from .length_ui import QLengthEdit
 from .fraction_ui import QFractionEdit
 from .angle_ui import QAngleEdit
+from .object_combobox import ObjectComboBox
+from .torque_ui import QTorqueEdit
 
 
 class Ui_Dialog(object):
@@ -320,19 +322,25 @@ class Ui_Dialog(object):
         self.planetary_ratio_page.setGeometry(QRect(0, 0, 461, 457))
         self.gridLayoutWidget_3 = QWidget(self.planetary_ratio_page)
         self.gridLayoutWidget_3.setObjectName(u"gridLayoutWidget_3")
-        self.gridLayoutWidget_3.setGeometry(QRect(10, 140, 385, 89))
+        self.gridLayoutWidget_3.setGeometry(QRect(10, 150, 385, 101))
         self.gridLayout_3 = QGridLayout(self.gridLayoutWidget_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.label_9 = QLabel(self.gridLayoutWidget_3)
-        self.label_9.setObjectName(u"label_9")
-
-        self.gridLayout_3.addWidget(self.label_9, 2, 0, 1, 1)
-
         self.gear_ratio_options_abort = QPushButton(self.gridLayoutWidget_3)
         self.gear_ratio_options_abort.setObjectName(u"gear_ratio_options_abort")
 
         self.gridLayout_3.addWidget(self.gear_ratio_options_abort, 2, 3, 1, 1)
+
+        self.label_65 = QLabel(self.gridLayoutWidget_3)
+        self.label_65.setObjectName(u"label_65")
+        self.label_65.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.label_65, 1, 2, 1, 1)
+
+        self.label_24 = QLabel(self.gridLayoutWidget_3)
+        self.label_24.setObjectName(u"label_24")
+
+        self.gridLayout_3.addWidget(self.label_24, 1, 3, 1, 1)
 
         self.gear_ratio_options_progress = QProgressBar(self.gridLayoutWidget_3)
         self.gear_ratio_options_progress.setObjectName(u"gear_ratio_options_progress")
@@ -340,45 +348,50 @@ class Ui_Dialog(object):
 
         self.gridLayout_3.addWidget(self.gear_ratio_options_progress, 2, 1, 1, 1)
 
-        self.label_8 = QLabel(self.gridLayoutWidget_3)
-        self.label_8.setObjectName(u"label_8")
+        self.label_9 = QLabel(self.gridLayoutWidget_3)
+        self.label_9.setObjectName(u"label_9")
 
-        self.gridLayout_3.addWidget(self.label_8, 3, 0, 1, 1)
-
-        self.gear_ratio_options_combobox = QComboBox(self.gridLayoutWidget_3)
-        self.gear_ratio_options_combobox.setObjectName(u"gear_ratio_options_combobox")
-
-        self.gridLayout_3.addWidget(self.gear_ratio_options_combobox, 3, 1, 1, 1)
-
-        self.target_cear_ratio_lineedit = QFractionEdit(self.gridLayoutWidget_3)
-        self.target_cear_ratio_lineedit.setObjectName(u"target_cear_ratio_lineedit")
-
-        self.gridLayout_3.addWidget(self.target_cear_ratio_lineedit, 0, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.label_9, 2, 0, 1, 1)
 
         self.label_7 = QLabel(self.gridLayoutWidget_3)
         self.label_7.setObjectName(u"label_7")
 
         self.gridLayout_3.addWidget(self.label_7, 0, 0, 1, 1)
 
+        self.target_inverse_gear_ratio_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_3)
+        self.target_inverse_gear_ratio_lineedit_lock.setObjectName(u"target_inverse_gear_ratio_lineedit_lock")
+        self.target_inverse_gear_ratio_lineedit_lock.setLayoutDirection(Qt.LeftToRight)
+
+        self.gridLayout_3.addWidget(self.target_inverse_gear_ratio_lineedit_lock, 0, 2, 1, 1)
+
+        self.label_20 = QLabel(self.gridLayoutWidget_3)
+        self.label_20.setObjectName(u"label_20")
+
+        self.gridLayout_3.addWidget(self.label_20, 1, 0, 1, 1)
+
+        self.target_gear_ratio_lineedit = QFractionEdit(self.gridLayoutWidget_3)
+        self.target_gear_ratio_lineedit.setObjectName(u"target_gear_ratio_lineedit")
+
+        self.gridLayout_3.addWidget(self.target_gear_ratio_lineedit, 1, 1, 1, 1)
+
+        self.label_26 = QLabel(self.gridLayoutWidget_3)
+        self.label_26.setObjectName(u"label_26")
+
+        self.gridLayout_3.addWidget(self.label_26, 0, 3, 1, 1)
+
+        self.target_inverse_gear_ratio_lineedit = QFractionEdit(self.gridLayoutWidget_3)
+        self.target_inverse_gear_ratio_lineedit.setObjectName(u"target_inverse_gear_ratio_lineedit")
+
+        self.gridLayout_3.addWidget(self.target_inverse_gear_ratio_lineedit, 0, 1, 1, 1)
+
         self.gear_ratio_options_calculate = QPushButton(self.gridLayoutWidget_3)
         self.gear_ratio_options_calculate.setObjectName(u"gear_ratio_options_calculate")
 
         self.gridLayout_3.addWidget(self.gear_ratio_options_calculate, 2, 2, 1, 1)
 
-        self.target_gear_ratio_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_3)
-        self.target_gear_ratio_lineedit_lock.setObjectName(u"target_gear_ratio_lineedit_lock")
-        self.target_gear_ratio_lineedit_lock.setLayoutDirection(Qt.LeftToRight)
-
-        self.gridLayout_3.addWidget(self.target_gear_ratio_lineedit_lock, 0, 2, 1, 1)
-
-        self.gear_ratio_options_combobox_lock = LockUnlockButton(self.gridLayoutWidget_3)
-        self.gear_ratio_options_combobox_lock.setObjectName(u"gear_ratio_options_combobox_lock")
-
-        self.gridLayout_3.addWidget(self.gear_ratio_options_combobox_lock, 3, 2, 1, 1)
-
         self.gridLayoutWidget_4 = QWidget(self.planetary_ratio_page)
         self.gridLayoutWidget_4.setObjectName(u"gridLayoutWidget_4")
-        self.gridLayoutWidget_4.setGeometry(QRect(10, 320, 301, 61))
+        self.gridLayoutWidget_4.setGeometry(QRect(10, 330, 360, 61))
         self.gridLayout_4 = QGridLayout(self.gridLayoutWidget_4)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -392,19 +405,23 @@ class Ui_Dialog(object):
 
         self.gridLayout_4.addWidget(self.label_37, 1, 0, 1, 1)
 
-        self.is_planet_neighbor_constraint_satisfied_indicator_label = QLabel(self.gridLayoutWidget_4)
-        self.is_planet_neighbor_constraint_satisfied_indicator_label.setObjectName(u"is_planet_neighbor_constraint_satisfied_indicator_label")
+        self.checkBox = QCheckBox(self.gridLayoutWidget_4)
+        self.checkBox.setObjectName(u"checkBox")
+        self.checkBox.setEnabled(False)
+        self.checkBox.setChecked(True)
 
-        self.gridLayout_4.addWidget(self.is_planet_neighbor_constraint_satisfied_indicator_label, 0, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.checkBox, 0, 1, 1, 1)
 
-        self.is_homogeneity_distribution_constraint_satisfied_indicator_label = QLabel(self.gridLayoutWidget_4)
-        self.is_homogeneity_distribution_constraint_satisfied_indicator_label.setObjectName(u"is_homogeneity_distribution_constraint_satisfied_indicator_label")
+        self.checkBox_2 = QCheckBox(self.gridLayoutWidget_4)
+        self.checkBox_2.setObjectName(u"checkBox_2")
+        self.checkBox_2.setEnabled(False)
+        self.checkBox_2.setChecked(True)
 
-        self.gridLayout_4.addWidget(self.is_homogeneity_distribution_constraint_satisfied_indicator_label, 1, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.checkBox_2, 1, 1, 1, 1)
 
         self.gridLayoutWidget_2 = QWidget(self.planetary_ratio_page)
         self.gridLayoutWidget_2.setObjectName(u"gridLayoutWidget_2")
-        self.gridLayoutWidget_2.setGeometry(QRect(10, 0, 231, 141))
+        self.gridLayoutWidget_2.setGeometry(QRect(10, 0, 231, 145))
         self.gridLayout_2 = QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -484,64 +501,39 @@ class Ui_Dialog(object):
 
         self.gridLayoutWidget_11 = QWidget(self.planetary_ratio_page)
         self.gridLayoutWidget_11.setObjectName(u"gridLayoutWidget_11")
-        self.gridLayoutWidget_11.setGeometry(QRect(10, 230, 301, 89))
+        self.gridLayoutWidget_11.setGeometry(QRect(10, 260, 421, 31))
         self.gridLayout_11 = QGridLayout(self.gridLayoutWidget_11)
         self.gridLayout_11.setObjectName(u"gridLayout_11")
         self.gridLayout_11.setContentsMargins(0, 0, 0, 0)
-        self.label_20 = QLabel(self.gridLayoutWidget_11)
-        self.label_20.setObjectName(u"label_20")
+        self.gear_ratio_options_combobox = ObjectComboBox(self.gridLayoutWidget_11)
+        self.gear_ratio_options_combobox.setObjectName(u"gear_ratio_options_combobox")
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.gear_ratio_options_combobox.sizePolicy().hasHeightForWidth())
+        self.gear_ratio_options_combobox.setSizePolicy(sizePolicy)
 
-        self.gridLayout_11.addWidget(self.label_20, 0, 0, 1, 1)
+        self.gridLayout_11.addWidget(self.gear_ratio_options_combobox, 0, 1, 1, 1)
 
-        self.ring_pitch_circle_diam_lineedit = QLengthEdit(self.gridLayoutWidget_11)
-        self.ring_pitch_circle_diam_lineedit.setObjectName(u"ring_pitch_circle_diam_lineedit")
-        self.ring_pitch_circle_diam_lineedit.setEnabled(True)
+        self.gear_ratio_options_combobox_lock = LockUnlockButton(self.gridLayoutWidget_11)
+        self.gear_ratio_options_combobox_lock.setObjectName(u"gear_ratio_options_combobox_lock")
 
-        self.gridLayout_11.addWidget(self.ring_pitch_circle_diam_lineedit, 0, 1, 1, 1)
+        self.gridLayout_11.addWidget(self.gear_ratio_options_combobox_lock, 0, 2, 1, 1)
 
-        self.label_27 = QLabel(self.gridLayoutWidget_11)
-        self.label_27.setObjectName(u"label_27")
-        self.label_27.setAlignment(Qt.AlignCenter)
+        self.label_8 = QLabel(self.gridLayoutWidget_11)
+        self.label_8.setObjectName(u"label_8")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.label_8.sizePolicy().hasHeightForWidth())
+        self.label_8.setSizePolicy(sizePolicy1)
 
-        self.gridLayout_11.addWidget(self.label_27, 0, 2, 1, 1)
-
-        self.label_24 = QLabel(self.gridLayoutWidget_11)
-        self.label_24.setObjectName(u"label_24")
-
-        self.gridLayout_11.addWidget(self.label_24, 1, 0, 1, 1)
-
-        self.label_28 = QLabel(self.gridLayoutWidget_11)
-        self.label_28.setObjectName(u"label_28")
-        self.label_28.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_11.addWidget(self.label_28, 1, 2, 1, 1)
-
-        self.sun_pitch_circle_diam_lineedit = QLengthEdit(self.gridLayoutWidget_11)
-        self.sun_pitch_circle_diam_lineedit.setObjectName(u"sun_pitch_circle_diam_lineedit")
-        self.sun_pitch_circle_diam_lineedit.setEnabled(True)
-
-        self.gridLayout_11.addWidget(self.sun_pitch_circle_diam_lineedit, 1, 1, 1, 1)
-
-        self.label_29 = QLabel(self.gridLayoutWidget_11)
-        self.label_29.setObjectName(u"label_29")
-
-        self.gridLayout_11.addWidget(self.label_29, 2, 0, 1, 1)
-
-        self.sun_pitch_circle_diam_lineedit_2 = QLengthEdit(self.gridLayoutWidget_11)
-        self.sun_pitch_circle_diam_lineedit_2.setObjectName(u"sun_pitch_circle_diam_lineedit_2")
-        self.sun_pitch_circle_diam_lineedit_2.setEnabled(True)
-
-        self.gridLayout_11.addWidget(self.sun_pitch_circle_diam_lineedit_2, 2, 1, 1, 1)
-
-        self.label_30 = QLabel(self.gridLayoutWidget_11)
-        self.label_30.setObjectName(u"label_30")
-        self.label_30.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_11.addWidget(self.label_30, 2, 2, 1, 1)
+        self.gridLayout_11.addWidget(self.label_8, 0, 0, 1, 1)
 
         self.toolBox.addItem(self.planetary_ratio_page, u"Planetary Ratio Calculator")
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
+        self.page_2.setGeometry(QRect(0, 0, 461, 457))
         self.gridLayoutWidget_7 = QWidget(self.page_2)
         self.gridLayoutWidget_7.setObjectName(u"gridLayoutWidget_7")
         self.gridLayoutWidget_7.setGeometry(QRect(0, 120, 421, 151))
@@ -774,10 +766,10 @@ class Ui_Dialog(object):
         self.gridLayout_13 = QGridLayout(self.gridLayoutWidget_13)
         self.gridLayout_13.setObjectName(u"gridLayout_13")
         self.gridLayout_13.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_2 = QLineEdit(self.gridLayoutWidget_13)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.max_in_torque_lineedit = QTorqueEdit(self.gridLayoutWidget_13)
+        self.max_in_torque_lineedit.setObjectName(u"max_in_torque_lineedit")
 
-        self.gridLayout_13.addWidget(self.lineEdit_2, 0, 1, 1, 1)
+        self.gridLayout_13.addWidget(self.max_in_torque_lineedit, 0, 1, 1, 1)
 
         self.label_45 = QLabel(self.gridLayoutWidget_13)
         self.label_45.setObjectName(u"label_45")
@@ -1195,7 +1187,7 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
 
-        self.toolBox.setCurrentIndex(3)
+        self.toolBox.setCurrentIndex(0)
         self.output_combobox.setCurrentIndex(0)
         self.fixed_combobox.setCurrentIndex(0)
 
@@ -1242,45 +1234,28 @@ class Ui_Dialog(object):
 #endif // QT_CONFIG(tooltip)
         self.label_48.setText(QCoreApplication.translate("Dialog", u"Max Ring Diameter:", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.min_max_teeth_page), QCoreApplication.translate("Dialog", u"Constraints", None))
-        self.label_9.setText(QCoreApplication.translate("Dialog", u"Calculating Options:", None))
         self.gear_ratio_options_abort.setText(QCoreApplication.translate("Dialog", u"Abort", None))
-        self.label_8.setText(QCoreApplication.translate("Dialog", u"Options:", None))
-        self.label_7.setText(QCoreApplication.translate("Dialog", u"Target Gear Ratio:", None))
+#if QT_CONFIG(tooltip)
+        self.label_65.setToolTip(QCoreApplication.translate("Dialog", u"This entry sets or is set by sun torque", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_65.setText(QCoreApplication.translate("Dialog", u"  =  ", None))
+        self.label_24.setText(QCoreApplication.translate("Dialog", u"Gear Ratio R", None))
+        self.label_9.setText(QCoreApplication.translate("Dialog", u"Calculating Options:", None))
+        self.label_7.setText(QCoreApplication.translate("Dialog", u"Out-RPM / In-RPM", None))
+        self.label_20.setText(QCoreApplication.translate("Dialog", u"Out-T / In-T", None))
+        self.label_26.setText(QCoreApplication.translate("Dialog", u"R\u207b\u00b9", None))
         self.gear_ratio_options_calculate.setText(QCoreApplication.translate("Dialog", u"Calculate", None))
-        self.label_36.setText(QCoreApplication.translate("Dialog", u"Is planet neighbor constraint satisfied:", None))
-        self.label_37.setText(QCoreApplication.translate("Dialog", u"Is homogeneity distribution constraint satisfied:", None))
-        self.is_planet_neighbor_constraint_satisfied_indicator_label.setText(QCoreApplication.translate("Dialog", u"X", None))
-        self.is_homogeneity_distribution_constraint_satisfied_indicator_label.setText(QCoreApplication.translate("Dialog", u"X", None))
+        self.label_36.setText(QCoreApplication.translate("Dialog", u"Satisfy Planet Neighbor Constraint:", None))
+        self.label_37.setText(QCoreApplication.translate("Dialog", u"Satisfy Homogeneity Distribution Constraint:", None))
+        self.checkBox.setText("")
+        self.checkBox_2.setText("")
         self.label_34.setText(QCoreApplication.translate("Dialog", u"Planet Clearance:", None))
         self.label_33.setText(QCoreApplication.translate("Dialog", u"Number of Planets:", None))
         self.label_35.setText(QCoreApplication.translate("Dialog", u"Gear Addendum:", None))
         self.label_43.setText(QCoreApplication.translate("Dialog", u"Number of Options:", None))
         self.label_44.setText(QCoreApplication.translate("Dialog", u"Use Absolute Value:", None))
         self.use_abs_checkbox.setText("")
-#if QT_CONFIG(tooltip)
-        self.label_20.setToolTip(QCoreApplication.translate("Dialog", u"If you don't know module and want to define this, set the module to the smallest possible module such as 3d printer resolution*6, then define this once you have teeth counts", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_20.setText(QCoreApplication.translate("Dialog", u"Ring Pitch Circle Diameter:", None))
-#if QT_CONFIG(tooltip)
-        self.label_27.setToolTip(QCoreApplication.translate("Dialog", u"This entry sets or is set by module", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_27.setText(QCoreApplication.translate("Dialog", u"=", None))
-#if QT_CONFIG(tooltip)
-        self.label_24.setToolTip(QCoreApplication.translate("Dialog", u"If you don't know module and want to define this, set the module to the smallest possible module such as 3d printer resolution*6, then define this once you have teeth counts", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_24.setText(QCoreApplication.translate("Dialog", u"Sun Pitch Circle Diameter:", None))
-#if QT_CONFIG(tooltip)
-        self.label_28.setToolTip(QCoreApplication.translate("Dialog", u"This entry sets or is set by module", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_28.setText(QCoreApplication.translate("Dialog", u"  =  ", None))
-#if QT_CONFIG(tooltip)
-        self.label_29.setToolTip(QCoreApplication.translate("Dialog", u"If you don't know module and want to define this, set the module to the smallest possible module such as 3d printer resolution*6, then define this once you have teeth counts", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_29.setText(QCoreApplication.translate("Dialog", u"Planet Pitch Circle Diameter:", None))
-#if QT_CONFIG(tooltip)
-        self.label_30.setToolTip(QCoreApplication.translate("Dialog", u"This entry sets or is set by module", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_30.setText(QCoreApplication.translate("Dialog", u"=", None))
+        self.label_8.setText(QCoreApplication.translate("Dialog", u"Options:", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.planetary_ratio_page), QCoreApplication.translate("Dialog", u"Planetary Ratio Calculator", None))
         self.label_54.setText(QCoreApplication.translate("Dialog", u"Ring Ft", None))
         self.label_61.setText(QCoreApplication.translate("Dialog", u"Planet Fn", None))

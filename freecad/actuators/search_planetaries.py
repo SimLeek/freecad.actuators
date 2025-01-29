@@ -3,7 +3,86 @@ from fractions import Fraction
 import math
 from itertools import permutations
 
-def evaluate_gear_ratio(planet_teeth: int, sun_teeth: int, fixed: str, input_: str, output: str) -> float:
+
+class GearboxConstraint:
+    """
+    A class to encapsulate gearbox constraints and provide methods to evaluate
+    and search for gear ratios matching given criteria.
+    """
+
+    def __init__(
+            self,
+            min_planet_1_teeth,
+            max_planet_1_teeth,
+            min_sun_1_teeth,
+            max_sun_1_teeth,
+            num_planets=3,
+            addendum=1,
+            clearance=0.5,
+            circular_pitch=4,
+    ):
+        """
+        Initializes the GearboxConstraint with the given constraints.
+
+        Args:
+            min_planet_1_teeth (int): Minimum number of teeth for first stage planetary gears.
+            max_planet_1_teeth (int): Maximum number of teeth for first stage planetary gears.
+            min_sun_1_teeth (int): Minimum number of teeth for first stage sun gears.
+            max_sun_1_teeth (int): Maximum number of teeth for first stage sun gears.
+            num_planets (int): Number of planets in the system.
+            addendum (float): Addendum circle diameter.
+            clearance (float): Clearance between gears.
+            circular_pitch (float): Circular pitch of the gears.
+        """
+        self.min_p1 = min_planet_1_teeth
+        self.max_p1 = max_planet_1_teeth
+        self.min_s1 = min_sun_1_teeth
+        self.max_s1 = max_sun_1_teeth
+        self.num_planets = num_planets
+        self.addendum = addendum
+        self.clearance = clearance
+        self.circular_pitch = circular_pitch
+
+
+class GearboxResult:
+    """A class to encapsulate the results of a gearbox configuration."""
+
+    def __init__(self, fixed, _input, output, result,
+                 planet_teeth, sun_teeth):
+        """
+        Initialize a GearboxResult instance.
+
+        Args:
+            result (Fraction): Calculated gear ratio.
+            planet_teeth (int): Teeth count for first stage planetary gears.
+            sun_teeth (int): Teeth count for first stage sun gears.
+        """
+        self.fixed = fixed
+        self._input = _input
+        self.output = output
+        self.result = result
+        self.planet_1_teeth = planet_teeth
+        self.sun_1_teeth = sun_teeth
+        self.ring_teeth = 2*planet_teeth+sun_teeth
+
+    def __repr__(self):
+        """
+        String representation of the GearboxResult instance.
+        Returns:
+            str: Formatted string showing all component teeth counts and result.
+        """
+        return (f"["
+                f"R⁻¹={self.result},"
+                f" F={self.fixed},"
+                f" I={self._input},"
+                f" O={self.output},"
+                f" S={self.sun_1_teeth},"
+                f" P={self.planet_1_teeth},"
+                f" R={self.planet_1_teeth}"
+                f"]")
+
+
+def evaluate_inverse_gear_ratio(planet_teeth: int, sun_teeth: int, fixed: str, input_: str, output: str) -> Fraction:
     """
     Calculates the gear ratio for a planetary gearbox given the fixed, input, and output selections.
 
@@ -21,21 +100,21 @@ def evaluate_gear_ratio(planet_teeth: int, sun_teeth: int, fixed: str, input_: s
     # Define cases based on fixed component
     if fixed == "Sun":
         if input_ == "Ring" and output == "Carrier":
-            return 1 + sun_teeth / ring_teeth
+            return Fraction(ring_teeth, sun_teeth) + 1
         elif input_ == "Carrier" and output == "Ring":
-            return (ring_teeth / sun_teeth) + 1
+            return Fraction(ring_teeth, (sun_teeth + ring_teeth))
 
     elif fixed == "Ring":
         if input_ == "Sun" and output == "Carrier":
-            return 1 + ring_teeth / sun_teeth
+            return Fraction(sun_teeth, (ring_teeth + sun_teeth))
         elif input_ == "Carrier" and output == "Sun":
-            return sun_teeth / (ring_teeth + sun_teeth)
+            return 1 + Fraction(ring_teeth, sun_teeth)
 
     elif fixed == "Carrier":
         if input_ == "Sun" and output == "Ring":
-            return -ring_teeth / sun_teeth  # Negative indicates direction reversal
+            return Fraction(-sun_teeth , ring_teeth)  # Negative indicates direction reversal
         elif input_ == "Ring" and output == "Sun":
-            return -sun_teeth / ring_teeth  # Negative indicates direction reversal
+            return Fraction(-ring_teeth,sun_teeth)  # Negative indicates direction reversal
 
     raise ValueError(f"Invalid or undefined configuration: Fixed={fixed}, Input={input_}, Output={output}")
 
@@ -67,11 +146,13 @@ def evaluate_all_possible_ratios(planet_teeth: int, sun_teeth: int, fixed: str, 
 
     # If two slots are Any, generate all valid permutations
     elif len(any_slots) == 2:
+        slot_pos = [fixed, input_, output].index(known_slots[0])
         remaining_options = list(set(possible_values) - set(known_slots))
-        slot_combinations = [tuple([remaining_options[i] if fixed == "Any" else fixed,
-                                    remaining_options[1 - i] if input_ == "Any" else input_,
-                                    output])
+        slot_combinations = [[remaining_options[i],
+                                    remaining_options[1 - i]]
                              for i in range(2)]
+        for s in slot_combinations:
+            s.insert(slot_pos, known_slots[0])
 
     # If all three are Any, generate all permutations
     elif len(any_slots) == 3:
@@ -84,7 +165,7 @@ def evaluate_all_possible_ratios(planet_teeth: int, sun_teeth: int, fixed: str, 
     results = {}
     for fixed_val, input_val, output_val in slot_combinations:
         try:
-            ratio = evaluate_gear_ratio(planet_teeth, sun_teeth, fixed_val, input_val, output_val)
+            ratio = evaluate_inverse_gear_ratio(planet_teeth, sun_teeth, fixed_val, input_val, output_val)
             results[(fixed_val, input_val, output_val)] = ratio
         except ValueError as e:
             results[(fixed_val, input_val, output_val)] = str(e)  # Store the error as a message
@@ -102,52 +183,68 @@ def _is_neighbor_constraint_satisfied(sun_teeth, planet_teeth, num_planets, adde
     n = (sun_teeth+planet_teeth) * math.sin(2*math.pi/num_planets) - planet_teeth - 2 * addendum/circular_pitch - clearance/circular_pitch
     return n>0
 
+
 def _find_closest_matches(idx, target_value, num_results=1):
-    nearest_items_it = idx.nearest((target_value, 0, target_value,0), num_results=num_results, objects=True)
-    nearest_items_list = []
-    for n in nearest_items_it:
-        nearest_items_list.append(n.object)  # Combine the actual value with a, b, x, y values
-    nearest_items_list.sort(key=lambda x: abs(x['gear_ratio']-target_value))
-    #print("found closest matches")
+    nearest_items_it = idx.nearest((target_value, 0, target_value, 0), num_results=num_results, objects=True)
+    nearest_items_list = [n.object for n in nearest_items_it]
+    nearest_items_list.sort(key=lambda x: abs(x.result - target_value))
     return nearest_items_list
 
 
-def evaluate_and_search_2d(min_planet_teeth, max_planet_teeth,
-                           min_sun_teeth, max_sun_teeth,
-                           target_gear_ratio, update_progress, num_results=1, num_planets = 3,
-                           addendum=None, clearance=0.5, circular_pitch=4.0, use_abs=False):
-    # Create an R-tree index
-    p = index.Property()
-    #p.dimension = 1
-    idx = index.Index(properties=p)
-    if addendum is None:
-        addendum = circular_pitch/math.pi  # addendum = module typically
+def evaluate_and_search_2d(constraints, target_gear_ratio, update_progress=None, num_results=1, use_abs=False,
+                           fixed='Any', input='Any', output='Any'):
+    """
+    Evaluates gearbox configurations based on given constraints and searches for the closest match to the target gear ratio.
 
-    full = (max_planet_teeth + 1 - min_planet_teeth) * (max_sun_teeth + 1 - min_sun_teeth)
-    # Evaluate the function and store results in the R-tree
-    for planet_teeth in range(min_planet_teeth, max_planet_teeth + 1):
-        for sun_teeth in range(min_sun_teeth, max_sun_teeth + 1):
-            partial = (planet_teeth - min_planet_teeth) * (max_sun_teeth + 1 - min_sun_teeth) + (sun_teeth - min_sun_teeth)
-            if update_progress is not None:
-                update_progress((partial/full)*100.0)
-            is_homo = _is_homogeneity_distribution_constraint_satisfied(sun_teeth, planet_teeth, num_planets)
-            is_good_neighbor = _is_neighbor_constraint_satisfied(sun_teeth, planet_teeth, num_planets, addendum, clearance, circular_pitch)
-            if not (is_homo and is_good_neighbor):
+    Args:
+        constraints (GearboxConstraint): Gearbox constraint settings.
+        target_gear_ratio (Fraction): Desired gear ratio.
+        update_progress (callable, optional): Function to update progress.
+        num_results (int, optional): Number of closest results to return.
+        use_abs (bool, optional): Whether to use absolute values for comparisons.
+        fixed (str, optional): Fixed gear designation.
+        input (str, optional): Input gear designation.
+        output (str, optional): Output gear designation.
+
+    Returns:
+        list[GearboxResult]: List of closest matching gearbox configurations.
+    """
+    p = index.Property()
+    idx = index.Index(properties=p)
+
+    full = (constraints.max_p1 + 1 - constraints.min_p1) * (constraints.max_s1 + 1 - constraints.min_s1)
+    for planet_teeth in range(constraints.min_p1, constraints.max_p1 + 1):
+        for sun_teeth in range(constraints.min_s1, constraints.max_s1 + 1):
+            partial = ((planet_teeth - constraints.min_p1) * (constraints.max_s1 + 1 - constraints.min_s1) +
+                       (sun_teeth - constraints.min_s1))
+            if update_progress:
+                update_progress((partial / full) * 100.0)
+
+            is_homo = _is_homogeneity_distribution_constraint_satisfied(sun_teeth, planet_teeth,
+                                                                      constraints.num_planets)
+            is_good_neighbor = _is_neighbor_constraint_satisfied(sun_teeth, planet_teeth, constraints.num_planets,
+                                                      constraints.addendum, constraints.clearance,
+                                                      constraints.circular_pitch)
+
+            if not ( is_homo and is_good_neighbor):
                 continue
-            result = evaluate_all_possible_ratios(planet_teeth, sun_teeth, 'Any', 'Any', 'Any')
+
+            result = evaluate_all_possible_ratios(planet_teeth, sun_teeth, fixed, input, output)
             for r_gear, r_val in result.items():
+                if isinstance(r_val, str):
+                    raise RuntimeError(r_val)
                 abs_res = abs(r_val) if use_abs else r_val
-                idx.insert(0, (abs_res, 0,abs_res,0), obj={"gear_ratio":abs_res, "Planet Teeth":planet_teeth, "Sun Teeth":sun_teeth, "Fixed":r_gear[0], "Input":r_gear[1], "Output":r_gear[2]})
-    # print("finding closest matches")
-    # Perform the search for the closest match
+                gearbox_result = GearboxResult(*r_gear, r_val, planet_teeth, sun_teeth)
+                idx.insert(0, (abs_res, 0, abs_res, 0), obj=gearbox_result)
+
     return _find_closest_matches(idx, target_gear_ratio, num_results)
 
 
 if __name__ == "__main__":
-    min_sun_1_teeth, max_sun_1_teeth = 8, 12
+    min_sun_1_teeth, max_sun_1_teeth = 6, 12
     min_planet_1_teeth, max_planet_1_teeth = 6, 24
 
-    target_gear_ratio = 1./5
+    target_gear_ratio = 1/8
     import time
     t0 = time.time()
     # ring 2 is the output, so 2 is the secondary
@@ -157,9 +254,9 @@ if __name__ == "__main__":
     circular_pitch = module*math.pi
     closest_match = evaluate_and_search_2d(min_planet_1_teeth, max_planet_1_teeth,
                                            min_sun_1_teeth, max_sun_1_teeth,
-                                           target_gear_ratio, num_results=10, use_abs=False,
+                                           target_gear_ratio, update_progress = None, num_results=10, use_abs=True,
                                            clearance=0.5, # mm
-                                           num_planets=4, circular_pitch=circular_pitch)  # use 3 for higher gear ratios but lower stability. 4 can get some good precision
+                                           num_planets=3, circular_pitch=circular_pitch, fixed='Any', input='Sun')  # use 3 for higher gear ratios but lower stability. 4 can get some good precision
     # idk why, but addendum=18 stops the planet gears from being too big.
 
     t1 = time.time()
@@ -179,19 +276,26 @@ class PlanetarySearchWorker(QThread):
     progress_updated = Signal(int)
     finished = Signal(list)  # Emits the result list when done
 
-    def __init__(self, min_planet_teeth, max_planet_teeth, min_sun_teeth, max_sun_teeth, target_gear_ratio, gear_addendum, planet_clearance, num_results, num_planets, circular_pitch, use_abs):
+    def __init__(self, min_planet_teeth, max_planet_teeth, min_sun_teeth, max_sun_teeth, target_gear_ratio, gear_addendum, planet_clearance, num_results, num_planets, circular_pitch, use_abs, fixed, input, output):
         super().__init__()
-        self.min_planet_teeth = min_planet_teeth
-        self.max_planet_teeth = max_planet_teeth
-        self.min_sun_teeth = min_sun_teeth
-        self.max_sun_teeth = max_sun_teeth
+
+        self.constraints = GearboxConstraint(
+                min_planet_teeth,
+                max_planet_teeth,
+                min_sun_teeth,
+                max_sun_teeth,
+                num_planets=num_planets,
+                addendum=gear_addendum,
+                clearance=planet_clearance,
+                circular_pitch=circular_pitch
+        )
         self.target_gear_ratio = target_gear_ratio
-        self.gear_addendum = gear_addendum
-        self.planet_clearance = planet_clearance
         self.num_results = num_results
-        self.num_planets = num_planets
-        self.circular_pitch = circular_pitch
         self.use_abs = use_abs
+        self.fixed = fixed
+        self.input = input
+        self.output = output
+
         self._abort = False
 
     def run(self):
@@ -201,10 +305,9 @@ class PlanetarySearchWorker(QThread):
         def is_aborted():
             return self._abort
 
-        results = evaluate_and_search_2d(self.min_planet_teeth, self.max_planet_teeth,
-                           self.min_sun_teeth, self.max_sun_teeth,
-                           self.target_gear_ratio, update_progress, num_results=self.num_results, num_planets = self.num_planets,
-                           addendum=self.gear_addendum, clearance=self.planet_clearance, circular_pitch=self.circular_pitch, use_abs=self.use_abs)
+        results = evaluate_and_search_2d(self.constraints,
+                           self.target_gear_ratio, update_progress, num_results=self.num_results, use_abs=self.use_abs,
+                                         fixed=self.fixed, input=self.input, output=self.output)
         if results is not None:
             self.finished.emit(results)
 

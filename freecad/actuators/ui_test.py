@@ -59,13 +59,39 @@ class MyDialog(QDialog):
         self.ui.gear_ratio_options_calculate.setEnabled(True)
         self.ui.gear_ratio_options_abort.setEnabled(False)
 
+        self.ui.target_inverse_gear_ratio_lineedit.textChanged.connect(self.on_target_inverse_gear_ratio_lineedit_user_changed)
+        self.ui.target_gear_ratio_lineedit.textChanged.connect(self.on_target_gear_ratio_lineedit_user_changed)
+
         self.reset_unlocked_comboboxes()
+
+    def on_target_inverse_gear_ratio_lineedit_user_changed(self, _):
+        if not self.computing:
+            if self.ui.target_inverse_gear_ratio_lineedit.get_value()!=0:
+                self.computing = True
+                try:
+                    self.ui.target_gear_ratio_lineedit.set_value(1/self.ui.target_inverse_gear_ratio_lineedit.get_value())
+                finally:
+                    self.computing = False
+            self.ui.target_inverse_gear_ratio_lineedit_lock.is_locked = True
+
+    def on_target_gear_ratio_lineedit_user_changed(self, _):
+        if not self.computing:
+            if self.ui.target_gear_ratio_lineedit.get_value()!=0:
+                self.computing = True
+                try:
+                    self.ui.target_inverse_gear_ratio_lineedit.set_value(1/self.ui.target_gear_ratio_lineedit.get_value())
+                finally:
+                    self.computing = False
+            self.ui.target_inverse_gear_ratio_lineedit_lock.is_locked = True
 
     def start_planetary_search(self):
         """Starts the long function in a worker thread."""
-        target_gear_ratio = self.ui.target_cear_ratio_lineedit.get_value()
-        gear_addendum = self.ui.gear_addendum_lineedit.get_mm_value()
-        planet_clearance = self.ui.planet_clearance_lineedit.get_mm_value()
+        circular_pitch = self.ui.min_circular_pitch_lineedit.get_mm_value()
+        if circular_pitch==0:
+            self.ui.gear_ratio_options_combobox.clear()
+            self.ui.gear_ratio_options_combobox.addItems(["Set circular pitch to non-zero to avoid div-0"])
+            return
+
 
         self.ui.gear_ratio_options_progress.setValue(0)
         self.planet_search_worker = PlanetarySearchWorker(
@@ -73,13 +99,16 @@ class MyDialog(QDialog):
             self.ui.max_planet_teeth_spinbox.value(),
             self.ui.min_sun_teeth_spinbox.value(),
             self.ui.max_sun_teeth_spinbox.value(),
-            self.ui.target_cear_ratio_lineedit.get_value(),
+            self.ui.target_inverse_gear_ratio_lineedit.get_value(),
             self.ui.gear_addendum_lineedit.get_mm_value(),
             self.ui.planet_clearance_lineedit.get_mm_value(),
             self.ui.num_results_spinbox.value(),
             self.ui.number_of_planets_spinbox.value(),
             self.ui.min_circular_pitch_lineedit.get_mm_value(),
-            self.ui.use_abs_checkbox.isChecked()
+            self.ui.use_abs_checkbox.isChecked(),
+            self.ui.fixed_combobox.currentText(),
+            self.ui.input_combobox.currentText(),
+            self.ui.output_combobox.currentText()
         )
         self.planet_search_worker.progress_updated.connect(self.ui.gear_ratio_options_progress.setValue)
         self.planet_search_worker.finished.connect(self.populate_results)
@@ -97,7 +126,7 @@ class MyDialog(QDialog):
     def populate_results(self, results):
         """Populates the combo box with results."""
         self.ui.gear_ratio_options_combobox.clear()
-        self.ui.gear_ratio_options_combobox.addItems([str(r) for r in results])
+        self.ui.gear_ratio_options_combobox.add_items(results)
 
         self.ui.gear_ratio_options_calculate.setEnabled(True)
         self.ui.gear_ratio_options_abort.setEnabled(False)

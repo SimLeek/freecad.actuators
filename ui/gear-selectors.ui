@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="min_max_teeth_page">
     <property name="geometry">
@@ -452,23 +452,36 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>140</y>
+       <y>150</y>
        <width>385</width>
-       <height>89</height>
+       <height>101</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>Calculating Options:</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="3">
        <widget class="QPushButton" name="gear_ratio_options_abort">
         <property name="text">
          <string>Abort</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_65">
+        <property name="toolTip">
+         <string>This entry sets or is set by sun torque</string>
+        </property>
+        <property name="text">
+         <string>  =  </string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="label_24">
+        <property name="text">
+         <string>Gear Ratio R</string>
         </property>
        </widget>
       </item>
@@ -479,25 +492,46 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_8">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>Options:</string>
+         <string>Calculating Options:</string>
         </property>
        </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QComboBox" name="gear_ratio_options_combobox"/>
-      </item>
-      <item row="0" column="1">
-       <widget class="QFractionEdit" name="target_cear_ratio_lineedit"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Target Gear Ratio:</string>
+         <string>Out-RPM / In-RPM</string>
         </property>
        </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="target_inverse_gear_ratio_lineedit_lock">
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_20">
+        <property name="text">
+         <string>Out-T / In-T</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QFractionEdit" name="target_gear_ratio_lineedit"/>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_26">
+        <property name="text">
+         <string>R⁻¹</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QFractionEdit" name="target_inverse_gear_ratio_lineedit"/>
       </item>
       <item row="2" column="2">
        <widget class="QPushButton" name="gear_ratio_options_calculate">
@@ -506,24 +540,14 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="target_gear_ratio_lineedit_lock">
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="LockUnlockButton" name="gear_ratio_options_combobox_lock"/>
-      </item>
      </layout>
     </widget>
     <widget class="QWidget" name="gridLayoutWidget_4">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>320</y>
-       <width>301</width>
+       <y>330</y>
+       <width>360</width>
        <height>61</height>
       </rect>
      </property>
@@ -531,28 +555,40 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_36">
         <property name="text">
-         <string>Is planet neighbor constraint satisfied:</string>
+         <string>Satisfy Planet Neighbor Constraint:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_37">
         <property name="text">
-         <string>Is homogeneity distribution constraint satisfied:</string>
+         <string>Satisfy Homogeneity Distribution Constraint:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLabel" name="is_planet_neighbor_constraint_satisfied_indicator_label">
+       <widget class="QCheckBox" name="checkBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>X</string>
+         <string/>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLabel" name="is_homogeneity_distribution_constraint_satisfied_indicator_label">
+       <widget class="QCheckBox" name="checkBox_2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>X</string>
+         <string/>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -564,7 +600,7 @@
        <x>10</x>
        <y>0</y>
        <width>231</width>
-       <height>141</height>
+       <height>145</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
@@ -654,99 +690,35 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>230</y>
-       <width>301</width>
-       <height>89</height>
+       <y>260</y>
+       <width>421</width>
+       <height>31</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_11">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_20">
-        <property name="toolTip">
-         <string>If you don't know module and want to define this, set the module to the smallest possible module such as 3d printer resolution*6, then define this once you have teeth counts</string>
-        </property>
-        <property name="text">
-         <string>Ring Pitch Circle Diameter:</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1">
-       <widget class="QLengthEdit" name="ring_pitch_circle_diam_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
+       <widget class="ObjectComboBox" name="gear_ratio_options_combobox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QLabel" name="label_27">
-        <property name="toolTip">
-         <string>This entry sets or is set by module</string>
+       <widget class="LockUnlockButton" name="gear_ratio_options_combobox_lock"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
         <property name="text">
-         <string>=</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_24">
-        <property name="toolTip">
-         <string>If you don't know module and want to define this, set the module to the smallest possible module such as 3d printer resolution*6, then define this once you have teeth counts</string>
-        </property>
-        <property name="text">
-         <string>Sun Pitch Circle Diameter:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_28">
-        <property name="toolTip">
-         <string>This entry sets or is set by module</string>
-        </property>
-        <property name="text">
-         <string>  =  </string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLengthEdit" name="sun_pitch_circle_diam_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_29">
-        <property name="toolTip">
-         <string>If you don't know module and want to define this, set the module to the smallest possible module such as 3d printer resolution*6, then define this once you have teeth counts</string>
-        </property>
-        <property name="text">
-         <string>Planet Pitch Circle Diameter:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLengthEdit" name="sun_pitch_circle_diam_lineedit_2">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QLabel" name="label_30">
-        <property name="toolTip">
-         <string>This entry sets or is set by module</string>
-        </property>
-        <property name="text">
-         <string>=</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <string>Options:</string>
         </property>
        </widget>
       </item>
@@ -754,6 +726,14 @@
     </widget>
    </widget>
    <widget class="QWidget" name="page_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>461</width>
+      <height>457</height>
+     </rect>
+    </property>
     <attribute name="label">
      <string>Force Analysis</string>
     </attribute>
@@ -1647,6 +1627,11 @@
    <class>QAngleEdit</class>
    <extends>QLineEdit</extends>
    <header>.angle_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>ObjectComboBox</class>
+   <extends>QComboBox</extends>
+   <header>.object_combobox</header>
   </customwidget>
  </customwidgets>
  <resources/>
