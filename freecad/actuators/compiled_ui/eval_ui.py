@@ -42,4 +42,5 @@ class QEvalEdit(QLineEdit):
         self.internal_value = value
         self.blockSignals(True)  # Prevent triggering textChanged
         self.setText(f"{value:.4f}")  # Display value with 4 decimal places
+        self.setToolTip(f"{value:.4f}")  # Clear error tooltip
         self.blockSignals(False)

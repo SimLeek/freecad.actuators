@@ -83,4 +83,5 @@ class QFractionEdit(QLineEdit):
             self.internal_value = fraction
             self.blockSignals(True)  # Prevent triggering update_internal_value
             self.setText(f"{fraction.numerator}:{fraction.denominator}")
+            self.setToolTip(f"{fraction.numerator}:{fraction.denominator}")
             self.blockSignals(False)

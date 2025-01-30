@@ -1,11 +1,18 @@
+import math
+
 from compiled_ui.planetary_ui import Ui_Dialog
 
 from PySide2.QtCore import *  # type: ignore
 from PySide2.QtGui import *  # type: ignore
 from PySide2.QtWidgets import *  # type: ignore
-from search_planetaries import PlanetarySearchWorker
+from search_planetaries import PlanetarySearchWorker, GearboxResult
 
 import math as m
+
+
+def form_factor(num_teeth, pressure_angle_degrees):
+    return 0.4987385734274752 * (
+                -9.572132173049477 / num_teeth + math.exp(0.02302371855123817 * pressure_angle_degrees))
 
 class MyDialog(QDialog):
     def __init__(self):
@@ -63,6 +70,118 @@ class MyDialog(QDialog):
         self.ui.target_gear_ratio_lineedit.textChanged.connect(self.on_target_gear_ratio_lineedit_user_changed)
 
         self.reset_unlocked_comboboxes()
+
+        self.ui.gear_ratio_options_combobox.currentIndexChanged.connect(self.recalculate_torque)
+        self.ui.max_in_torque_lineedit.textChanged.connect(self.recalculate_torque)
+        self.ui.beta_lineedit.textChanged.connect(self.recalculate_torque)
+        self.ui.pressure_angle_lineedit.textChanged.connect(self.recalculate_torque)
+        self.ui.actual_module_lineedit.textChanged.connect(self.recalculate_torque)
+
+    def recalculate_torque(self, _):
+        planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
+        if not isinstance(planetary, GearboxResult):
+            return  # todo: set them all back to 0 or blank
+        in_torque = self.ui.max_in_torque_lineedit.get_nm_value()
+        if in_torque==0:
+            return
+        beta = self.ui.beta_lineedit.get_degrees_value()
+        pressure_angle = self.ui.pressure_angle_lineedit.get_degrees_value()
+        if pressure_angle==0:
+            return
+        is_double_helix = self.ui.double_helix_checkbox.isChecked()
+        module = self.ui.actual_module_lineedit.get_mm_value()
+        if module==0:
+            return
+
+        if planetary._input=="Sun":
+            self.ui.sun_t_lineedit.set_nm_value(in_torque)
+            if planetary.output=="Ring":
+                self.ui.ring_t_lineedit.set_nm_value(in_torque/planetary.inv_gear_ratio)
+                self.ui.carrier_t_lineedit.set_nm_value(0)
+            elif planetary.output=="Carrier":
+                self.ui.carrier_t_lineedit.set_nm_value(in_torque/planetary.inv_gear_ratio)
+                self.ui.ring_t_lineedit.set_nm_value(0)
+        elif planetary._input=="Ring":
+            self.ui.ring_t_lineedit.set_nm_value(in_torque)
+            if planetary.output=="Sun":
+                self.ui.sun_t_lineedit.set_nm_value(in_torque/planetary.inv_gear_ratio)
+                self.ui.carrier_t_lineedit.set_nm_value(0)
+            elif planetary.output=="Carrier":
+                self.ui.carrier_t_lineedit.set_nm_value(in_torque / planetary.inv_gear_ratio)
+                self.ui.sun_t_lineedit.set_nm_value(0)
+        elif planetary._input=="Carrier":
+            self.ui.carrier_t_lineedit.set_nm_value(in_torque)
+            if planetary.output=="Sun":
+                self.ui.sun_t_lineedit.set_nm_value(in_torque / planetary.inv_gear_ratio)
+                self.ui.ring_t_lineedit.set_nm_value(0)
+            elif planetary.output=="Ring":
+                self.ui.ring_t_lineedit.set_nm_value(in_torque / planetary.inv_gear_ratio)
+                self.ui.sun_t_lineedit.set_nm_value(0)
+
+        self.ui.planet_t_lineedit.set_nm_value(
+            self.ui.sun_t_lineedit.get_nm_value()*(planetary.planet_teeth/planetary.sun_teeth)-
+            self.ui.ring_t_lineedit.get_nm_value() * (planetary.planet_teeth / planetary.ring_teeth)
+        )
+
+        self.ui.load_sharing_planets_lineedit.setText(str(planetary.num_planets))
+
+
+        ring_pitch_circle_diameter = module * planetary.ring_teeth
+        sun_pitch_circle_diameter = module * planetary.sun_teeth
+        planet_pitch_circle_diameter = module * planetary.planet_teeth
+        carrier_pitch_circle_diameter = sun_pitch_circle_diameter + planet_pitch_circle_diameter
+
+        sun_t = self.ui.sun_t_lineedit.get_nm_value()
+        sun_ft = (2*sun_t/(sun_pitch_circle_diameter/1000))/planetary.num_planets
+        sun_fr = sun_ft * math.tan(pressure_angle/180*math.pi)
+        sun_fa = sun_ft * math.tan(beta/180*math.pi)
+        sun_fn = math.sqrt(sun_ft**2 + sun_fr**2 + sun_fa**2)
+        self.ui.sun_ft_lineedit.set_n_value(sun_ft)
+        self.ui.sun_fr_lineedit.set_n_value(sun_fr)
+        self.ui.sun_fa_lineedit.set_n_value(sun_fa)
+        self.ui.sun_fn_lineedit.set_n_value(sun_fn)
+
+        planet_t = self.ui.planet_t_lineedit.get_nm_value()
+        planet_ft = (2 * planet_t / (planet_pitch_circle_diameter / 1000)) / planetary.num_planets
+        planet_fr = planet_ft * math.tan(pressure_angle / 180 * math.pi)
+        planet_fa = planet_ft * math.tan(beta / 180 * math.pi)
+        planet_fn = math.sqrt(planet_ft ** 2 + planet_fr ** 2 + planet_fa ** 2)
+        self.ui.planet_ft_lineedit.set_n_value(planet_ft)
+        self.ui.planet_fr_lineedit.set_n_value(planet_fr)
+        self.ui.planet_fa_lineedit.set_n_value(planet_fa)
+        self.ui.planet_fn_lineedit.set_n_value(planet_fn)
+
+        ring_t = self.ui.ring_t_lineedit.get_nm_value()
+        ring_ft = (2 * ring_t / (ring_pitch_circle_diameter / 1000)) / planetary.num_planets
+        ring_fr = ring_ft * math.tan(pressure_angle / 180 * math.pi)
+        ring_fa = ring_ft * math.tan(beta / 180 * math.pi)
+        ring_fn = math.sqrt(ring_ft ** 2 + ring_fr ** 2 + ring_fa ** 2)
+        self.ui.ring_ft_lineedit.set_n_value(ring_ft)
+        self.ui.ring_fr_lineedit.set_n_value(ring_fr)
+        self.ui.ring_fa_lineedit.set_n_value(ring_fa)
+        self.ui.ring_fn_lineedit.set_n_value(ring_fn)
+
+        carrier_t = self.ui.carrier_t_lineedit.get_nm_value()
+        carrier_ft = (2 * carrier_t / (carrier_pitch_circle_diameter / 1000)) / planetary.num_planets
+        carrier_fr = carrier_ft * math.tan(pressure_angle / 180 * math.pi)
+        carrier_fn = math.sqrt(carrier_ft ** 2 + carrier_fr ** 2)
+        self.ui.carrier_ft_lineedit.set_n_value(carrier_ft)
+        self.ui.carrier_fr_lineedit.set_n_value(carrier_fr)
+        self.ui.carrier_fn_lineedit.set_n_value(carrier_fn)
+
+        sun_teeth_virtual = planetary.sun_teeth/(math.cos(beta/180*math.pi)**3)
+        planet_teeth_virtual = planetary.planet_teeth/(math.cos(beta/180*math.pi)**3)
+        ring_teeth_virtual = planetary.ring_teeth/(math.cos(beta/180*math.pi)**3)
+        self.ui.sun_zy_lineedit.setText(f"{sun_teeth_virtual}")
+        self.ui.planet_zy_lineedit.setText(f"{planet_teeth_virtual}")
+        self.ui.ring_zy_lineedit.setText(f"{ring_teeth_virtual}")
+
+        sun_form_factor = form_factor(sun_teeth_virtual, pressure_angle)
+        planet_form_factor = form_factor(planet_teeth_virtual, pressure_angle)
+        ring_form_factor = form_factor(ring_teeth_virtual, pressure_angle)
+        self.ui.sun_form_factor_lineedit.setText(f"{sun_form_factor}")
+        self.ui.planet_form_factor_lineedit.setText(f"{planet_form_factor}")
+        self.ui.ring_form_factor_lineedit.setText(f"{ring_form_factor}")
 
     def on_target_inverse_gear_ratio_lineedit_user_changed(self, _):
         if not self.computing:

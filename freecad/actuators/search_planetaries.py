@@ -47,23 +47,24 @@ class GearboxConstraint:
 class GearboxResult:
     """A class to encapsulate the results of a gearbox configuration."""
 
-    def __init__(self, fixed, _input, output, result,
-                 planet_teeth, sun_teeth):
+    def __init__(self, fixed, _input, output, inv_gear_ratio,
+                 planet_teeth, sun_teeth, num_planets):
         """
         Initialize a GearboxResult instance.
 
         Args:
-            result (Fraction): Calculated gear ratio.
+            inv_gear_ratio (Fraction): Calculated inverse gear ratio.
             planet_teeth (int): Teeth count for first stage planetary gears.
             sun_teeth (int): Teeth count for first stage sun gears.
         """
         self.fixed = fixed
         self._input = _input
         self.output = output
-        self.result = result
-        self.planet_1_teeth = planet_teeth
-        self.sun_1_teeth = sun_teeth
+        self.inv_gear_ratio = inv_gear_ratio
+        self.planet_teeth = planet_teeth
+        self.sun_teeth = sun_teeth
         self.ring_teeth = 2*planet_teeth+sun_teeth
+        self.num_planets = num_planets
 
     def __repr__(self):
         """
@@ -72,15 +73,25 @@ class GearboxResult:
             str: Formatted string showing all component teeth counts and result.
         """
         return (f"["
-                f"R⁻¹={self.result},"
+                f"R⁻¹={self.inv_gear_ratio},"
                 f" F={self.fixed},"
                 f" I={self._input},"
                 f" O={self.output},"
-                f" S={self.sun_1_teeth},"
-                f" P={self.planet_1_teeth},"
-                f" R={self.planet_1_teeth}"
+                f" S={self.sun_teeth},"
+                f" P={self.planet_teeth},"
+                f" R={self.planet_teeth}"
+                f" Np={self.num_planets}"
                 f"]")
 
+    def tooltip(self):
+        return (f"Inverse gear ratio={self.inv_gear_ratio}\n"
+                f"Fixed={self.fixed}\n"
+                f"Input={self._input}\n"
+                f"Output={self.output}\n"
+                f"Sun Teeth={self.sun_teeth}\n"
+                f"Planet Teeth={self.planet_teeth}\n"
+                f"Ring Teeth={self.planet_teeth}\n"
+                f"Num Planets={self.num_planets}")
 
 def evaluate_inverse_gear_ratio(planet_teeth: int, sun_teeth: int, fixed: str, input_: str, output: str) -> Fraction:
     """
@@ -187,7 +198,7 @@ def _is_neighbor_constraint_satisfied(sun_teeth, planet_teeth, num_planets, adde
 def _find_closest_matches(idx, target_value, num_results=1):
     nearest_items_it = idx.nearest((target_value, 0, target_value, 0), num_results=num_results, objects=True)
     nearest_items_list = [n.object for n in nearest_items_it]
-    nearest_items_list.sort(key=lambda x: abs(x.result - target_value))
+    nearest_items_list.sort(key=lambda x: abs(x.inv_gear_ratio - target_value))
     return nearest_items_list
 
 
@@ -234,7 +245,7 @@ def evaluate_and_search_2d(constraints, target_gear_ratio, update_progress=None,
                 if isinstance(r_val, str):
                     raise RuntimeError(r_val)
                 abs_res = abs(r_val) if use_abs else r_val
-                gearbox_result = GearboxResult(*r_gear, r_val, planet_teeth, sun_teeth)
+                gearbox_result = GearboxResult(*r_gear, r_val, planet_teeth, sun_teeth, constraints.num_planets)
                 idx.insert(0, (abs_res, 0, abs_res, 0), obj=gearbox_result)
 
     return _find_closest_matches(idx, target_gear_ratio, num_results)
