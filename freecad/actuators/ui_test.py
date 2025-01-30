@@ -11,8 +11,7 @@ import math as m
 
 
 def form_factor(num_teeth, pressure_angle_degrees):
-    return 0.4987385734274752 * (
-                -9.572132173049477 / num_teeth + math.exp(0.02302371855123817 * pressure_angle_degrees))
+    return 0.4461457824814488+(math.sin((-10.057793276492692+pressure_angle_degrees)/180*math.pi))*math.log1p(0.0497526912165741*num_teeth)
 
 class MyDialog(QDialog):
     def __init__(self):
@@ -76,6 +75,20 @@ class MyDialog(QDialog):
         self.ui.beta_lineedit.textChanged.connect(self.recalculate_torque)
         self.ui.pressure_angle_lineedit.textChanged.connect(self.recalculate_torque)
         self.ui.actual_module_lineedit.textChanged.connect(self.recalculate_torque)
+
+        self.ui.gear_ratio_options_combobox.currentIndexChanged.connect(self.recalculate_stress)
+        self.ui.beta_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.actual_module_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.pressure_angle_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.poisson_ratio_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.elastic_modulus_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.sun_ft_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.sun_form_factor_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.actual_height_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.planet_ft_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.planet_form_factor_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.ring_ft_lineedit.textChanged.connect(self.recalculate_stress)
+        self.ui.ring_form_factor_lineedit.textChanged.connect(self.recalculate_stress)
 
     def recalculate_torque(self, _):
         planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
@@ -172,16 +185,115 @@ class MyDialog(QDialog):
         sun_teeth_virtual = planetary.sun_teeth/(math.cos(beta/180*math.pi)**3)
         planet_teeth_virtual = planetary.planet_teeth/(math.cos(beta/180*math.pi)**3)
         ring_teeth_virtual = planetary.ring_teeth/(math.cos(beta/180*math.pi)**3)
-        self.ui.sun_zy_lineedit.setText(f"{sun_teeth_virtual}")
-        self.ui.planet_zy_lineedit.setText(f"{planet_teeth_virtual}")
-        self.ui.ring_zy_lineedit.setText(f"{ring_teeth_virtual}")
+        self.ui.sun_zy_lineedit.set_value(sun_teeth_virtual)
+        self.ui.planet_zy_lineedit.set_value(planet_teeth_virtual)
+        self.ui.ring_zy_lineedit.set_value(ring_teeth_virtual)
 
         sun_form_factor = form_factor(sun_teeth_virtual, pressure_angle)
         planet_form_factor = form_factor(planet_teeth_virtual, pressure_angle)
         ring_form_factor = form_factor(ring_teeth_virtual, pressure_angle)
-        self.ui.sun_form_factor_lineedit.setText(f"{sun_form_factor}")
-        self.ui.planet_form_factor_lineedit.setText(f"{planet_form_factor}")
-        self.ui.ring_form_factor_lineedit.setText(f"{ring_form_factor}")
+        self.ui.sun_form_factor_lineedit.set_value(sun_form_factor)
+        self.ui.planet_form_factor_lineedit.set_value(planet_form_factor)
+        self.ui.ring_form_factor_lineedit.set_value(ring_form_factor)
+
+    def recalculate_stress(self, _):
+        planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
+        if not isinstance(planetary, GearboxResult):
+            return  # todo: set them all back to 0 or blank
+        beta = self.ui.beta_lineedit.get_degrees_value()
+        module = self.ui.actual_module_lineedit.get_mm_value()
+        if module == 0:
+            return
+        pressure_angle = self.ui.pressure_angle_lineedit.get_degrees_value()
+        if pressure_angle == 0:
+            return
+        poisson_ratio = self.ui.poisson_ratio_lineedit.get_value()
+        elastic_modulus = self.ui.elastic_modulus_lineedit.get_pa_value()
+        if elastic_modulus==0:
+            return
+
+        sun_tangential_load = self.ui.sun_ft_lineedit.get_n_value()
+        sun_form_factor = self.ui.sun_form_factor_lineedit.get_value()
+        height = self.ui.actual_height_lineedit.get_mm_value()
+        planet_tangential_load = self.ui.planet_ft_lineedit.get_n_value()
+        planet_form_factor = self.ui.planet_form_factor_lineedit.get_value()
+        ring_tangential_load = self.ui.ring_ft_lineedit.get_n_value()
+        ring_form_factor = self.ui.ring_form_factor_lineedit.get_value()
+
+        fwe = height/math.cos(beta/180*math.pi)  # https://www.khkgears.us/media/1225/the-benefits-of-converting-to-helical-gearing.pdf
+        # fwe should include contact ratio, probably
+
+        # https://www.engineersedge.com/gears/lewis-factor.htm
+        sun_bend_stress = sun_tangential_load / (module/1000 * fwe/1000 * sun_form_factor)
+        self.ui.sun_bend_stress_lineedit.set_pa_value(sun_bend_stress)
+
+
+        planet_bend_stress = planet_tangential_load / (module/1000 * fwe/1000 * planet_form_factor)
+        self.ui.planet_bend_stress_lineedit.set_pa_value(planet_bend_stress)
+
+
+        ring_bend_stress = ring_tangential_load / (module/1000 * fwe/1000 * ring_form_factor)
+        self.ui.ring_bend_stress_lineedit.set_pa_value(ring_bend_stress)
+
+        # https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=fe1a219b86058a5cf569d4222cff595df1794eed
+        material_factor = math.sqrt(1/((1-poisson_ratio**2)/elastic_modulus))
+        tooth_shape_factor = math.sqrt(1/(math.sin(pressure_angle/180*math.pi)))
+
+        sun_contact_pressure = math.sqrt(
+            sun_tangential_load*(1+planetary.sun_teeth/planetary.planet_teeth)/
+            ((module/1000)*planetary.sun_teeth*(fwe/1000)*math.pi)
+        ) * material_factor * tooth_shape_factor
+        self.ui.sun_contact_pressure.set_pa_value(sun_contact_pressure)
+
+        # I could do max of planet_teeth/sun_teeth and planet_teeth/ring_teeth,
+        # but that's always going to be planet_teeth/sun_teeth
+        planet_contact_pressure = math.sqrt(
+            planet_tangential_load * (1 + (planetary.planet_teeth / planetary.sun_teeth)) /
+            ((module / 1000) * planetary.planet_teeth * (fwe / 1000) * math.pi)
+        ) * material_factor * tooth_shape_factor
+        self.ui.planet_contact_pressure.set_pa_value(planet_contact_pressure)
+
+        ring_contact_pressure = math.sqrt(
+            ring_tangential_load * (1 + planetary.ring_teeth / planetary.sun_teeth) /
+            ((module / 1000) * planetary.planet_teeth * (fwe / 1000) * math.pi)
+        ) * material_factor * tooth_shape_factor
+        self.ui.ring_contact_pressure.set_pa_value(ring_contact_pressure)
+
+        max_reported_bend = max(ring_bend_stress, planet_bend_stress, sun_bend_stress)
+        max_reported_fatigue = max(ring_contact_pressure, planet_contact_pressure, sun_contact_pressure)
+
+        max_bend_stress = self.ui.max_bend_stress_lineedit.get_pa_value()
+        if max_bend_stress==0:
+            return
+        max_fatigue_stress = self.ui.max_fatigue_stress_lineedit.get_pa_value()
+        if max_fatigue_stress==0:
+            return
+
+        bend_safety = max_bend_stress/max_reported_bend
+        fatigue_safety = max_fatigue_stress/max_reported_fatigue
+
+        self.ui.bend_safety_factor_lineedit.setText(f"{bend_safety*100:.1f}%")
+        self.ui.contact_safety_factor_lineedit.setText(f"{fatigue_safety*100:.1f}%")
+
+        if bend_safety<1:
+            self.ui.bend_safety_factor_lineedit.setStyleSheet("background-color: red;")
+            self.ui.bend_safety_factor_lineedit.setToolTip("Gear teeth will permanently deform or snap")
+        elif bend_safety<1.5:
+            self.ui.bend_safety_factor_lineedit.setStyleSheet("background-color: yellow;")
+            self.ui.bend_safety_factor_lineedit.setToolTip("Gear teeth may permanently deform or snap")
+        else:
+            self.ui.bend_safety_factor_lineedit.setStyleSheet("")
+            self.ui.bend_safety_factor_lineedit.setToolTip("")
+
+        if fatigue_safety<1:
+            self.ui.contact_safety_factor_lineedit.setStyleSheet("background-color: red;")
+            self.ui.contact_safety_factor_lineedit.setToolTip("Gear teeth will pit")
+        elif fatigue_safety < 1.5:
+            self.ui.contact_safety_factor_lineedit.setStyleSheet("background-color: yellow;")
+            self.ui.contact_safety_factor_lineedit.setToolTip("Gear teeth may pit")
+        else:
+            self.ui.contact_safety_factor_lineedit.setStyleSheet("")
+            self.ui.contact_safety_factor_lineedit.setToolTip("")
 
     def on_target_inverse_gear_ratio_lineedit_user_changed(self, _):
         if not self.computing:

@@ -23,7 +23,7 @@ values = np.array([
 ])
 
 def math_func(x, y, a, b, c):
-    return a*(b / x + np.exp(c * y))
+    return a+(np.sin((b+y)/180*np.pi))*np.log1p(c*x)
 
 # Define exponential function
 def exp_func(data, a, b, c):

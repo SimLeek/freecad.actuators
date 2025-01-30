@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'gear-selectorsNUyAQv.ui'
+## Form generated from reading UI file 'gear-selectorsVltppZ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.16
 ##
@@ -19,13 +19,15 @@ from .angle_ui import QAngleEdit
 from .object_combobox import ObjectComboBox
 from .torque_ui import QTorqueEdit
 from .force_ui import QForceEdit
+from .pressure_ui import QPressureEdit
+from .eval_ui import QEvalEdit
 
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(477, 564)
+        Dialog.resize(481, 564)
         self.toolBox = QToolBox(Dialog)
         self.toolBox.setObjectName(u"toolBox")
         self.toolBox.setGeometry(QRect(10, 20, 461, 531))
@@ -650,6 +652,7 @@ class Ui_Dialog(object):
         self.sun_ft_lineedit = QForceEdit(self.gridLayoutWidget_7)
         self.sun_ft_lineedit.setObjectName(u"sun_ft_lineedit")
         self.sun_ft_lineedit.setEnabled(False)
+        self.sun_ft_lineedit.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.gridLayout_7.addWidget(self.sun_ft_lineedit, 0, 1, 1, 1)
 
@@ -786,7 +789,7 @@ class Ui_Dialog(object):
 
         self.gridLayout_6.addWidget(self.label_156, 0, 4, 1, 1)
 
-        self.ring_zy_lineedit = QLineEdit(self.gridLayoutWidget_6)
+        self.ring_zy_lineedit = QEvalEdit(self.gridLayoutWidget_6)
         self.ring_zy_lineedit.setObjectName(u"ring_zy_lineedit")
         self.ring_zy_lineedit.setEnabled(False)
 
@@ -797,13 +800,13 @@ class Ui_Dialog(object):
 
         self.gridLayout_6.addWidget(self.label_155, 0, 2, 1, 1)
 
-        self.planet_zy_lineedit = QLineEdit(self.gridLayoutWidget_6)
+        self.planet_zy_lineedit = QEvalEdit(self.gridLayoutWidget_6)
         self.planet_zy_lineedit.setObjectName(u"planet_zy_lineedit")
         self.planet_zy_lineedit.setEnabled(False)
 
         self.gridLayout_6.addWidget(self.planet_zy_lineedit, 0, 3, 1, 1)
 
-        self.sun_zy_lineedit = QLineEdit(self.gridLayoutWidget_6)
+        self.sun_zy_lineedit = QEvalEdit(self.gridLayoutWidget_6)
         self.sun_zy_lineedit.setObjectName(u"sun_zy_lineedit")
         self.sun_zy_lineedit.setEnabled(False)
 
@@ -829,19 +832,19 @@ class Ui_Dialog(object):
 
         self.gridLayout_6.addWidget(self.label_25, 1, 4, 1, 1)
 
-        self.sun_form_factor_lineedit = QLineEdit(self.gridLayoutWidget_6)
+        self.sun_form_factor_lineedit = QEvalEdit(self.gridLayoutWidget_6)
         self.sun_form_factor_lineedit.setObjectName(u"sun_form_factor_lineedit")
         self.sun_form_factor_lineedit.setEnabled(False)
 
         self.gridLayout_6.addWidget(self.sun_form_factor_lineedit, 1, 1, 1, 1)
 
-        self.planet_form_factor_lineedit = QLineEdit(self.gridLayoutWidget_6)
+        self.planet_form_factor_lineedit = QEvalEdit(self.gridLayoutWidget_6)
         self.planet_form_factor_lineedit.setObjectName(u"planet_form_factor_lineedit")
         self.planet_form_factor_lineedit.setEnabled(False)
 
         self.gridLayout_6.addWidget(self.planet_form_factor_lineedit, 1, 3, 1, 1)
 
-        self.ring_form_factor_lineedit = QLineEdit(self.gridLayoutWidget_6)
+        self.ring_form_factor_lineedit = QEvalEdit(self.gridLayoutWidget_6)
         self.ring_form_factor_lineedit.setObjectName(u"ring_form_factor_lineedit")
         self.ring_form_factor_lineedit.setEnabled(False)
 
@@ -971,150 +974,89 @@ class Ui_Dialog(object):
 
         self.gridLayout_24.addWidget(self.actual_module_lineedit, 0, 2, 1, 1)
 
-        self.toolBox.addItem(self.page_2, u"Force Analysis")
+        self.gridLayoutWidget_18 = QWidget(self.page_2)
+        self.gridLayoutWidget_18.setObjectName(u"gridLayoutWidget_18")
+        self.gridLayoutWidget_18.setGeometry(QRect(299, 70, 141, 51))
+        self.gridLayout_18 = QGridLayout(self.gridLayoutWidget_18)
+        self.gridLayout_18.setObjectName(u"gridLayout_18")
+        self.gridLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.ring_t_lineedit_2 = QTorqueEdit(self.gridLayoutWidget_18)
+        self.ring_t_lineedit_2.setObjectName(u"ring_t_lineedit_2")
+        self.ring_t_lineedit_2.setEnabled(False)
+
+        self.gridLayout_18.addWidget(self.ring_t_lineedit_2, 0, 1, 1, 1)
+
+        self.label_164 = QLabel(self.gridLayoutWidget_18)
+        self.label_164.setObjectName(u"label_164")
+
+        self.gridLayout_18.addWidget(self.label_164, 0, 0, 1, 1)
+
+        self.label_165 = QLabel(self.gridLayoutWidget_18)
+        self.label_165.setObjectName(u"label_165")
+
+        self.gridLayout_18.addWidget(self.label_165, 1, 0, 1, 1)
+
+        self.ring_t_lineedit_3 = QTorqueEdit(self.gridLayoutWidget_18)
+        self.ring_t_lineedit_3.setObjectName(u"ring_t_lineedit_3")
+        self.ring_t_lineedit_3.setEnabled(False)
+
+        self.gridLayout_18.addWidget(self.ring_t_lineedit_3, 1, 1, 1, 1)
+
+        self.toolBox.addItem(self.page_2, u"Force and Module Analysis")
         self.shape_page = QWidget()
         self.shape_page.setObjectName(u"shape_page")
         self.shape_page.setGeometry(QRect(0, 0, 461, 407))
-        self.gridLayoutWidget_5 = QWidget(self.shape_page)
-        self.gridLayoutWidget_5.setObjectName(u"gridLayoutWidget_5")
-        self.gridLayoutWidget_5.setGeometry(QRect(0, 170, 341, 31))
-        self.gridLayout_5 = QGridLayout(self.gridLayoutWidget_5)
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.label_10 = QLabel(self.gridLayoutWidget_5)
-        self.label_10.setObjectName(u"label_10")
-
-        self.gridLayout_5.addWidget(self.label_10, 0, 0, 1, 1)
-
-        self.comboBox = QComboBox(self.gridLayoutWidget_5)
-        self.comboBox.setObjectName(u"comboBox")
-
-        self.gridLayout_5.addWidget(self.comboBox, 0, 1, 1, 1)
-
-        self.number_of_planets_spinbox_lock_11 = QToolButton(self.gridLayoutWidget_5)
-        self.number_of_planets_spinbox_lock_11.setObjectName(u"number_of_planets_spinbox_lock_11")
-
-        self.gridLayout_5.addWidget(self.number_of_planets_spinbox_lock_11, 0, 2, 1, 1)
-
-        self.number_of_planets_spinbox_lock_12 = QToolButton(self.gridLayoutWidget_5)
-        self.number_of_planets_spinbox_lock_12.setObjectName(u"number_of_planets_spinbox_lock_12")
-
-        self.gridLayout_5.addWidget(self.number_of_planets_spinbox_lock_12, 0, 3, 1, 1)
-
-        self.gridLayoutWidget_17 = QWidget(self.shape_page)
-        self.gridLayoutWidget_17.setObjectName(u"gridLayoutWidget_17")
-        self.gridLayoutWidget_17.setGeometry(QRect(0, 200, 311, 31))
-        self.gridLayout_17 = QGridLayout(self.gridLayoutWidget_17)
-        self.gridLayout_17.setObjectName(u"gridLayout_17")
-        self.gridLayout_17.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_13 = QLineEdit(self.gridLayoutWidget_17)
-        self.lineEdit_13.setObjectName(u"lineEdit_13")
-
-        self.gridLayout_17.addWidget(self.lineEdit_13, 0, 1, 1, 1)
-
-        self.label_67 = QLabel(self.gridLayoutWidget_17)
-        self.label_67.setObjectName(u"label_67")
-
-        self.gridLayout_17.addWidget(self.label_67, 0, 0, 1, 1)
-
-        self.number_of_planets_spinbox_lock_3 = LockUnlockButton(self.gridLayoutWidget_17)
-        self.number_of_planets_spinbox_lock_3.setObjectName(u"number_of_planets_spinbox_lock_3")
-
-        self.gridLayout_17.addWidget(self.number_of_planets_spinbox_lock_3, 0, 2, 1, 1)
-
         self.gridLayoutWidget_43 = QWidget(self.shape_page)
         self.gridLayoutWidget_43.setObjectName(u"gridLayoutWidget_43")
-        self.gridLayoutWidget_43.setGeometry(QRect(0, 310, 211, 61))
+        self.gridLayoutWidget_43.setGeometry(QRect(0, 330, 241, 58))
         self.gridLayout_43 = QGridLayout(self.gridLayoutWidget_43)
         self.gridLayout_43.setObjectName(u"gridLayout_43")
         self.gridLayout_43.setContentsMargins(0, 0, 0, 0)
-        self.label_159 = QLabel(self.gridLayoutWidget_43)
-        self.label_159.setObjectName(u"label_159")
-
-        self.gridLayout_43.addWidget(self.label_159, 0, 0, 1, 1)
-
         self.label_160 = QLabel(self.gridLayoutWidget_43)
         self.label_160.setObjectName(u"label_160")
 
-        self.gridLayout_43.addWidget(self.label_160, 1, 0, 1, 1)
+        self.gridLayout_43.addWidget(self.label_160, 0, 0, 1, 1)
 
-        self.lineEdit_67 = QLineEdit(self.gridLayoutWidget_43)
-        self.lineEdit_67.setObjectName(u"lineEdit_67")
-        self.lineEdit_67.setEnabled(False)
+        self.bend_safety_factor_lineedit = QLineEdit(self.gridLayoutWidget_43)
+        self.bend_safety_factor_lineedit.setObjectName(u"bend_safety_factor_lineedit")
+        self.bend_safety_factor_lineedit.setEnabled(False)
 
-        self.gridLayout_43.addWidget(self.lineEdit_67, 0, 1, 1, 1)
+        self.gridLayout_43.addWidget(self.bend_safety_factor_lineedit, 0, 1, 1, 1)
 
-        self.lineEdit_68 = QLineEdit(self.gridLayoutWidget_43)
-        self.lineEdit_68.setObjectName(u"lineEdit_68")
-        self.lineEdit_68.setEnabled(False)
+        self.label_166 = QLabel(self.gridLayoutWidget_43)
+        self.label_166.setObjectName(u"label_166")
 
-        self.gridLayout_43.addWidget(self.lineEdit_68, 1, 1, 1, 1)
+        self.gridLayout_43.addWidget(self.label_166, 1, 0, 1, 1)
 
-        self.gridLayoutWidget_20 = QWidget(self.shape_page)
-        self.gridLayoutWidget_20.setObjectName(u"gridLayoutWidget_20")
-        self.gridLayoutWidget_20.setGeometry(QRect(0, 260, 311, 31))
-        self.gridLayout_20 = QGridLayout(self.gridLayoutWidget_20)
-        self.gridLayout_20.setObjectName(u"gridLayout_20")
-        self.gridLayout_20.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_24 = QLineEdit(self.gridLayoutWidget_20)
-        self.lineEdit_24.setObjectName(u"lineEdit_24")
+        self.contact_safety_factor_lineedit = QLineEdit(self.gridLayoutWidget_43)
+        self.contact_safety_factor_lineedit.setObjectName(u"contact_safety_factor_lineedit")
+        self.contact_safety_factor_lineedit.setEnabled(False)
 
-        self.gridLayout_20.addWidget(self.lineEdit_24, 0, 1, 1, 1)
-
-        self.label_70 = QLabel(self.gridLayoutWidget_20)
-        self.label_70.setObjectName(u"label_70")
-
-        self.gridLayout_20.addWidget(self.label_70, 0, 0, 1, 1)
-
-        self.number_of_planets_spinbox_lock_5 = LockUnlockButton(self.gridLayoutWidget_20)
-        self.number_of_planets_spinbox_lock_5.setObjectName(u"number_of_planets_spinbox_lock_5")
-
-        self.gridLayout_20.addWidget(self.number_of_planets_spinbox_lock_5, 0, 2, 1, 1)
-
-        self.gridLayoutWidget_19 = QWidget(self.shape_page)
-        self.gridLayoutWidget_19.setObjectName(u"gridLayoutWidget_19")
-        self.gridLayoutWidget_19.setGeometry(QRect(0, 230, 311, 31))
-        self.gridLayout_19 = QGridLayout(self.gridLayoutWidget_19)
-        self.gridLayout_19.setObjectName(u"gridLayout_19")
-        self.gridLayout_19.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_23 = QLineEdit(self.gridLayoutWidget_19)
-        self.lineEdit_23.setObjectName(u"lineEdit_23")
-
-        self.gridLayout_19.addWidget(self.lineEdit_23, 0, 1, 1, 1)
-
-        self.label_68 = QLabel(self.gridLayoutWidget_19)
-        self.label_68.setObjectName(u"label_68")
-
-        self.gridLayout_19.addWidget(self.label_68, 0, 0, 1, 1)
-
-        self.number_of_planets_spinbox_lock_4 = LockUnlockButton(self.gridLayoutWidget_19)
-        self.number_of_planets_spinbox_lock_4.setObjectName(u"number_of_planets_spinbox_lock_4")
-
-        self.gridLayout_19.addWidget(self.number_of_planets_spinbox_lock_4, 0, 2, 1, 1)
+        self.gridLayout_43.addWidget(self.contact_safety_factor_lineedit, 1, 1, 1, 1)
 
         self.gridLayoutWidget_21 = QWidget(self.shape_page)
         self.gridLayoutWidget_21.setObjectName(u"gridLayoutWidget_21")
-        self.gridLayoutWidget_21.setGeometry(QRect(0, 130, 421, 31))
+        self.gridLayoutWidget_21.setGeometry(QRect(0, 290, 421, 31))
         self.gridLayout_21 = QGridLayout(self.gridLayoutWidget_21)
         self.gridLayout_21.setObjectName(u"gridLayout_21")
         self.gridLayout_21.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_25 = QLineEdit(self.gridLayoutWidget_21)
-        self.lineEdit_25.setObjectName(u"lineEdit_25")
-        self.lineEdit_25.setEnabled(False)
+        self.sun_contact_pressure = QPressureEdit(self.gridLayoutWidget_21)
+        self.sun_contact_pressure.setObjectName(u"sun_contact_pressure")
+        self.sun_contact_pressure.setEnabled(False)
 
-        self.gridLayout_21.addWidget(self.lineEdit_25, 0, 1, 1, 1)
+        self.gridLayout_21.addWidget(self.sun_contact_pressure, 0, 1, 1, 1)
 
-        self.lineEdit_26 = QLineEdit(self.gridLayoutWidget_21)
-        self.lineEdit_26.setObjectName(u"lineEdit_26")
-        self.lineEdit_26.setEnabled(False)
+        self.planet_contact_pressure = QPressureEdit(self.gridLayoutWidget_21)
+        self.planet_contact_pressure.setObjectName(u"planet_contact_pressure")
+        self.planet_contact_pressure.setEnabled(False)
 
-        self.gridLayout_21.addWidget(self.lineEdit_26, 0, 3, 1, 1)
+        self.gridLayout_21.addWidget(self.planet_contact_pressure, 0, 3, 1, 1)
 
-        self.lineEdit_27 = QLineEdit(self.gridLayoutWidget_21)
-        self.lineEdit_27.setObjectName(u"lineEdit_27")
-        self.lineEdit_27.setEnabled(False)
+        self.ring_contact_pressure = QPressureEdit(self.gridLayoutWidget_21)
+        self.ring_contact_pressure.setObjectName(u"ring_contact_pressure")
+        self.ring_contact_pressure.setEnabled(False)
 
-        self.gridLayout_21.addWidget(self.lineEdit_27, 0, 5, 1, 1)
+        self.gridLayout_21.addWidget(self.ring_contact_pressure, 0, 5, 1, 1)
 
         self.label_75 = QLabel(self.gridLayoutWidget_21)
         self.label_75.setObjectName(u"label_75")
@@ -1133,30 +1075,30 @@ class Ui_Dialog(object):
 
         self.label_13 = QLabel(self.shape_page)
         self.label_13.setObjectName(u"label_13")
-        self.label_13.setGeometry(QRect(0, 110, 111, 17))
+        self.label_13.setGeometry(QRect(0, 270, 111, 17))
         self.gridLayoutWidget_16 = QWidget(self.shape_page)
         self.gridLayoutWidget_16.setObjectName(u"gridLayoutWidget_16")
-        self.gridLayoutWidget_16.setGeometry(QRect(0, 70, 421, 31))
+        self.gridLayoutWidget_16.setGeometry(QRect(0, 230, 421, 31))
         self.gridLayout_16 = QGridLayout(self.gridLayoutWidget_16)
         self.gridLayout_16.setObjectName(u"gridLayout_16")
         self.gridLayout_16.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit_18 = QLineEdit(self.gridLayoutWidget_16)
-        self.lineEdit_18.setObjectName(u"lineEdit_18")
-        self.lineEdit_18.setEnabled(False)
+        self.sun_bend_stress_lineedit = QPressureEdit(self.gridLayoutWidget_16)
+        self.sun_bend_stress_lineedit.setObjectName(u"sun_bend_stress_lineedit")
+        self.sun_bend_stress_lineedit.setEnabled(False)
 
-        self.gridLayout_16.addWidget(self.lineEdit_18, 0, 1, 1, 1)
+        self.gridLayout_16.addWidget(self.sun_bend_stress_lineedit, 0, 1, 1, 1)
 
-        self.lineEdit_20 = QLineEdit(self.gridLayoutWidget_16)
-        self.lineEdit_20.setObjectName(u"lineEdit_20")
-        self.lineEdit_20.setEnabled(False)
+        self.planet_bend_stress_lineedit = QPressureEdit(self.gridLayoutWidget_16)
+        self.planet_bend_stress_lineedit.setObjectName(u"planet_bend_stress_lineedit")
+        self.planet_bend_stress_lineedit.setEnabled(False)
 
-        self.gridLayout_16.addWidget(self.lineEdit_20, 0, 3, 1, 1)
+        self.gridLayout_16.addWidget(self.planet_bend_stress_lineedit, 0, 3, 1, 1)
 
-        self.lineEdit_22 = QLineEdit(self.gridLayoutWidget_16)
-        self.lineEdit_22.setObjectName(u"lineEdit_22")
-        self.lineEdit_22.setEnabled(False)
+        self.ring_bend_stress_lineedit = QPressureEdit(self.gridLayoutWidget_16)
+        self.ring_bend_stress_lineedit.setObjectName(u"ring_bend_stress_lineedit")
+        self.ring_bend_stress_lineedit.setEnabled(False)
 
-        self.gridLayout_16.addWidget(self.lineEdit_22, 0, 5, 1, 1)
+        self.gridLayout_16.addWidget(self.ring_bend_stress_lineedit, 0, 5, 1, 1)
 
         self.label_73 = QLabel(self.gridLayoutWidget_16)
         self.label_73.setObjectName(u"label_73")
@@ -1175,7 +1117,7 @@ class Ui_Dialog(object):
 
         self.label_12 = QLabel(self.shape_page)
         self.label_12.setObjectName(u"label_12")
-        self.label_12.setGeometry(QRect(0, 50, 91, 17))
+        self.label_12.setGeometry(QRect(0, 210, 91, 17))
         self.gridLayoutWidget_10 = QWidget(self.shape_page)
         self.gridLayoutWidget_10.setObjectName(u"gridLayoutWidget_10")
         self.gridLayoutWidget_10.setGeometry(QRect(0, 10, 421, 31))
@@ -1187,30 +1129,140 @@ class Ui_Dialog(object):
 
         self.gridLayout_10.addWidget(self.label_163, 0, 0, 1, 1)
 
-        self.horizontalSlider_2 = QSlider(self.gridLayoutWidget_10)
-        self.horizontalSlider_2.setObjectName(u"horizontalSlider_2")
-        self.horizontalSlider_2.setOrientation(Qt.Horizontal)
+        self.actual_height_slider = QSlider(self.gridLayoutWidget_10)
+        self.actual_height_slider.setObjectName(u"actual_height_slider")
+        self.actual_height_slider.setOrientation(Qt.Horizontal)
 
-        self.gridLayout_10.addWidget(self.horizontalSlider_2, 0, 1, 1, 1)
+        self.gridLayout_10.addWidget(self.actual_height_slider, 0, 1, 1, 1)
 
-        self.actual_height_lineedit_2 = QLengthEdit(self.gridLayoutWidget_10)
-        self.actual_height_lineedit_2.setObjectName(u"actual_height_lineedit_2")
-        self.actual_height_lineedit_2.setEnabled(True)
-        sizePolicy2.setHeightForWidth(self.actual_height_lineedit_2.sizePolicy().hasHeightForWidth())
-        self.actual_height_lineedit_2.setSizePolicy(sizePolicy2)
+        self.actual_height_lineedit = QLengthEdit(self.gridLayoutWidget_10)
+        self.actual_height_lineedit.setObjectName(u"actual_height_lineedit")
+        self.actual_height_lineedit.setEnabled(True)
+        sizePolicy2.setHeightForWidth(self.actual_height_lineedit.sizePolicy().hasHeightForWidth())
+        self.actual_height_lineedit.setSizePolicy(sizePolicy2)
 
-        self.gridLayout_10.addWidget(self.actual_height_lineedit_2, 0, 2, 1, 1)
+        self.gridLayout_10.addWidget(self.actual_height_lineedit, 0, 2, 1, 1)
 
-        self.actual_height_lineedit_lock_2 = LockUnlockButton(self.gridLayoutWidget_10)
-        self.actual_height_lineedit_lock_2.setObjectName(u"actual_height_lineedit_lock_2")
+        self.actual_height_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_10)
+        self.actual_height_lineedit_lock.setObjectName(u"actual_height_lineedit_lock")
 
-        self.gridLayout_10.addWidget(self.actual_height_lineedit_lock_2, 0, 3, 1, 1)
+        self.gridLayout_10.addWidget(self.actual_height_lineedit_lock, 0, 3, 1, 1)
+
+        self.gridLayoutWidget_5 = QWidget(self.shape_page)
+        self.gridLayoutWidget_5.setObjectName(u"gridLayoutWidget_5")
+        self.gridLayoutWidget_5.setGeometry(QRect(0, 50, 341, 31))
+        self.gridLayout_5 = QGridLayout(self.gridLayoutWidget_5)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.label_10 = QLabel(self.gridLayoutWidget_5)
+        self.label_10.setObjectName(u"label_10")
+
+        self.gridLayout_5.addWidget(self.label_10, 0, 0, 1, 1)
+
+        self.material_combobox = QComboBox(self.gridLayoutWidget_5)
+        self.material_combobox.setObjectName(u"material_combobox")
+
+        self.gridLayout_5.addWidget(self.material_combobox, 0, 1, 1, 1)
+
+        self.material_combobox_load = QToolButton(self.gridLayoutWidget_5)
+        self.material_combobox_load.setObjectName(u"material_combobox_load")
+
+        self.gridLayout_5.addWidget(self.material_combobox_load, 0, 2, 1, 1)
+
+        self.material_combobox_save = QToolButton(self.gridLayoutWidget_5)
+        self.material_combobox_save.setObjectName(u"material_combobox_save")
+
+        self.gridLayout_5.addWidget(self.material_combobox_save, 0, 3, 1, 1)
+
+        self.gridLayoutWidget_17 = QWidget(self.shape_page)
+        self.gridLayoutWidget_17.setObjectName(u"gridLayoutWidget_17")
+        self.gridLayoutWidget_17.setGeometry(QRect(0, 80, 311, 31))
+        self.gridLayout_17 = QGridLayout(self.gridLayoutWidget_17)
+        self.gridLayout_17.setObjectName(u"gridLayout_17")
+        self.gridLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.max_bend_stress_lineedit = QPressureEdit(self.gridLayoutWidget_17)
+        self.max_bend_stress_lineedit.setObjectName(u"max_bend_stress_lineedit")
+
+        self.gridLayout_17.addWidget(self.max_bend_stress_lineedit, 0, 1, 1, 1)
+
+        self.label_67 = QLabel(self.gridLayoutWidget_17)
+        self.label_67.setObjectName(u"label_67")
+
+        self.gridLayout_17.addWidget(self.label_67, 0, 0, 1, 1)
+
+        self.max_bend_stress_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_17)
+        self.max_bend_stress_lineedit_lock.setObjectName(u"max_bend_stress_lineedit_lock")
+
+        self.gridLayout_17.addWidget(self.max_bend_stress_lineedit_lock, 0, 2, 1, 1)
+
+        self.gridLayoutWidget_20 = QWidget(self.shape_page)
+        self.gridLayoutWidget_20.setObjectName(u"gridLayoutWidget_20")
+        self.gridLayoutWidget_20.setGeometry(QRect(0, 170, 311, 31))
+        self.gridLayout_20 = QGridLayout(self.gridLayoutWidget_20)
+        self.gridLayout_20.setObjectName(u"gridLayout_20")
+        self.gridLayout_20.setContentsMargins(0, 0, 0, 0)
+        self.poisson_ratio_lineedit = QFractionEdit(self.gridLayoutWidget_20)
+        self.poisson_ratio_lineedit.setObjectName(u"poisson_ratio_lineedit")
+
+        self.gridLayout_20.addWidget(self.poisson_ratio_lineedit, 0, 1, 1, 1)
+
+        self.label_70 = QLabel(self.gridLayoutWidget_20)
+        self.label_70.setObjectName(u"label_70")
+
+        self.gridLayout_20.addWidget(self.label_70, 0, 0, 1, 1)
+
+        self.poisson_ratio_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_20)
+        self.poisson_ratio_lineedit_lock.setObjectName(u"poisson_ratio_lineedit_lock")
+
+        self.gridLayout_20.addWidget(self.poisson_ratio_lineedit_lock, 0, 2, 1, 1)
+
+        self.gridLayoutWidget_19 = QWidget(self.shape_page)
+        self.gridLayoutWidget_19.setObjectName(u"gridLayoutWidget_19")
+        self.gridLayoutWidget_19.setGeometry(QRect(0, 140, 311, 31))
+        self.gridLayout_19 = QGridLayout(self.gridLayoutWidget_19)
+        self.gridLayout_19.setObjectName(u"gridLayout_19")
+        self.gridLayout_19.setContentsMargins(0, 0, 0, 0)
+        self.elastic_modulus_lineedit = QPressureEdit(self.gridLayoutWidget_19)
+        self.elastic_modulus_lineedit.setObjectName(u"elastic_modulus_lineedit")
+
+        self.gridLayout_19.addWidget(self.elastic_modulus_lineedit, 0, 1, 1, 1)
+
+        self.label_68 = QLabel(self.gridLayoutWidget_19)
+        self.label_68.setObjectName(u"label_68")
+
+        self.gridLayout_19.addWidget(self.label_68, 0, 0, 1, 1)
+
+        self.elastic_modulus_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_19)
+        self.elastic_modulus_lineedit_lock.setObjectName(u"elastic_modulus_lineedit_lock")
+
+        self.gridLayout_19.addWidget(self.elastic_modulus_lineedit_lock, 0, 2, 1, 1)
+
+        self.gridLayoutWidget_25 = QWidget(self.shape_page)
+        self.gridLayoutWidget_25.setObjectName(u"gridLayoutWidget_25")
+        self.gridLayoutWidget_25.setGeometry(QRect(0, 110, 311, 31))
+        self.gridLayout_25 = QGridLayout(self.gridLayoutWidget_25)
+        self.gridLayout_25.setObjectName(u"gridLayout_25")
+        self.gridLayout_25.setContentsMargins(0, 0, 0, 0)
+        self.max_fatigue_stress_lineedit = QPressureEdit(self.gridLayoutWidget_25)
+        self.max_fatigue_stress_lineedit.setObjectName(u"max_fatigue_stress_lineedit")
+
+        self.gridLayout_25.addWidget(self.max_fatigue_stress_lineedit, 0, 1, 1, 1)
+
+        self.label_69 = QLabel(self.gridLayoutWidget_25)
+        self.label_69.setObjectName(u"label_69")
+
+        self.gridLayout_25.addWidget(self.label_69, 0, 0, 1, 1)
+
+        self.max_fatiguq_stress_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_25)
+        self.max_fatiguq_stress_lineedit_lock.setObjectName(u"max_fatiguq_stress_lineedit_lock")
+
+        self.gridLayout_25.addWidget(self.max_fatiguq_stress_lineedit_lock, 0, 2, 1, 1)
 
         self.toolBox.addItem(self.shape_page, u"Material and Height Requirements")
 
         self.retranslateUi(Dialog)
 
-        self.toolBox.setCurrentIndex(2)
+        self.toolBox.setCurrentIndex(3)
         self.output_combobox.setCurrentIndex(0)
         self.fixed_combobox.setCurrentIndex(0)
 
@@ -1289,6 +1341,7 @@ class Ui_Dialog(object):
         self.label_16.setText(QCoreApplication.translate("Dialog", u"Sun Ft", None))
         self.label_50.setText(QCoreApplication.translate("Dialog", u"Sun Fa", None))
         self.label_58.setText(QCoreApplication.translate("Dialog", u"Carrier Fr", None))
+        self.sun_ft_lineedit.setPlaceholderText("")
         self.label_56.setText(QCoreApplication.translate("Dialog", u"Ring Fa", None))
         self.label_63.setText(QCoreApplication.translate("Dialog", u"Carrier Fn", None))
         self.label_55.setText(QCoreApplication.translate("Dialog", u"Ring Fr", None))
@@ -1314,22 +1367,25 @@ class Ui_Dialog(object):
         self.label_154.setText(QCoreApplication.translate("Dialog", u"Carrier T", None))
         self.label_161.setText(QCoreApplication.translate("Dialog", u"Num planets / load sharing:", None))
         self.label_162.setText(QCoreApplication.translate("Dialog", u"Actual Module", None))
-        self.toolBox.setItemText(self.toolBox.indexOf(self.page_2), QCoreApplication.translate("Dialog", u"Force Analysis", None))
-        self.label_10.setText(QCoreApplication.translate("Dialog", u"Material", None))
-        self.label_67.setText(QCoreApplication.translate("Dialog", u"Max Bend Stress (\u03c3b, ~0.66*Yield)", None))
-        self.label_159.setText(QCoreApplication.translate("Dialog", u"Actual Max Input Torque", None))
-        self.label_160.setText(QCoreApplication.translate("Dialog", u"Safety Factor", None))
-        self.label_70.setText(QCoreApplication.translate("Dialog", u"Poisson Ratio:", None))
-        self.label_68.setText(QCoreApplication.translate("Dialog", u"Elastic Modulus:", None))
-        self.label_75.setText(QCoreApplication.translate("Dialog", u"Planet min Pc", None))
-        self.label_76.setText(QCoreApplication.translate("Dialog", u"Sun min Pc", None))
-        self.label_77.setText(QCoreApplication.translate("Dialog", u"Ring min Pc", None))
+        self.label_164.setText(QCoreApplication.translate("Dialog", u"Min Module", None))
+        self.label_165.setText(QCoreApplication.translate("Dialog", u"Max Module", None))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_2), QCoreApplication.translate("Dialog", u"Force and Module Analysis", None))
+        self.label_160.setText(QCoreApplication.translate("Dialog", u"Bend Safety Factor", None))
+        self.label_166.setText(QCoreApplication.translate("Dialog", u"Contact Safety Factor", None))
+        self.label_75.setText(QCoreApplication.translate("Dialog", u"Planet Pc", None))
+        self.label_76.setText(QCoreApplication.translate("Dialog", u"Sun Pc", None))
+        self.label_77.setText(QCoreApplication.translate("Dialog", u"Ring Pc", None))
         self.label_13.setText(QCoreApplication.translate("Dialog", u"Contact Pressure:", None))
-        self.label_73.setText(QCoreApplication.translate("Dialog", u"Planet min \u03c3b", None))
-        self.label_72.setText(QCoreApplication.translate("Dialog", u"Sun min \u03c3b", None))
-        self.label_74.setText(QCoreApplication.translate("Dialog", u"Ring min \u03c3b", None))
+        self.label_73.setText(QCoreApplication.translate("Dialog", u"Planet \u03c3b", None))
+        self.label_72.setText(QCoreApplication.translate("Dialog", u"Sun \u03c3b", None))
+        self.label_74.setText(QCoreApplication.translate("Dialog", u"Ring \u03c3b", None))
         self.label_12.setText(QCoreApplication.translate("Dialog", u"Bending Stress:", None))
         self.label_163.setText(QCoreApplication.translate("Dialog", u"Actual Height", None))
+        self.label_10.setText(QCoreApplication.translate("Dialog", u"Material", None))
+        self.label_67.setText(QCoreApplication.translate("Dialog", u"Max Bend Stress (\u03c3b, ~0.66*Yield)", None))
+        self.label_70.setText(QCoreApplication.translate("Dialog", u"Poisson Ratio:", None))
+        self.label_68.setText(QCoreApplication.translate("Dialog", u"Elastic Modulus:", None))
+        self.label_69.setText(QCoreApplication.translate("Dialog", u"Max Fatigue Stress (\u03c3e, ~0.5*UTS)", None))
         self.toolBox.setItemText(self.toolBox.indexOf(self.shape_page), QCoreApplication.translate("Dialog", u"Material and Height Requirements", None))
     # retranslateUi
 

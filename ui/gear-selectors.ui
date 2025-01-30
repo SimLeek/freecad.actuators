@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>477</width>
+    <width>481</width>
     <height>564</height>
    </rect>
   </property>
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="min_max_teeth_page">
     <property name="geometry">
@@ -735,7 +735,7 @@
      </rect>
     </property>
     <attribute name="label">
-     <string>Force Analysis</string>
+     <string>Force and Module Analysis</string>
     </attribute>
     <widget class="QWidget" name="gridLayoutWidget_7">
      <property name="geometry">
@@ -1071,7 +1071,7 @@
        </widget>
       </item>
       <item row="0" column="5">
-       <widget class="QLineEdit" name="ring_zy_lineedit">
+       <widget class="QEvalEdit" name="ring_zy_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1085,14 +1085,14 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QLineEdit" name="planet_zy_lineedit">
+       <widget class="QEvalEdit" name="planet_zy_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="sun_zy_lineedit">
+       <widget class="QEvalEdit" name="sun_zy_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1127,21 +1127,21 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="sun_form_factor_lineedit">
+       <widget class="QEvalEdit" name="sun_form_factor_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
        </widget>
       </item>
       <item row="1" column="3">
-       <widget class="QLineEdit" name="planet_form_factor_lineedit">
+       <widget class="QEvalEdit" name="planet_form_factor_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
        </widget>
       </item>
       <item row="1" column="5">
-       <widget class="QLineEdit" name="ring_form_factor_lineedit">
+       <widget class="QEvalEdit" name="ring_form_factor_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1373,146 +1373,43 @@
     <attribute name="label">
      <string>Material and Height Requirements</string>
     </attribute>
-    <widget class="QWidget" name="gridLayoutWidget_5">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>170</y>
-       <width>341</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>Material</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="comboBox"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="QToolButton" name="number_of_planets_spinbox_lock_11"/>
-      </item>
-      <item row="0" column="3">
-       <widget class="QToolButton" name="number_of_planets_spinbox_lock_12"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_17">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>200</y>
-       <width>311</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_17">
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_13"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_67">
-        <property name="text">
-         <string>Max Bend Stress (σb, ~0.66*Yield)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_3"/>
-      </item>
-     </layout>
-    </widget>
     <widget class="QWidget" name="gridLayoutWidget_43">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>310</y>
-       <width>211</width>
-       <height>61</height>
+       <y>330</y>
+       <width>241</width>
+       <height>58</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_43">
       <item row="0" column="0">
-       <widget class="QLabel" name="label_159">
+       <widget class="QLabel" name="label_160">
         <property name="text">
-         <string>Actual Max Input Torque</string>
+         <string>Bend Safety Factor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="bend_safety_factor_lineedit">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="label_160">
+       <widget class="QLabel" name="label_166">
         <property name="text">
-         <string>Safety Factor</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_67">
-        <property name="enabled">
-         <bool>false</bool>
+         <string>Contact Safety Factor</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_68">
+       <widget class="QLineEdit" name="contact_safety_factor_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
        </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_20">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>260</y>
-       <width>311</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_20">
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_24"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_70">
-        <property name="text">
-         <string>Poisson Ratio:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_5"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_19">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>230</y>
-       <width>311</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_19">
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_23"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_68">
-        <property name="text">
-         <string>Elastic Modulus:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_4"/>
       </item>
      </layout>
     </widget>
@@ -1520,28 +1417,28 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>130</y>
+       <y>290</y>
        <width>421</width>
        <height>31</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_21">
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_25">
+       <widget class="QPressureEdit" name="sun_contact_pressure">
         <property name="enabled">
          <bool>false</bool>
         </property>
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QLineEdit" name="lineEdit_26">
+       <widget class="QPressureEdit" name="planet_contact_pressure">
         <property name="enabled">
          <bool>false</bool>
         </property>
        </widget>
       </item>
       <item row="0" column="5">
-       <widget class="QLineEdit" name="lineEdit_27">
+       <widget class="QPressureEdit" name="ring_contact_pressure">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1550,21 +1447,21 @@
       <item row="0" column="2">
        <widget class="QLabel" name="label_75">
         <property name="text">
-         <string>Planet min Pc</string>
+         <string>Planet Pc</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_76">
         <property name="text">
-         <string>Sun min Pc</string>
+         <string>Sun Pc</string>
         </property>
        </widget>
       </item>
       <item row="0" column="4">
        <widget class="QLabel" name="label_77">
         <property name="text">
-         <string>Ring min Pc</string>
+         <string>Ring Pc</string>
         </property>
        </widget>
       </item>
@@ -1574,7 +1471,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>110</y>
+       <y>270</y>
        <width>111</width>
        <height>17</height>
       </rect>
@@ -1587,28 +1484,28 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>70</y>
+       <y>230</y>
        <width>421</width>
        <height>31</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_16">
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_18">
+       <widget class="QPressureEdit" name="sun_bend_stress_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QLineEdit" name="lineEdit_20">
+       <widget class="QPressureEdit" name="planet_bend_stress_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
        </widget>
       </item>
       <item row="0" column="5">
-       <widget class="QLineEdit" name="lineEdit_22">
+       <widget class="QPressureEdit" name="ring_bend_stress_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1617,21 +1514,21 @@
       <item row="0" column="2">
        <widget class="QLabel" name="label_73">
         <property name="text">
-         <string>Planet min σb</string>
+         <string>Planet σb</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_72">
         <property name="text">
-         <string>Sun min σb</string>
+         <string>Sun σb</string>
         </property>
        </widget>
       </item>
       <item row="0" column="4">
        <widget class="QLabel" name="label_74">
         <property name="text">
-         <string>Ring min σb</string>
+         <string>Ring σb</string>
         </property>
        </widget>
       </item>
@@ -1641,7 +1538,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>50</y>
+       <y>210</y>
        <width>91</width>
        <height>17</height>
       </rect>
@@ -1668,14 +1565,14 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QSlider" name="horizontalSlider_2">
+       <widget class="QSlider" name="actual_height_slider">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QLengthEdit" name="actual_height_lineedit_2">
+       <widget class="QLengthEdit" name="actual_height_lineedit">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -1688,7 +1585,135 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="LockUnlockButton" name="actual_height_lineedit_lock_2"/>
+       <widget class="LockUnlockButton" name="actual_height_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>341</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Material</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="material_combobox"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="QToolButton" name="material_combobox_load"/>
+      </item>
+      <item row="0" column="3">
+       <widget class="QToolButton" name="material_combobox_save"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_17">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>80</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_17">
+      <item row="0" column="1">
+       <widget class="QPressureEdit" name="max_bend_stress_lineedit"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_67">
+        <property name="text">
+         <string>Max Bend Stress (σb, ~0.66*Yield)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="max_bend_stress_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_20">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>170</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_20">
+      <item row="0" column="1">
+       <widget class="QFractionEdit" name="poisson_ratio_lineedit"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_70">
+        <property name="text">
+         <string>Poisson Ratio:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="poisson_ratio_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_19">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>140</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_19">
+      <item row="0" column="1">
+       <widget class="QPressureEdit" name="elastic_modulus_lineedit"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_68">
+        <property name="text">
+         <string>Elastic Modulus:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="elastic_modulus_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_25">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>110</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_25">
+      <item row="0" column="1">
+       <widget class="QPressureEdit" name="max_fatigue_stress_lineedit"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_69">
+        <property name="text">
+         <string>Max Fatigue Stress (σe, ~0.5*UTS)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="max_fatiguq_stress_lineedit_lock"/>
       </item>
      </layout>
     </widget>
@@ -1730,6 +1755,16 @@
    <class>QForceEdit</class>
    <extends>QLineEdit</extends>
    <header>.force_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QPressureEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.pressure_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QEvalEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.eval_ui</header>
   </customwidget>
  </customwidgets>
  <resources/>

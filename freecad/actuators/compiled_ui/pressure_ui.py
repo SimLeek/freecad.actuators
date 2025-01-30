@@ -19,7 +19,7 @@ class QPressureEdit(QLineEdit):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.internal_pa = 0.0  # Store pressure in Pascals (N/m²)
-        self.display_unit = "Pa"  # Default display unit
+        self.display_unit = "MPa"  # Default display unit
         self.textChanged.connect(self.update_internal_value)
 
     def parse_pressure(self, text):
@@ -66,6 +66,6 @@ class QPressureEdit(QLineEdit):
 
     def update_display(self):
         """Updates the text to reflect the current Pa value in the chosen display unit."""
-        converted_value = self.internal_pa / eval('1.0'+self.PRESSURE_CONVERSIONS[self.display_unit], {"__builtins__": {}})
+        converted_value = self.internal_pa / eval('1.0'+self.PRESSURE_CONVERSIONS[self.display_unit.lower()], {"__builtins__": {}})
         self.setText(f"{converted_value:.4f}{self.display_unit}")  # 4 decimal places for precision
         self.setToolTip(f"{converted_value:.4f}{self.display_unit}")  # 4 decimal places for precision
