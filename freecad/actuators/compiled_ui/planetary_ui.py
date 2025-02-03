@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'gear-selectorsVltppZ.ui'
+## Form generated from reading UI file 'gear-selectorswIPyXz.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.16
 ##
@@ -22,144 +22,173 @@ from .force_ui import QForceEdit
 from .pressure_ui import QPressureEdit
 from .eval_ui import QEvalEdit
 
-
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(481, 564)
+        Dialog.resize(1169, 772)
         self.toolBox = QToolBox(Dialog)
         self.toolBox.setObjectName(u"toolBox")
-        self.toolBox.setGeometry(QRect(10, 20, 461, 531))
+        self.toolBox.setGeometry(QRect(10, 20, 1151, 731))
         self.min_max_teeth_page = QWidget()
         self.min_max_teeth_page.setObjectName(u"min_max_teeth_page")
-        self.min_max_teeth_page.setGeometry(QRect(0, 0, 461, 407))
-        self.verticalLayoutWidget = QWidget(self.min_max_teeth_page)
-        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(0, 100, 431, 111))
-        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.label = QLabel(self.verticalLayoutWidget)
-        self.label.setObjectName(u"label")
+        self.min_max_teeth_page.setGeometry(QRect(0, 0, 1151, 638))
+        self.gridLayoutWidget_4 = QWidget(self.min_max_teeth_page)
+        self.gridLayoutWidget_4.setObjectName(u"gridLayoutWidget_4")
+        self.gridLayoutWidget_4.setGeometry(QRect(350, 450, 681, 31))
+        self.gridLayout_4 = QGridLayout(self.gridLayoutWidget_4)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.num_results_spinbox_lock = LockUnlockButton(self.gridLayoutWidget_4)
+        self.num_results_spinbox_lock.setObjectName(u"num_results_spinbox_lock")
 
-        self.horizontalLayout.addWidget(self.label)
+        self.gridLayout_4.addWidget(self.num_results_spinbox_lock, 0, 2, 1, 1)
 
-        self.min_sun_teeth_spinbox = QSpinBox(self.verticalLayoutWidget)
-        self.min_sun_teeth_spinbox.setObjectName(u"min_sun_teeth_spinbox")
-        self.min_sun_teeth_spinbox.setMinimum(3)
-        self.min_sun_teeth_spinbox.setMaximum(99999)
+        self.label_44 = QLabel(self.gridLayoutWidget_4)
+        self.label_44.setObjectName(u"label_44")
 
-        self.horizontalLayout.addWidget(self.min_sun_teeth_spinbox)
+        self.gridLayout_4.addWidget(self.label_44, 0, 3, 1, 1)
 
-        self.min_sun_teeth_spinbox_lock = LockUnlockButton(self.verticalLayoutWidget)
-        self.min_sun_teeth_spinbox_lock.setObjectName(u"min_sun_teeth_spinbox_lock")
+        self.label_43 = QLabel(self.gridLayoutWidget_4)
+        self.label_43.setObjectName(u"label_43")
 
-        self.horizontalLayout.addWidget(self.min_sun_teeth_spinbox_lock)
+        self.gridLayout_4.addWidget(self.label_43, 0, 0, 1, 1)
 
-        self.label_2 = QLabel(self.verticalLayoutWidget)
-        self.label_2.setObjectName(u"label_2")
+        self.num_results_spinbox = QSpinBox(self.gridLayoutWidget_4)
+        self.num_results_spinbox.setObjectName(u"num_results_spinbox")
+        self.num_results_spinbox.setMinimum(1)
+        self.num_results_spinbox.setMaximum(99999)
 
-        self.horizontalLayout.addWidget(self.label_2)
+        self.gridLayout_4.addWidget(self.num_results_spinbox, 0, 1, 1, 1)
 
-        self.max_sun_teeth_spinbox = QSpinBox(self.verticalLayoutWidget)
-        self.max_sun_teeth_spinbox.setObjectName(u"max_sun_teeth_spinbox")
-        self.max_sun_teeth_spinbox.setMinimum(3)
-        self.max_sun_teeth_spinbox.setMaximum(99999)
+        self.use_abs_checkbox = QCheckBox(self.gridLayoutWidget_4)
+        self.use_abs_checkbox.setObjectName(u"use_abs_checkbox")
 
-        self.horizontalLayout.addWidget(self.max_sun_teeth_spinbox)
+        self.gridLayout_4.addWidget(self.use_abs_checkbox, 0, 4, 1, 1)
 
-        self.max_sun_teeth_spinbox_lock = LockUnlockButton(self.verticalLayoutWidget)
-        self.max_sun_teeth_spinbox_lock.setObjectName(u"max_sun_teeth_spinbox_lock")
-
-        self.horizontalLayout.addWidget(self.max_sun_teeth_spinbox_lock)
-
-
-        self.verticalLayout.addLayout(self.horizontalLayout)
-
-        self.horizontalLayout_2 = QHBoxLayout()
+        self.widget = QWidget(self.min_max_teeth_page)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(10, 0, 431, 31))
+        self.horizontalLayout_2 = QHBoxLayout(self.widget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.label_3 = QLabel(self.verticalLayoutWidget)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.label_3 = QLabel(self.widget)
         self.label_3.setObjectName(u"label_3")
 
         self.horizontalLayout_2.addWidget(self.label_3)
 
-        self.min_planet_teeth_spinbox = QSpinBox(self.verticalLayoutWidget)
+        self.min_planet_teeth_spinbox = QSpinBox(self.widget)
         self.min_planet_teeth_spinbox.setObjectName(u"min_planet_teeth_spinbox")
         self.min_planet_teeth_spinbox.setMinimum(3)
         self.min_planet_teeth_spinbox.setMaximum(99999)
 
         self.horizontalLayout_2.addWidget(self.min_planet_teeth_spinbox)
 
-        self.min_planet_teeth_spinbox_lock = LockUnlockButton(self.verticalLayoutWidget)
+        self.min_planet_teeth_spinbox_lock = LockUnlockButton(self.widget)
         self.min_planet_teeth_spinbox_lock.setObjectName(u"min_planet_teeth_spinbox_lock")
 
         self.horizontalLayout_2.addWidget(self.min_planet_teeth_spinbox_lock)
 
-        self.label_4 = QLabel(self.verticalLayoutWidget)
+        self.label_4 = QLabel(self.widget)
         self.label_4.setObjectName(u"label_4")
 
         self.horizontalLayout_2.addWidget(self.label_4)
 
-        self.max_planet_teeth_spinbox = QSpinBox(self.verticalLayoutWidget)
+        self.max_planet_teeth_spinbox = QSpinBox(self.widget)
         self.max_planet_teeth_spinbox.setObjectName(u"max_planet_teeth_spinbox")
         self.max_planet_teeth_spinbox.setMinimum(3)
         self.max_planet_teeth_spinbox.setMaximum(99999)
 
         self.horizontalLayout_2.addWidget(self.max_planet_teeth_spinbox)
 
-        self.max_planet_teeth_spinbox_lock = LockUnlockButton(self.verticalLayoutWidget)
+        self.max_planet_teeth_spinbox_lock = LockUnlockButton(self.widget)
         self.max_planet_teeth_spinbox_lock.setObjectName(u"max_planet_teeth_spinbox_lock")
 
         self.horizontalLayout_2.addWidget(self.max_planet_teeth_spinbox_lock)
 
+        self.widget1 = QWidget(self.min_max_teeth_page)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setGeometry(QRect(10, 170, 429, 32))
+        self.horizontalLayout = QHBoxLayout(self.widget1)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.label = QLabel(self.widget1)
+        self.label.setObjectName(u"label")
 
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.horizontalLayout.addWidget(self.label)
 
-        self.horizontalLayout_3 = QHBoxLayout()
+        self.min_sun_teeth_spinbox = QSpinBox(self.widget1)
+        self.min_sun_teeth_spinbox.setObjectName(u"min_sun_teeth_spinbox")
+        self.min_sun_teeth_spinbox.setMinimum(3)
+        self.min_sun_teeth_spinbox.setMaximum(99999)
+
+        self.horizontalLayout.addWidget(self.min_sun_teeth_spinbox)
+
+        self.min_sun_teeth_spinbox_lock = LockUnlockButton(self.widget1)
+        self.min_sun_teeth_spinbox_lock.setObjectName(u"min_sun_teeth_spinbox_lock")
+
+        self.horizontalLayout.addWidget(self.min_sun_teeth_spinbox_lock)
+
+        self.label_2 = QLabel(self.widget1)
+        self.label_2.setObjectName(u"label_2")
+
+        self.horizontalLayout.addWidget(self.label_2)
+
+        self.max_sun_teeth_spinbox = QSpinBox(self.widget1)
+        self.max_sun_teeth_spinbox.setObjectName(u"max_sun_teeth_spinbox")
+        self.max_sun_teeth_spinbox.setMinimum(3)
+        self.max_sun_teeth_spinbox.setMaximum(99999)
+
+        self.horizontalLayout.addWidget(self.max_sun_teeth_spinbox)
+
+        self.max_sun_teeth_spinbox_lock = LockUnlockButton(self.widget1)
+        self.max_sun_teeth_spinbox_lock.setObjectName(u"max_sun_teeth_spinbox_lock")
+
+        self.horizontalLayout.addWidget(self.max_sun_teeth_spinbox_lock)
+
+        self.widget2 = QWidget(self.min_max_teeth_page)
+        self.widget2.setObjectName(u"widget2")
+        self.widget2.setGeometry(QRect(10, 260, 429, 31))
+        self.horizontalLayout_3 = QHBoxLayout(self.widget2)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.label_5 = QLabel(self.verticalLayoutWidget)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.label_5 = QLabel(self.widget2)
         self.label_5.setObjectName(u"label_5")
 
         self.horizontalLayout_3.addWidget(self.label_5)
 
-        self.min_ring_teeth_spinbox = QSpinBox(self.verticalLayoutWidget)
+        self.min_ring_teeth_spinbox = QSpinBox(self.widget2)
         self.min_ring_teeth_spinbox.setObjectName(u"min_ring_teeth_spinbox")
         self.min_ring_teeth_spinbox.setMinimum(3)
         self.min_ring_teeth_spinbox.setMaximum(99999)
 
         self.horizontalLayout_3.addWidget(self.min_ring_teeth_spinbox)
 
-        self.min_ring_teeth_spinbox_lock = LockUnlockButton(self.verticalLayoutWidget)
+        self.min_ring_teeth_spinbox_lock = LockUnlockButton(self.widget2)
         self.min_ring_teeth_spinbox_lock.setObjectName(u"min_ring_teeth_spinbox_lock")
 
         self.horizontalLayout_3.addWidget(self.min_ring_teeth_spinbox_lock)
 
-        self.label_6 = QLabel(self.verticalLayoutWidget)
+        self.label_6 = QLabel(self.widget2)
         self.label_6.setObjectName(u"label_6")
 
         self.horizontalLayout_3.addWidget(self.label_6)
 
-        self.max_ring_teeth_spinbox = QSpinBox(self.verticalLayoutWidget)
+        self.max_ring_teeth_spinbox = QSpinBox(self.widget2)
         self.max_ring_teeth_spinbox.setObjectName(u"max_ring_teeth_spinbox")
         self.max_ring_teeth_spinbox.setMinimum(3)
         self.max_ring_teeth_spinbox.setMaximum(99999)
 
         self.horizontalLayout_3.addWidget(self.max_ring_teeth_spinbox)
 
-        self.max_ring_teeth_spinbox_lock = LockUnlockButton(self.verticalLayoutWidget)
+        self.max_ring_teeth_spinbox_lock = LockUnlockButton(self.widget2)
         self.max_ring_teeth_spinbox_lock.setObjectName(u"max_ring_teeth_spinbox_lock")
 
         self.horizontalLayout_3.addWidget(self.max_ring_teeth_spinbox_lock)
 
-
-        self.verticalLayout.addLayout(self.horizontalLayout_3)
-
         self.gridLayoutWidget = QWidget(self.min_max_teeth_page)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(0, 210, 177, 89))
+        self.gridLayoutWidget.setGeometry(QRect(160, 450, 161, 91))
         self.gridLayout = QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -220,47 +249,9 @@ class Ui_Dialog(object):
 
         self.gridLayout.addWidget(self.fixed_combobox_lock, 2, 2, 1, 1)
 
-        self.gridLayoutWidget_14 = QWidget(self.min_max_teeth_page)
-        self.gridLayoutWidget_14.setObjectName(u"gridLayoutWidget_14")
-        self.gridLayoutWidget_14.setGeometry(QRect(0, 300, 251, 58))
-        self.gridLayout_14 = QGridLayout(self.gridLayoutWidget_14)
-        self.gridLayout_14.setObjectName(u"gridLayout_14")
-        self.gridLayout_14.setContentsMargins(0, 0, 0, 0)
-        self.min_height_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_14)
-        self.min_height_lineedit_lock.setObjectName(u"min_height_lineedit_lock")
-
-        self.gridLayout_14.addWidget(self.min_height_lineedit_lock, 0, 2, 1, 1)
-
-        self.min_height_lineedit = QLengthEdit(self.gridLayoutWidget_14)
-        self.min_height_lineedit.setObjectName(u"min_height_lineedit")
-        self.min_height_lineedit.setEnabled(True)
-
-        self.gridLayout_14.addWidget(self.min_height_lineedit, 0, 1, 1, 1)
-
-        self.label_46 = QLabel(self.gridLayoutWidget_14)
-        self.label_46.setObjectName(u"label_46")
-
-        self.gridLayout_14.addWidget(self.label_46, 0, 0, 1, 1)
-
-        self.label_47 = QLabel(self.gridLayoutWidget_14)
-        self.label_47.setObjectName(u"label_47")
-
-        self.gridLayout_14.addWidget(self.label_47, 1, 0, 1, 1)
-
-        self.max_height_lineedit = QLengthEdit(self.gridLayoutWidget_14)
-        self.max_height_lineedit.setObjectName(u"max_height_lineedit")
-        self.max_height_lineedit.setEnabled(True)
-
-        self.gridLayout_14.addWidget(self.max_height_lineedit, 1, 1, 1, 1)
-
-        self.max_height_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_14)
-        self.max_height_lineedit_lock.setObjectName(u"max_height_lineedit_lock")
-
-        self.gridLayout_14.addWidget(self.max_height_lineedit_lock, 1, 2, 1, 1)
-
         self.gridLayoutWidget_12 = QWidget(self.min_max_teeth_page)
         self.gridLayoutWidget_12.setObjectName(u"gridLayoutWidget_12")
-        self.gridLayoutWidget_12.setGeometry(QRect(0, 40, 251, 58))
+        self.gridLayoutWidget_12.setGeometry(QRect(860, 50, 251, 58))
         self.gridLayout_12 = QGridLayout(self.gridLayoutWidget_12)
         self.gridLayout_12.setObjectName(u"gridLayout_12")
         self.gridLayout_12.setContentsMargins(0, 0, 0, 0)
@@ -297,35 +288,9 @@ class Ui_Dialog(object):
 
         self.gridLayout_12.addWidget(self.label_42, 1, 2, 1, 1)
 
-        self.gridLayoutWidget_15 = QWidget(self.min_max_teeth_page)
-        self.gridLayoutWidget_15.setObjectName(u"gridLayoutWidget_15")
-        self.gridLayoutWidget_15.setGeometry(QRect(0, 10, 251, 31))
-        self.gridLayout_15 = QGridLayout(self.gridLayoutWidget_15)
-        self.gridLayout_15.setObjectName(u"gridLayout_15")
-        self.gridLayout_15.setContentsMargins(0, 0, 0, 0)
-        self.label_48 = QLabel(self.gridLayoutWidget_15)
-        self.label_48.setObjectName(u"label_48")
-
-        self.gridLayout_15.addWidget(self.label_48, 0, 0, 1, 1)
-
-        self.max_ring_diam_lineedit = QLengthEdit(self.gridLayoutWidget_15)
-        self.max_ring_diam_lineedit.setObjectName(u"max_ring_diam_lineedit")
-        self.max_ring_diam_lineedit.setEnabled(True)
-
-        self.gridLayout_15.addWidget(self.max_ring_diam_lineedit, 0, 1, 1, 1)
-
-        self.max_ring_diam_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_15)
-        self.max_ring_diam_lineedit_lock.setObjectName(u"max_ring_diam_lineedit_lock")
-
-        self.gridLayout_15.addWidget(self.max_ring_diam_lineedit_lock, 0, 2, 1, 1)
-
-        self.toolBox.addItem(self.min_max_teeth_page, u"Constraints")
-        self.planetary_ratio_page = QWidget()
-        self.planetary_ratio_page.setObjectName(u"planetary_ratio_page")
-        self.planetary_ratio_page.setGeometry(QRect(0, 0, 461, 407))
-        self.gridLayoutWidget_3 = QWidget(self.planetary_ratio_page)
+        self.gridLayoutWidget_3 = QWidget(self.min_max_teeth_page)
         self.gridLayoutWidget_3.setObjectName(u"gridLayoutWidget_3")
-        self.gridLayoutWidget_3.setGeometry(QRect(10, 150, 385, 101))
+        self.gridLayoutWidget_3.setGeometry(QRect(350, 480, 681, 121))
         self.gridLayout_3 = QGridLayout(self.gridLayoutWidget_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -389,122 +354,115 @@ class Ui_Dialog(object):
 
         self.gear_ratio_options_calculate = QPushButton(self.gridLayoutWidget_3)
         self.gear_ratio_options_calculate.setObjectName(u"gear_ratio_options_calculate")
+        self.gear_ratio_options_calculate.setStyleSheet(u"background-color: yellow; \n"
+"/*border: none;*/")
 
         self.gridLayout_3.addWidget(self.gear_ratio_options_calculate, 2, 2, 1, 1)
 
-        self.gridLayoutWidget_4 = QWidget(self.planetary_ratio_page)
-        self.gridLayoutWidget_4.setObjectName(u"gridLayoutWidget_4")
-        self.gridLayoutWidget_4.setGeometry(QRect(10, 330, 360, 61))
-        self.gridLayout_4 = QGridLayout(self.gridLayoutWidget_4)
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.label_36 = QLabel(self.gridLayoutWidget_4)
-        self.label_36.setObjectName(u"label_36")
+        self.gridLayoutWidget_14 = QWidget(self.min_max_teeth_page)
+        self.gridLayoutWidget_14.setObjectName(u"gridLayoutWidget_14")
+        self.gridLayoutWidget_14.setGeometry(QRect(860, 290, 251, 58))
+        self.gridLayout_14 = QGridLayout(self.gridLayoutWidget_14)
+        self.gridLayout_14.setObjectName(u"gridLayout_14")
+        self.gridLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.min_height_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_14)
+        self.min_height_lineedit_lock.setObjectName(u"min_height_lineedit_lock")
 
-        self.gridLayout_4.addWidget(self.label_36, 0, 0, 1, 1)
+        self.gridLayout_14.addWidget(self.min_height_lineedit_lock, 0, 2, 1, 1)
 
-        self.label_37 = QLabel(self.gridLayoutWidget_4)
-        self.label_37.setObjectName(u"label_37")
+        self.min_height_lineedit = QLengthEdit(self.gridLayoutWidget_14)
+        self.min_height_lineedit.setObjectName(u"min_height_lineedit")
+        self.min_height_lineedit.setEnabled(True)
 
-        self.gridLayout_4.addWidget(self.label_37, 1, 0, 1, 1)
+        self.gridLayout_14.addWidget(self.min_height_lineedit, 0, 1, 1, 1)
 
-        self.checkBox = QCheckBox(self.gridLayoutWidget_4)
-        self.checkBox.setObjectName(u"checkBox")
-        self.checkBox.setEnabled(False)
-        self.checkBox.setChecked(True)
+        self.label_46 = QLabel(self.gridLayoutWidget_14)
+        self.label_46.setObjectName(u"label_46")
 
-        self.gridLayout_4.addWidget(self.checkBox, 0, 1, 1, 1)
+        self.gridLayout_14.addWidget(self.label_46, 0, 0, 1, 1)
 
-        self.checkBox_2 = QCheckBox(self.gridLayoutWidget_4)
-        self.checkBox_2.setObjectName(u"checkBox_2")
-        self.checkBox_2.setEnabled(False)
-        self.checkBox_2.setChecked(True)
+        self.label_47 = QLabel(self.gridLayoutWidget_14)
+        self.label_47.setObjectName(u"label_47")
 
-        self.gridLayout_4.addWidget(self.checkBox_2, 1, 1, 1, 1)
+        self.gridLayout_14.addWidget(self.label_47, 1, 0, 1, 1)
 
-        self.gridLayoutWidget_2 = QWidget(self.planetary_ratio_page)
-        self.gridLayoutWidget_2.setObjectName(u"gridLayoutWidget_2")
-        self.gridLayoutWidget_2.setGeometry(QRect(10, 0, 231, 145))
-        self.gridLayout_2 = QGridLayout(self.gridLayoutWidget_2)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.planet_clearance_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_2)
-        self.planet_clearance_lineedit_lock.setObjectName(u"planet_clearance_lineedit_lock")
+        self.max_height_lineedit = QLengthEdit(self.gridLayoutWidget_14)
+        self.max_height_lineedit.setObjectName(u"max_height_lineedit")
+        self.max_height_lineedit.setEnabled(True)
 
-        self.gridLayout_2.addWidget(self.planet_clearance_lineedit_lock, 1, 2, 1, 1)
+        self.gridLayout_14.addWidget(self.max_height_lineedit, 1, 1, 1, 1)
 
-        self.label_34 = QLabel(self.gridLayoutWidget_2)
-        self.label_34.setObjectName(u"label_34")
+        self.max_height_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_14)
+        self.max_height_lineedit_lock.setObjectName(u"max_height_lineedit_lock")
 
-        self.gridLayout_2.addWidget(self.label_34, 1, 0, 1, 1)
+        self.gridLayout_14.addWidget(self.max_height_lineedit_lock, 1, 2, 1, 1)
 
-        self.gear_addendum_lineedit = QLengthEdit(self.gridLayoutWidget_2)
-        self.gear_addendum_lineedit.setObjectName(u"gear_addendum_lineedit")
-
-        self.gridLayout_2.addWidget(self.gear_addendum_lineedit, 0, 1, 1, 1)
-
-        self.num_results_spinbox = QSpinBox(self.gridLayoutWidget_2)
-        self.num_results_spinbox.setObjectName(u"num_results_spinbox")
-        self.num_results_spinbox.setMinimum(1)
-        self.num_results_spinbox.setMaximum(99999)
-
-        self.gridLayout_2.addWidget(self.num_results_spinbox, 3, 1, 1, 1)
-
-        self.num_results_spinbox_lock = LockUnlockButton(self.gridLayoutWidget_2)
-        self.num_results_spinbox_lock.setObjectName(u"num_results_spinbox_lock")
-
-        self.gridLayout_2.addWidget(self.num_results_spinbox_lock, 3, 2, 1, 1)
-
-        self.gear_addendum_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_2)
-        self.gear_addendum_lineedit_lock.setObjectName(u"gear_addendum_lineedit_lock")
-
-        self.gridLayout_2.addWidget(self.gear_addendum_lineedit_lock, 0, 2, 1, 1)
-
-        self.number_of_planets_spinbox_lock = LockUnlockButton(self.gridLayoutWidget_2)
-        self.number_of_planets_spinbox_lock.setObjectName(u"number_of_planets_spinbox_lock")
-
-        self.gridLayout_2.addWidget(self.number_of_planets_spinbox_lock, 2, 2, 1, 1)
-
-        self.label_33 = QLabel(self.gridLayoutWidget_2)
+        self.horizontalLayoutWidget = QWidget(self.min_max_teeth_page)
+        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
+        self.horizontalLayoutWidget.setGeometry(QRect(10, 30, 431, 31))
+        self.horizontalLayout_7 = QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.label_33 = QLabel(self.horizontalLayoutWidget)
         self.label_33.setObjectName(u"label_33")
 
-        self.gridLayout_2.addWidget(self.label_33, 2, 0, 1, 1)
+        self.horizontalLayout_7.addWidget(self.label_33)
 
-        self.number_of_planets_spinbox = QSpinBox(self.gridLayoutWidget_2)
+        self.number_of_planets_spinbox = QSpinBox(self.horizontalLayoutWidget)
         self.number_of_planets_spinbox.setObjectName(u"number_of_planets_spinbox")
         self.number_of_planets_spinbox.setMinimum(3)
         self.number_of_planets_spinbox.setMaximum(99999)
 
-        self.gridLayout_2.addWidget(self.number_of_planets_spinbox, 2, 1, 1, 1)
+        self.horizontalLayout_7.addWidget(self.number_of_planets_spinbox)
 
-        self.label_35 = QLabel(self.gridLayoutWidget_2)
-        self.label_35.setObjectName(u"label_35")
+        self.number_of_planets_spinbox_lock = LockUnlockButton(self.horizontalLayoutWidget)
+        self.number_of_planets_spinbox_lock.setObjectName(u"number_of_planets_spinbox_lock")
 
-        self.gridLayout_2.addWidget(self.label_35, 0, 0, 1, 1)
+        self.horizontalLayout_7.addWidget(self.number_of_planets_spinbox_lock)
 
-        self.planet_clearance_lineedit = QLengthEdit(self.gridLayoutWidget_2)
-        self.planet_clearance_lineedit.setObjectName(u"planet_clearance_lineedit")
+        self.label_38 = QLabel(self.horizontalLayoutWidget)
+        self.label_38.setObjectName(u"label_38")
 
-        self.gridLayout_2.addWidget(self.planet_clearance_lineedit, 1, 1, 1, 1)
+        self.horizontalLayout_7.addWidget(self.label_38)
 
-        self.label_43 = QLabel(self.gridLayoutWidget_2)
-        self.label_43.setObjectName(u"label_43")
+        self.number_of_planets_spinbox_2 = QSpinBox(self.horizontalLayoutWidget)
+        self.number_of_planets_spinbox_2.setObjectName(u"number_of_planets_spinbox_2")
+        self.number_of_planets_spinbox_2.setMinimum(3)
+        self.number_of_planets_spinbox_2.setMaximum(99999)
+        self.number_of_planets_spinbox_2.setValue(5)
 
-        self.gridLayout_2.addWidget(self.label_43, 3, 0, 1, 1)
+        self.horizontalLayout_7.addWidget(self.number_of_planets_spinbox_2)
 
-        self.label_44 = QLabel(self.gridLayoutWidget_2)
-        self.label_44.setObjectName(u"label_44")
+        self.number_of_planets_spinbox_lock_3 = LockUnlockButton(self.horizontalLayoutWidget)
+        self.number_of_planets_spinbox_lock_3.setObjectName(u"number_of_planets_spinbox_lock_3")
 
-        self.gridLayout_2.addWidget(self.label_44, 4, 0, 1, 1)
+        self.horizontalLayout_7.addWidget(self.number_of_planets_spinbox_lock_3)
 
-        self.use_abs_checkbox = QCheckBox(self.gridLayoutWidget_2)
-        self.use_abs_checkbox.setObjectName(u"use_abs_checkbox")
+        self.gridLayoutWidget_15 = QWidget(self.min_max_teeth_page)
+        self.gridLayoutWidget_15.setObjectName(u"gridLayoutWidget_15")
+        self.gridLayoutWidget_15.setGeometry(QRect(860, 10, 251, 31))
+        self.gridLayout_15 = QGridLayout(self.gridLayoutWidget_15)
+        self.gridLayout_15.setObjectName(u"gridLayout_15")
+        self.gridLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.label_48 = QLabel(self.gridLayoutWidget_15)
+        self.label_48.setObjectName(u"label_48")
 
-        self.gridLayout_2.addWidget(self.use_abs_checkbox, 4, 1, 1, 1)
+        self.gridLayout_15.addWidget(self.label_48, 0, 0, 1, 1)
 
-        self.gridLayoutWidget_11 = QWidget(self.planetary_ratio_page)
+        self.max_ring_diam_lineedit = QLengthEdit(self.gridLayoutWidget_15)
+        self.max_ring_diam_lineedit.setObjectName(u"max_ring_diam_lineedit")
+        self.max_ring_diam_lineedit.setEnabled(True)
+
+        self.gridLayout_15.addWidget(self.max_ring_diam_lineedit, 0, 1, 1, 1)
+
+        self.max_ring_diam_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_15)
+        self.max_ring_diam_lineedit_lock.setObjectName(u"max_ring_diam_lineedit_lock")
+
+        self.gridLayout_15.addWidget(self.max_ring_diam_lineedit_lock, 0, 2, 1, 1)
+
+        self.gridLayoutWidget_11 = QWidget(self.min_max_teeth_page)
         self.gridLayoutWidget_11.setObjectName(u"gridLayoutWidget_11")
-        self.gridLayoutWidget_11.setGeometry(QRect(10, 260, 421, 31))
+        self.gridLayoutWidget_11.setGeometry(QRect(350, 600, 681, 31))
         self.gridLayout_11 = QGridLayout(self.gridLayoutWidget_11)
         self.gridLayout_11.setObjectName(u"gridLayout_11")
         self.gridLayout_11.setContentsMargins(0, 0, 0, 0)
@@ -516,12 +474,12 @@ class Ui_Dialog(object):
         sizePolicy.setHeightForWidth(self.gear_ratio_options_combobox.sizePolicy().hasHeightForWidth())
         self.gear_ratio_options_combobox.setSizePolicy(sizePolicy)
 
-        self.gridLayout_11.addWidget(self.gear_ratio_options_combobox, 0, 1, 1, 1)
+        self.gridLayout_11.addWidget(self.gear_ratio_options_combobox, 0, 2, 1, 1)
 
         self.gear_ratio_options_combobox_lock = LockUnlockButton(self.gridLayoutWidget_11)
         self.gear_ratio_options_combobox_lock.setObjectName(u"gear_ratio_options_combobox_lock")
 
-        self.gridLayout_11.addWidget(self.gear_ratio_options_combobox_lock, 0, 2, 1, 1)
+        self.gridLayout_11.addWidget(self.gear_ratio_options_combobox_lock, 0, 3, 1, 1)
 
         self.label_8 = QLabel(self.gridLayoutWidget_11)
         self.label_8.setObjectName(u"label_8")
@@ -531,12 +489,53 @@ class Ui_Dialog(object):
         sizePolicy1.setHeightForWidth(self.label_8.sizePolicy().hasHeightForWidth())
         self.label_8.setSizePolicy(sizePolicy1)
 
-        self.gridLayout_11.addWidget(self.label_8, 0, 0, 1, 1)
+        self.gridLayout_11.addWidget(self.label_8, 0, 1, 1, 1)
 
-        self.toolBox.addItem(self.planetary_ratio_page, u"Planetary Ratio Calculator")
+        self.gridLayoutWidget_2 = QWidget(self.min_max_teeth_page)
+        self.gridLayoutWidget_2.setObjectName(u"gridLayoutWidget_2")
+        self.gridLayoutWidget_2.setGeometry(QRect(860, 170, 231, 61))
+        self.gridLayout_2 = QGridLayout(self.gridLayoutWidget_2)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.gear_addendum_lineedit = QLengthEdit(self.gridLayoutWidget_2)
+        self.gear_addendum_lineedit.setObjectName(u"gear_addendum_lineedit")
+
+        self.gridLayout_2.addWidget(self.gear_addendum_lineedit, 0, 1, 1, 1)
+
+        self.label_34 = QLabel(self.gridLayoutWidget_2)
+        self.label_34.setObjectName(u"label_34")
+
+        self.gridLayout_2.addWidget(self.label_34, 1, 0, 1, 1)
+
+        self.gear_addendum_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_2)
+        self.gear_addendum_lineedit_lock.setObjectName(u"gear_addendum_lineedit_lock")
+
+        self.gridLayout_2.addWidget(self.gear_addendum_lineedit_lock, 0, 2, 1, 1)
+
+        self.planet_clearance_lineedit_lock = LockUnlockButton(self.gridLayoutWidget_2)
+        self.planet_clearance_lineedit_lock.setObjectName(u"planet_clearance_lineedit_lock")
+
+        self.gridLayout_2.addWidget(self.planet_clearance_lineedit_lock, 1, 2, 1, 1)
+
+        self.label_35 = QLabel(self.gridLayoutWidget_2)
+        self.label_35.setObjectName(u"label_35")
+
+        self.gridLayout_2.addWidget(self.label_35, 0, 0, 1, 1)
+
+        self.planet_clearance_lineedit = QLengthEdit(self.gridLayoutWidget_2)
+        self.planet_clearance_lineedit.setObjectName(u"planet_clearance_lineedit")
+
+        self.gridLayout_2.addWidget(self.planet_clearance_lineedit, 1, 1, 1, 1)
+
+        self.widget3 = QWidget(self.min_max_teeth_page)
+        self.widget3.setObjectName(u"widget3")
+        self.widget3.setGeometry(QRect(440, 20, 421, 431))
+        self.widget3.setStyleSheet(u"border-image: url('./compiled_ui//planetary-angle-ratio.svg') 0 0 0 0 stretch stretch;\n"
+"")
+        self.toolBox.addItem(self.min_max_teeth_page, u"Planetary Gearbox Ratio")
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
-        self.page_2.setGeometry(QRect(0, 0, 461, 407))
+        self.page_2.setGeometry(QRect(0, 0, 1151, 638))
         self.gridLayoutWidget_7 = QWidget(self.page_2)
         self.gridLayoutWidget_7.setObjectName(u"gridLayoutWidget_7")
         self.gridLayoutWidget_7.setGeometry(QRect(0, 220, 441, 121))
@@ -1005,7 +1004,7 @@ class Ui_Dialog(object):
         self.toolBox.addItem(self.page_2, u"Force and Module Analysis")
         self.shape_page = QWidget()
         self.shape_page.setObjectName(u"shape_page")
-        self.shape_page.setGeometry(QRect(0, 0, 461, 407))
+        self.shape_page.setGeometry(QRect(0, 0, 1151, 638))
         self.gridLayoutWidget_43 = QWidget(self.shape_page)
         self.gridLayoutWidget_43.setObjectName(u"gridLayoutWidget_43")
         self.gridLayoutWidget_43.setGeometry(QRect(0, 330, 241, 58))
@@ -1262,7 +1261,7 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
 
-        self.toolBox.setCurrentIndex(3)
+        self.toolBox.setCurrentIndex(0)
         self.output_combobox.setCurrentIndex(0)
         self.fixed_combobox.setCurrentIndex(0)
 
@@ -1272,10 +1271,13 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
-        self.label.setText(QCoreApplication.translate("Dialog", u"Min Sun Teeth:", None))
-        self.label_2.setText(QCoreApplication.translate("Dialog", u"Max Sun Teeth:", None))
+        self.label_44.setText(QCoreApplication.translate("Dialog", u"Use Absolute Value:", None))
+        self.label_43.setText(QCoreApplication.translate("Dialog", u"Number of Options:", None))
+        self.use_abs_checkbox.setText("")
         self.label_3.setText(QCoreApplication.translate("Dialog", u"Min Planet Teeth:", None))
         self.label_4.setText(QCoreApplication.translate("Dialog", u"Max Planet Teeth:", None))
+        self.label.setText(QCoreApplication.translate("Dialog", u"Min Sun Teeth:", None))
+        self.label_2.setText(QCoreApplication.translate("Dialog", u"Max Sun Teeth:", None))
         self.label_5.setText(QCoreApplication.translate("Dialog", u"Min Ring Teeth:", None))
         self.label_6.setText(QCoreApplication.translate("Dialog", u"Max Ring Teeth:", None))
         self.label_11.setText(QCoreApplication.translate("Dialog", u"Input:", None))
@@ -1296,19 +1298,12 @@ class Ui_Dialog(object):
         self.fixed_combobox.setItemText(2, QCoreApplication.translate("Dialog", u"Ring", None))
         self.fixed_combobox.setItemText(3, QCoreApplication.translate("Dialog", u"Carrier", None))
 
-        self.label_46.setText(QCoreApplication.translate("Dialog", u"Min height:", None))
-        self.label_47.setText(QCoreApplication.translate("Dialog", u"Max height:", None))
         self.label_40.setText(QCoreApplication.translate("Dialog", u"Min Module:", None))
         self.label_41.setText(QCoreApplication.translate("Dialog", u"Min Circular Pitch:", None))
 #if QT_CONFIG(tooltip)
         self.label_42.setToolTip(QCoreApplication.translate("Dialog", u"This entry sets or is set by sun torque", None))
 #endif // QT_CONFIG(tooltip)
         self.label_42.setText(QCoreApplication.translate("Dialog", u"  =  ", None))
-#if QT_CONFIG(tooltip)
-        self.label_48.setToolTip(QCoreApplication.translate("Dialog", u"This assumes the ring is the full gear radius plus 2*addendum, usually 2*module.", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_48.setText(QCoreApplication.translate("Dialog", u"Max Ring Diameter:", None))
-        self.toolBox.setItemText(self.toolBox.indexOf(self.min_max_teeth_page), QCoreApplication.translate("Dialog", u"Constraints", None))
         self.gear_ratio_options_abort.setText(QCoreApplication.translate("Dialog", u"Abort", None))
 #if QT_CONFIG(tooltip)
         self.label_65.setToolTip(QCoreApplication.translate("Dialog", u"This entry sets or is set by sun torque", None))
@@ -1320,18 +1315,18 @@ class Ui_Dialog(object):
         self.label_20.setText(QCoreApplication.translate("Dialog", u"Out-T / In-T", None))
         self.label_26.setText(QCoreApplication.translate("Dialog", u"R\u207b\u00b9", None))
         self.gear_ratio_options_calculate.setText(QCoreApplication.translate("Dialog", u"Calculate", None))
-        self.label_36.setText(QCoreApplication.translate("Dialog", u"Satisfy Planet Neighbor Constraint:", None))
-        self.label_37.setText(QCoreApplication.translate("Dialog", u"Satisfy Homogeneity Distribution Constraint:", None))
-        self.checkBox.setText("")
-        self.checkBox_2.setText("")
-        self.label_34.setText(QCoreApplication.translate("Dialog", u"Planet Clearance:", None))
-        self.label_33.setText(QCoreApplication.translate("Dialog", u"Number of Planets:", None))
-        self.label_35.setText(QCoreApplication.translate("Dialog", u"Gear Addendum:", None))
-        self.label_43.setText(QCoreApplication.translate("Dialog", u"Number of Options:", None))
-        self.label_44.setText(QCoreApplication.translate("Dialog", u"Use Absolute Value:", None))
-        self.use_abs_checkbox.setText("")
+        self.label_46.setText(QCoreApplication.translate("Dialog", u"Min height:", None))
+        self.label_47.setText(QCoreApplication.translate("Dialog", u"Max height:", None))
+        self.label_33.setText(QCoreApplication.translate("Dialog", u"Min Num Planets:", None))
+        self.label_38.setText(QCoreApplication.translate("Dialog", u"Max Num Planets:", None))
+#if QT_CONFIG(tooltip)
+        self.label_48.setToolTip(QCoreApplication.translate("Dialog", u"This assumes the ring is the full gear radius plus 2*addendum, usually 2*module.", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_48.setText(QCoreApplication.translate("Dialog", u"Max Ring Diameter:", None))
         self.label_8.setText(QCoreApplication.translate("Dialog", u"Options:", None))
-        self.toolBox.setItemText(self.toolBox.indexOf(self.planetary_ratio_page), QCoreApplication.translate("Dialog", u"Planetary Ratio Calculator", None))
+        self.label_34.setText(QCoreApplication.translate("Dialog", u"Planet Clearance:", None))
+        self.label_35.setText(QCoreApplication.translate("Dialog", u"Gear Addendum:", None))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.min_max_teeth_page), QCoreApplication.translate("Dialog", u"Planetary Gearbox Ratio", None))
         self.label_62.setText(QCoreApplication.translate("Dialog", u"Ring Fn", None))
         self.label_57.setText(QCoreApplication.translate("Dialog", u"Carrier Ft", None))
         self.label_59.setText(QCoreApplication.translate("Dialog", u"Carrier Fa", None))

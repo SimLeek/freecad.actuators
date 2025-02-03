@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="images">
+    <file>planetary-angle-torque.svg</file>
+    <file>planetary-angle.svg</file>
+    <file>planetary.svg</file>
+    <file>check_icon.png</file>
+    <file>planetary-angle-ratio.svg</file>
+  </qresource>
+</RCC>

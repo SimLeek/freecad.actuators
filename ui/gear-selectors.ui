@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>481</width>
-    <height>564</height>
+    <width>1144</width>
+    <height>742</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,176 +18,234 @@
     <rect>
      <x>10</x>
      <y>20</y>
-     <width>461</width>
-     <height>531</height>
+     <width>1121</width>
+     <height>701</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="min_max_teeth_page">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>461</width>
-      <height>407</height>
+      <width>1121</width>
+      <height>639</height>
      </rect>
     </property>
     <attribute name="label">
-     <string>Constraints</string>
+     <string>Planetary Gearbox Ratio</string>
     </attribute>
-    <widget class="QWidget" name="verticalLayoutWidget">
+    <widget class="QWidget" name="gridLayoutWidget_4">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>100</y>
-       <width>431</width>
-       <height>111</height>
+       <x>350</x>
+       <y>450</y>
+       <width>681</width>
+       <height>31</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="num_results_spinbox_lock"/>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_44">
+        <property name="text">
+         <string>Use Absolute Value:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_43">
+        <property name="text">
+         <string>Number of Options:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="num_results_spinbox">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QCheckBox" name="use_abs_checkbox">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>431</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Min Sun Teeth:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="min_sun_teeth_spinbox">
-          <property name="minimum">
-           <number>3</number>
-          </property>
-          <property name="maximum">
-           <number>99999</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="LockUnlockButton" name="min_sun_teeth_spinbox_lock"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Max Sun Teeth:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="max_sun_teeth_spinbox">
-          <property name="minimum">
-           <number>3</number>
-          </property>
-          <property name="maximum">
-           <number>99999</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="LockUnlockButton" name="max_sun_teeth_spinbox_lock"/>
-        </item>
-       </layout>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Min Planet Teeth:</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Min Planet Teeth:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="min_planet_teeth_spinbox">
-          <property name="minimum">
-           <number>3</number>
-          </property>
-          <property name="maximum">
-           <number>99999</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="LockUnlockButton" name="min_planet_teeth_spinbox_lock"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Max Planet Teeth:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="max_planet_teeth_spinbox">
-          <property name="minimum">
-           <number>3</number>
-          </property>
-          <property name="maximum">
-           <number>99999</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="LockUnlockButton" name="max_planet_teeth_spinbox_lock"/>
-        </item>
-       </layout>
+       <widget class="QSpinBox" name="min_planet_teeth_spinbox">
+        <property name="minimum">
+         <number>3</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>Min Ring Teeth:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="min_ring_teeth_spinbox">
-          <property name="minimum">
-           <number>3</number>
-          </property>
-          <property name="maximum">
-           <number>99999</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="LockUnlockButton" name="min_ring_teeth_spinbox_lock"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Max Ring Teeth:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="max_ring_teeth_spinbox">
-          <property name="minimum">
-           <number>3</number>
-          </property>
-          <property name="maximum">
-           <number>99999</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="LockUnlockButton" name="max_ring_teeth_spinbox_lock"/>
-        </item>
-       </layout>
+       <widget class="LockUnlockButton" name="min_planet_teeth_spinbox_lock"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Max Planet Teeth:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="max_planet_teeth_spinbox">
+        <property name="minimum">
+         <number>3</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="LockUnlockButton" name="max_planet_teeth_spinbox_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>429</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Min Sun Teeth:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="min_sun_teeth_spinbox">
+        <property name="minimum">
+         <number>3</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="LockUnlockButton" name="min_sun_teeth_spinbox_lock"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Max Sun Teeth:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="max_sun_teeth_spinbox">
+        <property name="minimum">
+         <number>3</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="LockUnlockButton" name="max_sun_teeth_spinbox_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>429</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Min Ring Teeth:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="min_ring_teeth_spinbox">
+        <property name="minimum">
+         <number>3</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="LockUnlockButton" name="min_ring_teeth_spinbox_lock"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Max Ring Teeth:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="max_ring_teeth_spinbox">
+        <property name="minimum">
+         <number>3</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="LockUnlockButton" name="max_ring_teeth_spinbox_lock"/>
       </item>
      </layout>
     </widget>
     <widget class="QWidget" name="gridLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>210</y>
-       <width>177</width>
-       <height>89</height>
+       <x>160</x>
+       <y>450</y>
+       <width>161</width>
+       <height>91</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -301,57 +359,11 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="gridLayoutWidget_14">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>300</y>
-       <width>251</width>
-       <height>58</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_14">
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="min_height_lineedit_lock"/>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLengthEdit" name="min_height_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_46">
-        <property name="text">
-         <string>Min height:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_47">
-        <property name="text">
-         <string>Max height:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLengthEdit" name="max_height_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="LockUnlockButton" name="max_height_lineedit_lock"/>
-      </item>
-     </layout>
-    </widget>
     <widget class="QWidget" name="gridLayoutWidget_12">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>40</y>
+       <x>860</x>
+       <y>50</y>
        <width>251</width>
        <height>58</height>
       </rect>
@@ -403,58 +415,13 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="gridLayoutWidget_15">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>251</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_15">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_48">
-        <property name="toolTip">
-         <string>This assumes the ring is the full gear radius plus 2*addendum, usually 2*module.</string>
-        </property>
-        <property name="text">
-         <string>Max Ring Diameter:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLengthEdit" name="max_ring_diam_lineedit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="max_ring_diam_lineedit_lock"/>
-      </item>
-     </layout>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="planetary_ratio_page">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>461</width>
-      <height>407</height>
-     </rect>
-    </property>
-    <attribute name="label">
-     <string>Planetary Ratio Calculator</string>
-    </attribute>
     <widget class="QWidget" name="gridLayoutWidget_3">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>150</y>
-       <width>385</width>
-       <height>101</height>
+       <x>350</x>
+       <y>480</y>
+       <width>681</width>
+       <height>121</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
@@ -535,6 +502,10 @@
       </item>
       <item row="2" column="2">
        <widget class="QPushButton" name="gear_ratio_options_calculate">
+        <property name="styleSheet">
+         <string notr="true">background-color: yellow; 
+/*border: none;*/</string>
+        </property>
         <property name="text">
          <string>Calculate</string>
         </property>
@@ -542,108 +513,70 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="gridLayoutWidget_4">
+    <widget class="QWidget" name="gridLayoutWidget_14">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>330</y>
-       <width>360</width>
-       <height>61</height>
+       <x>860</x>
+       <y>290</y>
+       <width>251</width>
+       <height>58</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout_4">
+     <layout class="QGridLayout" name="gridLayout_14">
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="min_height_lineedit_lock"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLengthEdit" name="min_height_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
-       <widget class="QLabel" name="label_36">
+       <widget class="QLabel" name="label_46">
         <property name="text">
-         <string>Satisfy Planet Neighbor Constraint:</string>
+         <string>Min height:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="label_37">
+       <widget class="QLabel" name="label_47">
         <property name="text">
-         <string>Satisfy Homogeneity Distribution Constraint:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="checkBox">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
+         <string>Max height:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QCheckBox" name="checkBox_2">
+       <widget class="QLengthEdit" name="max_height_lineedit">
         <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="checked">
          <bool>true</bool>
         </property>
        </widget>
       </item>
+      <item row="1" column="2">
+       <widget class="LockUnlockButton" name="max_height_lineedit_lock"/>
+      </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="gridLayoutWidget_2">
+    <widget class="QWidget" name="horizontalLayoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>0</y>
-       <width>231</width>
-       <height>145</height>
+       <y>30</y>
+       <width>431</width>
+       <height>31</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="1" column="2">
-       <widget class="LockUnlockButton" name="planet_clearance_lineedit_lock"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_34">
-        <property name="text">
-         <string>Planet Clearance:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLengthEdit" name="gear_addendum_lineedit"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QSpinBox" name="num_results_spinbox">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>99999</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="LockUnlockButton" name="num_results_spinbox_lock"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="gear_addendum_lineedit_lock"/>
-      </item>
-      <item row="2" column="2">
-       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock"/>
-      </item>
-      <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
        <widget class="QLabel" name="label_33">
         <property name="text">
-         <string>Number of Planets:</string>
+         <string>Min Num Planets:</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item>
        <widget class="QSpinBox" name="number_of_planets_spinbox">
         <property name="minimum">
          <number>3</number>
@@ -653,50 +586,77 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_38">
+        <property name="text">
+         <string>Max Num Planets:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="number_of_planets_spinbox_2">
+        <property name="minimum">
+         <number>3</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_3"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_15">
+     <property name="geometry">
+      <rect>
+       <x>860</x>
+       <y>10</y>
+       <width>251</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_15">
       <item row="0" column="0">
-       <widget class="QLabel" name="label_35">
+       <widget class="QLabel" name="label_48">
+        <property name="toolTip">
+         <string>This assumes the ring is the full gear radius plus 2*addendum, usually 2*module.</string>
+        </property>
         <property name="text">
-         <string>Gear Addendum:</string>
+         <string>Max Ring Diameter:</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLengthEdit" name="planet_clearance_lineedit"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_43">
-        <property name="text">
-         <string>Number of Options:</string>
+      <item row="0" column="1">
+       <widget class="QLengthEdit" name="max_ring_diam_lineedit">
+        <property name="enabled">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_44">
-        <property name="text">
-         <string>Use Absolute Value:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QCheckBox" name="use_abs_checkbox">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="max_ring_diam_lineedit_lock"/>
       </item>
      </layout>
     </widget>
     <widget class="QWidget" name="gridLayoutWidget_11">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>260</y>
-       <width>421</width>
+       <x>350</x>
+       <y>600</y>
+       <width>681</width>
        <height>31</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_11">
-      <item row="0" column="1">
+      <item row="0" column="2">
        <widget class="ObjectComboBox" name="gear_ratio_options_combobox">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -706,10 +666,10 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
+      <item row="0" column="3">
        <widget class="LockUnlockButton" name="gear_ratio_options_combobox_lock"/>
       </item>
-      <item row="0" column="0">
+      <item row="0" column="1">
        <widget class="QLabel" name="label_8">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -724,24 +684,76 @@
       </item>
      </layout>
     </widget>
+    <widget class="QWidget" name="gridLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>860</x>
+       <y>170</y>
+       <width>231</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="1">
+       <widget class="QLengthEdit" name="gear_addendum_lineedit"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_34">
+        <property name="text">
+         <string>Planet Clearance:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="gear_addendum_lineedit_lock"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="LockUnlockButton" name="planet_clearance_lineedit_lock"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_35">
+        <property name="text">
+         <string>Gear Addendum:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLengthEdit" name="planet_clearance_lineedit"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>20</y>
+       <width>421</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/images/planetary-angle-ratio.svg) 0 0 0 0 stretch stretch;
+</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="page_2">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>461</width>
-      <height>407</height>
+      <width>1121</width>
+      <height>639</height>
      </rect>
     </property>
     <attribute name="label">
-     <string>Force and Module Analysis</string>
+     <string>Force, Shape, and Material requirements</string>
     </attribute>
     <widget class="QWidget" name="gridLayoutWidget_7">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>220</y>
+       <x>10</x>
+       <y>450</y>
        <width>441</width>
        <height>121</height>
       </rect>
@@ -779,16 +791,6 @@
        <widget class="QLabel" name="label_59">
         <property name="text">
          <string>Carrier Fa</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="7">
-       <widget class="QLabel" name="label_64">
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -980,14 +982,21 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="7">
+       <widget class="QLabel" name="label_64">
+        <property name="text">
+         <string>=Planet Fa</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
     <widget class="QWidget" name="gridLayoutWidget_13">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>241</width>
+       <x>10</x>
+       <y>10</y>
+       <width>321</width>
        <height>31</height>
       </rect>
      </property>
@@ -1010,9 +1019,9 @@
     <widget class="QWidget" name="gridLayoutWidget_8">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>30</y>
-       <width>261</width>
+       <x>10</x>
+       <y>120</y>
+       <width>321</width>
        <height>61</height>
       </rect>
      </property>
@@ -1056,8 +1065,8 @@
     <widget class="QWidget" name="gridLayoutWidget_6">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>340</y>
+       <x>10</x>
+       <y>570</y>
        <width>447</width>
        <height>61</height>
       </rect>
@@ -1152,9 +1161,9 @@
     <widget class="QWidget" name="gridLayoutWidget_9">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>90</y>
-       <width>261</width>
+       <x>10</x>
+       <y>180</y>
+       <width>321</width>
        <height>31</height>
       </rect>
      </property>
@@ -1181,8 +1190,8 @@
     <widget class="QWidget" name="gridLayoutWidget_22">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>160</y>
+       <x>10</x>
+       <y>390</y>
        <width>441</width>
        <height>31</height>
       </rect>
@@ -1249,8 +1258,8 @@
     <widget class="QWidget" name="gridLayoutWidget_23">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>190</y>
+       <x>10</x>
+       <y>420</y>
        <width>441</width>
        <height>31</height>
       </rect>
@@ -1275,21 +1284,21 @@
     <widget class="QWidget" name="gridLayoutWidget_24">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>120</y>
-       <width>441</width>
-       <height>31</height>
+       <x>740</x>
+       <y>100</y>
+       <width>371</width>
+       <height>58</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_24">
-      <item row="0" column="0">
+      <item row="1" column="0">
        <widget class="QLabel" name="label_162">
         <property name="text">
          <string>Actual Module</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="1" column="1">
        <widget class="QSlider" name="actual_module_slider">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -1302,10 +1311,10 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="3">
+      <item row="1" column="3">
        <widget class="LockUnlockButton" name="actual_module_lineedit_lock"/>
       </item>
-      <item row="0" column="2">
+      <item row="1" column="2">
        <widget class="QLengthEdit" name="actual_module_lineedit">
         <property name="enabled">
          <bool>true</bool>
@@ -1318,15 +1327,35 @@
         </property>
        </widget>
       </item>
+      <item row="0" column="2">
+       <widget class="QLengthEdit" name="actual_module_lineedit_2">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_167">
+        <property name="text">
+         <string>Actual Diameter</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
     <widget class="QWidget" name="gridLayoutWidget_18">
      <property name="geometry">
       <rect>
-       <x>299</x>
-       <y>70</y>
+       <x>820</x>
+       <y>10</y>
        <width>141</width>
-       <height>51</height>
+       <height>61</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_18">
@@ -1360,64 +1389,11 @@
       </item>
      </layout>
     </widget>
-   </widget>
-   <widget class="QWidget" name="shape_page">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>461</width>
-      <height>407</height>
-     </rect>
-    </property>
-    <attribute name="label">
-     <string>Material and Height Requirements</string>
-    </attribute>
-    <widget class="QWidget" name="gridLayoutWidget_43">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>330</y>
-       <width>241</width>
-       <height>58</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_43">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_160">
-        <property name="text">
-         <string>Bend Safety Factor</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="bend_safety_factor_lineedit">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_166">
-        <property name="text">
-         <string>Contact Safety Factor</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="contact_safety_factor_lineedit">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QWidget" name="gridLayoutWidget_21">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>290</y>
+       <x>680</x>
+       <y>510</y>
        <width>421</width>
        <height>31</height>
       </rect>
@@ -1470,8 +1446,8 @@
     <widget class="QLabel" name="label_13">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>270</y>
+       <x>680</x>
+       <y>490</y>
        <width>111</width>
        <height>17</height>
       </rect>
@@ -1480,11 +1456,49 @@
       <string>Contact Pressure:</string>
      </property>
     </widget>
+    <widget class="QWidget" name="gridLayoutWidget_25">
+     <property name="geometry">
+      <rect>
+       <x>740</x>
+       <y>310</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_25">
+      <item row="0" column="1">
+       <widget class="QPressureEdit" name="max_fatigue_stress_lineedit"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="max_fatiguq_stress_lineedit_lock"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_69">
+        <property name="text">
+         <string>Max Fatigue Stress (σe, ~0.5*UTS)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>430</y>
+       <width>91</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bending Stress:</string>
+     </property>
+    </widget>
     <widget class="QWidget" name="gridLayoutWidget_16">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>230</y>
+       <x>680</x>
+       <y>450</y>
        <width>421</width>
        <height>31</height>
       </rect>
@@ -1534,25 +1548,105 @@
       </item>
      </layout>
     </widget>
-    <widget class="QLabel" name="label_12">
+    <widget class="QWidget" name="gridLayoutWidget_5">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>210</y>
-       <width>91</width>
-       <height>17</height>
+       <x>740</x>
+       <y>250</y>
+       <width>341</width>
+       <height>31</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Bending Stress:</string>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Material</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="material_combobox"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="QToolButton" name="material_combobox_load"/>
+      </item>
+      <item row="0" column="3">
+       <widget class="QToolButton" name="material_combobox_save"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_17">
+     <property name="geometry">
+      <rect>
+       <x>740</x>
+       <y>280</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
      </property>
+     <layout class="QGridLayout" name="gridLayout_17">
+      <item row="0" column="1">
+       <widget class="QPressureEdit" name="max_bend_stress_lineedit"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_67">
+        <property name="text">
+         <string>Max Bend Stress (σb, ~0.66*Yield)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="LockUnlockButton" name="max_bend_stress_lineedit_lock"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_43">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>550</y>
+       <width>241</width>
+       <height>58</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_43">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_160">
+        <property name="text">
+         <string>Bend Safety Factor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="bend_safety_factor_lineedit">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_166">
+        <property name="text">
+         <string>Contact Safety Factor</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="contact_safety_factor_lineedit">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
     <widget class="QWidget" name="gridLayoutWidget_10">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>421</width>
+       <x>750</x>
+       <y>180</y>
+       <width>361</width>
        <height>31</height>
       </rect>
      </property>
@@ -1589,64 +1683,11 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="gridLayoutWidget_5">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>341</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>Material</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="material_combobox"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="QToolButton" name="material_combobox_load"/>
-      </item>
-      <item row="0" column="3">
-       <widget class="QToolButton" name="material_combobox_save"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_17">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>80</y>
-       <width>311</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_17">
-      <item row="0" column="1">
-       <widget class="QPressureEdit" name="max_bend_stress_lineedit"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_67">
-        <property name="text">
-         <string>Max Bend Stress (σb, ~0.66*Yield)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="max_bend_stress_lineedit_lock"/>
-      </item>
-     </layout>
-    </widget>
     <widget class="QWidget" name="gridLayoutWidget_20">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>170</y>
+       <x>740</x>
+       <y>370</y>
        <width>311</width>
        <height>31</height>
       </rect>
@@ -1670,8 +1711,8 @@
     <widget class="QWidget" name="gridLayoutWidget_19">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>140</y>
+       <x>740</x>
+       <y>340</y>
        <width>311</width>
        <height>31</height>
       </rect>
@@ -1692,31 +1733,157 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="gridLayoutWidget_25">
+    <widget class="QWidget" name="widget_2" native="true">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>110</y>
-       <width>311</width>
-       <height>31</height>
+       <x>330</x>
+       <y>0</y>
+       <width>421</width>
+       <height>431</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout_25">
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/images/planetary-angle-torque.svg) 0 0 0 0 stretch stretch;
+</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_26">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>10</y>
+       <width>141</width>
+       <height>58</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_26">
       <item row="0" column="1">
-       <widget class="QPressureEdit" name="max_fatigue_stress_lineedit"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_69">
-        <property name="text">
-         <string>Max Fatigue Stress (σe, ~0.5*UTS)</string>
+       <widget class="QTorqueEdit" name="ring_t_lineedit_4">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="LockUnlockButton" name="max_fatiguq_stress_lineedit_lock"/>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_168">
+        <property name="text">
+         <string>Min Height</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_169">
+        <property name="text">
+         <string>Max Height</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QTorqueEdit" name="ring_t_lineedit_5">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
+    <widget class="QWidget" name="gridLayoutWidget_27">
+     <property name="geometry">
+      <rect>
+       <x>960</x>
+       <y>10</y>
+       <width>141</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_27">
+      <item row="0" column="1">
+       <widget class="QTorqueEdit" name="ring_t_lineedit_6">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_170">
+        <property name="text">
+         <string>Min Diameter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_171">
+        <property name="text">
+         <string>Max Diameter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QTorqueEdit" name="ring_t_lineedit_7">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>610</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: yellow; </string>
+     </property>
+     <property name="text">
+      <string>Finish</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>610</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+    <zorder>widget_2</zorder>
+    <zorder>gridLayoutWidget_7</zorder>
+    <zorder>gridLayoutWidget_13</zorder>
+    <zorder>gridLayoutWidget_8</zorder>
+    <zorder>gridLayoutWidget_6</zorder>
+    <zorder>gridLayoutWidget_9</zorder>
+    <zorder>gridLayoutWidget_22</zorder>
+    <zorder>gridLayoutWidget_23</zorder>
+    <zorder>gridLayoutWidget_24</zorder>
+    <zorder>gridLayoutWidget_18</zorder>
+    <zorder>gridLayoutWidget_21</zorder>
+    <zorder>label_13</zorder>
+    <zorder>gridLayoutWidget_25</zorder>
+    <zorder>label_12</zorder>
+    <zorder>gridLayoutWidget_16</zorder>
+    <zorder>gridLayoutWidget_5</zorder>
+    <zorder>gridLayoutWidget_17</zorder>
+    <zorder>gridLayoutWidget_43</zorder>
+    <zorder>gridLayoutWidget_10</zorder>
+    <zorder>gridLayoutWidget_20</zorder>
+    <zorder>gridLayoutWidget_19</zorder>
+    <zorder>gridLayoutWidget_26</zorder>
+    <zorder>gridLayoutWidget_27</zorder>
+    <zorder>pushButton</zorder>
+    <zorder>pushButton_2</zorder>
    </widget>
   </widget>
  </widget>
@@ -1767,6 +1934,8 @@
    <header>.eval_ui</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../freecad/actuators/compiled_ui/img_src.qrc"/>
+ </resources>
  <connections/>
 </ui>

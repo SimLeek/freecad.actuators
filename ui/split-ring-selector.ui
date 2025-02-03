@@ -685,9 +685,6 @@
         <property name="text">
          <string>X</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
        </widget>
       </item>
       <item row="0" column="0">
@@ -708,9 +705,6 @@
        <widget class="QLabel" name="is_homogeneity_distribution_constraint_satisfied_indicator_label">
         <property name="text">
          <string>X</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>
