@@ -1,7 +1,10 @@
 import re
 import traceback
 from fractions import Fraction
-from PySide2.QtWidgets import QLineEdit
+try:
+    from PySide2.QtWidgets import QLineEdit
+except ImportError:
+    from PySide.QtWidgets import QLineEdit
 import ast
 import math
 

@@ -1,7 +1,9 @@
 import re
 import traceback
-from PySide2.QtWidgets import QLineEdit
-
+try:
+    from PySide2.QtWidgets import QLineEdit
+except ImportError:
+    from PySide.QtWidgets import QLineEdit
 
 class QForceEdit(QLineEdit):
     """A QLineEdit that parses force values and stores them internally in Newtons (N)."""

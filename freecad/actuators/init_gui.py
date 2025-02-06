@@ -67,13 +67,13 @@ class ActuatorWorkbench(gui.Workbench):
     ToolTip = "Actuator Workbench"
     Icon = os.path.join(__dirname__, "icons", "actuatorworkbench.svg")
     commands = [
-        "CreateMotor",
+        #"CreateMotor",
         "CreatePlanetary",
-        "CreateSplitRing",
-        "CreateBevel",
-        "CreatePulley",
-        "CreateRollerScrew",
-        "CreateSpring"
+        #"CreateSplitRing",
+        #"CreateBevel",
+        #"CreatePulley",
+        #"CreateRollerScrew",
+        #"CreateSpring"
     ]
 
     def GetClassName(self):
@@ -84,24 +84,24 @@ class ActuatorWorkbench(gui.Workbench):
         # gui.updateLocale()
 
         from .commands import (
-            CreateMotor,
+            #CreateMotor,
             CreatePlanetary,
-            CreateSplitRing,
-            CreateBevel,
-            CreatePulley,
-            CreateRollerScrew,
-            CreateSpring,
+            #CreateSplitRing,
+            #CreateBevel,
+            #CreatePulley,
+            #CreateRollerScrew,
+            #CreateSpring,
         )
 
         self.appendToolbar("Actuator", self.commands)
         self.appendMenu("Actuator", self.commands)
-        gui.addCommand("CreateMotor", CreateMotor())
+        #gui.addCommand("CreateMotor", CreateMotor())
         gui.addCommand("CreatePlanetary", CreatePlanetary())
-        gui.addCommand("CreateSplitRing", CreateSplitRing())
-        gui.addCommand("CreateBevel", CreateBevel())
-        gui.addCommand("CreatePulley", CreatePulley())
-        gui.addCommand("CreateRollerScrew", CreateRollerScrew())
-        gui.addCommand("CreateSpring", CreateSpring())
+        #gui.addCommand("CreateSplitRing", CreateSplitRing())
+        #gui.addCommand("CreateBevel", CreateBevel())
+        #gui.addCommand("CreatePulley", CreatePulley())
+        #gui.addCommand("CreateRollerScrew", CreateRollerScrew())
+        #gui.addCommand("CreateSpring", CreateSpring())
 
     def Activated(self):
         pass

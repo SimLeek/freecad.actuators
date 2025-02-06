@@ -3,6 +3,12 @@ from fractions import Fraction
 import math
 from itertools import permutations
 
+try:
+    from PySide2.QtCore import QThread, Signal
+except ImportError:
+    from PySide.QtCore import QThread, Signal
+
+from fractions import Fraction
 
 class GearboxConstraint:
     """
@@ -16,7 +22,10 @@ class GearboxConstraint:
             max_planet_1_teeth,
             min_sun_1_teeth,
             max_sun_1_teeth,
-            num_planets=3,
+            min_ring_teeth,# exit if ring out of range
+            max_ring_teeth,
+            min_num_planets=3,
+            max_num_planets=3,
             addendum=1,
             clearance=0.5,
             circular_pitch=4,
@@ -38,10 +47,14 @@ class GearboxConstraint:
         self.max_p1 = max_planet_1_teeth
         self.min_s1 = min_sun_1_teeth
         self.max_s1 = max_sun_1_teeth
-        self.num_planets = num_planets
+        self.max_r1 = max_ring_teeth
+        self.min_r1 = min_ring_teeth
+        self.min_num_planets = min_num_planets
+        self.max_num_planets = max_num_planets
         self.addendum = addendum
         self.clearance = clearance
         self.circular_pitch = circular_pitch
+        self.abort = False
 
 
 class GearboxResult:
@@ -79,7 +92,7 @@ class GearboxResult:
                 f" O={self.output},"
                 f" S={self.sun_teeth},"
                 f" P={self.planet_teeth},"
-                f" R={self.planet_teeth}"
+                f" R={self.ring_teeth}"
                 f" Np={self.num_planets}"
                 f"]")
 
@@ -223,71 +236,60 @@ def evaluate_and_search_2d(constraints, target_gear_ratio, update_progress=None,
     p = index.Property()
     idx = index.Index(properties=p)
 
-    full = (constraints.max_p1 + 1 - constraints.min_p1) * (constraints.max_s1 + 1 - constraints.min_s1)
-    for planet_teeth in range(constraints.min_p1, constraints.max_p1 + 1):
-        for sun_teeth in range(constraints.min_s1, constraints.max_s1 + 1):
-            partial = ((planet_teeth - constraints.min_p1) * (constraints.max_s1 + 1 - constraints.min_s1) +
-                       (sun_teeth - constraints.min_s1))
-            if update_progress:
-                update_progress((partial / full) * 100.0)
+    full = (constraints.max_num_planets + 1 - constraints.min_num_planets) * (constraints.max_p1 + 1 - constraints.min_p1) * (constraints.max_s1 + 1 - constraints.min_s1)
+    for num_planets in range(constraints.min_num_planets, constraints.max_num_planets + 1):
+        for planet_teeth in range(constraints.min_p1, constraints.max_p1 + 1):
+            for sun_teeth in range(constraints.min_s1, constraints.max_s1 + 1):
+                r = 2*planet_teeth+sun_teeth
+                partial =  ( ((num_planets - constraints.min_num_planets) * (constraints.max_p1 + 1 - constraints.min_p1) * (constraints.max_s1 + 1 - constraints.min_s1)) +
+                            (planet_teeth - constraints.min_p1) * (constraints.max_s1 + 1 - constraints.min_s1) +
+                           (sun_teeth - constraints.min_s1))
+                if update_progress:
+                    update_progress((partial / full) * 100.0)
+                if r<constraints.min_r1 or r>constraints.max_r1:
+                    continue
 
-            is_homo = _is_homogeneity_distribution_constraint_satisfied(sun_teeth, planet_teeth,
-                                                                      constraints.num_planets)
-            is_good_neighbor = _is_neighbor_constraint_satisfied(sun_teeth, planet_teeth, constraints.num_planets,
-                                                      constraints.addendum, constraints.clearance,
-                                                      constraints.circular_pitch)
+                is_homo = _is_homogeneity_distribution_constraint_satisfied(sun_teeth, planet_teeth,
+                                                                          num_planets)
+                is_good_neighbor = _is_neighbor_constraint_satisfied(sun_teeth, planet_teeth, num_planets,
+                                                          constraints.addendum, constraints.clearance,
+                                                          constraints.circular_pitch)
 
-            if not ( is_homo and is_good_neighbor):
-                continue
+                if not ( is_homo and is_good_neighbor):
+                    continue
 
-            result = evaluate_all_possible_ratios(planet_teeth, sun_teeth, fixed, input, output)
-            for r_gear, r_val in result.items():
-                if isinstance(r_val, str):
-                    raise RuntimeError(r_val)
-                abs_res = abs(r_val) if use_abs else r_val
-                gearbox_result = GearboxResult(*r_gear, r_val, planet_teeth, sun_teeth, constraints.num_planets)
-                idx.insert(0, (abs_res, 0, abs_res, 0), obj=gearbox_result)
+                result = evaluate_all_possible_ratios(planet_teeth, sun_teeth, fixed, input, output)
+                for r_gear, r_val in result.items():
+                    if isinstance(r_val, str):
+                        raise RuntimeError(r_val)
+                    abs_res = abs(r_val) if use_abs else r_val
+                    gearbox_result = GearboxResult(*r_gear, r_val, planet_teeth, sun_teeth, num_planets)
+                    idx.insert(0, (abs_res, 0, abs_res, 0), obj=gearbox_result)
+                    # the four aborts allow returning just what we have instead of nothing
+                    # returning idx to another function would also work
+                    if constraints.abort:
+                        break
+                if constraints.abort:
+                    break
+            if constraints.abort:
+                break
+        if constraints.abort:
+            break
 
-    return _find_closest_matches(idx, target_gear_ratio, num_results)
+    matches = _find_closest_matches(idx, target_gear_ratio, num_results)
 
+    if update_progress:
+        update_progress(100.0)
 
-if __name__ == "__main__":
-    min_sun_1_teeth, max_sun_1_teeth = 6, 12
-    min_planet_1_teeth, max_planet_1_teeth = 6, 24
+    return matches
 
-    target_gear_ratio = 1/8
-    import time
-    t0 = time.time()
-    # ring 2 is the output, so 2 is the secondary
-    # the list is: [result, planet_2_teeth, sun_2_teeth, planet_1_teeth, sun_1_teeth]
-    # so the last two items are the first gearbox
-    module = 1.5
-    circular_pitch = module*math.pi
-    closest_match = evaluate_and_search_2d(min_planet_1_teeth, max_planet_1_teeth,
-                                           min_sun_1_teeth, max_sun_1_teeth,
-                                           target_gear_ratio, update_progress = None, num_results=10, use_abs=True,
-                                           clearance=0.5, # mm
-                                           num_planets=3, circular_pitch=circular_pitch, fixed='Any', input='Sun')  # use 3 for higher gear ratios but lower stability. 4 can get some good precision
-    # idk why, but addendum=18 stops the planet gears from being too big.
-
-    t1 = time.time()
-    for m in closest_match:
-        print(f"match: {m}")
-    print(f"time:{t1-t0}")
-
-from PySide2.QtWidgets import QWidget, QVBoxLayout, QPushButton, QComboBox, QLineEdit, QProgressBar
-from PySide2.QtCore import QThread, Signal
-from fractions import Fraction
-import time  # Simulating long function
-
-# Placeholder for long-running function
 
 class PlanetarySearchWorker(QThread):
     """Worker thread for running long_func without freezing UI."""
     progress_updated = Signal(int)
     finished = Signal(list)  # Emits the result list when done
 
-    def __init__(self, min_planet_teeth, max_planet_teeth, min_sun_teeth, max_sun_teeth, target_gear_ratio, gear_addendum, planet_clearance, num_results, num_planets, circular_pitch, use_abs, fixed, input, output):
+    def __init__(self, min_planet_teeth, max_planet_teeth, min_sun_teeth, max_sun_teeth, min_ring_teeth, max_ring_teeth, target_gear_ratio, gear_addendum, planet_clearance, num_results, min_num_planets, max_num_planets, circular_pitch, use_abs, fixed, input, output):
         super().__init__()
 
         self.constraints = GearboxConstraint(
@@ -295,7 +297,10 @@ class PlanetarySearchWorker(QThread):
                 max_planet_teeth,
                 min_sun_teeth,
                 max_sun_teeth,
-                num_planets=num_planets,
+                min_ring_teeth,
+                max_ring_teeth,
+                min_num_planets=min_num_planets,
+                max_num_planets=max_num_planets,
                 addendum=gear_addendum,
                 clearance=planet_clearance,
                 circular_pitch=circular_pitch
@@ -307,7 +312,7 @@ class PlanetarySearchWorker(QThread):
         self.input = input
         self.output = output
 
-        self._abort = False
+        self.constraints.abort = False
 
     def run(self):
         def update_progress(value):
@@ -324,5 +329,5 @@ class PlanetarySearchWorker(QThread):
 
     def abort(self):
         """Signals the worker thread to stop."""
-        self._abort = True
+        self.constraints.abort = True
 

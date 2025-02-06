@@ -1,7 +1,9 @@
 import re
 import traceback
-from PySide2.QtWidgets import QLineEdit
-
+try:
+    from PySide2.QtWidgets import QLineEdit
+except ImportError:
+    from PySide.QtWidgets import QLineEdit
 
 class QTorqueEdit(QLineEdit):
     """A QLineEdit that parses torque values and stores them internally in Newton-meters (N·m)."""

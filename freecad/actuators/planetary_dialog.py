@@ -1,11 +1,15 @@
 import math
 
-from compiled_ui.planetary_ui import Ui_Dialog
-
-from PySide2.QtCore import *  # type: ignore
-from PySide2.QtGui import *  # type: ignore
-from PySide2.QtWidgets import *  # type: ignore
-from search_planetaries import PlanetarySearchWorker, GearboxResult
+from .compiled_ui.planetary_ui import Ui_Dialog
+try:
+    from PySide2.QtCore import *  # type: ignore
+    from PySide2.QtGui import *  # type: ignore
+    from PySide2.QtWidgets import *  # type: ignore
+except ImportError:
+    from PySide.QtCore import *  # type: ignore
+    from PySide.QtGui import *  # type: ignore
+    from PySide.QtWidgets import *  # type: ignore
+from .search_planetaries import PlanetarySearchWorker, GearboxResult
 
 import math as m
 
@@ -13,7 +17,52 @@ import math as m
 def form_factor(num_teeth, pressure_angle_degrees):
     return 0.4461457824814488+(math.sin((-10.057793276492692+pressure_angle_degrees)/180*math.pi))*math.log1p(0.0497526912165741*num_teeth)
 
-class MyDialog(QDialog):
+class PlanetaryDesign:
+    def __init__(
+        self,
+        fixed: str,
+        _input: str,
+        output: str,
+        inv_gear_ratio,
+        planet_teeth: int,
+        sun_teeth: int,
+        ring_teeth: int,
+        num_planets: int,
+        input_torque: float,
+        beta: float,
+        is_double_helix: bool,
+        pressure_angle: float,
+        module: float,
+        height: float,
+        material: str,
+    ):
+        self.fixed = fixed
+        self._input = _input
+        self.output = output
+        self.inv_gear_ratio = inv_gear_ratio
+        self.planet_teeth = planet_teeth
+        self.sun_teeth = sun_teeth
+        self.ring_teeth = ring_teeth
+        self.num_planets = num_planets
+        self.input_torque = input_torque
+        self.beta = beta
+        self.is_double_helix = is_double_helix
+        self.pressure_angle = pressure_angle
+        self.module = module
+        self.height = height
+        self.material = material
+
+    def __repr__(self):
+        return (
+            f"PlanetaryDesign(fixed={self.fixed}, input={self._input}, output={self.output}, "
+            f"inv_gear_ratio={self.inv_gear_ratio}, planet_teeth={self.planet_teeth}, "
+            f"sun_teeth={self.sun_teeth}, ring_teeth={self.ring_teeth}, num_planets={self.num_planets}, "
+            f"input_torque={self.input_torque}, beta={self.beta}, is_double_helix={self.is_double_helix}, "
+            f"pressure_angle={self.pressure_angle}, module={self.module}, height={self.height}, "
+            f"material={self.material})"
+        )
+
+class PlanetaryDialog(QDialog):
     def __init__(self):
         super().__init__()
         self.ui = Ui_Dialog()
@@ -70,25 +119,171 @@ class MyDialog(QDialog):
 
         self.reset_unlocked_comboboxes()
 
-        self.ui.gear_ratio_options_combobox.currentIndexChanged.connect(self.recalculate_torque)
         self.ui.max_in_torque_lineedit.textChanged.connect(self.recalculate_torque)
-        self.ui.beta_lineedit.textChanged.connect(self.recalculate_torque)
-        self.ui.pressure_angle_lineedit.textChanged.connect(self.recalculate_torque)
-        self.ui.actual_module_lineedit.textChanged.connect(self.recalculate_torque)
 
-        self.ui.gear_ratio_options_combobox.currentIndexChanged.connect(self.recalculate_stress)
-        self.ui.beta_lineedit.textChanged.connect(self.recalculate_stress)
-        self.ui.actual_module_lineedit.textChanged.connect(self.recalculate_stress)
-        self.ui.pressure_angle_lineedit.textChanged.connect(self.recalculate_stress)
         self.ui.poisson_ratio_lineedit.textChanged.connect(self.recalculate_stress)
         self.ui.elastic_modulus_lineedit.textChanged.connect(self.recalculate_stress)
         self.ui.sun_ft_lineedit.textChanged.connect(self.recalculate_stress)
         self.ui.sun_form_factor_lineedit.textChanged.connect(self.recalculate_stress)
-        self.ui.actual_height_lineedit.textChanged.connect(self.recalculate_stress)
         self.ui.planet_ft_lineedit.textChanged.connect(self.recalculate_stress)
         self.ui.planet_form_factor_lineedit.textChanged.connect(self.recalculate_stress)
         self.ui.ring_ft_lineedit.textChanged.connect(self.recalculate_stress)
         self.ui.ring_form_factor_lineedit.textChanged.connect(self.recalculate_stress)
+
+        self.ui.min_num_of_planets_spinbox.valueChanged.connect(self.on_min_num_of_planets_spinbox_changed)
+        self.ui.max_num_of_planets_spinbox.valueChanged.connect(self.on_max_num_of_planets_spinbox_changed)
+        self.ui.num_results_spinbox.valueChanged.connect(self.on_num_results_spinbox_changed)
+        self.ui.gear_ratio_options_combobox.currentIndexChanged.connect(self.gear_ratio_options_combobox_changed)
+
+        self.ui.actual_diameter_lineedit.textChanged.connect(self.on_actual_diameter_user_changed)
+        self.ui.actual_module_lineedit.textChanged.connect(self.on_actual_module_user_changed)
+        self.ui.actual_module_slider.valueChanged.connect(self.on_actual_module_slider_user_changed)
+        self.ui.actual_height_lineedit.textChanged.connect(self.on_actual_height_user_changed)
+        self.ui.actual_height_slider.valueChanged.connect(self.on_actual_height_slider_user_changed)
+
+        self.ui.beta_lineedit.textChanged.connect(self.on_beta_lineedit_changed)
+        self.ui.pressure_angle_lineedit.textChanged.connect(self.recalculate_torque)
+
+    def finish_return(self):
+        planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
+        input_torque = self.ui.max_in_torque_lineedit.get_nm_value()
+        beta = self.ui.beta_lineedit.get_degrees_value()
+        is_double_helix = self.ui.double_helix_checkbox.isChecked()
+        pressure_angle = self.ui.pressure_angle_lineedit.get_degrees_value()
+        module = self.ui.actual_module_lineedit.get_mm_value()
+        height = self.ui.actual_height_lineedit.get_mm_value()
+        material = self.ui.material_combobox.currentText()
+
+        planetary_design = PlanetaryDesign(
+            planetary.fixed,  # str
+            planetary._input,  # str
+            planetary.output,  # str
+            planetary.inv_gear_ratio,  # Fraction
+            planetary.planet_teeth,  # int
+            planetary.sun_teeth,  # int
+            planetary.ring_teeth,  # int
+            planetary.num_planets,  # int
+            input_torque,  # float
+            beta,
+            is_double_helix,
+            pressure_angle,
+            module,
+            height,
+            material  # str or object
+        )
+        return planetary_design
+
+    def on_pressure_angle_lineedit_changed(self, _):
+        self.recalculate_torque(_)
+        self.recalculate_stress(_)
+
+    def on_beta_lineedit_changed(self, _):
+        self.recalculate_torque(_)
+        self.recalculate_stress(_)
+
+    def on_actual_diameter_user_changed(self, _):
+        if not self.computing:
+            planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
+            if self.ui.actual_diameter_lineedit.get_mm_value()!=0.0 and planetary is not None:
+                self.computing = True
+                try:
+                    self.ui.actual_module_lineedit.set_mm_value(self.ui.actual_diameter_lineedit.get_mm_value()/(planetary.ring_teeth + 6))
+                    self.ui.actual_module_slider.setFractionalValue(self.ui.actual_module_lineedit.get_mm_value())
+                finally:
+                    self.computing = False
+            self.ui.actual_module_lineedit_lock.is_locked = True
+        self.recalculate_torque(_)
+        self.recalculate_stress(_)
+
+    def on_actual_module_user_changed(self, _):
+        if not self.computing:
+            planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
+            if self.ui.actual_module_lineedit.get_mm_value()!=0.0 and planetary is not None:
+                self.computing = True
+                try:
+                    self.ui.actual_diameter_lineedit.set_mm_value(self.ui.actual_module_lineedit.get_mm_value()*(planetary.ring_teeth + 6))
+                    self.ui.actual_module_slider.setFractionalValue(self.ui.actual_module_lineedit.get_mm_value())
+                finally:
+                    self.computing = False
+            self.ui.actual_module_lineedit_lock.is_locked = True
+        self.recalculate_torque(_)
+        self.recalculate_stress(_)
+
+    def on_actual_module_slider_user_changed(self, _):
+        if not self.computing:
+            planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
+            if self.ui.actual_module_slider.value()!=0.0 and planetary is not None:
+                self.computing = True
+                try:
+                    self.ui.actual_module_lineedit.set_mm_value(self.ui.actual_module_slider.getFractionalValue())
+                    self.ui.actual_diameter_lineedit.set_mm_value(self.ui.actual_module_slider.getFractionalValue()*(planetary.ring_teeth + 6))
+                finally:
+                    self.computing = False
+            self.ui.actual_module_lineedit_lock.is_locked = True
+        self.recalculate_torque(_)
+        self.recalculate_stress(_)
+
+    def on_actual_height_user_changed(self, _):
+        if not self.computing:
+            if self.ui.actual_height_lineedit.get_mm_value()!=0.0:
+                self.computing = True
+                try:
+                    self.ui.actual_height_slider.setFractionalValue(self.ui.actual_height_lineedit.get_mm_value())
+                finally:
+                    self.computing = False
+            self.ui.actual_height_lineedit_lock.is_locked = True
+        self.recalculate_stress(_)
+
+    def on_actual_height_slider_user_changed(self, _):
+        if not self.computing:
+            if self.ui.actual_height_slider.value()!=0.0:
+                self.computing = True
+                try:
+                    self.ui.actual_height_lineedit.set_mm_value(self.ui.actual_height_slider.getFractionalValue())
+                finally:
+                    self.computing = False
+            self.ui.actual_height_lineedit_lock.is_locked = True
+        self.recalculate_stress(_)
+
+    def recalculate_max_module_display(self):
+        planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
+        if planetary is None:
+            return
+        ring_diameter = self.ui.max_ring_diam_lineedit.get_mm_value()
+
+        module = ring_diameter / (planetary.ring_teeth+6)
+        self.ui.max_module_display_lineedit.set_mm_value(module)
+        self.ui.actual_module_slider.setFractionalMaximum(module)
+        self.ui.actual_module_slider.setFractionalSingleStep((module - self.ui.actual_module_slider.getFractionalMinimum())/100)
+
+    def recalculate_min_ring_diam_display(self):
+        planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
+        if planetary is None:
+            return
+        module = self.ui.min_module_lineedit.get_mm_value()
+
+        ring_diameter = module*(planetary.ring_teeth + 6)
+        self.ui.min_diameter_display_lineedit.set_mm_value(ring_diameter)
+
+    def gear_ratio_options_combobox_changed(self, _):
+        if not self.computing:
+            self.ui.gear_ratio_options_combobox_lock.is_locked = True
+        self.recalculate_max_module_display()
+        self.recalculate_min_ring_diam_display()
+        self.recalculate_torque(_)
+        self.recalculate_stress(_)
+
+    def on_num_results_spinbox_changed(self, _):
+        if not self.computing:
+            self.ui.num_results_spinbox_lock.is_locked = True
+
+    def on_min_num_of_planets_spinbox_changed(self, _):
+        if not self.computing:
+            self.ui.min_num_of_planets_spinbox_lock.is_locked = True
+
+    def on_max_num_of_planets_spinbox_changed(self, _):
+        if not self.computing:
+            self.ui.max_num_of_planets_spinbox_lock.is_locked = True
 
     def recalculate_torque(self, _):
         planetary = self.ui.gear_ratio_options_combobox.get_selected_object()
@@ -137,7 +332,6 @@ class MyDialog(QDialog):
         )
 
         self.ui.load_sharing_planets_lineedit.setText(str(planetary.num_planets))
-
 
         ring_pitch_circle_diameter = module * planetary.ring_teeth
         sun_pitch_circle_diameter = module * planetary.sun_teeth
@@ -330,11 +524,14 @@ class MyDialog(QDialog):
             self.ui.max_planet_teeth_spinbox.value(),
             self.ui.min_sun_teeth_spinbox.value(),
             self.ui.max_sun_teeth_spinbox.value(),
+            self.ui.min_ring_teeth_spinbox.value(),
+            self.ui.max_ring_teeth_spinbox.value(),
             self.ui.target_inverse_gear_ratio_lineedit.get_value(),
             self.ui.gear_addendum_lineedit.get_mm_value(),
             self.ui.planet_clearance_lineedit.get_mm_value(),
             self.ui.num_results_spinbox.value(),
-            self.ui.number_of_planets_spinbox.value(),
+            self.ui.min_num_of_planets_spinbox.value(),
+            self.ui.max_num_of_planets_spinbox.value(),
             self.ui.min_circular_pitch_lineedit.get_mm_value(),
             self.ui.use_abs_checkbox.isChecked(),
             self.ui.fixed_combobox.currentText(),
@@ -658,6 +855,8 @@ class MyDialog(QDialog):
             self.recalculate_gear_addendum()
         if not self.ui.planet_clearance_lineedit_lock.is_locked:
             self.recalculate_planet_clearance()
+        self.ui.min_height_display_lineedit.set_mm_value(self.ui.min_module_lineedit.get_mm_value())
+        self.recalculate_min_ring_diam_display()
 
     def on_min_module_user_changed(self, _):
         if not self.computing:
@@ -668,6 +867,10 @@ class MyDialog(QDialog):
                 finally:
                     self.computing = False
             self.ui.min_module_lineedit_lock.is_locked = True
+        self.ui.min_module_display_lineedit.set_mm_value(self.ui.min_module_lineedit.get_mm_value())
+        self.ui.actual_module_slider.setFractionalMinimum(self.ui.min_module_lineedit.get_mm_value())
+        self.ui.actual_module_slider.setFractionalSingleStep((self.ui.actual_module_slider.getFractionalMaximum() - self.ui.min_module_lineedit.get_mm_value())/100)
+        self.recalculate_min_ring_diam_display()
 
     def on_min_circular_pitch_user_changed(self, _):
         if not self.computing:
@@ -675,6 +878,10 @@ class MyDialog(QDialog):
                 self.computing = True
                 try:
                     self.ui.min_module_lineedit.set_mm_value(self.ui.min_circular_pitch_lineedit.get_mm_value()/m.pi)
+                    self.ui.min_module_display_lineedit.set_mm_value(self.ui.min_circular_pitch_lineedit.get_mm_value()/m.pi)
+                    self.ui.actual_module_slider.setFractionalMinimum(self.ui.min_module_lineedit.get_mm_value())
+                    self.ui.actual_module_slider.setFractionalSingleStep(
+                        (self.ui.actual_module_slider.getFractionalMaximum() - self.ui.min_module_lineedit.get_mm_value()) / 100)
                 finally:
                     self.computing = False
             self.ui.min_module_lineedit_lock.is_locked = True
@@ -682,10 +889,14 @@ class MyDialog(QDialog):
     def on_max_ring_diam_lock_changed(self, _):
         if not self.ui.max_ring_teeth_spinbox_lock.is_locked:
             self.recalculate_max_ring()
+        self.ui.max_diameter_display_lineedit.set_mm_value(self.ui.max_ring_diam_lineedit.get_mm_value())
+        self.recalculate_max_module_display()
 
     def on_max_ring_diam_user_changed(self, _):
         if not self.computing:
             self.ui.max_ring_diam_lineedit_lock.is_locked = True
+        self.ui.max_diameter_display_lineedit.set_mm_value(self.ui.max_ring_diam_lineedit.get_mm_value())
+        self.recalculate_max_module_display()
 
     # endregion module_and_diam
 
@@ -700,6 +911,9 @@ class MyDialog(QDialog):
                 self.computing = True
                 try:
                     self.ui.max_height_lineedit.set_mm_value(self.ui.min_height_lineedit.get_mm_value())
+                    self.ui.max_height_display_lineedit.set_mm_value(self.ui.min_height_lineedit.get_mm_value())
+                    self.ui.actual_height_slider.setFractionalMaximum(self.ui.max_height_display_lineedit.get_mm_value())
+                    self.ui.actual_height_slider.setFractionalSingleStep((self.ui.max_height_display_lineedit.get_mm_value() - self.ui.min_height_display_lineedit.get_mm_value()) / 100)
                     self.ui.max_height_lineedit.setToolTip("")
                     self.ui.max_height_lineedit.setStyleSheet("")
                 finally:
@@ -717,6 +931,10 @@ class MyDialog(QDialog):
                 self.computing = True
                 try:
                     self.ui.min_height_lineedit.set_mm_value(self.ui.max_height_lineedit.get_mm_value())
+                    self.ui.min_height_display_lineedit.set_mm_value(self.ui.max_height_lineedit.get_mm_value())
+                    self.ui.actual_height_slider.setFractionalMinimum(self.ui.min_height_display_lineedit.get_mm_value())
+                    self.ui.actual_height_slider.setFractionalSingleStep((
+                                                                           self.ui.max_height_display_lineedit.get_mm_value() - self.ui.min_height_display_lineedit.get_mm_value()) / 100)
                     self.ui.min_height_lineedit.setToolTip("")
                     self.ui.min_height_lineedit.setStyleSheet("")
                 finally:
@@ -726,12 +944,19 @@ class MyDialog(QDialog):
             self.ui.min_height_lineedit.setStyleSheet("")
 
     def on_min_height_user_changed(self, _):
+        self.ui.min_height_display_lineedit.set_mm_value(self.ui.min_height_lineedit.get_mm_value())
         if not self.computing:
             self.ui.min_height_lineedit_lock.is_locked = True
+        self.ui.actual_height_slider.setFractionalMinimum(self.ui.min_height_display_lineedit.get_mm_value())
+        self.ui.actual_height_slider.setFractionalSingleStep((
+                                                           self.ui.max_height_display_lineedit.get_mm_value() - self.ui.min_height_display_lineedit.get_mm_value()) / 100)
 
     def on_max_height_user_changed(self, _):
+        self.ui.max_height_display_lineedit.set_mm_value(self.ui.max_height_lineedit.get_mm_value())
         if not self.computing:
             self.ui.max_height_lineedit_lock.is_locked = True
+        self.ui.actual_height_slider.setFractionalMaximum(self.ui.max_height_display_lineedit.get_mm_value())
+        self.ui.actual_height_slider.setFractionalSingleStep((self.ui.max_height_display_lineedit.get_mm_value() - self.ui.min_height_display_lineedit.get_mm_value()) / 100)
 
     # endregion
 
@@ -775,10 +1000,10 @@ class MyDialog(QDialog):
     # endregion
 
 
+if __name__ == '__main__':
+    import sys
 
-import sys
-
-app = QApplication(sys.argv)
-dialog = MyDialog()
-dialog.show()
-sys.exit(app.exec_())
+    app = QApplication(sys.argv)
+    dialog = PlanetaryDialog()
+    dialog.show()
+    sys.exit(app.exec_())

@@ -1,10 +1,17 @@
 import heapq
 import math
 
-from PySide2.QtWidgets import QWidget
-from PySide2.QtGui import QPainter, QPen
-from PySide2.QtCore import Qt, QPointF
-from PySide2.QtWidgets import QApplication, QVBoxLayout
+try:
+    from PySide2.QtWidgets import QWidget
+    from PySide2.QtGui import QPainter, QPen
+    from PySide2.QtCore import Qt, QPointF
+    from PySide2.QtWidgets import QApplication, QVBoxLayout
+except ImportError:
+    from PySide.QtWidgets import QWidget
+    from PySide.QtGui import QPainter, QPen
+    from PySide.QtCore import Qt, QPointF
+    from PySide.QtWidgets import QApplication, QVBoxLayout
+
 import sys
 
 class DiagramWidget(QWidget):

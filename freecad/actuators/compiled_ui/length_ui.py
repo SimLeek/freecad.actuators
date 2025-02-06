@@ -1,7 +1,10 @@
 import traceback
-from PySide2.QtWidgets import QLineEdit, QApplication
-from PySide2.QtGui import QDoubleValidator
-
+try:
+    from PySide2.QtWidgets import QLineEdit, QApplication
+    from PySide2.QtGui import QDoubleValidator
+except ImportError:
+    from PySide.QtWidgets import QLineEdit, QApplication
+    from PySide.QtGui import QDoubleValidator
 
 class QLengthEdit(QLineEdit):
     UNIT_CONVERSIONS = {

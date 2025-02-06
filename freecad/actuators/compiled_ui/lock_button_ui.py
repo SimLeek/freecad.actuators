@@ -1,6 +1,11 @@
-from PySide2.QtWidgets import QToolButton
-from PySide2.QtGui import QIcon
-from PySide2.QtCore import Signal
+try:
+    from PySide2.QtWidgets import QToolButton
+    from PySide2.QtGui import QIcon
+    from PySide2.QtCore import Signal
+except ImportError:
+    from PySide.QtWidgets import QToolButton
+    from PySide.QtGui import QIcon
+    from PySide.QtCore import Signal
 import os
 
 

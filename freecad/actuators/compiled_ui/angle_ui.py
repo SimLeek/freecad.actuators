@@ -1,6 +1,9 @@
 import traceback
 import math
-from PySide2.QtWidgets import QLineEdit
+try:
+    from PySide2.QtWidgets import QLineEdit
+except ImportError:
+    from PySide.QtWidgets import QLineEdit
 
 class QAngleEdit(QLineEdit):
     """A QLineEdit that parses angle expressions with units and stores the value internally in degrees."""

@@ -1,6 +1,8 @@
 import traceback
-from PySide2.QtWidgets import QLineEdit
-
+try:
+    from PySide2.QtWidgets import QLineEdit
+except ImportError:
+    from PySide.QtWidgets import QLineEdit
 
 class QPressureEdit(QLineEdit):
     """A QLineEdit that parses pressure values and stores them internally in Pascals (N/m²)."""

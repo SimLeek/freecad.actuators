@@ -1,4 +1,7 @@
-from PySide2.QtWidgets import QComboBox
+try:
+    from PySide2.QtWidgets import QComboBox
+except ImportError:
+    from PySide.QtWidgets import QComboBox
 
 class ObjectComboBox(QComboBox):
     def __init__(self, parent=None):

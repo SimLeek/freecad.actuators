@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="min_max_teeth_page">
     <property name="geometry">
@@ -83,7 +83,7 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -135,7 +135,7 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -187,7 +187,7 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -577,7 +577,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="number_of_planets_spinbox">
+       <widget class="QSpinBox" name="min_num_of_planets_spinbox">
         <property name="minimum">
          <number>3</number>
         </property>
@@ -587,7 +587,7 @@
        </widget>
       </item>
       <item>
-       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock"/>
+       <widget class="LockUnlockButton" name="min_num_of_planets_spinbox_lock"/>
       </item>
       <item>
        <widget class="QLabel" name="label_38">
@@ -597,7 +597,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="number_of_planets_spinbox_2">
+       <widget class="QSpinBox" name="max_num_of_planets_spinbox">
         <property name="minimum">
          <number>3</number>
         </property>
@@ -610,7 +610,7 @@
        </widget>
       </item>
       <item>
-       <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_3"/>
+       <widget class="LockUnlockButton" name="max_num_of_planets_spinbox_lock"/>
       </item>
      </layout>
     </widget>
@@ -1299,7 +1299,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QSlider" name="actual_module_slider">
+       <widget class="FractionalSlider" name="actual_module_slider">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -1328,7 +1328,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QLengthEdit" name="actual_module_lineedit_2">
+       <widget class="QLengthEdit" name="actual_diameter_lineedit">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -1360,7 +1360,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_18">
       <item row="0" column="1">
-       <widget class="QTorqueEdit" name="ring_t_lineedit_2">
+       <widget class="QLengthEdit" name="min_module_display_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1381,7 +1381,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QTorqueEdit" name="ring_t_lineedit_3">
+       <widget class="QLengthEdit" name="max_module_display_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1566,7 +1566,11 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="material_combobox"/>
+       <widget class="QComboBox" name="material_combobox">
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
       <item row="0" column="2">
        <widget class="QToolButton" name="material_combobox_load"/>
@@ -1659,9 +1663,12 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QSlider" name="actual_height_slider">
+       <widget class="FractionalSlider" name="actual_height_slider">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::NoTicks</enum>
         </property>
        </widget>
       </item>
@@ -1758,7 +1765,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_26">
       <item row="0" column="1">
-       <widget class="QTorqueEdit" name="ring_t_lineedit_4">
+       <widget class="QLengthEdit" name="min_height_display_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1779,7 +1786,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QTorqueEdit" name="ring_t_lineedit_5">
+       <widget class="QLengthEdit" name="max_height_display_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1798,7 +1805,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_27">
       <item row="0" column="1">
-       <widget class="QTorqueEdit" name="ring_t_lineedit_6">
+       <widget class="QLengthEdit" name="min_diameter_display_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1819,7 +1826,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QTorqueEdit" name="ring_t_lineedit_7">
+       <widget class="QLengthEdit" name="max_diameter_display_lineedit">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -1827,7 +1834,7 @@
       </item>
      </layout>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="finishButton">
      <property name="geometry">
       <rect>
        <x>580</x>
@@ -1843,7 +1850,7 @@
       <string>Finish</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="cancelButton">
      <property name="geometry">
       <rect>
        <x>490</x>
@@ -1882,8 +1889,8 @@
     <zorder>gridLayoutWidget_19</zorder>
     <zorder>gridLayoutWidget_26</zorder>
     <zorder>gridLayoutWidget_27</zorder>
-    <zorder>pushButton</zorder>
-    <zorder>pushButton_2</zorder>
+    <zorder>finishButton</zorder>
+    <zorder>cancelButton</zorder>
    </widget>
   </widget>
  </widget>
@@ -1932,6 +1939,11 @@
    <class>QEvalEdit</class>
    <extends>QLineEdit</extends>
    <header>.eval_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>FractionalSlider</class>
+   <extends>QSlider</extends>
+   <header>.fractional_slider</header>
   </customwidget>
  </customwidgets>
  <resources>
