@@ -1,5 +1,14 @@
 <RCC>
   <qresource prefix="images">
+    <file>bearing_icon.svg</file>
+    <file>bevel_gear_icon.svg</file>
+    <file>spur_gear_icon.svg</file>
+    <file>circular_profile.svg</file>
+    <file>square_profile.svg</file>
+    <file>hexagonal_profile.svg</file>
+    <file>D_Profile.svg</file>
+    <file>Spline_Profile.svg</file>
+    <file>DD_Profile.svg</file>
     <file>planetary-angle-torque.svg</file>
     <file>planetary-angle.svg</file>
     <file>planetary.svg</file>

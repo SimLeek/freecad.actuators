@@ -69,6 +69,7 @@ class ActuatorWorkbench(gui.Workbench):
     commands = [
         #"CreateMotor",
         "CreatePlanetary",
+        "CreateAxleConnector",
         #"CreateSplitRing",
         #"CreateBevel",
         #"CreatePulley",
@@ -86,6 +87,7 @@ class ActuatorWorkbench(gui.Workbench):
         from .commands import (
             #CreateMotor,
             CreatePlanetary,
+            CreateAxleConnector
             #CreateSplitRing,
             #CreateBevel,
             #CreatePulley,
@@ -97,6 +99,7 @@ class ActuatorWorkbench(gui.Workbench):
         self.appendMenu("Actuator", self.commands)
         #gui.addCommand("CreateMotor", CreateMotor())
         gui.addCommand("CreatePlanetary", CreatePlanetary())
+        gui.addCommand("CreateAxleConnector", CreateAxleConnector())
         #gui.addCommand("CreateSplitRing", CreateSplitRing())
         #gui.addCommand("CreateBevel", CreateBevel())
         #gui.addCommand("CreatePulley", CreatePulley())

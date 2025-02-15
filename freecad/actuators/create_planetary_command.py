@@ -115,7 +115,7 @@ class CreatePlanetary:
         return {
             'MenuText': 'Create Planetary',
             'ToolTip': 'Open the Planetary Dialog and create a planetary gear set',
-            'Pixmap': os.path.join(os.path.dirname(__file__), "icons", "planetary.svg")
+            'Pixmap': os.path.join(os.path.dirname(__file__), "compiled_ui", "planetary-angle.svg")
         }
 
     def Activated(self):
