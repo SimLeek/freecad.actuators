@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1107</width>
+    <height>642</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Shaft to Gear Designer</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget_13">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>321</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_13">
+    <item row="0" column="1">
+     <widget class="QTorqueEdit" name="max_in_torque_lineedit"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_45">
+      <property name="text">
+       <string>Max Torque:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_2"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_25">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>90</y>
+     <width>311</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_25">
+    <item row="0" column="1">
+     <widget class="QPressureEdit" name="max_fatigue_stress_lineedit"/>
+    </item>
+    <item row="0" column="2">
+     <widget class="LockUnlockButton" name="max_fatiguq_stress_lineedit_lock"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_69">
+      <property name="text">
+       <string>Max Fatigue Stress (σe, ~0.5*UTS)</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_20">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>150</y>
+     <width>311</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_20">
+    <item row="0" column="1">
+     <widget class="QFractionEdit" name="poisson_ratio_lineedit"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_70">
+      <property name="text">
+       <string>Poisson Ratio:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="LockUnlockButton" name="poisson_ratio_lineedit_lock"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_17">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>60</y>
+     <width>311</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_17">
+    <item row="0" column="1">
+     <widget class="QPressureEdit" name="max_bend_stress_lineedit"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_67">
+      <property name="text">
+       <string>Max Bend Stress (σb, ~0.66*Yield)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="LockUnlockButton" name="max_bend_stress_lineedit_lock"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_5">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>30</y>
+     <width>341</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_5">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_10">
+      <property name="text">
+       <string>Material</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QComboBox" name="material_combobox">
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QToolButton" name="material_combobox_load"/>
+    </item>
+    <item row="0" column="3">
+     <widget class="QToolButton" name="material_combobox_save"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_19">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>120</y>
+     <width>311</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_19">
+    <item row="0" column="1">
+     <widget class="QPressureEdit" name="elastic_modulus_lineedit"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_68">
+      <property name="text">
+       <string>Elastic Modulus:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="LockUnlockButton" name="elastic_modulus_lineedit_lock"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>30</y>
+     <width>230</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="2">
+     <widget class="QToolButton" name="toolButton">
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../freecad/actuators/compiled_ui/img_src.qrc">
+        <normaloff>:/images/Spline_Profile.svg</normaloff>:/images/Spline_Profile.svg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QToolButton" name="toolButton_2">
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../freecad/actuators/compiled_ui/img_src.qrc">
+        <normaloff>:/images/DD_Profile.svg</normaloff>:/images/DD_Profile.svg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QToolButton" name="toolButton_5">
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../freecad/actuators/compiled_ui/img_src.qrc">
+        <normaloff>:/images/hexagonal_profile.svg</normaloff>:/images/hexagonal_profile.svg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QToolButton" name="toolButton_3">
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../freecad/actuators/compiled_ui/img_src.qrc">
+        <normaloff>:/images/D_Profile.svg</normaloff>:/images/D_Profile.svg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QToolButton" name="toolButton_7">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../freecad/actuators/compiled_ui/img_src.qrc">
+        <normaloff>:/images/circular_profile.svg</normaloff>:/images/circular_profile.svg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QToolButton" name="toolButton_6">
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../freecad/actuators/compiled_ui/img_src.qrc">
+        <normaloff>:/images/square_profile.svg</normaloff>:/images/square_profile.svg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>141</y>
+     <width>271</width>
+     <height>461</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_14">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>50</y>
+     <width>321</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_14">
+    <item row="0" column="1">
+     <widget class="QFractionEdit" name="max_in_torque_lineedit_2"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_46">
+      <property name="text">
+       <string>Max RPM:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="LockUnlockButton" name="number_of_planets_spinbox_lock_3"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="LockUnlockButton" name="beta_lineedit_lock_4">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>610</y>
+     <width>24</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>-</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>271</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Click on spurs, bevels, and bearings in freecad's assembly view, then click + to add them here&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>10</y>
+     <width>131</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select a shaft profile:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_33">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>30</y>
+     <width>111</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Vary shaft diameter:</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="double_helix_checkbox_7">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>60</y>
+     <width>95</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="LockUnlockButton" name="beta_lineedit_lock_10">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>610</y>
+     <width>24</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LockUnlockButton</class>
+   <extends>QToolButton</extends>
+   <header>.lock_button_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QFractionEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.fraction_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QTorqueEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.torque_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QPressureEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.pressure_ui</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../freecad/actuators/compiled_ui/img_src.qrc"/>
+ </resources>
+ <connections/>
+</ui>

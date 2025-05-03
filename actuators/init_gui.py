@@ -70,6 +70,7 @@ class ActuatorWorkbench(gui.Workbench):
         #"CreateMotor",
         "CreatePlanetary",
         "CreateAxleConnector",
+        "CreateBearing"
         #"CreateSplitRing",
         #"CreateBevel",
         #"CreatePulley",
@@ -78,7 +79,7 @@ class ActuatorWorkbench(gui.Workbench):
     ]
 
     def GetClassName(self):
-        return "Gui::PythonWorkbench"
+        return "Gui::ActuatorWorkbench"
 
     def Initialize(self):
         # gui.addLanguagePath(os.path.join(os.path.dirname(__file__), "translations"))
@@ -87,7 +88,8 @@ class ActuatorWorkbench(gui.Workbench):
         from .commands import (
             #CreateMotor,
             CreatePlanetary,
-            CreateAxleConnector
+            CreateAxleConnector,
+            CreateAxialThrustBearingCommand
             #CreateSplitRing,
             #CreateBevel,
             #CreatePulley,
@@ -100,6 +102,8 @@ class ActuatorWorkbench(gui.Workbench):
         #gui.addCommand("CreateMotor", CreateMotor())
         gui.addCommand("CreatePlanetary", CreatePlanetary())
         gui.addCommand("CreateAxleConnector", CreateAxleConnector())
+        gui.addCommand("CreateBearing", CreateAxialThrustBearingCommand())
+
         #gui.addCommand("CreateSplitRing", CreateSplitRing())
         #gui.addCommand("CreateBevel", CreateBevel())
         #gui.addCommand("CreatePulley", CreatePulley())
