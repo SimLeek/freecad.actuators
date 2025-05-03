@@ -70,7 +70,7 @@ class ActuatorWorkbench(gui.Workbench):
         #"CreateMotor",
         "CreatePlanetary",
         "CreateAxleConnector",
-        "CreateBearing"
+        "CreateBearing",
         #"CreateSplitRing",
         #"CreateBevel",
         #"CreatePulley",
@@ -78,8 +78,8 @@ class ActuatorWorkbench(gui.Workbench):
         #"CreateSpring"
     ]
 
-    def GetClassName(self):
-        return "Gui::ActuatorWorkbench"
+    #def GetClassName(self):
+    #    return "Gui::ActuatorWorkbench"
 
     def Initialize(self):
         # gui.addLanguagePath(os.path.join(os.path.dirname(__file__), "translations"))

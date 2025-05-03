@@ -2,14 +2,13 @@ import FreeCAD
 import FreeCADGui
 import pytest
 def test_create_tapered_roller_bearing():
-    from actuators.tests_base import show_feature_python
+    from freecad.actuators.tests_base import show_feature_python
     import FreeCAD
-    import math
     import Part
     from freecad import app as App
-    from actuators.makelThrustBearing import create_tapered_roller_track_cutout
-    from actuators.makelThrustBearing import create_crowned_tapered_roller
-    from actuators.makelThrustBearing import create_top_race, create_bottom_race
+    from freecad.actuators.makelThrustBearing import create_tapered_roller_track_cutout
+    from freecad.actuators.makelThrustBearing import create_crowned_tapered_roller
+    from freecad.actuators.makelThrustBearing import create_top_race, create_bottom_race
 
     doc = FreeCAD.newDocument("TestDoc")
     FreeCAD.setActiveDocument("TestDoc")

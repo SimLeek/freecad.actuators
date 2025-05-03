@@ -8,7 +8,7 @@ def run_in_freecad(test_func):
     @functools.wraps(test_func)
     def wrapper(*args, **kwargs):
         # Project directory (relative to this file)
-        project_dir = os.path.join(os.path.dirname(__file__), '..')
+        project_dir = os.path.join(os.path.dirname(__file__), '..', '..')
 
         # Path to the test script we'll generate
         test_script = os.path.join(project_dir, "tests", "temp_test.py")
