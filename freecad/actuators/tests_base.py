@@ -54,16 +54,7 @@ def run_in_freecad(test_func):
 
     return wrapper
 
-
-def show_feature_python(obj, doc, solid):
-    """
-    Set up a FeaturePython object with dummy proxy and view provider, recompute the document,
-    and adjust the GUI view to show the object.
-
-    Args:
-        obj: FreeCAD object (e.g., Part::FeaturePython)
-        doc: FreeCAD document containing the object
-    """
+def make_feature_python(obj, solid):
     import FreeCAD
     import FreeCADGui
     from freecad import app as App
@@ -90,9 +81,76 @@ def show_feature_python(obj, doc, solid):
     DummyProxy(obj)
     DummyView(obj.ViewObject)
 
+def show_feature_python(obj, doc, solid):
+    """
+    Set up a FeaturePython object with dummy proxy and view provider, recompute the document,
+    and adjust the GUI view to show the object.
+
+    Args:
+        obj: FreeCAD object (e.g., Part::FeaturePython)
+        doc: FreeCAD document containing the object
+    """
+    make_feature_python(obj, solid)
+
     # Recompute document
     doc.recompute([obj])
 
     # Ensure document is active and adjust view
     FreeCAD.setActiveDocument(doc.Name)
     FreeCADGui.ActiveDocument.ActiveView.fitAll()
+
+def show_feature_python_group(doc, shapes, names, group_name="FeatureGroup", colors=None):
+    """
+    Create a Part::FeaturePython group with child Part::Feature objects for each shape.
+
+    Args:
+        doc: FreeCAD document
+        shapes: List of Part.Shape or Part.Compound objects
+        names: List of strings for child object names
+        group_name: Name of the FeaturePython group (default: "AxialThrustBearing")
+
+    Returns \Returns:
+        The Part::FeaturePython group object
+    """
+
+    import FreeCAD
+    import FreeCADGui
+    from freecad import app as App
+
+    class DummyProxy:
+        def __init__(self, obj):
+            obj.addProperty("App::PropertyString", "version", "version", "freecad.dummy-version", 1)
+            obj.version = "0.0.1"
+            obj.Proxy = self
+
+        def execute(self, fp):
+            pass
+
+    class DummyView:
+        def __init__(self, vobj):
+            vobj.Proxy = self
+
+        def attach(self, vobj):
+            self.vobj = vobj
+
+    # Create parent FeaturePython object
+    group_obj = doc.addObject("App::DocumentObjectGroupPython", group_name)
+    DummyProxy(group_obj)
+    DummyView(group_obj.ViewObject)
+
+
+    # Create child objects
+    for i, (shape, name) in enumerate(zip(shapes, names)):
+        child_obj = doc.addObject("Part::FeaturePython", name)
+        group_obj.addObject(child_obj)
+        make_feature_python(child_obj, shape)
+        if colors and i < len(colors):
+            child_obj.ViewObject.ShapeColor = colors[i]
+
+
+    # Recompute document
+    doc.recompute()
+    FreeCAD.setActiveDocument(doc.Name)
+    FreeCADGui.ActiveDocument.ActiveView.fitAll()
+
+    return group_obj
