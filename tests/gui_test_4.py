@@ -56,6 +56,38 @@ class PlotWindow(QMainWindow):
         layout.addWidget(QLabel("Gap Distance"))
         layout.addWidget(self.gap_slider)
 
+        # Bearing width slider
+        self.bearing_width_slider = QSlider(Qt.Horizontal)
+        self.bearing_width_slider.setMinimum(1)
+        self.bearing_width_slider.setMaximum(1000)
+        self.bearing_width_slider.setValue(200)
+        layout.addWidget(QLabel("Bearing Width"))
+        layout.addWidget(self.bearing_width_slider)
+
+        # Groove extra slider
+        self.groove_extra_slider = QSlider(Qt.Horizontal)
+        self.groove_extra_slider.setMinimum(0)
+        self.groove_extra_slider.setMaximum(200)
+        self.groove_extra_slider.setValue(50)
+        layout.addWidget(QLabel("Groove Extra"))
+        layout.addWidget(self.groove_extra_slider)
+
+        # Groove depth 1 slider
+        self.groove_depth_1_slider = QSlider(Qt.Horizontal)
+        self.groove_depth_1_slider.setMinimum(0)
+        self.groove_depth_1_slider.setMaximum(500)
+        self.groove_depth_1_slider.setValue(50)
+        layout.addWidget(QLabel("Bearing Height 1"))
+        layout.addWidget(self.groove_depth_1_slider)
+
+        # Groove depth 2 slider
+        self.groove_depth_2_slider = QSlider(Qt.Horizontal)
+        self.groove_depth_2_slider.setMinimum(0)
+        self.groove_depth_2_slider.setMaximum(500)
+        self.groove_depth_2_slider.setValue(50)
+        layout.addWidget(QLabel("Bearing Height 2"))
+        layout.addWidget(self.groove_depth_2_slider)
+
         # Sliders for theta, w2, h2
         self.theta_slider = QSlider(Qt.Horizontal)
         self.theta_slider.setMinimum(0)
@@ -83,6 +115,10 @@ class PlotWindow(QMainWindow):
         self.w2_slider.valueChanged.connect(self.update_plot)
         self.h2_slider.valueChanged.connect(self.update_plot)
         self.gap_slider.valueChanged.connect(self.update_plot)
+        self.bearing_width_slider.valueChanged.connect(self.update_plot)
+        self.groove_extra_slider.valueChanged.connect(self.update_plot)
+        self.groove_depth_1_slider.valueChanged.connect(self.update_plot)
+        self.groove_depth_2_slider.valueChanged.connect(self.update_plot)
         self.split_group.buttonClicked.connect(self.update_plot)
 
         # Initial plot items
@@ -95,7 +131,7 @@ class PlotWindow(QMainWindow):
         # Initial plot
         self.update_plot()
 
-    def calc_points(self, theta, w2, h2, gap):
+    def calc_points(self, theta, w2, h2, gap, bearing_width, groove_extra, groove_depth_1, groove_depth_2=None):
         # Handle 45-degree edge case
         t = theta
         sin_t, cos_t = sin(t), cos(t)
@@ -149,42 +185,19 @@ class PlotWindow(QMainWindow):
             return intersections
 
         def line_line_intersection(a, b, c, d, t_min=None, t_max=None):
-            """
-            Finds the intersection point of two lines (a,b) and (c,d) using parametric form.
-
-            Parameters:
-                a, b: Points on the first line, as (x, y)
-                c, d: Points on the second line, as (x, y)
-
-            Returns:
-                A tuple (x, y) representing the intersection point if it exists,
-                or None if the lines are parallel and non-intersecting.
-            """
             ax, ay = a
             bx, by = b
             cx, cy = c
             dx, dy = d
-
-            # Line 1: p = a + t*(b - a)
-            # Line 2: q = c + u*(d - c)
-            # Find t and u such that a + t*(b - a) = c + u*(d - c)
-
-            # Direction vectors
             r = (bx - ax, by - ay)
             s = (dx - cx, dy - cy)
-
-            # Cross product to check for parallelism
             cross_r_s = r[0] * s[1] - r[1] * s[0]
             if cross_r_s == 0:
-                return None  # Lines are parallel or collinear
-
-            # Solve for t using cross product
+                return None
             c_minus_a = (cx - ax, cy - ay)
             t = (c_minus_a[0] * s[1] - c_minus_a[1] * s[0]) / cross_r_s
-            if t_min is not None and t_max is not None and (t>t_max or t<t_min):
+            if t_min is not None and t_max is not None and (t > t_max or t < t_min):
                 return None
-
-            # Get intersection point
             intersection = (ax + t * r[0], ay + t * r[1])
             return intersection
 
@@ -229,8 +242,7 @@ class PlotWindow(QMainWindow):
         kl_valid = not any(p[0] < 0 or p[0] > w2 or p[1] > h2 for p in [k, l])
         mn_valid = not any(p[0] < 0 or p[0] > w2 or p[1] > h2 for p in [m, n])
 
-        gap_cos = gap * cos(theta)
-        gap_sin = gap * sin(theta)
+
         # Parallel lines at gap distance
         if self.inscribed_radio.isChecked():
             sel1 = sel1_x, sel1_y = e
@@ -242,14 +254,18 @@ class PlotWindow(QMainWindow):
             sel1 = sel1_x, sel1_y = m
             sel2 = sel2_x, sel2_y = n
 
+        # Parallel lines at gap distance
+        gap_cos = gap * cos(theta)
+        gap_sin = gap * sin(theta)
         line1_a = [sel1_x - gap_sin, sel1_y + gap_cos]
         line1_b = [sel2_x - gap_sin, sel2_y + gap_cos]
         line2_a = [sel1_x + gap_sin, sel1_y - gap_cos]
         line2_b = [sel2_x + gap_sin, sel2_y - gap_cos]
-        # Intersections with bounding box
 
         # Determine split shapes
         split_shapes = []
+        line1_inters = []
+        line2_inters = []
         if self.bbox_radio.isChecked():
             line1_inters = bbox_line_intersection(line1_a, line1_b, 0, w2, 0, h2, -100, 100)
             line2_inters = bbox_line_intersection(line2_a, line2_b, 0, w2, 0, h2, -100, 100)
@@ -258,13 +274,6 @@ class PlotWindow(QMainWindow):
                 line1_inters = sorted(line1_inters, key=lambda x:x[0])
                 line2_inters = sorted(line2_inters, key=lambda x:x[0])
 
-                # Split bounding box
-                #bbox_points = [i, j, h, g]
-                #if len(line1_inters) >= 2 and len(line2_inters) >= 2:
-                #    if kl_valid:
-                #        top = [p for p in bbox_points + line1_inters if p[1] > (sel1_y + sel2_y) / 2] + [line2_inters[0], line2_inters[1]]
-                #        bottom = [p for p in bbox_points + line2_inters if p[1] < (sel1_y + sel2_y) / 2] + [line1_inters[0], line1_inters[1]]
-                #        split_shapes = [top, bottom]
                 if h[1]>line1_inters[1][1]:
                     t1_split = [line1_inters[0], line1_inters[1], h, g]
                 elif i[0]<line1_inters[0][0]:
@@ -282,15 +291,12 @@ class PlotWindow(QMainWindow):
 
                 split_shapes = [t1_split, br_split]
         elif not self.bbox_radio.isChecked() and not is_invalid:
-            line1_inters = []
             line1_inters.append(line_line_intersection(line1_a, line1_b, a, c))
             line1_inters.append(line_line_intersection(line1_a, line1_b, b, d))
-            line2_inters = []
             line2_inters.append(line_line_intersection(line2_a, line2_b, a, c))
             line2_inters.append(line_line_intersection(line2_a, line2_b, b, d))
 
             if (None not in line1_inters) and (None not in line2_inters):
-                # Split inscribed rectangle
                 line1_inters = sorted(line1_inters, key=lambda x: x[0])
                 line2_inters = sorted(line2_inters, key=lambda x: x[0])
 
@@ -299,11 +305,76 @@ class PlotWindow(QMainWindow):
 
                 split_shapes = [top_split, bottom_split]
 
-                #if len(line1_inters) >= 2 and len(line2_inters) >= 2:
-                #    top = [p for p in inscribed_points + line1_inters if p[1] > (sel1_y + sel2_y) / 2] + [line2_inters[0], line2_inters[1]]
-                #    bottom = [p for p in inscribed_points + line2_inters if p[1] < (sel1_y + sel2_y) / 2] + [line1_inters[0], line1_inters[1]]
-                #    split_shapes = [top, bottom]
+        # Compute midpoint of the splitting line (between line1_inters and line2_inters)
+        #if len(line1_inters) == 2 and len(line2_inters) == 2:
+        #    split_mid_x = (line1_inters[0][0] + line1_inters[1][0] + line2_inters[0][0] + line2_inters[1][
+        #        0]) / 4
+        #    split_mid_y = (line1_inters[0][1] + line1_inters[1][1] + line2_inters[0][1] + line2_inters[1][
+        #        1]) / 4
+        #    split_mid = (split_mid_x, split_mid_y)
+        #else:
+        split_mid = ((sel1_x + sel2_x) / 2, (sel1_y + sel2_y) / 2)
 
+        # Compute direction vector of the splitting line (sel1 to sel2)
+        split_dx = sel2_x - sel1_x
+        split_dy = sel2_y - sel1_y
+        split_length = sqrt(split_dx ** 2 + split_dy ** 2)
+        # Compute perpendicular vector (counterclockwise 90-degree rotation)
+        perp_unit_x = -split_dy / split_length
+        perp_unit_y = split_dx / split_length
+
+        # Define perpendicular line through split_mid (extend infinitely)
+        perp_a = (split_mid[0] - perp_unit_x * 1000, split_mid[1] - perp_unit_y * 1000)
+        perp_b = (split_mid[0] + perp_unit_x * 1000, split_mid[1] + perp_unit_y * 1000)
+
+        # Add groove to split shapes
+        if groove_depth_2 is None:
+            groove_depth_1 = groove_depth_2
+        groove_length = bearing_width + 2 * groove_extra
+        for i, shape in enumerate(split_shapes):
+            if len(shape) < 3:
+                continue
+
+            # First line points
+            p1, p2 = shape[0], shape[1]
+
+            # Find intersection of perpendicular line with the shape's first line
+            intersection = line_line_intersection(perp_a, perp_b, p1, p2, t_min=-float('inf'), t_max=float('inf'))
+            if intersection is None:
+                # Fallback to geometric midpoint if no intersection
+                mid_x = (p1[0] + p2[0]) / 2
+                mid_y = (p1[1] + p2[1]) / 2
+            else:
+                mid_x, mid_y = intersection
+
+            # Compute unit vector along the shape's first line
+            dx = p2[0] - p1[0]
+            dy = p2[1] - p1[1]
+            length = sqrt(dx ** 2 + dy ** 2)
+            if length == 0:
+                continue
+            unit_x = dx / length
+            unit_y = dy / length
+
+            # Compute groove start and end points
+            groove_half = groove_length / 2
+            groove_start = (mid_x - unit_x * groove_half, mid_y - unit_y * groove_half)
+            groove_end = (mid_x + unit_x * groove_half, mid_y + unit_y * groove_half)
+
+            # Compute perpendicular vector (counterclockwise 90-degree rotation)
+            perp_x = -unit_y
+            perp_y = unit_x
+
+            # Compute groove inset points
+            gd1 = groove_depth_1 if i==0 else groove_depth_2
+            gd2 = groove_depth_2 if i==0 else groove_depth_1
+            groove_inset_0 = (groove_start[0] + perp_x * gd1, groove_start[1] + perp_y * gd1)
+            groove_inset_1 = (groove_end[0] + perp_x * gd2, groove_end[1] + perp_y * gd2)
+
+            # Adjust for bottom shape direction (reverse groove points)
+            new_points = [p1, groove_start, groove_inset_0, groove_inset_1, groove_end] + shape[1:]
+
+            split_shapes[i] = new_points
 
         inscribed = [c, d, b, a]
         bbox = [i, j, h, g]
@@ -315,8 +386,14 @@ class PlotWindow(QMainWindow):
         w2 = self.w2_slider.value()
         h2 = self.h2_slider.value()
         gap = self.gap_slider.value() / 100
+        bearing_width = self.bearing_width_slider.value() / 100
+        groove_extra = self.groove_extra_slider.value() / 100
+        groove_depth_1 = self.groove_depth_1_slider.value() / 100
+        groove_depth_2 = self.groove_depth_2_slider.value() / 100
 
-        inscribed, bbox, ef, kl, mn, split_shapes, is_invalid, ef_valid, kl_valid, mn_valid = self.calc_points(theta, w2, h2, gap)
+        inscribed, bbox, ef, kl, mn, split_shapes, is_invalid, ef_valid, kl_valid, mn_valid = self.calc_points(
+            theta, w2, h2, gap, bearing_width, groove_extra, groove_depth_1-gap, groove_depth_2-gap
+        )
 
         if kl_valid:
             self.slice_label.setText("slice: use kl")

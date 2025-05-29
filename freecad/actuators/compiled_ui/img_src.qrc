@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>bldc_gui.svg</file>
     <file>bearing_icon.svg</file>
     <file>bevel_gear_icon.svg</file>
     <file>spur_gear_icon.svg</file>
