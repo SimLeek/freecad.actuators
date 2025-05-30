@@ -5,6 +5,14 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHBoxLayou
 from PySide2.QtCore import Qt
 import pyqtgraph as pg
 
+def traverse_tuple(nums):
+    start, end = nums
+    if start <= end:
+        for i in range(start, end):
+            yield i
+    else:
+        for i in range(start, end, -1):
+            yield i
 
 class BLDCWindow(QMainWindow):
     def __init__(self):
@@ -43,19 +51,19 @@ class BLDCWindow(QMainWindow):
             "stator_inner_radius": 20.0,
             "magnet_thickness": 3.0,
             "wire_awg": 1.0,
-            "num_turns_per_slot": 4.0,
+            "num_turns_per_slot": 70,
             "outrunner_thickness": 5.0,
-            "tight_pack": False,  # Default: tight packing off
-            "fast_display": False,  # Default: fast display off
-            "cnc_milling": False,  # Default: CNC milling off
-            "drill_bit_diameter": 2.0  # Default drill bit diameter
+            "tight_pack": False,
+            "fast_display": False,
+            "cnc_milling": False,
+            "drill_bit_diameter": 2.0
         }
 
         # Create spinboxes for each parameter
         self.spinboxes = {}
         for param, value in self.params.items():
             if param in ["tight_pack", "fast_display", "cnc_milling"]:
-                continue  # These will be checkboxes
+                continue
             label = QLabel(param.replace("_", " ").title())
             control_layout.addWidget(label)
             spinbox = QDoubleSpinBox()
@@ -63,7 +71,7 @@ class BLDCWindow(QMainWindow):
             spinbox.setSingleStep(1.0)
             if param in ["num_slots", "num_magnets", "num_turns_per_slot"]:
                 spinbox.setDecimals(0)
-                spinbox.setRange(4, 1000000)  # Allow high turn counts
+                spinbox.setRange(4, 1000000)
             elif param == "slot_arc_length":
                 spinbox.setRange(5, 30)
             elif param == "air_gap":
@@ -85,7 +93,7 @@ class BLDCWindow(QMainWindow):
             elif param == "hammerhead_width":
                 spinbox.setRange(0.5, 20.0)
             elif param == "drill_bit_diameter":
-                spinbox.setRange(0.5, 10.0)  # Reasonable range for drill bit diameter
+                spinbox.setRange(0.5, 10.0)
             else:  # radius
                 spinbox.setRange(50, 200)
             spinbox.setValue(value)
@@ -94,11 +102,11 @@ class BLDCWindow(QMainWindow):
             self.spinboxes[param] = spinbox
 
         # Add QLineEdit for max turns per layer
-        self.max_turns_input = QLineEdit()
-        self.max_turns_input.setPlaceholderText("Max turns per layer (e.g., 5,4,3)")
-        control_layout.addWidget(QLabel("Max Turns per Layer"))
-        control_layout.addWidget(self.max_turns_input)
-        self.max_turns_input.editingFinished.connect(self.update_visualization)
+        self.turns_per_layer_input = QLineEdit()
+        self.turns_per_layer_input.setPlaceholderText("Turns per layer (e.g., 5,4,3)")
+        control_layout.addWidget(QLabel("Turns per Layer"))
+        control_layout.addWidget(self.turns_per_layer_input)
+        self.turns_per_layer_input.editingFinished.connect(self.update_visualization)
 
         # Add Tight Pack checkbox
         self.tight_pack_checkbox = QCheckBox("Tight Pack (Hexagonal)")
@@ -142,14 +150,16 @@ class BLDCWindow(QMainWindow):
         self.params["cnc_milling"] = self.cnc_milling_checkbox.isChecked()
 
         # Parse max_turns_per_layer_list from QLineEdit
-        max_turns_text = self.max_turns_input.text()
+        max_turns_text = self.turns_per_layer_input.text()
         if max_turns_text:
             try:
-                self.params["max_turns_per_layer_list"] = [int(x) for x in max_turns_text.split(',')]
-            except ValueError:
-                self.params["max_turns_per_layer_list"] = None
+                self.params["turns_per_layer_list"] = eval(max_turns_text)
+            except Exception:
+                self.params["turns_per_layer_list"] = None
+            if not isinstance(self.params["turns_per_layer_list"], list):
+                self.params["turns_per_layer_list"] = None
         else:
-            self.params["max_turns_per_layer_list"] = None
+            self.params["turns_per_layer_list"] = None
 
         # Clear the plot widget
         self.plot_widget.clear()
@@ -164,7 +174,7 @@ class BLDCWindow(QMainWindow):
         # Draw components with scaled pen widths
         #self.draw_axle(pixel_per_unit)
         self.draw_stator_core(pixel_per_unit)
-        #self.draw_wires(pixel_per_unit)
+        self.draw_wires(pixel_per_unit)
         #self.draw_magnets(pixel_per_unit)
         #self.draw_outrunner(pixel_per_unit)
 
@@ -180,21 +190,16 @@ class BLDCWindow(QMainWindow):
 
     def draw_stator_core(self, pixel_per_unit):
         """Draw the stator core using parametric equations for each slot with CNC milling support."""
-        import numpy as np
-        import pyqtgraph as pg
-
         # Parameters
         N = int(self.params["num_slots"])
-        G = self.params["slot_width"] / 2  # half thickness
+        G = self.params["slot_width"] / 2
         W = self.params["hammerhead_width"]
         L = self.params["hammerhead_length"]
         r_inner = self.params["stator_inner_radius"]
         r_outer = self.params["radius"] - self.params["air_gap"] - self.params["magnet_thickness"] - L
         cnc_milling = self.params["cnc_milling"]
         drill_bit_radius = self.params["drill_bit_diameter"] / 2 if cnc_milling else 0
-        adjusted_r_inner = r_inner - drill_bit_radius if cnc_milling else r_inner
 
-        #pen_width = 1 / pixel_per_unit
         pen_width = 1
         pen = pg.mkPen('#000000', width=pen_width)
 
@@ -205,9 +210,9 @@ class BLDCWindow(QMainWindow):
 
             # Quarter-circles at slot ends (before slot geometry) if CNC milling
             if cnc_milling:
-                quarter_center_x = r_inner * np.cos(q) + drill_bit_radius * np.sin(q)+ G * np.sin(q)
-                quarter_center_y = r_inner * np.sin(q) - drill_bit_radius * np.cos(q)- G * np.cos(q)
-                theta_quarter_start = np.linspace(q+np.pi / 2, q, 10)
+                quarter_center_x = r_inner * np.cos(q) + drill_bit_radius * np.sin(q) + G * np.sin(q)
+                quarter_center_y = r_inner * np.sin(q) - drill_bit_radius * np.cos(q) - G * np.cos(q)
+                theta_quarter_start = np.linspace(q + np.pi / 2, q, 10)
                 x_quarter_start = quarter_center_x - (drill_bit_radius * np.sin(theta_quarter_start))
                 y_quarter_start = quarter_center_y + (drill_bit_radius * np.cos(theta_quarter_start))
 
@@ -235,16 +240,17 @@ class BLDCWindow(QMainWindow):
                 # Half-circle at left hammerhead transition
                 half_center_x_left = x_left[-1] + drill_bit_radius * np.cos(q + np.pi / 2)
                 half_center_y_left = y_left[-1] + drill_bit_radius * np.sin(q + np.pi / 2)
-                theta_half_left = np.linspace(q+2*np.pi, q+np.pi,  15)
+                theta_half_left = np.linspace(q + 2 * np.pi, q + np.pi, 15)
                 x_half_left = half_center_x_left - (drill_bit_radius * np.sin(theta_half_left))
                 y_half_left = half_center_y_left + (drill_bit_radius * np.cos(theta_half_left))
 
                 # Half-circle at right hammerhead transition
                 half_center_x_right = x_right[-1] - drill_bit_radius * np.cos(q + np.pi / 2)
                 half_center_y_right = y_right[-1] - drill_bit_radius * np.sin(q + np.pi / 2)
-                theta_half_right = np.linspace( q+2*np.pi, q+np.pi, 15)
+                theta_half_right = np.linspace(q + 2 * np.pi, q + np.pi, 15)
                 x_half_right = half_center_x_right - (drill_bit_radius * np.sin(theta_half_right))
                 y_half_right = half_center_y_right + (drill_bit_radius * np.cos(theta_half_right))
+
             x_hammer_left = np.linspace(tip_x_left, end_x_left, 2)
             y_hammer_left = np.linspace(tip_y_left, end_y_left, 2)
             x_hammer_right = np.linspace(tip_x_right, end_x_right, 2)
@@ -264,7 +270,7 @@ class BLDCWindow(QMainWindow):
             if cnc_milling:
                 quarter_center_x = r_inner * np.cos(q) - drill_bit_radius * np.sin(q) - G * np.sin(q)
                 quarter_center_y = r_inner * np.sin(q) + drill_bit_radius * np.cos(q) + G * np.cos(q)
-                theta_quarter_end = np.linspace( q+np.pi, q+np.pi/2, 10)
+                theta_quarter_end = np.linspace(q + np.pi, q + np.pi / 2, 10)
                 x_quarter_end = quarter_center_x - (drill_bit_radius * np.sin(theta_quarter_end))
                 y_quarter_end = quarter_center_y + (drill_bit_radius * np.cos(theta_quarter_end))
 
@@ -272,12 +278,10 @@ class BLDCWindow(QMainWindow):
             if cnc_milling:
                 arc_start = np.arctan2(y_quarter_end[-1], x_quarter_end[-1])
                 q_next = np.deg2rad((i + 1) * (360 / N))  # centerline angle of next slot
-#
                 quarter_center_x = r_inner * np.cos(q_next) + drill_bit_radius * np.sin(q_next)+ G * np.sin(q_next)
                 quarter_center_y = r_inner * np.sin(q_next) - drill_bit_radius * np.cos(q_next)- G * np.cos(q_next)
                 next_x = quarter_center_x - (drill_bit_radius * np.sin(q_next)) # +np.pi/2))
                 next_y = quarter_center_y + (drill_bit_radius * np.cos(q_next))
-#
                 arc_end = np.arctan2(next_y, next_x)
             else:
                 arc_start = np.arctan2(y_left[0], x_left[0])
@@ -285,10 +289,10 @@ class BLDCWindow(QMainWindow):
                 x_next = r_inner * np.cos(q_next) + G * np.sin(q_next)
                 y_next = r_inner * np.sin(q_next) - G * np.cos(q_next)
                 arc_end = np.arctan2(y_next, x_next)
-#
+
             if arc_end < arc_start:
                 arc_end += 2 * np.pi
-            theta_inner = np.linspace(arc_start+(arc_end-arc_start)/5, arc_end, 5, endpoint=False)
+            theta_inner = np.linspace(arc_start + (arc_end - arc_start) / 5, arc_end, 5, endpoint=False)
 
             if cnc_milling:
                 x_inner = (r_inner - drill_bit_radius / 2) * np.cos(theta_inner)
@@ -315,7 +319,6 @@ class BLDCWindow(QMainWindow):
                 all_y.extend(y_hammer_left[::-1])
                 all_y.extend(y_half_left)
                 all_y.extend(y_left[::-1])
-
                 all_x.extend(x_quarter_end)
                 all_y.extend(y_quarter_end)
                 # currently not working with inner circles, and also not that important
@@ -332,72 +335,296 @@ class BLDCWindow(QMainWindow):
                 all_y.extend(y_arc[::-1])
                 all_y.extend(y_hammer_left[::-1])
                 all_y.extend(y_left[::-1])
-
                 all_x.extend(x_inner)
                 all_y.extend(y_inner)
 
         # Close polygon loop
         all_x.append(all_x[0])
         all_y.append(all_y[0])
-
         self.plot_widget.plot(np.array(all_x), np.array(all_y), pen=pen)
 
     def draw_wires(self, pixel_per_unit):
-        """Draw the wires in the stator slots as arc segments."""
-        stator_radius = self.params["radius"] - self.params["air_gap"] - self.params["magnet_thickness"]
-        wire_diameter = self.params["wire_awg"]  # In mm
-        slot_length = stator_radius - self.params["stator_inner_radius"]  # Radial length in mm
-        max_turns_in_slot = int(slot_length / wire_diameter)  # Max turns that fit in one layer
+        """Draw the wires in the stator slots as lines between left and right vectors."""
+        wire_awg = self.params["wire_awg"]
+        L = self.params["hammerhead_length"]
+        r_inner = self.params["stator_inner_radius"]
+        r_outer = self.params["radius"] - self.params["air_gap"] - self.params["magnet_thickness"] - L
         num_turns = int(self.params["num_turns_per_slot"])
-        slot_arc_length_rad = np.deg2rad(self.params["slot_arc_length"])  # Convert degrees to radians
+        #turns_list = self.params["turns_per_layer_list"]
+        turns_list=None
+        N = int(self.params["num_slots"])
         tight_pack = self.params["tight_pack"]
-        fast_display = self.params["fast_display"]
+        G = self.params["slot_width"] / 2
 
-        max_turns_per_layer_list = self.params.get("max_turns_per_layer_list", None)
+        # Pens for drawing
+        pen_width = wire_awg / pixel_per_unit
+        non_colliding_pen = pg.mkPen('#B87333', width=pen_width, cap=pg.QtCore.Qt.RoundCap)
+        colliding_pen = pg.mkPen('#FF0000', width=pen_width, cap=pg.QtCore.Qt.RoundCap)
 
-        pen_width = wire_diameter / pixel_per_unit  # Scale wire_awg to pixels
-        non_colliding_pen = pg.mkPen('#B87333', width=pen_width)
-        colliding_pen = pg.mkPen('#FF0000', width=pen_width)
-        non_colliding_pen.setCapStyle(pg.QtCore.Qt.PenCapStyle.RoundCap)
-        colliding_pen.setCapStyle(pg.QtCore.Qt.PenCapStyle.RoundCap)
+        good_x, good_y = [], []
+        bad_x, bad_y = [], []
 
-        # Initialize arrays to store all x and y coordinates
+        for i in range(N):
+            q = i * (360.0 / N) / 180.0 * np.pi
 
-        if not self.use_cache:
-            self.all_x_non_colliding = []
-            self.all_y_non_colliding = []
-            self.all_x_colliding = []
-            self.all_y_colliding = []
-            # For hexagonal packing: theta shift = wire_diameter / 2 at reference radius
-            theta_shift_factor = (np.sqrt(3) * wire_diameter) / 2 if tight_pack else wire_diameter
-            for i in range(int(self.params["num_slots"])):
-                slot_angle = i * (360.0 / self.params["num_slots"])
-                slot_start_angle_rad = np.deg2rad(slot_angle)
-                for j in range(int(min(num_turns, max_turns_in_slot))):
-                    if max_turns_in_slot == 0:
-                        max_turns_in_slot = 1
-                    # num_layers here is the number of layers of wire
-                    if j < num_turns % max_turns_in_slot:
-                        num_layers = int(np.ceil(num_turns / max_turns_in_slot))
+            # Define bin positions for loose and tight packing
+            # len(bin_counts) also determines turns per layer
+            if tight_pack:
+                # Two sets of bins for hexagonal packing
+                bin_radii_even = np.arange(r_inner, r_outer, wire_awg)
+                bin_radii_odd = np.arange( r_inner + (wire_awg / 2), r_outer, wire_awg)
+                bin_counts_even = [0]*len(bin_radii_even)
+                bin_counts_odd = [0]*len(bin_radii_odd)
+                current_bin = len(bin_counts_even) - 1
+            else:
+                bin_radii = np.arange(r_inner, r_outer, wire_awg)
+                #print(bin_radii)
+                bin_counts = [0]*len(bin_radii)
+                current_bin = len(bin_counts) - 1
+
+            current_layer = 0
+            if turns_list is None:
+                turns_list = [[current_bin]]
+                turn = 0
+                while turn<num_turns:
+                    #print(turn)
+                    #print(current_bin)
+                    #todo: add the wire winding tool end diameter to this to ensure it can fit and winding is possible
+                    #  add it as another parameter that can be edited in the ui
+                    if tight_pack:
+                        if current_layer%2==0:
+                            total_height = wire_awg*int((current_layer+1)/2) * np.sqrt(3) + wire_awg
+                        else:
+                            total_height = wire_awg*(int((current_layer+1)/2)-1) * np.sqrt(3) + wire_awg*(1+np.sqrt(3) / 2)
+
                     else:
-                        num_layers = int(np.floor(num_turns / max_turns_in_slot))
+                        total_height = (current_layer+1) * wire_awg
+                    G_adjusted = G + total_height
 
-                    # Adjust radial position for this layer
-                    wire_arc_radius = stator_radius - j * wire_diameter - wire_diameter / 2.0
-                    our_side_thickness = num_layers * wire_diameter
-                    # Arc length in radians at this radius
-                    start_angle = slot_start_angle_rad - our_side_thickness / wire_arc_radius
-                    end_angle = slot_start_angle_rad + slot_arc_length_rad + our_side_thickness / wire_arc_radius
-                    theta_wire = np.linspace(start_angle, end_angle, 20)
-                    x_wire = wire_arc_radius * np.cos(theta_wire)
-                    y_wire = wire_arc_radius * np.sin(theta_wire)
-                    #all_x.extend(x_wire)
-                    #all_y.extend(y_wire)
-                    #all_x.append(float('inf'))
-                    #all_y.append(float('inf'))
+                    r=0
+                    if tight_pack:
+                        if current_layer%2==0:
+                            r = bin_radii_even[current_bin]
+                        else:
+                            r = bin_radii_odd[current_bin]
+                    else:
+                        r = bin_radii[current_bin]
 
-        # Plot all wire segments in one call
-        #self.plot_widget.plot(np.array(all_x), np.array(all_y), pen=pen)
+                    # Wire end positions
+                    x_left = r * np.cos(0) - G_adjusted * np.sin(0)
+                    y_left = r * np.sin(0) + G_adjusted * np.cos(0)
+                    x_right = r * np.cos(0) + G_adjusted * np.sin(0)
+                    y_right = r * np.sin(0) - G_adjusted * np.cos(0)
+
+                    # Collision detection with slot boundaries
+                    theta_left = (-0.5) * (360 / N) / 180 * np.pi
+                    theta_right = (0.5) * (360 / N) / 180 * np.pi
+
+                    # Calculate angles of wire ends
+                    angle_left = np.arctan2(y_left, x_left)
+                    angle_right = np.arctan2(y_right, x_right)
+
+                    # Check if wire (with thickness) crosses boundaries
+                    min_angle = min(angle_left, angle_right)
+                    max_angle = max(angle_left, angle_right)
+                    is_colliding = (min_angle < theta_left < max_angle) or (min_angle < theta_right < max_angle)
+
+                    if not is_colliding:
+                        if tight_pack:
+                            if current_layer%2==0:
+                                bin_counts_even[current_bin]+=1
+                            else:
+                                bin_counts_odd[current_bin]+=1
+                        else:
+                            bin_counts[current_bin]+=1
+                    else:
+                        #print('is_colliding')
+                        #print(min_angle / np.pi * 180, max_angle / np.pi * 180, theta_left / np.pi * 180,
+                        #      theta_right / np.pi * 180)
+                        if current_layer%2!=0:
+                            turns_list[-1][0] = current_bin+1  # postpone start for odd going back
+                        turn-=1
+
+                    if current_layer%2==0:
+                        current_bin-=1
+                        if current_bin<0 or is_colliding:
+                            current_layer+=1
+                            # corresponding next position in both packing methods should be equal to our prev position:
+                            current_bin+=1
+                            if is_colliding:
+                                turns_list[-1].append(current_bin)
+                                turns_list.append([current_bin + 1])
+                            else:
+                                turns_list[-1].append(current_bin-1)
+                                turns_list.append([current_bin])
+                    else:
+                        # don't check is_colliding here. We want to keep going out until there's room
+                        current_bin+=1
+                        if tight_pack:
+                            if current_bin>=len(bin_counts_odd):
+                                # corresponding next position in odd layer should be one behind our prev position:
+                                current_bin -= 1
+                                current_layer += 1
+                                if current_bin >= len(bin_counts_odd) or is_colliding:
+                                    break  # Todo: add warning here: not possible to wind anymore
+                                turns_list[-1].append(current_bin+1)
+                                turns_list.append([len(bin_counts_even)-1])  # even has different start
+                        else:
+                            if current_bin >= len(bin_counts):
+                                current_bin -= 1
+                                #if is_colliding:
+                                #    current_bin -= 1
+                                current_layer += 1
+                                if current_bin >= len(bin_counts) or is_colliding:
+                                    break  # Todo: add warning here: not possible to wind anymore
+                                turns_list[-1].append(current_bin+1)
+                                turns_list.append([current_bin])
+                    turn+=1
+                if current_layer%2==0:
+                    turns_list[-1].append(current_bin)  # set at end of loop, iterated at start, so no plus/minus
+                else:
+                    turns_list[-1].append(current_bin)
+                self.turns_per_layer_input.setText(str(turns_list))
+            else:
+                #print(turns_list)
+                current_layer = 0
+                for turn_tuple in turns_list:
+                    for turn in traverse_tuple(turn_tuple):
+                        if tight_pack:
+                            if current_layer % 2 == 0:
+                                bin_counts_even[turn] += 1
+                            else:
+                                bin_counts_odd[turn] += 1
+                        else:
+                            bin_counts[turn] += 1
+                    current_layer +=1
+            #print(bin_counts)
+            if tight_pack:
+                for r, bc in zip(bin_radii_even, bin_counts_even):
+                    if bc==0:
+                        continue
+                    total_height = wire_awg*(bc-1)*np.sqrt(3)+wire_awg
+
+                    G_adjusted = G + total_height
+                    # Wire end positions
+                    x_left = r * np.cos(0) - G_adjusted * np.sin(0)
+                    y_left = r * np.sin(0) + G_adjusted * np.cos(0)
+                    x_right = r * np.cos(0) + G_adjusted * np.sin(0)
+                    y_right = r * np.sin(0) - G_adjusted * np.cos(0)
+
+                    # Collision detection with slot boundaries
+                    theta_left = (-0.5) * (360 / N) / 180 * np.pi
+                    theta_right = (0.5) * (360 / N) / 180 * np.pi
+
+                    # Calculate angles of wire ends
+                    angle_left = np.arctan2(y_left, x_left)
+                    angle_right = np.arctan2(y_right, x_right)
+
+                    # Check if wire (with thickness) crosses boundaries
+                    min_angle = min(angle_left, angle_right)
+                    max_angle = max(angle_left, angle_right)
+                    is_colliding = (min_angle < theta_left < max_angle) or (min_angle < theta_right < max_angle)
+
+                    # reset to actual positions
+                    middle_height = wire_awg*(bc-1)*np.sqrt(3)+wire_awg*.5
+                    G_adjusted = G + middle_height
+                    x_left = r * np.cos(q) - G_adjusted * np.sin(q)
+                    y_left = r * np.sin(q) + G_adjusted * np.cos(q)
+                    x_right = r * np.cos(q) + G_adjusted * np.sin(q)
+                    y_right = r * np.sin(q) - G_adjusted * np.cos(q)
+
+                    if not is_colliding:
+                        good_x.extend([x_left, x_right, np.nan])
+                        good_y.extend([y_left, y_right, np.nan])
+                    else:
+                        #print('is_colliding1')
+                        bad_x.extend([x_left, x_right, np.nan])
+                        bad_y.extend([y_left, y_right, np.nan])
+                for r, bc in zip(bin_radii_odd, bin_counts_odd):
+                    if bc==0:
+                        continue
+                    total_height = wire_awg*(bc - 1) * np.sqrt(3) + wire_awg*(1+np.sqrt(3)/2)
+
+                    G_adjusted = G + total_height
+                    # Wire end positions
+                    x_left = r * np.cos(0) - G_adjusted * np.sin(0)
+                    y_left = r * np.sin(0) + G_adjusted * np.cos(0)
+                    x_right = r * np.cos(0) + G_adjusted * np.sin(0)
+                    y_right = r * np.sin(0) - G_adjusted * np.cos(0)
+
+                    # Collision detection with slot boundaries
+                    theta_left = (-0.5) * (360 / N) / 180 * np.pi
+                    theta_right = (0.5) * (360 / N) / 180 * np.pi
+
+                    # Calculate angles of wire ends
+                    angle_left = np.arctan2(y_left, x_left)
+                    angle_right = np.arctan2(y_right, x_right)
+
+                    # Check if wire (with thickness) crosses boundaries
+                    min_angle = min(angle_left, angle_right)
+                    max_angle = max(angle_left, angle_right)
+                    is_colliding = (min_angle < theta_left < max_angle) or (min_angle < theta_right < max_angle)
+
+                    # reset to actual positions
+                    middle_height = wire_awg*(bc - 1) * np.sqrt(3) + wire_awg * (0.5 + np.sqrt(3) / 2)
+                    G_adjusted = G + middle_height
+                    x_left = r * np.cos(q) - G_adjusted * np.sin(q)
+                    y_left = r * np.sin(q) + G_adjusted * np.cos(q)
+                    x_right = r * np.cos(q) + G_adjusted * np.sin(q)
+                    y_right = r * np.sin(q) - G_adjusted * np.cos(q)
+
+                    if not is_colliding:
+                        good_x.extend([x_left, x_right, np.nan])
+                        good_y.extend([y_left, y_right, np.nan])
+                    else:
+                        #print('is_colliding2')
+                        bad_x.extend([x_left, x_right, np.nan])
+                        bad_y.extend([y_left, y_right, np.nan])
+            else:
+                for r, bc in zip(bin_radii, bin_counts):
+                    if bc==0:
+                        continue
+                    total_height = bc*wire_awg
+                    G_adjusted = G + total_height
+                    # Wire end positions
+                    x_left = r * np.cos(0) - G_adjusted * np.sin(0)
+                    y_left = r * np.sin(0) + G_adjusted * np.cos(0)
+                    x_right = r * np.cos(0) + G_adjusted * np.sin(0)
+                    y_right = r * np.sin(0) - G_adjusted * np.cos(0)
+
+                    # Collision detection with slot boundaries
+                    theta_left = (-0.5) * (360 / N) / 180 * np.pi
+                    theta_right = (0.5) * (360 / N) / 180 * np.pi
+
+                    # Calculate angles of wire ends
+                    angle_left = np.arctan2(y_left, x_left)
+                    angle_right = np.arctan2(y_right, x_right)
+
+                    # Check if wire (with thickness) crosses boundaries
+                    min_angle = min(angle_left, angle_right)
+                    max_angle = max(angle_left, angle_right)
+                    is_colliding = (min_angle < theta_left < max_angle) or (min_angle < theta_right < max_angle)
+
+                    # reset to actual positions
+                    middle_height = (bc - 1) * wire_awg + wire_awg / 2
+                    G_adjusted = G + middle_height
+                    x_left = r * np.cos(q) - G_adjusted * np.sin(q)
+                    y_left = r * np.sin(q) + G_adjusted * np.cos(q)
+                    x_right = r * np.cos(q) + G_adjusted * np.sin(q)
+                    y_right = r * np.sin(q) - G_adjusted * np.cos(q)
+
+                    if not is_colliding:
+                        good_x.extend([x_left, x_right, np.nan])
+                        good_y.extend([y_left, y_right, np.nan])
+                    else:
+                        #print('is_colliding2')
+                        #print(min_angle / np.pi * 180, max_angle / np.pi * 180, theta_left / np.pi * 180,
+                        #      theta_right / np.pi * 180)
+                        bad_x.extend([x_left, x_right, np.nan])
+                        bad_y.extend([y_left, y_right, np.nan])
+
+        self.plot_widget.plot(good_x, good_y, pen=non_colliding_pen)
+        self.plot_widget.plot(bad_x, bad_y, pen=colliding_pen)
 
     def draw_magnets(self, pixel_per_unit):
         """Draw the magnets on the outrunner with thickness toward the stator."""
