@@ -1,10 +1,12 @@
 import traceback
 try:
     from PySide2.QtWidgets import QLineEdit, QApplication
-    from PySide2.QtGui import QDoubleValidator
+    from PySide2.QtGui import QWheelEvent, QDoubleValidator
+    from PySide2.QtCore import Qt
 except ImportError:
     from PySide.QtWidgets import QLineEdit, QApplication
-    from PySide.QtGui import QDoubleValidator
+    from PySide.QtGui import QWheelEvent, QDoubleValidator
+    from PySide.QtCore import Qt
 
 class QLengthEdit(QLineEdit):
     UNIT_CONVERSIONS = {
@@ -19,15 +21,25 @@ class QLengthEdit(QLineEdit):
         super().__init__(parent)
         self.internal_mm = 0.0  # Store value in mm
         self.display_unit = "mm"  # Default display unit
+        self._current_unit = None  # Last parsed unit
         self.textChanged.connect(self.update_internal_value)
+        self.setFocusPolicy(Qt.WheelFocus)  # Enable wheel events
 
     def parse_length(self, text):
         """Parses the input, replacing unit names with their mm multipliers and evaluating the expression."""
-        # Replace all recognized units with their corresponding multipliers
+        text = text.lower().replace(" ", "")  # Normalize input
+        self._current_unit = None  # Reset current unit
+        max_pos = 0
         for unit, multiplier in self.UNIT_CONVERSIONS.items():
-            text = text.lower().replace(unit, multiplier)
+            last_pos = text.rfind(unit)
+            if last_pos != -1:
+                if last_pos > max_pos:
+                    max_pos = last_pos
+                    self._current_unit = unit
+                text = text.replace(unit, multiplier)
+
         try:
-            return eval(text, {"__builtins__": {}})  # Safe eval (no built-ins)
+            return eval(text, {"__builtins__": math.__dict__})  # Safe eval (no built-ins)
         except Exception:
             return traceback.format_exc()  # Return the full error traceback as a string
 
@@ -57,20 +69,32 @@ class QLengthEdit(QLineEdit):
 
     def set_display_unit(self, unit):
         """Sets the display unit and updates the displayed text."""
-        if unit in self.UNIT_CONVERSIONS:
+        if unit.lower() in self.UNIT_CONVERSIONS:
             self.display_unit = unit
             self.update_display()
 
     def update_display(self):
         """Updates the text to reflect the current mm value in the chosen display unit."""
-        converted_value = self.internal_mm / eval('1.0'+self.UNIT_CONVERSIONS[self.display_unit], {"__builtins__": {}})
+        converted_value = self.internal_mm / eval('1.0'+self.UNIT_CONVERSIONS[self.display_unit.lower()], {"__builtins__": {}})
         self.setText(f"{converted_value:.2f}{self.display_unit}")
         self.setToolTip(f"{converted_value:.2f}{self.display_unit}")
 
+    def wheelEvent(self, event: QWheelEvent):
+        """Handles mouse wheel events to increment/decrement the displayed value by 1 in the current unit."""
+        unit = self._current_unit if self._current_unit else self.display_unit
+        multiplier = eval('1.0'+self.UNIT_CONVERSIONS[unit.lower()], {"__builtins__": math.__dict__})
+        delta = event.angleDelta().y()
+        if delta > 0:
+            self.internal_mm += 1.0 * multiplier  # Scroll up: add 1 in display unit
+        elif delta < 0:
+            self.internal_mm -= 1.0 * multiplier  # Scroll down: subtract 1 in display unit
+        self.blockSignals(True)
+        self.update_display()
+        self.blockSignals(False)
+        event.accept()
 
 if __name__ == "__main__":
     import sys
-
     app = QApplication(sys.argv)
     widget = QLengthEdit()
     widget.show()

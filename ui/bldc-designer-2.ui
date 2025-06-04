@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BLDCDialog</class>
+ <widget class="QDialog" name="BLDCDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1174</width>
+    <height>748</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>2</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Stator</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QCheckBox" name="checkBox_2">
+            <property name="text">
+             <string>Axle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_6">
+            <property name="text">
+             <string>Bearing</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox">
+            <property name="text">
+             <string>Stator Core</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_3">
+            <property name="text">
+             <string>Wires</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_4">
+            <property name="text">
+             <string>Magnets</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_5">
+            <property name="text">
+             <string>Outrunner</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_7">
+            <property name="text">
+             <string>Height</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="stator_plot_widget" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Slot-Pole</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QWidget" name="slot_pole_grid_widget" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>Graphs</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QWidget" name="graph_widget" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget_2">
+     <property name="maximumSize">
+      <size>
+       <width>400</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Tab 1</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QScrollArea" name="scrollArea">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>376</width>
+            <height>679</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QGroupBox" name="groupBox_3">
+             <property name="title">
+              <string>Default Settings</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox">
+                <item>
+                 <property name="text">
+                  <string>Quadcopter Motor</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Micro Motor</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>MEMS Motor</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Car Motor</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Airplane Motor</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QPushButton" name="pushButton">
+                <property name="text">
+                 <string>Apply</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox">
+             <property name="title">
+              <string>Input/Output Properties</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="4" column="2">
+               <widget class="LockUnlockButton" name="torque_lineedit_lock_8"/>
+              </item>
+              <item row="5" column="2">
+               <widget class="LockUnlockButton" name="torque_lineedit_lock_9"/>
+              </item>
+              <item row="2" column="2">
+               <widget class="LockUnlockButton" name="torque_lineedit_lock_6"/>
+              </item>
+              <item row="2" column="1">
+               <widget class="QFractionEdit" name="lineEdit_3"/>
+              </item>
+              <item row="5" column="1">
+               <widget class="QVoltageEdit" name="lineEdit_6"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Gearbox Ratio</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>Motor Torque</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QTorqueEdit" name="lineEdit_2"/>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Motor RPM</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QRotationalVelocityEdit" name="lineEdit"/>
+              </item>
+              <item row="1" column="2">
+               <widget class="LockUnlockButton" name="torque_lineedit_lock_5"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="LockUnlockButton" name="torque_lineedit_lock_4"/>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_6">
+                <property name="text">
+                 <string>Max Volts</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QRotationalVelocityEdit" name="lineEdit_4"/>
+              </item>
+              <item row="3" column="2">
+               <widget class="LockUnlockButton" name="torque_lineedit_lock_7"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Output Torque</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Output RPM</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QTorqueEdit" name="lineEdit_5"/>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Max Temp</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QTemperatureEdit" name="lineEdit_7"/>
+              </item>
+              <item row="6" column="2">
+               <widget class="LockUnlockButton" name="torque_lineedit_lock_10"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="title">
+              <string>GroupBox</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Tab 2</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LockUnlockButton</class>
+   <extends>QToolButton</extends>
+   <header>.lock_button_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QTorqueEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.torque_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QFractionEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.fraction_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QRotationalVelocityEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.rotational_velocity_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QTemperatureEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.temperature_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>QVoltageEdit</class>
+   <extends>QLineEdit</extends>
+   <header>.voltage_ui</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

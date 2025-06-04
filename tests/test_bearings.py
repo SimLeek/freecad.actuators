@@ -1,5 +1,5 @@
 from freecad.actuators.tests_base import run_in_freecad
-import pytest
+
 
 @run_in_freecad
 def test_create_tapered_roller_bearing_3():
@@ -8,7 +8,7 @@ def test_create_tapered_roller_bearing_3():
     import BOPTools.SplitAPI
     import math
     from freecad import app as App
-    from freecad.actuators.makelThrustBearing import (
+    from freecad.actuators.bearing.makelThrustBearing import (
         create_tapered_roller_track_cutout,
         create_crowned_tapered_roller,
         create_top_race,

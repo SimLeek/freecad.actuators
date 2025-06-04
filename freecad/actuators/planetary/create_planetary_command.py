@@ -1,6 +1,4 @@
 import os
-import time
-import math as m
 import FreeCAD
 import FreeCADGui as Gui
 import Part
@@ -13,7 +11,7 @@ try:
 except ImportError:
     from PySide import QtWidgets, QtCore
 # Import your custom dialog
-from .planetary_dialog import PlanetaryDialog
+from freecad.actuators.planetary.planetary_dialog import PlanetaryDialog
 
 def create_planetary(
 sun_teeth,

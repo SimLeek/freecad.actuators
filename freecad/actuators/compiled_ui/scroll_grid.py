@@ -116,18 +116,18 @@ class CustomTableView(QTableView):
             self.setCurrentIndex(self.model.index(row, 0))
         elif event.key() == Qt.Key_Right and col == self.model.cols - 1:
             self.model.shift_right()
-            self.setCurrentIndex(self.model.index(col, self.model.cols - 1))
+            self.setCurrentIndex(self.model.index(row, self.model.cols - 1))
         elif event.key() == Qt.Key_Up and row == 0:
             self.model.shift_up()
             self.setCurrentIndex(self.model.index(0, col))
         elif event.key() == Qt.Key_Down and row == self.model.rows - 1:
             self.model.shift_down()
-            self.setCurrentIndex(self.model.index(self.model.rows - 1, row))
+            self.setCurrentIndex(self.model.index(self.model.rows - 1, col))
         else:
             super().keyPressEvent(event)
 
 def sample_cell_callback(x, y):
-    # Sample callback for testing
+    """Sample callback for testing"""
     selectable = (x + y) % 2 != 0  # Selectable if x + y is odd
     if (x + y) % 3 == 0:
         text = f"[{x},{y}]"
@@ -137,16 +137,12 @@ def sample_cell_callback(x, y):
         bg_color = QColor('lightgreen')
     else:
         text = f"{x},{y}"
-        bg_color = None  # No background color
+        bg_color = None
     return selectable, text, bg_color
 
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("Infinite Selectable Grid")
-        self.resize(800, 600)
-
-        # Setup model and view
+class InfiniteGridWidget(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
         self.cell_callback = sample_cell_callback
         self.model = InfiniteGridModel(rows=16, cols=10, x_offset=-10, y_offset=-10, cell_callback=self.cell_callback)
         self.view = CustomTableView(self.model)
@@ -197,11 +193,7 @@ class MainWindow(QMainWindow):
         spin_layout.addWidget(self.y_spin)
         layout.addLayout(spin_layout)
 
-        central_widget = QWidget()
-        central_widget.setLayout(layout)
-        self.setCentralWidget(central_widget)
-
-        # Start at (0,0)
+        self.setLayout(layout)
         self.set_selection(0, 0)
 
     def on_selection_changed(self, selected, deselected):
@@ -229,6 +221,14 @@ class MainWindow(QMainWindow):
         col = self.model.cols // 2
         index = self.model.index(row, col)
         self.view.setCurrentIndex(index)
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Infinite Grid Demo")
+        self.resize(800, 600)
+        self.grid_widget = InfiniteGridWidget()
+        self.setCentralWidget(self.grid_widget)
 
 if __name__ == "__main__":
     import sys

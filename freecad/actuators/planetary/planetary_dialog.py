@@ -1,6 +1,6 @@
 import math
 
-from .compiled_ui.planetary_ui import Ui_Dialog
+from freecad.actuators.compiled_ui.planetary_ui import Ui_Dialog
 try:
     from PySide2.QtCore import *  # type: ignore
     from PySide2.QtGui import *  # type: ignore
@@ -9,7 +9,7 @@ except ImportError:
     from PySide.QtCore import *  # type: ignore
     from PySide.QtGui import *  # type: ignore
     from PySide.QtWidgets import *  # type: ignore
-from .search_planetaries import PlanetarySearchWorker, GearboxResult
+from freecad.actuators.planetary.search_planetaries import PlanetarySearchWorker, GearboxResult
 
 import math as m
 
