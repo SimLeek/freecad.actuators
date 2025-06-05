@@ -3,6 +3,7 @@ try:
     from PySide2.QtWidgets import QLineEdit
 except ImportError:
     from PySide.QtWidgets import QLineEdit
+import math
 
 class QPressureEdit(QLineEdit):
     """A QLineEdit that parses pressure values and stores them internally in Pascals (N/m²)."""

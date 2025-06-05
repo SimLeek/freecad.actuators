@@ -8,6 +8,7 @@ except ImportError:
     from PySide.QtWidgets import QLineEdit
     from PySide.QtGui import QWheelEvent
     from PySide.QtCore import Qt
+import math
 
 class QAngleEdit(QLineEdit):
     """A QLineEdit that parses angle expressions with units and stores the value internally in degrees."""
@@ -87,7 +88,5 @@ class QAngleEdit(QLineEdit):
             self.internal_degrees += 1.0 * multiplier  # Scroll up: add 1 in display unit
         elif delta < 0:
             self.internal_degrees -= 1.0 * multiplier  # Scroll down: subtract 1 in display unit
-        self.blockSignals(True)
-        self.update_display()
-        self.blockSignals(False)
         event.accept()
+        self.update_display()

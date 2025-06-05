@@ -126,7 +126,7 @@ class CustomTableView(QTableView):
         else:
             super().keyPressEvent(event)
 
-def sample_cell_callback(x, y):
+'''def sample_cell_callback(x, y):
     """Sample callback for testing"""
     selectable = (x + y) % 2 != 0  # Selectable if x + y is odd
     if (x + y) % 3 == 0:
@@ -138,13 +138,12 @@ def sample_cell_callback(x, y):
     else:
         text = f"{x},{y}"
         bg_color = None
-    return selectable, text, bg_color
+    return selectable, text, bg_color'''
 
-class InfiniteGridWidget(QWidget):
-    def __init__(self, parent=None):
+class InfXYGridWidget(QWidget):
+    def __init__(self, parent=None, callback=lambda x, y:(True, f"{x},{y}", QColor(255, 255, 255)), rows=16, cols=10, x_offset=-10, y_offset=-10):
         super().__init__(parent)
-        self.cell_callback = sample_cell_callback
-        self.model = InfiniteGridModel(rows=16, cols=10, x_offset=-10, y_offset=-10, cell_callback=self.cell_callback)
+        self.model = InfiniteGridModel(rows=rows, cols=cols, x_offset=x_offset, y_offset=y_offset, cell_callback=callback)
         self.view = CustomTableView(self.model)
         self.view.setModel(self.model)
         self.view.setSelectionMode(QAbstractItemView.SingleSelection)
@@ -196,6 +195,17 @@ class InfiniteGridWidget(QWidget):
         self.setLayout(layout)
         self.set_selection(0, 0)
 
+    def set_callback(self, callback):
+        self.model.cell_callback = callback
+        # update for new callback
+        for c in self.model.cols:
+            for r in self.model.rows:
+                index = model.index(r, c)
+                self.model.dataChanged.emit(index, role=Qt.DisplayRole)
+
+    def get_callback(self):
+        return self.model.cell_callback
+
     def on_selection_changed(self, selected, deselected):
         indexes = selected.indexes()
         if indexes:
@@ -227,7 +237,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Infinite Grid Demo")
         self.resize(800, 600)
-        self.grid_widget = InfiniteGridWidget()
+        self.grid_widget = InfXYGridWidget()
         self.setCentralWidget(self.grid_widget)
 
 if __name__ == "__main__":

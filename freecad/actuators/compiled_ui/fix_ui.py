@@ -109,7 +109,7 @@ def main():
         if len(sys.argv) != 2:
             #print("Usage: python fix_ui.py <path_to_python_file>")
             #sys.exit(1)
-            filepath = dir_path+os.sep+"planetary_ui.py"
+            filepath = dir_path+os.sep+"bldc_ui.py"
         else:
             filepath = sys.argv[1]
             if not os.path.isfile(filepath):

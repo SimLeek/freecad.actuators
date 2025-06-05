@@ -608,15 +608,7 @@ class BLDCWindow(QMainWindow):
                     max_angle = max(angle_left, angle_right)
                     is_colliding = (min_angle < theta_left < max_angle) or (min_angle < theta_right < max_angle)
 
-                    if not is_colliding:
-                        if tight_pack:
-                            if current_layer%2==0:
-                                bin_counts_even[current_bin]+=1
-                            else:
-                                bin_counts_odd[current_bin]+=1
-                        else:
-                            bin_counts[current_bin]+=1
-                    else:
+                    if is_colliding:
                         #print('is_colliding')
                         #print(min_angle / np.pi * 180, max_angle / np.pi * 180, theta_left / np.pi * 180,
                         #      theta_right / np.pi * 180)
@@ -664,19 +656,18 @@ class BLDCWindow(QMainWindow):
                 else:
                     turns_list[-1].append(current_bin)
                 self.turns_per_layer_input.setText(str(turns_list))
-            else:
-                #print(turns_list)
-                current_layer = 0
-                for turn_tuple in turns_list:
-                    for turn in traverse_tuple(turn_tuple):
-                        if tight_pack:
-                            if current_layer % 2 == 0:
-                                bin_counts_even[turn] += 1
-                            else:
-                                bin_counts_odd[turn] += 1
+            #print(turns_list)
+            current_layer = 0
+            for turn_tuple in turns_list:
+                for turn in traverse_tuple(turn_tuple):
+                    if tight_pack:
+                        if current_layer % 2 == 0:
+                            bin_counts_even[turn] += 1
                         else:
-                            bin_counts[turn] += 1
-                    current_layer +=1
+                            bin_counts_odd[turn] += 1
+                    else:
+                        bin_counts[turn] += 1
+                current_layer +=1
             #print(bin_counts)
             if tight_pack:
                 for r, bc in zip(bin_radii_even, bin_counts_even):

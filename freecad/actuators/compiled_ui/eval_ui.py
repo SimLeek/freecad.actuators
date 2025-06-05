@@ -4,6 +4,7 @@ try:
     from PySide2.QtWidgets import QLineEdit
 except:
     from PySide.QtWidgets import QLineEdit
+import math
 
 class QEvalEdit(QLineEdit):
     """A QLineEdit that evaluates mathematical expressions and stores the result internally."""

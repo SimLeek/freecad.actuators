@@ -8,6 +8,7 @@ except ImportError:
     from PySide.QtWidgets import QLineEdit
     from PySide.QtGui import QWheelEvent
     from PySide.QtCore import Qt
+import math
 
 class QTorqueEdit(QLineEdit):
     """A QLineEdit that parses torque values and stores them internally in Newton-meters (N·m)."""
@@ -97,7 +98,5 @@ class QTorqueEdit(QLineEdit):
             self.internal_nm += 1.0 * multiplier  # Scroll up: add 1 in display unit
         elif delta < 0:
             self.internal_nm -= 1.0 * multiplier  # Scroll down: subtract 1 in display unit
-        self.blockSignals(True)
-        self.update_display()
-        self.blockSignals(False)
         event.accept()
+        self.update_display()

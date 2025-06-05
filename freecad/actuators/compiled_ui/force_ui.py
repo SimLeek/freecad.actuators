@@ -8,6 +8,7 @@ except ImportError:
     from PySide.QtWidgets import QLineEdit
     from PySide.QtGui import QWheelEvent
     from PySide.QtCore import Qt
+import math
 
 class QForceEdit(QLineEdit):
     """A QLineEdit that parses force values and stores them internally in Newtons (N)."""
@@ -94,7 +95,5 @@ class QForceEdit(QLineEdit):
             self.internal_n += 1.0 * multiplier  # Scroll up: add 1 in display unit
         elif delta < 0:
             self.internal_n -= 1.0 * multiplier  # Scroll down: subtract 1 in display unit
-        self.blockSignals(True)
-        self.update_display()
-        self.blockSignals(False)
         event.accept()
+        self.update_display()

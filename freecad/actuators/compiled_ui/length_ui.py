@@ -7,6 +7,7 @@ except ImportError:
     from PySide.QtWidgets import QLineEdit, QApplication
     from PySide.QtGui import QWheelEvent, QDoubleValidator
     from PySide.QtCore import Qt
+import math
 
 class QLengthEdit(QLineEdit):
     UNIT_CONVERSIONS = {
@@ -88,10 +89,8 @@ class QLengthEdit(QLineEdit):
             self.internal_mm += 1.0 * multiplier  # Scroll up: add 1 in display unit
         elif delta < 0:
             self.internal_mm -= 1.0 * multiplier  # Scroll down: subtract 1 in display unit
-        self.blockSignals(True)
-        self.update_display()
-        self.blockSignals(False)
         event.accept()
+        self.update_display()
 
 if __name__ == "__main__":
     import sys
