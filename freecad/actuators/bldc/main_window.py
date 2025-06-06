@@ -8,6 +8,7 @@ from wire_drawing import draw_wires
 from stator_visualization_setup import connect_display_checkboxes, connect_display_and_parameters, update_visualization, update_visualization_with_cache
 from defaults import connect_defaults
 from freecad.actuators.compiled_ui.bldc_ui import Ui_BLDCDialog
+from slot_pole_grid import connect_slot_pole
 
 class BLDCWindow(QDialog):
     """A window for visualizing BLDC motor stator with interactive controls."""
@@ -32,6 +33,7 @@ class BLDCWindow(QDialog):
         connect_display_checkboxes(self)
         connect_display_and_parameters(self)
         connect_defaults(self)
+        connect_slot_pole(self)
 
         # Connect range changed signal
         self.ui.stator_plot_widget.sigRangeChanged.connect(lambda: update_visualization_with_cache(self))

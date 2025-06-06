@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bldc-designer-2itolwA.ui'
+## Form generated from reading UI file 'bldc-designer-2aSHFbg.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.16
 ##
@@ -102,6 +102,104 @@ class Ui_BLDCDialog(object):
         self.tab_2.setObjectName(u"tab_2")
         self.verticalLayout_2 = QVBoxLayout(self.tab_2)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.groupBox_8 = QGroupBox(self.tab_2)
+        self.groupBox_8.setObjectName(u"groupBox_8")
+        self.groupBox_8.setMaximumSize(QSize(16777215, 80))
+        self.gridLayout_8 = QGridLayout(self.groupBox_8)
+        self.gridLayout_8.setObjectName(u"gridLayout_8")
+        self.display_magnet_pitch_factor_radio_button = QRadioButton(self.groupBox_8)
+        self.slot_pole_button_group = QButtonGroup(BLDCDialog)
+        self.slot_pole_button_group.setObjectName(u"slot_pole_button_group")
+        self.slot_pole_button_group.addButton(self.display_magnet_pitch_factor_radio_button)
+        self.display_magnet_pitch_factor_radio_button.setObjectName(u"display_magnet_pitch_factor_radio_button")
+
+        self.gridLayout_8.addWidget(self.display_magnet_pitch_factor_radio_button, 1, 2, 1, 1)
+
+        self.display_chording_radio_button = QRadioButton(self.groupBox_8)
+        self.slot_pole_button_group.addButton(self.display_chording_radio_button)
+        self.display_chording_radio_button.setObjectName(u"display_chording_radio_button")
+
+        self.gridLayout_8.addWidget(self.display_chording_radio_button, 1, 1, 1, 1)
+
+        self.display_slot_pole_radio_button = QRadioButton(self.groupBox_8)
+        self.slot_pole_button_group.addButton(self.display_slot_pole_radio_button)
+        self.display_slot_pole_radio_button.setObjectName(u"display_slot_pole_radio_button")
+
+        self.gridLayout_8.addWidget(self.display_slot_pole_radio_button, 1, 4, 1, 1)
+
+        self.display_winding_distribution_radio_button = QRadioButton(self.groupBox_8)
+        self.slot_pole_button_group.addButton(self.display_winding_distribution_radio_button)
+        self.display_winding_distribution_radio_button.setObjectName(u"display_winding_distribution_radio_button")
+
+        self.gridLayout_8.addWidget(self.display_winding_distribution_radio_button, 1, 3, 1, 1)
+
+        self.display_coil_span_radio_button = QRadioButton(self.groupBox_8)
+        self.slot_pole_button_group.addButton(self.display_coil_span_radio_button)
+        self.display_coil_span_radio_button.setObjectName(u"display_coil_span_radio_button")
+
+        self.gridLayout_8.addWidget(self.display_coil_span_radio_button, 1, 0, 1, 1)
+
+        self.display_winding_factor_radio_button = QRadioButton(self.groupBox_8)
+        self.slot_pole_button_group.addButton(self.display_winding_factor_radio_button)
+        self.display_winding_factor_radio_button.setObjectName(u"display_winding_factor_radio_button")
+        self.display_winding_factor_radio_button.setChecked(True)
+
+        self.gridLayout_8.addWidget(self.display_winding_factor_radio_button, 0, 0, 1, 1)
+
+        self.display_freq_at_rpm_radio_button = QRadioButton(self.groupBox_8)
+        self.slot_pole_button_group.addButton(self.display_freq_at_rpm_radio_button)
+        self.display_freq_at_rpm_radio_button.setObjectName(u"display_freq_at_rpm_radio_button")
+
+        self.gridLayout_8.addWidget(self.display_freq_at_rpm_radio_button, 0, 1, 1, 1)
+
+        self.display_cogging_freq_radio_button = QRadioButton(self.groupBox_8)
+        self.slot_pole_button_group.addButton(self.display_cogging_freq_radio_button)
+        self.display_cogging_freq_radio_button.setObjectName(u"display_cogging_freq_radio_button")
+
+        self.gridLayout_8.addWidget(self.display_cogging_freq_radio_button, 0, 2, 1, 1)
+
+        self.display_winding_balance_radio_button = QRadioButton(self.groupBox_8)
+        self.slot_pole_button_group.addButton(self.display_winding_balance_radio_button)
+        self.display_winding_balance_radio_button.setObjectName(u"display_winding_balance_radio_button")
+
+        self.gridLayout_8.addWidget(self.display_winding_balance_radio_button, 0, 3, 1, 1)
+
+
+        self.verticalLayout_2.addWidget(self.groupBox_8)
+
+        self.groupBox_9 = QGroupBox(self.tab_2)
+        self.groupBox_9.setObjectName(u"groupBox_9")
+        self.groupBox_9.setMaximumSize(QSize(16777215, 60))
+        self.horizontalLayout_4 = QHBoxLayout(self.groupBox_9)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.remove_no_symmetry_checkbox = QCheckBox(self.groupBox_9)
+        self.remove_no_symmetry_checkbox.setObjectName(u"remove_no_symmetry_checkbox")
+
+        self.horizontalLayout_4.addWidget(self.remove_no_symmetry_checkbox)
+
+        self.remove_unbalanced_checkbox = QCheckBox(self.groupBox_9)
+        self.remove_unbalanced_checkbox.setObjectName(u"remove_unbalanced_checkbox")
+
+        self.horizontalLayout_4.addWidget(self.remove_unbalanced_checkbox)
+
+        self.remove_ns_is_nm_checkbox = QCheckBox(self.groupBox_9)
+        self.remove_ns_is_nm_checkbox.setObjectName(u"remove_ns_is_nm_checkbox")
+
+        self.horizontalLayout_4.addWidget(self.remove_ns_is_nm_checkbox)
+
+        self.remove_q_less_0_25_checkbox = QCheckBox(self.groupBox_9)
+        self.remove_q_less_0_25_checkbox.setObjectName(u"remove_q_less_0_25_checkbox")
+
+        self.horizontalLayout_4.addWidget(self.remove_q_less_0_25_checkbox)
+
+        self.remove_q_gt_0_5_checkbox = QCheckBox(self.groupBox_9)
+        self.remove_q_gt_0_5_checkbox.setObjectName(u"remove_q_gt_0_5_checkbox")
+
+        self.horizontalLayout_4.addWidget(self.remove_q_gt_0_5_checkbox)
+
+
+        self.verticalLayout_2.addWidget(self.groupBox_9)
+
         self.slot_pole_grid_widget = InfXYGridWidget(self.tab_2)
         self.slot_pole_grid_widget.setObjectName(u"slot_pole_grid_widget")
 
@@ -133,7 +231,7 @@ class Ui_BLDCDialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 362, 1151))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -126, 362, 1151))
         self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.groupBox_3 = QGroupBox(self.scrollAreaWidgetContents)
@@ -592,6 +690,22 @@ class Ui_BLDCDialog(object):
         self.display_outrunner_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Outrunner", None))
         self.display_height_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Height", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.stator_display_tab), QCoreApplication.translate("BLDCDialog", u"Stator", None))
+        self.groupBox_8.setTitle(QCoreApplication.translate("BLDCDialog", u"Display", None))
+        self.display_magnet_pitch_factor_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Pitch Factor", None))
+        self.display_chording_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"Chording", None))
+        self.display_slot_pole_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"slot/pole", None))
+        self.display_winding_distribution_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"winding distribution", None))
+        self.display_coil_span_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"Coil Span Factor", None))
+        self.display_winding_factor_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"Winding Factor", None))
+        self.display_freq_at_rpm_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"Freq@Motor RPM", None))
+        self.display_cogging_freq_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"CoggingFreq", None))
+        self.display_winding_balance_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"Winding Balance", None))
+        self.groupBox_9.setTitle(QCoreApplication.translate("BLDCDialog", u"Remove Invalid", None))
+        self.remove_no_symmetry_checkbox.setText(QCoreApplication.translate("BLDCDialog", u" No Symmetry (GCD=1)", None))
+        self.remove_unbalanced_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Unbalanced", None))
+        self.remove_ns_is_nm_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Ns=Nm", None))
+        self.remove_q_less_0_25_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Slot-Pole Ratio<0.25", None))
+        self.remove_q_gt_0_5_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Slot-Pole Ratio>0.5", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("BLDCDialog", u"Slot-Pole", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QCoreApplication.translate("BLDCDialog", u"Graphs", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("BLDCDialog", u"Default Settings", None))

@@ -23,7 +23,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="stator_display_tab">
       <attribute name="title">
@@ -102,7 +102,175 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QWidget" name="slot_pole_grid_widget" native="true"/>
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Display</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="1" column="2">
+           <widget class="QRadioButton" name="display_magnet_pitch_factor_radio_button">
+            <property name="text">
+             <string>Magnet Pitch Factor</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QRadioButton" name="display_chording_radio_button">
+            <property name="text">
+             <string>Chording</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QRadioButton" name="display_slot_pole_radio_button">
+            <property name="text">
+             <string>slot/pole</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QRadioButton" name="display_winding_distribution_radio_button">
+            <property name="text">
+             <string>winding distribution</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="display_coil_span_radio_button">
+            <property name="text">
+             <string>Coil Span Factor</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="display_winding_factor_radio_button">
+            <property name="text">
+             <string>Winding Factor</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QRadioButton" name="display_freq_at_rpm_radio_button">
+            <property name="text">
+             <string>Freq@Motor RPM</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QRadioButton" name="display_cogging_freq_radio_button">
+            <property name="text">
+             <string>CoggingFreq</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QRadioButton" name="display_LCM_radio_button">
+            <property name="text">
+             <string>Pole-Slot LCM</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QRadioButton" name="display_winding_balance_radio_button">
+            <property name="text">
+             <string>Winding Balance</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">slot_pole_button_group</string>
+            </attribute>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_9">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Remove Invalid</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QCheckBox" name="remove_no_symmetry_checkbox">
+            <property name="text">
+             <string> No Symmetry (GCD=1)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="remove_unbalanced_checkbox">
+            <property name="text">
+             <string>Unbalanced</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="remove_ns_is_nm_checkbox">
+            <property name="text">
+             <string>Ns=Nm</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="remove_q_less_0_25_checkbox">
+            <property name="text">
+             <string>Slot-Pole Ratio&lt;0.25</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="remove_q_gt_0_5_checkbox">
+            <property name="text">
+             <string>Slot-Pole Ratio&gt;0.5</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="InfXYGridWidget" name="slot_pole_grid_widget" native="true"/>
        </item>
       </layout>
      </widget>
@@ -140,7 +308,7 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>0</y>
+            <y>-126</y>
             <width>362</width>
             <height>1151</height>
            </rect>
@@ -627,7 +795,16 @@
    <header>pyqtgraph</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>InfXYGridWidget</class>
+   <extends>QWidget</extends>
+   <header>.inf_xy_grid</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="slot_pole_button_group"/>
+ </buttongroups>
 </ui>
