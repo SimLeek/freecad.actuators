@@ -44,7 +44,10 @@ def connect_slot_pole(bldc_window: BLDCWindow):
 
     bldc_window.ui.slot_pole_grid_widget.selection_changed_callback = bldc_window.slot_pole_validation.update_lineedits
     bldc_window.ui.num_slots_lineedit.textChanged.connect(bldc_window.slot_pole_validation.update_grid)
-    bldc_window.ui.num_magnets_lineedit.textChanged.connect(bldc_window.slot_pole_validation.update_grid)
+
+    bldc_window.ui.num_arc_magnets_lineedit.textChanged.connect(bldc_window.slot_pole_validation.update_grid)
+    bldc_window.ui.num_square_magnets_lineedit.textChanged.connect(bldc_window.slot_pole_validation.update_grid)
+    bldc_window.ui.magnet_tab_widget.currentChanged.connect(bldc_window.slot_pole_validation.update_grid)
 
 class SlotPoleValidation(object):
     def __init__(self, window :BLDCWindow):
@@ -66,12 +69,20 @@ class SlotPoleValidation(object):
             num_poles = self.col_header_callback(index.column() + self.window.ui.slot_pole_grid_widget.model.x_offset)
             num_slots = self.row_header_callback(index.row() + self.window.ui.slot_pole_grid_widget.model.y_offset)
 
-            self.window.ui.num_slots_lineedit.set_value(int(num_slots))
-            self.window.ui.num_magnets_lineedit.set_value(int(num_poles))
+            # todo: Needs to override locks, so let's use a button for this later.
+            #self.window.ui.num_slots_lineedit.set_value(int(num_slots))
+            #if self.window.ui.magnet_tab_widget.currentIndex() == 0:
+            #    self.window.ui.num_square_magnets_lineedit.set_value(int(num_poles))
+            #else:
+            #    self.window.ui.num_arc_magnets_lineedit.set_value(int(num_poles))
 
     def update_grid(self):
         num_slots = int(self.window.ui.num_slots_lineedit.get_value())
-        num_poles = int(self.window.ui.num_magnets_lineedit.get_value())
+
+        if self.window.ui.magnet_tab_widget.currentIndex()==0:
+            num_poles = int(self.window.ui.num_square_magnets_lineedit.get_value())
+        else:
+            num_poles = int(self.window.ui.num_arc_magnets_lineedit.get_value())
 
         x_pos = int(num_poles/2)
         y_pos = int(num_slots/3)

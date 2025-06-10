@@ -12,6 +12,8 @@ else:
     from typing import Any
     BLDCWindow = Any
 
+from fractions import Fraction
+
 def draw_axle(bldc_window: BLDCWindow, _):
     """Draw the central axle circle."""
     theta = np.linspace(0, 2 * np.pi, 60, endpoint=False)
@@ -22,32 +24,207 @@ def draw_axle(bldc_window: BLDCWindow, _):
     pen_width = 2
     bldc_window.ui.stator_plot_widget.plot(x, y, pen=pg.mkPen("#000000", width=pen_width))
 
+def get_magnet_inner_radius(bldc_window: BLDCWindow):
+    magnet_outer_radius = bldc_window.ui.radius_lineedit.get_mm_value() - bldc_window.ui.outrunner_thickness_lineedit.get_mm_value()
+    if bldc_window.ui.magnet_tab_widget.currentIndex()==0: # square magnet
+        magnet_thickness = bldc_window.ui.square_magnet_thickness_lineedit.get_mm_value()
+        magnet_width = bldc_window.ui.square_magnet_width_lineedit.get_mm_value()
+
+        if bldc_window.ui.square_magnet_rounded_corners.isChecked():
+            rad = bldc_window.ui.square_magnet_rounding_radius_lineedit.get_mm_value()
+            magnet_width -= 2*rad
+        dist_from_wall = magnet_outer_radius - magnet_outer_radius*np.sin(np.arccos(magnet_width/2/magnet_outer_radius))
+        magnet_inner_radius = magnet_outer_radius - magnet_thickness - dist_from_wall
+
+        #print(f"magnet_thickness({magnet_thickness}), magnet_width({magnet_width}), rad({rad}), dist_from_wall({dist_from_wall}), magnet_inner_radius({magnet_inner_radius})")
+    else:
+        magnet_thickness = bldc_window.ui.arc_magnet_thickness_lineedit.get_mm_value()
+
+        dist_from_wall = 0
+        magnet_inner_radius = magnet_outer_radius - magnet_thickness
+    return magnet_inner_radius, dist_from_wall
+
 def draw_magnets(bldc_window: BLDCWindow, _):
     """Draw magnets on the outrunner with thickness toward the stator."""
     magnet_outer_radius = bldc_window.ui.radius_lineedit.get_mm_value() - bldc_window.ui.outrunner_thickness_lineedit.get_mm_value()
-    magnet_inner_radius = magnet_outer_radius - bldc_window.ui.magnet_thickness_lineedit.get_mm_value()
-    num_magnets = bldc_window.ui.num_magnets_lineedit.get_value()
-    magnet_arc = 2 * np.pi / num_magnets
-    all_x, all_y = [], []
-    for i in range(int(num_magnets)):
-        magnet_angle = i * (2 * np.pi / num_magnets)
-        start_angle = magnet_angle - magnet_arc / 3
-        end_angle = magnet_angle + magnet_arc / 3
-        theta_magnet = np.linspace(start_angle, end_angle, 20, endpoint=False)
-        x_inner = magnet_inner_radius * np.cos(theta_magnet)
-        y_inner = magnet_inner_radius * np.sin(theta_magnet)
-        x_outer = magnet_outer_radius * np.cos(theta_magnet[::-1])
-        y_outer = magnet_outer_radius * np.sin(theta_magnet[::-1])
-        x_magnet = np.concatenate([x_inner, x_outer])
-        y_magnet = np.concatenate([y_inner, y_outer])
-        x_magnet = np.append(x_magnet, x_magnet[0])
-        y_magnet = np.append(y_magnet, y_magnet[0])
-        all_x.extend(x_magnet)
-        all_y.extend(y_magnet)
-        all_x.append(np.nan)
-        all_y.append(np.nan)
-    pen_width = 2
-    bldc_window.ui.stator_plot_widget.plot(all_x, all_y, pen=pg.mkPen("#C0C0C0", width=pen_width))
+
+
+    if bldc_window.ui.magnet_tab_widget.currentIndex()==0: # square magnet
+        # todo: break into own section dependent on num magnets and thickness
+        num_magnets = bldc_window.ui.num_square_magnets_lineedit.get_value()
+        magnet_thickness = bldc_window.ui.square_magnet_thickness_lineedit.get_mm_value()
+
+        if bldc_window.ui.square_magnet_rounded_corners.isChecked():
+            rad = bldc_window.ui.square_magnet_rounding_radius_lineedit.get_mm_value()
+        else:
+            rad = 0
+
+        magnet_inner_radius, dist_from_wall = get_magnet_inner_radius(bldc_window)
+        bldc_window.ui.square_magnet_dist_from_circle_lineedit.set_mm_value(dist_from_wall)
+        theta = (num_magnets-2)*np.pi/(2*num_magnets)
+        no_thickness_width = 2*magnet_outer_radius*np.cos(theta)
+        h = magnet_outer_radius*np.sin(theta) - (magnet_thickness-rad)
+        max_w = 2*h*np.cos(theta)
+        #print(f"h({h}), max_w({max_w}), theta({theta})")
+        bldc_window.ui.square_magnet_width_slider.setFractionalSingleStep(max_w/1000)
+        bldc_window.ui.square_magnet_width_slider.setFractionalMinimum(0)
+        bldc_window.ui.square_magnet_width_slider.setFractionalMaximum(max_w)
+        bldc_window.ui.square_magnet_min_max_display.setText(f"[0mm, {max_w}mm]")
+
+        magnet_width = bldc_window.ui.square_magnet_width_lineedit.get_mm_value()
+        dist_from_each_other = max_w-magnet_width
+        bldc_window.ui.square_magnet_dist_between_lineedit.set_mm_value(dist_from_each_other)
+
+        if rad*2>magnet_width:
+            bldc_window.ui.square_magnet_rounding_radius_lineedit.setStyleSheet("background-color: red;")
+            bldc_window.ui.square_magnet_rounding_radius_lineedit.setToolTip("rounding radius cannot be greater than magnet width")
+        elif rad*2>magnet_thickness:
+            bldc_window.ui.square_magnet_rounding_radius_lineedit.setStyleSheet("background-color: red;")
+            bldc_window.ui.square_magnet_rounding_radius_lineedit.setToolTip("rounding radius cannot be greater than magnet height")
+        else:
+            bldc_window.ui.square_magnet_rounding_radius_lineedit.setStyleSheet("")
+            bldc_window.ui.square_magnet_rounding_radius_lineedit.setToolTip("")
+        # todo end
+
+        non_round_width = magnet_width - rad*2
+        non_round_height = magnet_thickness - rad*2
+
+        all_x, all_y = [], []
+        for i in range(int(num_magnets)):
+            q = magnet_angle = i * (2 * np.pi / num_magnets)
+            #start_contact_angle = np.arctan2(-non_round_width/2, magnet_outer_radius-dist_from_wall)
+            #end_contact_angle = np.arctan2(-non_round_width/2, magnet_outer_radius-dist_from_wall)
+
+            r = magnet_outer_radius - dist_from_wall
+
+            if rad!=0:
+                quarter_center_x = (r-rad) * np.cos(q) - (non_round_width / 2) * np.sin(q)
+                quarter_center_y = (r-rad) * np.sin(q) + (non_round_width / 2) * np.cos(q)
+
+                theta_quarter_start = np.linspace(q + 2*np.pi +  np.pi / (2 * 20), q + 3*np.pi/2, 10, endpoint=False)
+                x_quarter = quarter_center_x - (rad * np.sin(theta_quarter_start))
+                y_quarter = quarter_center_y + (rad * np.cos(theta_quarter_start))
+                all_x.extend(x_quarter)
+                all_y.extend(y_quarter)
+
+            x_left = r * np.cos(q) - non_round_width / 2 * np.sin(q)
+            y_left = r * np.sin(q) + non_round_width / 2 * np.cos(q)
+            x_right = r * np.cos(q) + non_round_width / 2 * np.sin(q)
+            y_right = r * np.sin(q) - non_round_width / 2 * np.cos(q)
+
+            all_x.extend([x_left, x_right])
+            all_y.extend([y_left, y_right])
+
+            if rad!=0:
+                quarter_center_x = (r-rad) * np.cos(q) + (non_round_width / 2) * np.sin(q)
+                quarter_center_y = (r-rad) * np.sin(q) - (non_round_width / 2) * np.cos(q)
+
+                theta_quarter_start = np.linspace(q -np.pi/2 + np.pi / (2 * 20), q - np.pi, 10, endpoint=False)
+                x_quarter = quarter_center_x - (rad * np.sin(theta_quarter_start))
+                y_quarter = quarter_center_y + (rad * np.cos(theta_quarter_start))
+                all_x.extend(x_quarter)
+                all_y.extend(y_quarter)
+
+            x_left = (r-rad) * np.cos(q) + magnet_width / 2 * np.sin(q)
+            y_left = (r-rad) * np.sin(q) - magnet_width / 2 * np.cos(q)
+            x_right = (r - rad-non_round_height) * np.cos(q) + magnet_width / 2 * np.sin(q)
+            y_right = (r - rad-non_round_height) * np.sin(q) - magnet_width / 2 * np.cos(q)
+
+            if rad!=0:
+                all_x.extend([x_left, x_right])
+                all_y.extend([y_left, y_right])
+            else:
+                all_x.extend([x_right])
+                all_y.extend([y_right])
+
+            if rad!=0:
+                quarter_center_x = (r-rad-non_round_height) * np.cos(q) + (non_round_width / 2) * np.sin(q)
+                quarter_center_y = (r-rad-non_round_height) * np.sin(q) - (non_round_width / 2) * np.cos(q)
+
+                theta_quarter_start = np.linspace(q + np.pi +  np.pi / (2 * 20), q + np.pi/2, 10, endpoint=False)
+                x_quarter = quarter_center_x - (rad * np.sin(theta_quarter_start))
+                y_quarter = quarter_center_y + (rad * np.cos(theta_quarter_start))
+                all_x.extend(x_quarter)
+                all_y.extend(y_quarter)
+
+            x_left = (r-magnet_thickness) * np.cos(q) + non_round_width / 2 * np.sin(q)
+            y_left = (r-magnet_thickness) * np.sin(q) - non_round_width / 2 * np.cos(q)
+            x_right = (r-magnet_thickness) * np.cos(q) - non_round_width / 2 * np.sin(q)
+            y_right = (r-magnet_thickness) * np.sin(q) + non_round_width / 2 * np.cos(q)
+
+            if rad != 0:
+                all_x.extend([x_left, x_right])
+                all_y.extend([y_left, y_right])
+            else:
+                all_x.extend([x_right])
+                all_y.extend([y_right])
+
+            if rad!=0:
+                quarter_center_x = (r-rad-non_round_height) * np.cos(q) - (non_round_width / 2) * np.sin(q)
+                quarter_center_y = (r-rad-non_round_height) * np.sin(q) + (non_round_width / 2) * np.cos(q)
+
+                theta_quarter_start = np.linspace(q + np.pi/2 + np.pi / (2 * 20), q, 10, endpoint=False)
+                x_quarter = quarter_center_x - (rad * np.sin(theta_quarter_start))
+                y_quarter = quarter_center_y + (rad * np.cos(theta_quarter_start))
+                all_x.extend(x_quarter)
+                all_y.extend(y_quarter)
+
+            x_left = (r - rad - non_round_height) * np.cos(q) - magnet_width / 2 * np.sin(q)
+            y_left = (r - rad - non_round_height) * np.sin(q) + magnet_width / 2 * np.cos(q)
+            x_right = (r - rad) * np.cos(q) - magnet_width / 2 * np.sin(q)
+            y_right = (r - rad) * np.sin(q) + magnet_width / 2 * np.cos(q)
+
+            if rad != 0:
+                all_x.extend([x_left, x_right])
+                all_y.extend([y_left, y_right])
+            else:
+                all_x.extend([x_right])
+                all_y.extend([y_right])
+
+            all_x.append(np.nan)
+            all_y.append(np.nan)
+
+            pen_width = 2
+            bldc_window.ui.stator_plot_widget.plot(all_x, all_y, pen=pg.mkPen("#C0C0C0", width=pen_width))
+
+    else:
+        # todo: break into own section dependent on num magnets
+        num_magnets = bldc_window.ui.num_arc_magnets_lineedit.get_value()
+        #magnet_thickness = bldc_window.ui.arc_magnet_thickness_lineedit.get_mm_value()
+        max_arc_width = 360/num_magnets
+        magnet_inner_radius, _ = get_magnet_inner_radius(bldc_window)
+
+        bldc_window.ui.arc_magnet_width_slider.setFractionalSingleStep(max_arc_width/1000)
+        bldc_window.ui.arc_magnet_width_slider.setFractionalMinimum(0)
+        bldc_window.ui.arc_magnet_width_slider.setFractionalMaximum(max_arc_width)
+        bldc_window.ui.arc_magnet_min_max_display.setText(f"[0°, {max_arc_width}°]")
+
+        arc_width = bldc_window.ui.arc_magnet_width_lineedit.get_degrees_value()
+        dist_from_each_other = 2*magnet_inner_radius*np.sin(np.deg2rad(max_arc_width - arc_width)/2)
+        bldc_window.ui.arc_magnet_dist_between_lineedit.set_mm_value(dist_from_each_other)
+        # todo end
+
+        magnet_arc = 2 * np.pi / num_magnets
+        all_x, all_y = [], []
+        for i in range(int(num_magnets)):
+            magnet_angle = i * (2 * np.pi / num_magnets)
+            start_angle = magnet_angle - np.deg2rad(arc_width)/2
+            end_angle = magnet_angle + np.deg2rad(arc_width)/2
+            theta_magnet = np.linspace(start_angle, end_angle, 20, endpoint=False)
+            x_inner = magnet_inner_radius * np.cos(theta_magnet)
+            y_inner = magnet_inner_radius * np.sin(theta_magnet)
+            x_outer = magnet_outer_radius * np.cos(theta_magnet[::-1])
+            y_outer = magnet_outer_radius * np.sin(theta_magnet[::-1])
+            x_magnet = np.concatenate([x_inner, x_outer])
+            y_magnet = np.concatenate([y_inner, y_outer])
+            x_magnet = np.append(x_magnet, x_magnet[0])
+            y_magnet = np.append(y_magnet, y_magnet[0])
+            all_x.extend(x_magnet)
+            all_y.extend(y_magnet)
+            all_x.append(np.nan)
+            all_y.append(np.nan)
+        pen_width = 2
+        bldc_window.ui.stator_plot_widget.plot(all_x, all_y, pen=pg.mkPen("#C0C0C0", width=pen_width))
 
 def draw_outrunner(bldc_window: BLDCWindow, _):
     """Draw outrunner circles with editable thickness."""
@@ -73,11 +250,11 @@ def draw_stator_core(bldc_window: BLDCWindow, pixel_per_unit):
     hammerhead_width = bldc_window.ui.hammerhead_width_lineedit.get_mm_value()
     hammerhead_length = bldc_window.ui.hammerhead_length_lineedit.get_mm_value()
     r_inner = bldc_window.ui.stator_inner_radius_lineedit.get_mm_value()
+    mag_inner, _ = get_magnet_inner_radius(bldc_window)
+
     r_outer = (
-        bldc_window.ui.radius_lineedit.get_mm_value()
-        - bldc_window.ui.outrunner_thickness_lineedit.get_mm_value()
+        mag_inner
         - bldc_window.ui.air_gap_lineedit.get_mm_value()
-        - bldc_window.ui.magnet_thickness_lineedit.get_mm_value()
         - hammerhead_length
     )
     cnc_milling = bldc_window.ui.cnc_milling_checkbox.isChecked()
@@ -122,12 +299,12 @@ def _calculate_slot_points(
 
     if cnc_milling:
         quarter_center_x = (
-            r_inner * np.cos(q)
+                               (r_inner+drill_bit_radius) * np.cos(q)
             + drill_bit_radius * np.sin(q)
             + slot_width_half * np.sin(q)
         )
         quarter_center_y = (
-            r_inner * np.sin(q)
+            (r_inner+drill_bit_radius) * np.sin(q)
             - drill_bit_radius * np.cos(q)
             - slot_width_half * np.cos(q)
         )
@@ -137,16 +314,21 @@ def _calculate_slot_points(
         x_slot.extend(x_quarter_start)
         y_slot.extend(y_quarter_start)
 
-    t_vals = np.linspace(r_inner, r_outer, 2)
+    if not cnc_milling:
+        drill_bit_radius = 0
+
+    t_vals = np.linspace(r_inner+drill_bit_radius, r_outer - drill_bit_radius, 2)
     x_left = t_vals * np.cos(q) - slot_width_half * np.sin(q)
     y_left = t_vals * np.sin(q) + slot_width_half * np.cos(q)
     x_right = t_vals * np.cos(q) + slot_width_half * np.sin(q)
     y_right = t_vals * np.sin(q) - slot_width_half * np.cos(q)
 
     hammer_theta = np.arctan2(hammerhead_width + slot_width_half, r_outer + hammerhead_length)
-    hammer_length_adjusted = hammerhead_length - (hammerhead_width + slot_width_half) * np.tan(
-        hammer_theta
-    )
+    # div 2 would make sense, but close enough
+    sub_len = (hammerhead_width + slot_width_half)* np.tan( hammer_theta )/1.9
+    hammer_length_adjusted = hammerhead_length - sub_len
+    #if hammer_length_adjusted<0:
+    #    print("f")
     tip_x_left = r_outer * np.cos(q) - (hammerhead_width + slot_width_half) * np.sin(q)
     tip_y_left = r_outer * np.sin(q) + (hammerhead_width + slot_width_half) * np.cos(q)
     end_x_left = tip_x_left + hammer_length_adjusted * np.cos(q)
@@ -159,12 +341,12 @@ def _calculate_slot_points(
     if cnc_milling:
         half_center_x_left = x_left[-1] + drill_bit_radius * np.cos(q + np.pi / 2)
         half_center_y_left = y_left[-1] + drill_bit_radius * np.sin(q + np.pi / 2)
-        theta_half_left = np.linspace(q + 2 * np.pi - np.pi / (2 * 30), q + np.pi, 15, endpoint=False)
+        theta_half_left = np.linspace(q + 3*np.pi/2 - np.pi / (2 * 30), q + np.pi, 15, endpoint=False)
         x_half_left = half_center_x_left - (drill_bit_radius * np.sin(theta_half_left))
         y_half_left = half_center_y_left + (drill_bit_radius * np.cos(theta_half_left))
         half_center_x_right = x_right[-1] - drill_bit_radius * np.cos(q + np.pi / 2)
         half_center_y_right = y_right[-1] - drill_bit_radius * np.sin(q + np.pi / 2)
-        theta_half_right = np.linspace(q + 2 * np.pi - np.pi / (2 * 30), q + np.pi, 15, endpoint=False)
+        theta_half_right = np.linspace(q + 2 * np.pi - np.pi / (2 * 30), q + 3*np.pi/2, 15, endpoint=False)
         x_half_right = half_center_x_right - (drill_bit_radius * np.sin(theta_half_right))
         y_half_right = half_center_y_right + (drill_bit_radius * np.cos(theta_half_right))
 
@@ -177,19 +359,19 @@ def _calculate_slot_points(
     arc_start = np.arctan2(end_y_right, end_x_right)
     if arc_end < arc_start:
         arc_end += 2 * np.pi
-    arc_theta = np.linspace(arc_end, arc_start, 20, endpoint=False)
+    arc_theta = np.linspace(arc_end, arc_start, 20, endpoint=True)
     arc_radius = r_outer + hammerhead_length
     x_arc = arc_radius * np.cos(arc_theta)
     y_arc = arc_radius * np.sin(arc_theta)
 
     if cnc_milling:
         quarter_center_x = (
-            r_inner * np.cos(q)
+            (r_inner+drill_bit_radius) * np.cos(q)
             - drill_bit_radius * np.sin(q)
             - slot_width_half * np.sin(q)
         )
         quarter_center_y = (
-            r_inner * np.sin(q)
+            (r_inner+drill_bit_radius) * np.sin(q)
             + drill_bit_radius * np.cos(q)
             + slot_width_half * np.cos(q)
         )
@@ -201,12 +383,12 @@ def _calculate_slot_points(
         arc_start = np.arctan2(y_quarter_end[-1], x_quarter_end[-1])
         q_next = np.deg2rad((slot_idx + 1) * (360 / num_slots))
         quarter_center_x = (
-            r_inner * np.cos(q_next)
+            (r_inner+drill_bit_radius) * np.cos(q_next)
             + drill_bit_radius * np.sin(q_next)
             + slot_width_half * np.sin(q_next)
         )
         quarter_center_y = (
-            r_inner * np.sin(q_next)
+            (r_inner+drill_bit_radius) * np.sin(q_next)
             - drill_bit_radius * np.cos(q_next)
             - slot_width_half * np.cos(q_next)
         )

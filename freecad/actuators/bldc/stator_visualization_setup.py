@@ -10,6 +10,22 @@ else:
     from typing import Any
     BLDCWindow = Any
 
+def square_magnet_width_lineedit_to_slider(bldc_window: BLDCWindow):
+    value = bldc_window.ui.square_magnet_width_lineedit.get_mm_value()
+    bldc_window.ui.square_magnet_width_slider.setFractionalValue(value)
+
+def square_magnet_width_slider_to_lineedit(bldc_window: BLDCWindow):
+    value = bldc_window.ui.square_magnet_width_slider.getFractionalValue()
+    bldc_window.ui.square_magnet_width_lineedit.set_mm_value(float(value))
+
+def arc_magnet_width_lineedit_to_slider(bldc_window: BLDCWindow):
+    value = bldc_window.ui.arc_magnet_width_lineedit.get_degrees_value()
+    bldc_window.ui.arc_magnet_width_slider.setFractionalValue(value)
+
+def arc_magnet_width_slider_to_lineedit(bldc_window: BLDCWindow):
+    value = bldc_window.ui.arc_magnet_width_slider.getFractionalValue()
+    bldc_window.ui.arc_magnet_width_lineedit.set_degrees_value(float(value))
+
 def connect_display_checkboxes(bldc_window: BLDCWindow):
     """Create horizontal Display Options group at the top."""
     bldc_window.ui.display_stator_core_checkbox.setChecked(True)
@@ -42,7 +58,6 @@ def connect_display_and_parameters(bldc_window: BLDCWindow):
     # General Parameters Group
     bldc_window.ui.radius_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
     bldc_window.ui.num_slots_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
-    bldc_window.ui.num_magnets_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
     bldc_window.ui.air_gap_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
     bldc_window.ui.axle_radius_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
 
@@ -52,9 +67,23 @@ def connect_display_and_parameters(bldc_window: BLDCWindow):
     bldc_window.ui.hammerhead_length_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
     bldc_window.ui.stator_inner_radius_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
 
-    # Magnet and Outrunner Group
-    bldc_window.ui.magnet_thickness_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
+    # Outrunner Group
     bldc_window.ui.outrunner_thickness_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
+
+    # Magnet Group
+    bldc_window.ui.magnet_tab_widget.currentChanged.connect(lambda: update_visualization(bldc_window))
+    bldc_window.ui.num_square_magnets_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
+    bldc_window.ui.square_magnet_width_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
+    bldc_window.ui.square_magnet_rounded_corners.stateChanged.connect(lambda: update_visualization(bldc_window))
+    bldc_window.ui.square_magnet_rounding_radius_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
+    bldc_window.ui.num_arc_magnets_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
+    bldc_window.ui.arc_magnet_thickness_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
+    bldc_window.ui.arc_magnet_width_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
+
+    bldc_window.ui.square_magnet_width_lineedit.textChanged.connect(lambda: square_magnet_width_lineedit_to_slider(bldc_window))
+    bldc_window.ui.square_magnet_width_slider.valueChanged.connect(lambda: square_magnet_width_slider_to_lineedit(bldc_window))
+    bldc_window.ui.arc_magnet_width_lineedit.textChanged.connect(lambda: arc_magnet_width_lineedit_to_slider(bldc_window))
+    bldc_window.ui.arc_magnet_width_slider.valueChanged.connect(lambda: arc_magnet_width_slider_to_lineedit(bldc_window))
 
     # Wire Group
     bldc_window.ui.wire_diameter_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
@@ -92,12 +121,12 @@ def update_visualization(bldc_window: BLDCWindow):
         bldc_window.draw_axle_callback(bldc_window, pixel_per_unit)
     if bldc_window.ui.display_stator_core_checkbox.isChecked():
         bldc_window.draw_stator_core_callback(bldc_window, pixel_per_unit)
-    if bldc_window.ui.display_wires_checkbox.isChecked():
-        bldc_window.draw_wires_callback(bldc_window, pixel_per_unit)
     if bldc_window.ui.display_magnets_checkbox.isChecked():
         bldc_window.draw_magnets_callback(bldc_window, pixel_per_unit)
     if bldc_window.ui.display_outrunner_checkbox.isChecked():
         bldc_window.draw_outrunner_callback(bldc_window, pixel_per_unit)
+    if bldc_window.ui.display_wires_checkbox.isChecked():
+        bldc_window.draw_wires_callback(bldc_window, pixel_per_unit)
 
 def update_visualization_with_cache(bldc_window):
     """Update visualization using cached turns per layer."""

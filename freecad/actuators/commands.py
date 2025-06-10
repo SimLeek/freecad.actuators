@@ -1,3 +1,3 @@
-from .planetary.create_planetary_command import CreatePlanetary
-from .create_axle_command import CreateAxleConnector
-from .bearing.makelThrustBearing import CreateAxialThrustBearingCommand
+from freecad.actuators.planetary.create_planetary_command import CreatePlanetary
+from freecad.actuators.create_axle_command import CreateAxleConnector
+from freecad.actuators.bearing.makelThrustBearing import CreateAxialThrustBearingCommand

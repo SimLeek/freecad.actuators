@@ -197,16 +197,6 @@
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="QRadioButton" name="display_LCM_radio_button">
-            <property name="text">
-             <string>Pole-Slot LCM</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">slot_pole_button_group</string>
-            </attribute>
-           </widget>
-          </item>
-          <item row="0" column="4">
            <widget class="QRadioButton" name="display_winding_balance_radio_button">
             <property name="text">
              <string>Winding Balance</string>
@@ -308,9 +298,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-126</y>
+            <y>-484</y>
             <width>362</width>
-            <height>1151</height>
+            <height>1378</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -465,70 +455,31 @@
               <string>Physical Properties</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_3">
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_8">
-                <property name="text">
-                 <string>Radius</string>
-                </property>
-               </widget>
+              <item row="3" column="2">
+               <widget class="LockUnlockButton" name="axle_radius_lock"/>
               </item>
-              <item row="0" column="1">
-               <widget class="QLengthEdit" name="radius_lineedit"/>
-              </item>
-              <item row="0" column="2">
-               <widget class="LockUnlockButton" name="radius_lock"/>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_9">
-                <property name="text">
-                 <string>Num Slots</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QEvalEdit" name="num_slots_lineedit"/>
-              </item>
-              <item row="1" column="2">
-               <widget class="LockUnlockButton" name="num_slots_lock"/>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_10">
-                <property name="text">
-                 <string>Num Magnets</string>
-                </property>
-               </widget>
+              <item row="3" column="1">
+               <widget class="QLengthEdit" name="axle_radius_lineedit"/>
               </item>
               <item row="2" column="1">
-               <widget class="QEvalEdit" name="num_magnets_lineedit"/>
+               <widget class="QLengthEdit" name="air_gap_lineedit"/>
               </item>
-              <item row="2" column="2">
-               <widget class="LockUnlockButton" name="num_magnets_lock"/>
-              </item>
-              <item row="3" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="label_11">
                 <property name="text">
                  <string>Air Gap</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
-               <widget class="QLengthEdit" name="air_gap_lineedit"/>
-              </item>
-              <item row="3" column="2">
-               <widget class="LockUnlockButton" name="air_gap_lock"/>
-              </item>
-              <item row="4" column="0">
+              <item row="3" column="0">
                <widget class="QLabel" name="label_12">
                 <property name="text">
                  <string>Axle Radius</string>
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
-               <widget class="QLengthEdit" name="axle_radius_lineedit"/>
-              </item>
-              <item row="4" column="2">
-               <widget class="LockUnlockButton" name="axle_radius_lock"/>
+              <item row="2" column="2">
+               <widget class="LockUnlockButton" name="air_gap_lock"/>
               </item>
              </layout>
             </widget>
@@ -539,57 +490,70 @@
               <string>Stator</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
-              <item row="8" column="4">
+              <item row="9" column="4">
                <widget class="LockUnlockButton" name="stator_inner_radius_lock"/>
               </item>
-              <item row="8" column="0">
+              <item row="9" column="0">
                <widget class="QLabel" name="label_16">
                 <property name="text">
                  <string>Stator Inner Radius</string>
                 </property>
                </widget>
               </item>
-              <item row="8" column="2">
+              <item row="9" column="2">
                <widget class="QLengthEdit" name="stator_inner_radius_lineedit"/>
               </item>
-              <item row="0" column="0" colspan="2">
-               <widget class="QLabel" name="label_13">
-                <property name="text">
-                 <string>Slot Width</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="4">
-               <widget class="LockUnlockButton" name="hammerhead_length_lock"/>
-              </item>
-              <item row="7" column="2">
-               <widget class="QLengthEdit" name="hammerhead_length_lineedit"/>
-              </item>
-              <item row="0" column="2" colspan="2">
-               <widget class="QLengthEdit" name="slot_width_lineedit"/>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="label_15">
-                <property name="text">
-                 <string>Hammerhead Length</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
+              <item row="2" column="2">
                <widget class="QLengthEdit" name="hammerhead_width_lineedit"/>
               </item>
-              <item row="1" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="label_14">
                 <property name="text">
                  <string>Hammerhead Width</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="4">
-               <widget class="LockUnlockButton" name="slot_width_lock"/>
+              <item row="1" column="0" colspan="2">
+               <widget class="QLabel" name="label_13">
+                <property name="text">
+                 <string>Slot Width</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="4">
+               <widget class="LockUnlockButton" name="hammerhead_length_lock"/>
+              </item>
+              <item row="8" column="2">
+               <widget class="QLengthEdit" name="hammerhead_length_lineedit"/>
+              </item>
+              <item row="1" column="2" colspan="2">
+               <widget class="QLengthEdit" name="slot_width_lineedit"/>
+              </item>
+              <item row="2" column="4">
+               <widget class="LockUnlockButton" name="hammerhead_width_lock"/>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="label_15">
+                <property name="text">
+                 <string>Hammerhead Length</string>
+                </property>
+               </widget>
               </item>
               <item row="1" column="4">
-               <widget class="LockUnlockButton" name="hammerhead_width_lock"/>
+               <widget class="LockUnlockButton" name="slot_width_lock"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QEvalEdit" name="num_slots_lineedit"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string>Num Slots</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="LockUnlockButton" name="num_slots_lock"/>
               </item>
              </layout>
             </widget>
@@ -597,22 +561,9 @@
            <item>
             <widget class="QGroupBox" name="groupBox_5">
              <property name="title">
-              <string>Magnet and Outrunner</string>
+              <string>Outrunner</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_5">
-              <item row="0" column="2">
-               <widget class="LockUnlockButton" name="magnet_thickness_lock"/>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLengthEdit" name="magnet_thickness_lineedit"/>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_17">
-                <property name="text">
-                 <string>Magnet Thickness</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="0">
                <widget class="QLabel" name="label_18">
                 <property name="text">
@@ -620,13 +571,229 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="2">
-               <widget class="LockUnlockButton" name="outrunner_thickness_lock"/>
-              </item>
               <item row="1" column="1">
                <widget class="QLengthEdit" name="outrunner_thickness_lineedit"/>
               </item>
+              <item row="1" column="2">
+               <widget class="LockUnlockButton" name="outrunner_thickness_lock"/>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLengthEdit" name="radius_lineedit"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Radius</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="LockUnlockButton" name="radius_lock"/>
+              </item>
              </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTabWidget" name="magnet_tab_widget">
+             <property name="currentIndex">
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="tab">
+              <attribute name="title">
+               <string>Square Magnet</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_9">
+               <item row="7" column="0">
+                <widget class="QLabel" name="label_32">
+                 <property name="text">
+                  <string>Dist Between</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="label_29">
+                 <property name="text">
+                  <string>Rounding Radius</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_28">
+                 <property name="text">
+                  <string>[min, max]</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_24">
+                 <property name="text">
+                  <string>Num Magnets</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QEvalEdit" name="num_square_magnets_lineedit"/>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_17">
+                 <property name="text">
+                  <string>Magnet Thickness</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QCheckBox" name="square_magnet_rounded_corners">
+                 <property name="text">
+                  <string>Rounded Corners</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLengthEdit" name="square_magnet_width_lineedit"/>
+               </item>
+               <item row="6" column="1">
+                <widget class="QLengthEdit" name="square_magnet_rounding_radius_lineedit"/>
+               </item>
+               <item row="3" column="2">
+                <widget class="LockUnlockButton" name="square_magnet_width_lock"/>
+               </item>
+               <item row="4" column="1">
+                <widget class="FractionalSlider" name="square_magnet_width_slider">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
+                <widget class="QLengthEdit" name="square_magnet_dist_between_lineedit">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="LockUnlockButton" name="num_square_magnets_lock"/>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLengthEdit" name="square_magnet_thickness_lineedit"/>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_27">
+                 <property name="text">
+                  <string>Magnet Width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="LockUnlockButton" name="square_magnet_thickness_lock"/>
+               </item>
+               <item row="6" column="2">
+                <widget class="LockUnlockButton" name="square_magnet_rounding_radius_lock"/>
+               </item>
+               <item row="8" column="1">
+                <widget class="QLengthEdit" name="square_magnet_dist_from_circle_lineedit">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="0">
+                <widget class="QLabel" name="label_33">
+                 <property name="text">
+                  <string>Dist From Circle</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_6">
+              <attribute name="title">
+               <string>Arc Magnet</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_10">
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_30">
+                 <property name="text">
+                  <string>Magnet Arc Width</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_26">
+                 <property name="text">
+                  <string>Magnet Thickness</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="LockUnlockButton" name="num_arc_magnets_lock"/>
+               </item>
+               <item row="3" column="1">
+                <widget class="FractionalSlider" name="arc_magnet_width_slider">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLengthEdit" name="arc_magnet_thickness_lineedit"/>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_35">
+                 <property name="text">
+                  <string>Dist From Circle</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_31">
+                 <property name="text">
+                  <string>[min, max]</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_25">
+                 <property name="text">
+                  <string>Num Magnets</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QEvalEdit" name="num_arc_magnets_lineedit"/>
+               </item>
+               <item row="1" column="2">
+                <widget class="LockUnlockButton" name="arc_magnet_thickness_lock"/>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLengthEdit" name="arc_magnet_width_lineedit"/>
+               </item>
+               <item row="2" column="2">
+                <widget class="LockUnlockButton" name="arc_magnet_width_lock"/>
+               </item>
+               <item row="5" column="1">
+                <widget class="QLengthEdit" name="arc_magnet_dist_from_circle_lineedit">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_34">
+                 <property name="text">
+                  <string>Dist Between</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QLengthEdit" name="arc_magnet_dist_between_lineedit">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </widget>
            </item>
            <item>
@@ -773,6 +940,11 @@
    <class>QEvalEdit</class>
    <extends>QLineEdit</extends>
    <header>.eval_ui</header>
+  </customwidget>
+  <customwidget>
+   <class>FractionalSlider</class>
+   <extends>QSlider</extends>
+   <header>.fractional_slider</header>
   </customwidget>
   <customwidget>
    <class>QRotationalVelocityEdit</class>

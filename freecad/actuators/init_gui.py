@@ -85,7 +85,7 @@ class ActuatorWorkbench(gui.Workbench):
         # gui.addLanguagePath(os.path.join(os.path.dirname(__file__), "translations"))
         # gui.updateLocale()
 
-        from .commands import (
+        from freecad.actuators.commands import (
             #CreateMotor,
             CreatePlanetary,
             CreateAxleConnector,

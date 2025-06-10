@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bldc-designer-2aSHFbg.ui'
+## Form generated from reading UI file 'bldc-designer-2QUpocW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.16
 ##
@@ -21,7 +21,9 @@ from .lock_button_ui import LockUnlockButton
 from .torque_ui import QTorqueEdit
 from .length_ui import QLengthEdit
 from .fraction_ui import QFractionEdit
+from .angle_ui import QAngleEdit
 from .eval_ui import QEvalEdit
+from .fractional_slider import FractionalSlider
 from .rotational_velocity_ui import QRotationalVelocityEdit
 from .temperature_ui import QTemperatureEdit
 from .voltage_ui import QVoltageEdit
@@ -231,7 +233,7 @@ class Ui_BLDCDialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -126, 362, 1151))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -484, 362, 1378))
         self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.groupBox_3 = QGroupBox(self.scrollAreaWidgetContents)
@@ -372,80 +374,35 @@ class Ui_BLDCDialog(object):
         self.groupBox_2.setObjectName(u"groupBox_2")
         self.gridLayout_3 = QGridLayout(self.groupBox_2)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.label_8 = QLabel(self.groupBox_2)
-        self.label_8.setObjectName(u"label_8")
+        self.axle_radius_lock = LockUnlockButton(self.groupBox_2)
+        self.axle_radius_lock.setObjectName(u"axle_radius_lock")
 
-        self.gridLayout_3.addWidget(self.label_8, 0, 0, 1, 1)
-
-        self.radius_lineedit = QLengthEdit(self.groupBox_2)
-        self.radius_lineedit.setObjectName(u"radius_lineedit")
-
-        self.gridLayout_3.addWidget(self.radius_lineedit, 0, 1, 1, 1)
-
-        self.radius_lock = LockUnlockButton(self.groupBox_2)
-        self.radius_lock.setObjectName(u"radius_lock")
-
-        self.gridLayout_3.addWidget(self.radius_lock, 0, 2, 1, 1)
-
-        self.label_9 = QLabel(self.groupBox_2)
-        self.label_9.setObjectName(u"label_9")
-
-        self.gridLayout_3.addWidget(self.label_9, 1, 0, 1, 1)
-
-        self.num_slots_lineedit = QEvalEdit(self.groupBox_2)
-        self.num_slots_lineedit.setObjectName(u"num_slots_lineedit")
-
-        self.gridLayout_3.addWidget(self.num_slots_lineedit, 1, 1, 1, 1)
-
-        self.num_slots_lock = LockUnlockButton(self.groupBox_2)
-        self.num_slots_lock.setObjectName(u"num_slots_lock")
-
-        self.gridLayout_3.addWidget(self.num_slots_lock, 1, 2, 1, 1)
-
-        self.label_10 = QLabel(self.groupBox_2)
-        self.label_10.setObjectName(u"label_10")
-
-        self.gridLayout_3.addWidget(self.label_10, 2, 0, 1, 1)
-
-        self.num_magnets_lineedit = QEvalEdit(self.groupBox_2)
-        self.num_magnets_lineedit.setObjectName(u"num_magnets_lineedit")
-
-        self.gridLayout_3.addWidget(self.num_magnets_lineedit, 2, 1, 1, 1)
-
-        self.num_magnets_lock = LockUnlockButton(self.groupBox_2)
-        self.num_magnets_lock.setObjectName(u"num_magnets_lock")
-
-        self.gridLayout_3.addWidget(self.num_magnets_lock, 2, 2, 1, 1)
-
-        self.label_11 = QLabel(self.groupBox_2)
-        self.label_11.setObjectName(u"label_11")
-
-        self.gridLayout_3.addWidget(self.label_11, 3, 0, 1, 1)
-
-        self.air_gap_lineedit = QLengthEdit(self.groupBox_2)
-        self.air_gap_lineedit.setObjectName(u"air_gap_lineedit")
-
-        self.gridLayout_3.addWidget(self.air_gap_lineedit, 3, 1, 1, 1)
-
-        self.air_gap_lock = LockUnlockButton(self.groupBox_2)
-        self.air_gap_lock.setObjectName(u"air_gap_lock")
-
-        self.gridLayout_3.addWidget(self.air_gap_lock, 3, 2, 1, 1)
-
-        self.label_12 = QLabel(self.groupBox_2)
-        self.label_12.setObjectName(u"label_12")
-
-        self.gridLayout_3.addWidget(self.label_12, 4, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.axle_radius_lock, 3, 2, 1, 1)
 
         self.axle_radius_lineedit = QLengthEdit(self.groupBox_2)
         self.axle_radius_lineedit.setObjectName(u"axle_radius_lineedit")
 
-        self.gridLayout_3.addWidget(self.axle_radius_lineedit, 4, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.axle_radius_lineedit, 3, 1, 1, 1)
 
-        self.axle_radius_lock = LockUnlockButton(self.groupBox_2)
-        self.axle_radius_lock.setObjectName(u"axle_radius_lock")
+        self.air_gap_lineedit = QLengthEdit(self.groupBox_2)
+        self.air_gap_lineedit.setObjectName(u"air_gap_lineedit")
 
-        self.gridLayout_3.addWidget(self.axle_radius_lock, 4, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.air_gap_lineedit, 2, 1, 1, 1)
+
+        self.label_11 = QLabel(self.groupBox_2)
+        self.label_11.setObjectName(u"label_11")
+
+        self.gridLayout_3.addWidget(self.label_11, 2, 0, 1, 1)
+
+        self.label_12 = QLabel(self.groupBox_2)
+        self.label_12.setObjectName(u"label_12")
+
+        self.gridLayout_3.addWidget(self.label_12, 3, 0, 1, 1)
+
+        self.air_gap_lock = LockUnlockButton(self.groupBox_2)
+        self.air_gap_lock.setObjectName(u"air_gap_lock")
+
+        self.gridLayout_3.addWidget(self.air_gap_lock, 2, 2, 1, 1)
 
 
         self.verticalLayout_5.addWidget(self.groupBox_2)
@@ -457,62 +414,77 @@ class Ui_BLDCDialog(object):
         self.stator_inner_radius_lock = LockUnlockButton(self.groupBox_4)
         self.stator_inner_radius_lock.setObjectName(u"stator_inner_radius_lock")
 
-        self.gridLayout_4.addWidget(self.stator_inner_radius_lock, 8, 4, 1, 1)
+        self.gridLayout_4.addWidget(self.stator_inner_radius_lock, 9, 4, 1, 1)
 
         self.label_16 = QLabel(self.groupBox_4)
         self.label_16.setObjectName(u"label_16")
 
-        self.gridLayout_4.addWidget(self.label_16, 8, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.label_16, 9, 0, 1, 1)
 
         self.stator_inner_radius_lineedit = QLengthEdit(self.groupBox_4)
         self.stator_inner_radius_lineedit.setObjectName(u"stator_inner_radius_lineedit")
 
-        self.gridLayout_4.addWidget(self.stator_inner_radius_lineedit, 8, 2, 1, 1)
-
-        self.label_13 = QLabel(self.groupBox_4)
-        self.label_13.setObjectName(u"label_13")
-
-        self.gridLayout_4.addWidget(self.label_13, 0, 0, 1, 2)
-
-        self.hammerhead_length_lock = LockUnlockButton(self.groupBox_4)
-        self.hammerhead_length_lock.setObjectName(u"hammerhead_length_lock")
-
-        self.gridLayout_4.addWidget(self.hammerhead_length_lock, 7, 4, 1, 1)
-
-        self.hammerhead_length_lineedit = QLengthEdit(self.groupBox_4)
-        self.hammerhead_length_lineedit.setObjectName(u"hammerhead_length_lineedit")
-
-        self.gridLayout_4.addWidget(self.hammerhead_length_lineedit, 7, 2, 1, 1)
-
-        self.slot_width_lineedit = QLengthEdit(self.groupBox_4)
-        self.slot_width_lineedit.setObjectName(u"slot_width_lineedit")
-
-        self.gridLayout_4.addWidget(self.slot_width_lineedit, 0, 2, 1, 2)
-
-        self.label_15 = QLabel(self.groupBox_4)
-        self.label_15.setObjectName(u"label_15")
-
-        self.gridLayout_4.addWidget(self.label_15, 7, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.stator_inner_radius_lineedit, 9, 2, 1, 1)
 
         self.hammerhead_width_lineedit = QLengthEdit(self.groupBox_4)
         self.hammerhead_width_lineedit.setObjectName(u"hammerhead_width_lineedit")
 
-        self.gridLayout_4.addWidget(self.hammerhead_width_lineedit, 1, 2, 1, 1)
+        self.gridLayout_4.addWidget(self.hammerhead_width_lineedit, 2, 2, 1, 1)
 
         self.label_14 = QLabel(self.groupBox_4)
         self.label_14.setObjectName(u"label_14")
 
-        self.gridLayout_4.addWidget(self.label_14, 1, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.label_14, 2, 0, 1, 1)
 
-        self.slot_width_lock = LockUnlockButton(self.groupBox_4)
-        self.slot_width_lock.setObjectName(u"slot_width_lock")
+        self.label_13 = QLabel(self.groupBox_4)
+        self.label_13.setObjectName(u"label_13")
 
-        self.gridLayout_4.addWidget(self.slot_width_lock, 0, 4, 1, 1)
+        self.gridLayout_4.addWidget(self.label_13, 1, 0, 1, 2)
+
+        self.hammerhead_length_lock = LockUnlockButton(self.groupBox_4)
+        self.hammerhead_length_lock.setObjectName(u"hammerhead_length_lock")
+
+        self.gridLayout_4.addWidget(self.hammerhead_length_lock, 8, 4, 1, 1)
+
+        self.hammerhead_length_lineedit = QLengthEdit(self.groupBox_4)
+        self.hammerhead_length_lineedit.setObjectName(u"hammerhead_length_lineedit")
+
+        self.gridLayout_4.addWidget(self.hammerhead_length_lineedit, 8, 2, 1, 1)
+
+        self.slot_width_lineedit = QLengthEdit(self.groupBox_4)
+        self.slot_width_lineedit.setObjectName(u"slot_width_lineedit")
+
+        self.gridLayout_4.addWidget(self.slot_width_lineedit, 1, 2, 1, 2)
 
         self.hammerhead_width_lock = LockUnlockButton(self.groupBox_4)
         self.hammerhead_width_lock.setObjectName(u"hammerhead_width_lock")
 
-        self.gridLayout_4.addWidget(self.hammerhead_width_lock, 1, 4, 1, 1)
+        self.gridLayout_4.addWidget(self.hammerhead_width_lock, 2, 4, 1, 1)
+
+        self.label_15 = QLabel(self.groupBox_4)
+        self.label_15.setObjectName(u"label_15")
+
+        self.gridLayout_4.addWidget(self.label_15, 8, 0, 1, 1)
+
+        self.slot_width_lock = LockUnlockButton(self.groupBox_4)
+        self.slot_width_lock.setObjectName(u"slot_width_lock")
+
+        self.gridLayout_4.addWidget(self.slot_width_lock, 1, 4, 1, 1)
+
+        self.num_slots_lineedit = QEvalEdit(self.groupBox_4)
+        self.num_slots_lineedit.setObjectName(u"num_slots_lineedit")
+
+        self.gridLayout_4.addWidget(self.num_slots_lineedit, 0, 2, 1, 1)
+
+        self.label_9 = QLabel(self.groupBox_4)
+        self.label_9.setObjectName(u"label_9")
+
+        self.gridLayout_4.addWidget(self.label_9, 0, 0, 1, 1)
+
+        self.num_slots_lock = LockUnlockButton(self.groupBox_4)
+        self.num_slots_lock.setObjectName(u"num_slots_lock")
+
+        self.gridLayout_4.addWidget(self.num_slots_lock, 0, 4, 1, 1)
 
 
         self.verticalLayout_5.addWidget(self.groupBox_4)
@@ -521,38 +493,218 @@ class Ui_BLDCDialog(object):
         self.groupBox_5.setObjectName(u"groupBox_5")
         self.gridLayout_5 = QGridLayout(self.groupBox_5)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.magnet_thickness_lock = LockUnlockButton(self.groupBox_5)
-        self.magnet_thickness_lock.setObjectName(u"magnet_thickness_lock")
-
-        self.gridLayout_5.addWidget(self.magnet_thickness_lock, 0, 2, 1, 1)
-
-        self.magnet_thickness_lineedit = QLengthEdit(self.groupBox_5)
-        self.magnet_thickness_lineedit.setObjectName(u"magnet_thickness_lineedit")
-
-        self.gridLayout_5.addWidget(self.magnet_thickness_lineedit, 0, 1, 1, 1)
-
-        self.label_17 = QLabel(self.groupBox_5)
-        self.label_17.setObjectName(u"label_17")
-
-        self.gridLayout_5.addWidget(self.label_17, 0, 0, 1, 1)
-
         self.label_18 = QLabel(self.groupBox_5)
         self.label_18.setObjectName(u"label_18")
 
         self.gridLayout_5.addWidget(self.label_18, 1, 0, 1, 1)
-
-        self.outrunner_thickness_lock = LockUnlockButton(self.groupBox_5)
-        self.outrunner_thickness_lock.setObjectName(u"outrunner_thickness_lock")
-
-        self.gridLayout_5.addWidget(self.outrunner_thickness_lock, 1, 2, 1, 1)
 
         self.outrunner_thickness_lineedit = QLengthEdit(self.groupBox_5)
         self.outrunner_thickness_lineedit.setObjectName(u"outrunner_thickness_lineedit")
 
         self.gridLayout_5.addWidget(self.outrunner_thickness_lineedit, 1, 1, 1, 1)
 
+        self.outrunner_thickness_lock = LockUnlockButton(self.groupBox_5)
+        self.outrunner_thickness_lock.setObjectName(u"outrunner_thickness_lock")
+
+        self.gridLayout_5.addWidget(self.outrunner_thickness_lock, 1, 2, 1, 1)
+
+        self.radius_lineedit = QLengthEdit(self.groupBox_5)
+        self.radius_lineedit.setObjectName(u"radius_lineedit")
+
+        self.gridLayout_5.addWidget(self.radius_lineedit, 0, 1, 1, 1)
+
+        self.label_8 = QLabel(self.groupBox_5)
+        self.label_8.setObjectName(u"label_8")
+
+        self.gridLayout_5.addWidget(self.label_8, 0, 0, 1, 1)
+
+        self.radius_lock = LockUnlockButton(self.groupBox_5)
+        self.radius_lock.setObjectName(u"radius_lock")
+
+        self.gridLayout_5.addWidget(self.radius_lock, 0, 2, 1, 1)
+
 
         self.verticalLayout_5.addWidget(self.groupBox_5)
+
+        self.magnet_tab_widget = QTabWidget(self.scrollAreaWidgetContents)
+        self.magnet_tab_widget.setObjectName(u"magnet_tab_widget")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.gridLayout_9 = QGridLayout(self.tab)
+        self.gridLayout_9.setObjectName(u"gridLayout_9")
+        self.label_32 = QLabel(self.tab)
+        self.label_32.setObjectName(u"label_32")
+
+        self.gridLayout_9.addWidget(self.label_32, 7, 0, 1, 1)
+
+        self.label_29 = QLabel(self.tab)
+        self.label_29.setObjectName(u"label_29")
+
+        self.gridLayout_9.addWidget(self.label_29, 6, 0, 1, 1)
+
+        self.square_magnet_min_max_display = QLabel(self.tab)
+        self.square_magnet_min_max_display.setObjectName(u"square_magnet_min_max_display")
+
+        self.gridLayout_9.addWidget(self.square_magnet_min_max_display, 4, 0, 1, 1)
+
+        self.label_24 = QLabel(self.tab)
+        self.label_24.setObjectName(u"label_24")
+
+        self.gridLayout_9.addWidget(self.label_24, 0, 0, 1, 1)
+
+        self.num_square_magnets_lineedit = QEvalEdit(self.tab)
+        self.num_square_magnets_lineedit.setObjectName(u"num_square_magnets_lineedit")
+
+        self.gridLayout_9.addWidget(self.num_square_magnets_lineedit, 0, 1, 1, 1)
+
+        self.label_17 = QLabel(self.tab)
+        self.label_17.setObjectName(u"label_17")
+
+        self.gridLayout_9.addWidget(self.label_17, 2, 0, 1, 1)
+
+        self.square_magnet_rounded_corners = QCheckBox(self.tab)
+        self.square_magnet_rounded_corners.setObjectName(u"square_magnet_rounded_corners")
+
+        self.gridLayout_9.addWidget(self.square_magnet_rounded_corners, 5, 1, 1, 1)
+
+        self.square_magnet_width_lineedit = QLengthEdit(self.tab)
+        self.square_magnet_width_lineedit.setObjectName(u"square_magnet_width_lineedit")
+
+        self.gridLayout_9.addWidget(self.square_magnet_width_lineedit, 3, 1, 1, 1)
+
+        self.square_magnet_rounding_radius_lineedit = QLengthEdit(self.tab)
+        self.square_magnet_rounding_radius_lineedit.setObjectName(u"square_magnet_rounding_radius_lineedit")
+
+        self.gridLayout_9.addWidget(self.square_magnet_rounding_radius_lineedit, 6, 1, 1, 1)
+
+        self.square_magnet_width_lock = LockUnlockButton(self.tab)
+        self.square_magnet_width_lock.setObjectName(u"square_magnet_width_lock")
+
+        self.gridLayout_9.addWidget(self.square_magnet_width_lock, 3, 2, 1, 1)
+
+        self.square_magnet_width_slider = FractionalSlider(self.tab)
+        self.square_magnet_width_slider.setObjectName(u"square_magnet_width_slider")
+        self.square_magnet_width_slider.setOrientation(Qt.Horizontal)
+
+        self.gridLayout_9.addWidget(self.square_magnet_width_slider, 4, 1, 1, 1)
+
+        self.square_magnet_dist_between_lineedit = QLengthEdit(self.tab)
+        self.square_magnet_dist_between_lineedit.setObjectName(u"square_magnet_dist_between_lineedit")
+        self.square_magnet_dist_between_lineedit.setEnabled(False)
+
+        self.gridLayout_9.addWidget(self.square_magnet_dist_between_lineedit, 7, 1, 1, 1)
+
+        self.num_square_magnets_lock = LockUnlockButton(self.tab)
+        self.num_square_magnets_lock.setObjectName(u"num_square_magnets_lock")
+
+        self.gridLayout_9.addWidget(self.num_square_magnets_lock, 0, 2, 1, 1)
+
+        self.square_magnet_thickness_lineedit = QLengthEdit(self.tab)
+        self.square_magnet_thickness_lineedit.setObjectName(u"square_magnet_thickness_lineedit")
+
+        self.gridLayout_9.addWidget(self.square_magnet_thickness_lineedit, 2, 1, 1, 1)
+
+        self.label_27 = QLabel(self.tab)
+        self.label_27.setObjectName(u"label_27")
+
+        self.gridLayout_9.addWidget(self.label_27, 3, 0, 1, 1)
+
+        self.square_magnet_thickness_lock = LockUnlockButton(self.tab)
+        self.square_magnet_thickness_lock.setObjectName(u"square_magnet_thickness_lock")
+
+        self.gridLayout_9.addWidget(self.square_magnet_thickness_lock, 2, 2, 1, 1)
+
+        self.square_magnet_rounding_radius_lock = LockUnlockButton(self.tab)
+        self.square_magnet_rounding_radius_lock.setObjectName(u"square_magnet_rounding_radius_lock")
+
+        self.gridLayout_9.addWidget(self.square_magnet_rounding_radius_lock, 6, 2, 1, 1)
+
+        self.square_magnet_dist_from_circle_lineedit = QLengthEdit(self.tab)
+        self.square_magnet_dist_from_circle_lineedit.setObjectName(u"square_magnet_dist_from_circle_lineedit")
+        self.square_magnet_dist_from_circle_lineedit.setEnabled(False)
+
+        self.gridLayout_9.addWidget(self.square_magnet_dist_from_circle_lineedit, 8, 1, 1, 1)
+
+        self.label_33 = QLabel(self.tab)
+        self.label_33.setObjectName(u"label_33")
+
+        self.gridLayout_9.addWidget(self.label_33, 8, 0, 1, 1)
+
+        self.magnet_tab_widget.addTab(self.tab, "")
+        self.tab_6 = QWidget()
+        self.tab_6.setObjectName(u"tab_6")
+        self.gridLayout_10 = QGridLayout(self.tab_6)
+        self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.label_30 = QLabel(self.tab_6)
+        self.label_30.setObjectName(u"label_30")
+
+        self.gridLayout_10.addWidget(self.label_30, 2, 0, 1, 1)
+
+        self.arc_magnet_dist_between_lineedit = QLengthEdit(self.tab_6)
+        self.arc_magnet_dist_between_lineedit.setObjectName(u"arc_magnet_dist_between_lineedit")
+        self.arc_magnet_dist_between_lineedit.setEnabled(False)
+
+        self.gridLayout_10.addWidget(self.arc_magnet_dist_between_lineedit, 4, 1, 1, 1)
+
+        self.label_26 = QLabel(self.tab_6)
+        self.label_26.setObjectName(u"label_26")
+
+        self.gridLayout_10.addWidget(self.label_26, 1, 0, 1, 1)
+
+        self.num_arc_magnets_lock = LockUnlockButton(self.tab_6)
+        self.num_arc_magnets_lock.setObjectName(u"num_arc_magnets_lock")
+
+        self.gridLayout_10.addWidget(self.num_arc_magnets_lock, 0, 2, 1, 1)
+
+        self.arc_magnet_width_slider = FractionalSlider(self.tab_6)
+        self.arc_magnet_width_slider.setObjectName(u"arc_magnet_width_slider")
+        self.arc_magnet_width_slider.setOrientation(Qt.Horizontal)
+
+        self.gridLayout_10.addWidget(self.arc_magnet_width_slider, 3, 1, 1, 1)
+
+        self.label_34 = QLabel(self.tab_6)
+        self.label_34.setObjectName(u"label_34")
+
+        self.gridLayout_10.addWidget(self.label_34, 4, 0, 1, 1)
+
+        self.arc_magnet_thickness_lineedit = QLengthEdit(self.tab_6)
+        self.arc_magnet_thickness_lineedit.setObjectName(u"arc_magnet_thickness_lineedit")
+
+        self.gridLayout_10.addWidget(self.arc_magnet_thickness_lineedit, 1, 1, 1, 1)
+
+        self.arc_magnet_min_max_display = QLabel(self.tab_6)
+        self.arc_magnet_min_max_display.setObjectName(u"arc_magnet_min_max_display")
+
+        self.gridLayout_10.addWidget(self.arc_magnet_min_max_display, 3, 0, 1, 1)
+
+        self.label_25 = QLabel(self.tab_6)
+        self.label_25.setObjectName(u"label_25")
+
+        self.gridLayout_10.addWidget(self.label_25, 0, 0, 1, 1)
+
+        self.num_arc_magnets_lineedit = QEvalEdit(self.tab_6)
+        self.num_arc_magnets_lineedit.setObjectName(u"num_arc_magnets_lineedit")
+
+        self.gridLayout_10.addWidget(self.num_arc_magnets_lineedit, 0, 1, 1, 1)
+
+        self.arc_magnet_thickness_lock = LockUnlockButton(self.tab_6)
+        self.arc_magnet_thickness_lock.setObjectName(u"arc_magnet_thickness_lock")
+
+        self.gridLayout_10.addWidget(self.arc_magnet_thickness_lock, 1, 2, 1, 1)
+
+        self.arc_magnet_width_lineedit = QAngleEdit(self.tab_6)
+        self.arc_magnet_width_lineedit.setObjectName(u"arc_magnet_width_lineedit")
+
+        self.gridLayout_10.addWidget(self.arc_magnet_width_lineedit, 2, 1, 1, 1)
+
+        self.arc_magnet_width_lock = LockUnlockButton(self.tab_6)
+        self.arc_magnet_width_lock.setObjectName(u"arc_magnet_width_lock")
+
+        self.gridLayout_10.addWidget(self.arc_magnet_width_lock, 2, 2, 1, 1)
+
+        self.magnet_tab_widget.addTab(self.tab_6, "")
+
+        self.verticalLayout_5.addWidget(self.magnet_tab_widget)
 
         self.groupBox_6 = QGroupBox(self.scrollAreaWidgetContents)
         self.groupBox_6.setObjectName(u"groupBox_6")
@@ -675,6 +827,7 @@ class Ui_BLDCDialog(object):
         self.retranslateUi(BLDCDialog)
 
         self.tabWidget.setCurrentIndex(1)
+        self.magnet_tab_widget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(BLDCDialog)
@@ -725,19 +878,32 @@ class Ui_BLDCDialog(object):
         self.label.setText(QCoreApplication.translate("BLDCDialog", u"Output RPM", None))
         self.label_7.setText(QCoreApplication.translate("BLDCDialog", u"Max Temp", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("BLDCDialog", u"Physical Properties", None))
-        self.label_8.setText(QCoreApplication.translate("BLDCDialog", u"Radius", None))
-        self.label_9.setText(QCoreApplication.translate("BLDCDialog", u"Num Slots", None))
-        self.label_10.setText(QCoreApplication.translate("BLDCDialog", u"Num Magnets", None))
         self.label_11.setText(QCoreApplication.translate("BLDCDialog", u"Air Gap", None))
         self.label_12.setText(QCoreApplication.translate("BLDCDialog", u"Axle Radius", None))
         self.groupBox_4.setTitle(QCoreApplication.translate("BLDCDialog", u"Stator", None))
         self.label_16.setText(QCoreApplication.translate("BLDCDialog", u"Stator Inner Radius", None))
+        self.label_14.setText(QCoreApplication.translate("BLDCDialog", u"Hammerhead Width", None))
         self.label_13.setText(QCoreApplication.translate("BLDCDialog", u"Slot Width", None))
         self.label_15.setText(QCoreApplication.translate("BLDCDialog", u"Hammerhead Length", None))
-        self.label_14.setText(QCoreApplication.translate("BLDCDialog", u"Hammerhead Width", None))
-        self.groupBox_5.setTitle(QCoreApplication.translate("BLDCDialog", u"Magnet and Outrunner", None))
-        self.label_17.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Thickness", None))
+        self.label_9.setText(QCoreApplication.translate("BLDCDialog", u"Num Slots", None))
+        self.groupBox_5.setTitle(QCoreApplication.translate("BLDCDialog", u"Outrunner", None))
         self.label_18.setText(QCoreApplication.translate("BLDCDialog", u"Outrunner Thickness", None))
+        self.label_8.setText(QCoreApplication.translate("BLDCDialog", u"Radius", None))
+        self.label_32.setText(QCoreApplication.translate("BLDCDialog", u"Dist Between", None))
+        self.label_29.setText(QCoreApplication.translate("BLDCDialog", u"Rounding Radius", None))
+        self.square_magnet_min_max_display.setText(QCoreApplication.translate("BLDCDialog", u"[min, max]", None))
+        self.label_24.setText(QCoreApplication.translate("BLDCDialog", u"Num Magnets", None))
+        self.label_17.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Thickness", None))
+        self.square_magnet_rounded_corners.setText(QCoreApplication.translate("BLDCDialog", u"Rounded Corners", None))
+        self.label_27.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Width", None))
+        self.label_33.setText(QCoreApplication.translate("BLDCDialog", u"Dist From Circle", None))
+        self.magnet_tab_widget.setTabText(self.magnet_tab_widget.indexOf(self.tab), QCoreApplication.translate("BLDCDialog", u"Square Magnet", None))
+        self.label_30.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Arc Width", None))
+        self.label_26.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Thickness", None))
+        self.label_34.setText(QCoreApplication.translate("BLDCDialog", u"Dist Between", None))
+        self.arc_magnet_min_max_display.setText(QCoreApplication.translate("BLDCDialog", u"[min, max]", None))
+        self.label_25.setText(QCoreApplication.translate("BLDCDialog", u"Num Magnets", None))
+        self.magnet_tab_widget.setTabText(self.magnet_tab_widget.indexOf(self.tab_6), QCoreApplication.translate("BLDCDialog", u"Arc Magnet", None))
         self.groupBox_6.setTitle(QCoreApplication.translate("BLDCDialog", u"Wire", None))
         self.label_21.setText(QCoreApplication.translate("BLDCDialog", u"Needle Diameter", None))
         self.label_19.setText(QCoreApplication.translate("BLDCDialog", u"Wire Diameter", None))
