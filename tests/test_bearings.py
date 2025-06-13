@@ -244,7 +244,7 @@ def test_create_tapered_roller_bearing_3():
     FreeCAD.setActiveDocument("TestDoc")
 
     config = Config(
-        bearing=BearingConfig(external_radius=45.0, internal_radius=15.0, height=30.0, gap=15.0),
+        bearing=BearingConfig(external_radius=45.0, internal_radius=15.0, height=30.0, gap=15.0, bearing_angle=45),
         roller=RollerConfig.from_length_radius_near_radius_far(
             length=20.0, radius_near=7.5, radius_far=10.0, track_radius=19.5, crown_drop=1.0, crown_drop_2=0.5, num_points=21,
             fillet_radius=2.0, num_rollers=6

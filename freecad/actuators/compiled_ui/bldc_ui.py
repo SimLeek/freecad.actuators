@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bldc-designer-2QUpocW.ui'
+## Form generated from reading UI file 'bldc-designer-2fKGGwv.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.16
 ##
@@ -37,7 +37,7 @@ class Ui_BLDCDialog(object):
     def setupUi(self, BLDCDialog):
         if not BLDCDialog.objectName():
             BLDCDialog.setObjectName(u"BLDCDialog")
-        BLDCDialog.resize(1174, 748)
+        BLDCDialog.resize(1265, 748)
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(1)
         sizePolicy.setVerticalStretch(1)
@@ -56,6 +56,11 @@ class Ui_BLDCDialog(object):
         self.widget_2.setMaximumSize(QSize(16777215, 40))
         self.horizontalLayout = QHBoxLayout(self.widget_2)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.display_base_checkbox = QCheckBox(self.widget_2)
+        self.display_base_checkbox.setObjectName(u"display_base_checkbox")
+
+        self.horizontalLayout.addWidget(self.display_base_checkbox)
+
         self.display_axle_checkbox = QCheckBox(self.widget_2)
         self.display_axle_checkbox.setObjectName(u"display_axle_checkbox")
 
@@ -86,18 +91,23 @@ class Ui_BLDCDialog(object):
 
         self.horizontalLayout.addWidget(self.display_outrunner_checkbox)
 
-        self.display_height_checkbox = QCheckBox(self.widget_2)
-        self.display_height_checkbox.setObjectName(u"display_height_checkbox")
-
-        self.horizontalLayout.addWidget(self.display_height_checkbox)
-
 
         self.verticalLayout.addWidget(self.widget_2)
 
+        self.gridLayout_12 = QGridLayout()
+        self.gridLayout_12.setObjectName(u"gridLayout_12")
         self.stator_plot_widget = PlotWidget(self.stator_display_tab)
         self.stator_plot_widget.setObjectName(u"stator_plot_widget")
 
-        self.verticalLayout.addWidget(self.stator_plot_widget)
+        self.gridLayout_12.addWidget(self.stator_plot_widget, 0, 0, 1, 1)
+
+        self.side_view_plot_widget = PlotWidget(self.stator_display_tab)
+        self.side_view_plot_widget.setObjectName(u"side_view_plot_widget")
+
+        self.gridLayout_12.addWidget(self.side_view_plot_widget, 0, 1, 1, 1)
+
+
+        self.verticalLayout.addLayout(self.gridLayout_12)
 
         self.tabWidget.addTab(self.stator_display_tab, "")
         self.tab_2 = QWidget()
@@ -233,27 +243,22 @@ class Ui_BLDCDialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -484, 362, 1378))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 362, 1745))
         self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.groupBox_3 = QGroupBox(self.scrollAreaWidgetContents)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.gridLayout_2 = QGridLayout(self.groupBox_3)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.default_settings_combobox = QComboBox(self.groupBox_3)
-        self.default_settings_combobox.addItem("")
-        self.default_settings_combobox.addItem("")
-        self.default_settings_combobox.addItem("")
-        self.default_settings_combobox.addItem("")
-        self.default_settings_combobox.addItem("")
-        self.default_settings_combobox.setObjectName(u"default_settings_combobox")
+        self.settings_save_button = QPushButton(self.groupBox_3)
+        self.settings_save_button.setObjectName(u"settings_save_button")
 
-        self.gridLayout_2.addWidget(self.default_settings_combobox, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.settings_save_button, 1, 1, 1, 1)
 
-        self.default_settings_apply_button = QPushButton(self.groupBox_3)
-        self.default_settings_apply_button.setObjectName(u"default_settings_apply_button")
+        self.settings_load_button = QPushButton(self.groupBox_3)
+        self.settings_load_button.setObjectName(u"settings_load_button")
 
-        self.gridLayout_2.addWidget(self.default_settings_apply_button, 0, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.settings_load_button, 1, 0, 1, 1)
 
 
         self.verticalLayout_5.addWidget(self.groupBox_3)
@@ -374,16 +379,6 @@ class Ui_BLDCDialog(object):
         self.groupBox_2.setObjectName(u"groupBox_2")
         self.gridLayout_3 = QGridLayout(self.groupBox_2)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.axle_radius_lock = LockUnlockButton(self.groupBox_2)
-        self.axle_radius_lock.setObjectName(u"axle_radius_lock")
-
-        self.gridLayout_3.addWidget(self.axle_radius_lock, 3, 2, 1, 1)
-
-        self.axle_radius_lineedit = QLengthEdit(self.groupBox_2)
-        self.axle_radius_lineedit.setObjectName(u"axle_radius_lineedit")
-
-        self.gridLayout_3.addWidget(self.axle_radius_lineedit, 3, 1, 1, 1)
-
         self.air_gap_lineedit = QLengthEdit(self.groupBox_2)
         self.air_gap_lineedit.setObjectName(u"air_gap_lineedit")
 
@@ -394,18 +389,80 @@ class Ui_BLDCDialog(object):
 
         self.gridLayout_3.addWidget(self.label_11, 2, 0, 1, 1)
 
-        self.label_12 = QLabel(self.groupBox_2)
-        self.label_12.setObjectName(u"label_12")
-
-        self.gridLayout_3.addWidget(self.label_12, 3, 0, 1, 1)
-
         self.air_gap_lock = LockUnlockButton(self.groupBox_2)
         self.air_gap_lock.setObjectName(u"air_gap_lock")
 
         self.gridLayout_3.addWidget(self.air_gap_lock, 2, 2, 1, 1)
 
+        self.label_28 = QLabel(self.groupBox_2)
+        self.label_28.setObjectName(u"label_28")
+
+        self.gridLayout_3.addWidget(self.label_28, 4, 0, 1, 1)
+
+        self.base_height_lineedit = QLengthEdit(self.groupBox_2)
+        self.base_height_lineedit.setObjectName(u"base_height_lineedit")
+
+        self.gridLayout_3.addWidget(self.base_height_lineedit, 4, 1, 1, 1)
+
+        self.base_height_lock = LockUnlockButton(self.groupBox_2)
+        self.base_height_lock.setObjectName(u"base_height_lock")
+
+        self.gridLayout_3.addWidget(self.base_height_lock, 4, 2, 1, 1)
+
 
         self.verticalLayout_5.addWidget(self.groupBox_2)
+
+        self.groupBox_11 = QGroupBox(self.scrollAreaWidgetContents)
+        self.groupBox_11.setObjectName(u"groupBox_11")
+        self.gridLayout_13 = QGridLayout(self.groupBox_11)
+        self.gridLayout_13.setObjectName(u"gridLayout_13")
+        self.axle_radius_lineedit = QLengthEdit(self.groupBox_11)
+        self.axle_radius_lineedit.setObjectName(u"axle_radius_lineedit")
+
+        self.gridLayout_13.addWidget(self.axle_radius_lineedit, 0, 1, 1, 1)
+
+        self.axle_below_base_height_lineedit = QLengthEdit(self.groupBox_11)
+        self.axle_below_base_height_lineedit.setObjectName(u"axle_below_base_height_lineedit")
+
+        self.gridLayout_13.addWidget(self.axle_below_base_height_lineedit, 1, 1, 1, 1)
+
+        self.label_37 = QLabel(self.groupBox_11)
+        self.label_37.setObjectName(u"label_37")
+
+        self.gridLayout_13.addWidget(self.label_37, 1, 0, 1, 1)
+
+        self.label_12 = QLabel(self.groupBox_11)
+        self.label_12.setObjectName(u"label_12")
+
+        self.gridLayout_13.addWidget(self.label_12, 0, 0, 1, 1)
+
+        self.axle_radius_lock = LockUnlockButton(self.groupBox_11)
+        self.axle_radius_lock.setObjectName(u"axle_radius_lock")
+
+        self.gridLayout_13.addWidget(self.axle_radius_lock, 0, 2, 1, 1)
+
+        self.axle_below_base_height_lock = LockUnlockButton(self.groupBox_11)
+        self.axle_below_base_height_lock.setObjectName(u"axle_below_base_height_lock")
+
+        self.gridLayout_13.addWidget(self.axle_below_base_height_lock, 1, 2, 1, 1)
+
+        self.label_38 = QLabel(self.groupBox_11)
+        self.label_38.setObjectName(u"label_38")
+
+        self.gridLayout_13.addWidget(self.label_38, 2, 0, 1, 1)
+
+        self.axle_above_outrunner_height_lineedit = QLengthEdit(self.groupBox_11)
+        self.axle_above_outrunner_height_lineedit.setObjectName(u"axle_above_outrunner_height_lineedit")
+
+        self.gridLayout_13.addWidget(self.axle_above_outrunner_height_lineedit, 2, 1, 1, 1)
+
+        self.axle_above_outrunner_height_lock = LockUnlockButton(self.groupBox_11)
+        self.axle_above_outrunner_height_lock.setObjectName(u"axle_above_outrunner_height_lock")
+
+        self.gridLayout_13.addWidget(self.axle_above_outrunner_height_lock, 2, 2, 1, 1)
+
+
+        self.verticalLayout_5.addWidget(self.groupBox_11)
 
         self.groupBox_4 = QGroupBox(self.scrollAreaWidgetContents)
         self.groupBox_4.setObjectName(u"groupBox_4")
@@ -486,6 +543,36 @@ class Ui_BLDCDialog(object):
 
         self.gridLayout_4.addWidget(self.num_slots_lock, 0, 4, 1, 1)
 
+        self.label_31 = QLabel(self.groupBox_4)
+        self.label_31.setObjectName(u"label_31")
+
+        self.gridLayout_4.addWidget(self.label_31, 10, 0, 1, 1)
+
+        self.stator_height_lineedit = QLengthEdit(self.groupBox_4)
+        self.stator_height_lineedit.setObjectName(u"stator_height_lineedit")
+
+        self.gridLayout_4.addWidget(self.stator_height_lineedit, 10, 2, 1, 1)
+
+        self.stator_height_lock = LockUnlockButton(self.groupBox_4)
+        self.stator_height_lock.setObjectName(u"stator_height_lock")
+
+        self.gridLayout_4.addWidget(self.stator_height_lock, 10, 4, 1, 1)
+
+        self.label_39 = QLabel(self.groupBox_4)
+        self.label_39.setObjectName(u"label_39")
+
+        self.gridLayout_4.addWidget(self.label_39, 11, 0, 1, 1)
+
+        self.stator_dist_from_base_lineedit = QLengthEdit(self.groupBox_4)
+        self.stator_dist_from_base_lineedit.setObjectName(u"stator_dist_from_base_lineedit")
+
+        self.gridLayout_4.addWidget(self.stator_dist_from_base_lineedit, 11, 2, 1, 1)
+
+        self.stator_dist_from_base_lock = LockUnlockButton(self.groupBox_4)
+        self.stator_dist_from_base_lock.setObjectName(u"stator_dist_from_base_lock")
+
+        self.gridLayout_4.addWidget(self.stator_dist_from_base_lock, 11, 4, 1, 1)
+
 
         self.verticalLayout_5.addWidget(self.groupBox_4)
 
@@ -493,35 +580,65 @@ class Ui_BLDCDialog(object):
         self.groupBox_5.setObjectName(u"groupBox_5")
         self.gridLayout_5 = QGridLayout(self.groupBox_5)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.label_18 = QLabel(self.groupBox_5)
-        self.label_18.setObjectName(u"label_18")
-
-        self.gridLayout_5.addWidget(self.label_18, 1, 0, 1, 1)
-
-        self.outrunner_thickness_lineedit = QLengthEdit(self.groupBox_5)
-        self.outrunner_thickness_lineedit.setObjectName(u"outrunner_thickness_lineedit")
-
-        self.gridLayout_5.addWidget(self.outrunner_thickness_lineedit, 1, 1, 1, 1)
-
-        self.outrunner_thickness_lock = LockUnlockButton(self.groupBox_5)
-        self.outrunner_thickness_lock.setObjectName(u"outrunner_thickness_lock")
-
-        self.gridLayout_5.addWidget(self.outrunner_thickness_lock, 1, 2, 1, 1)
-
         self.radius_lineedit = QLengthEdit(self.groupBox_5)
         self.radius_lineedit.setObjectName(u"radius_lineedit")
 
         self.gridLayout_5.addWidget(self.radius_lineedit, 0, 1, 1, 1)
+
+        self.outrunner_height_lock = LockUnlockButton(self.groupBox_5)
+        self.outrunner_height_lock.setObjectName(u"outrunner_height_lock")
+
+        self.gridLayout_5.addWidget(self.outrunner_height_lock, 1, 2, 1, 1)
 
         self.label_8 = QLabel(self.groupBox_5)
         self.label_8.setObjectName(u"label_8")
 
         self.gridLayout_5.addWidget(self.label_8, 0, 0, 1, 1)
 
+        self.label_18 = QLabel(self.groupBox_5)
+        self.label_18.setObjectName(u"label_18")
+
+        self.gridLayout_5.addWidget(self.label_18, 3, 0, 1, 1)
+
         self.radius_lock = LockUnlockButton(self.groupBox_5)
         self.radius_lock.setObjectName(u"radius_lock")
 
         self.gridLayout_5.addWidget(self.radius_lock, 0, 2, 1, 1)
+
+        self.label_10 = QLabel(self.groupBox_5)
+        self.label_10.setObjectName(u"label_10")
+
+        self.gridLayout_5.addWidget(self.label_10, 1, 0, 1, 1)
+
+        self.outrunner_thickness_lineedit = QLengthEdit(self.groupBox_5)
+        self.outrunner_thickness_lineedit.setObjectName(u"outrunner_thickness_lineedit")
+
+        self.gridLayout_5.addWidget(self.outrunner_thickness_lineedit, 3, 1, 1, 1)
+
+        self.outrunner_height_lineedit = QLengthEdit(self.groupBox_5)
+        self.outrunner_height_lineedit.setObjectName(u"outrunner_height_lineedit")
+
+        self.gridLayout_5.addWidget(self.outrunner_height_lineedit, 1, 1, 1, 1)
+
+        self.outrunner_thickness_lock = LockUnlockButton(self.groupBox_5)
+        self.outrunner_thickness_lock.setObjectName(u"outrunner_thickness_lock")
+
+        self.gridLayout_5.addWidget(self.outrunner_thickness_lock, 3, 2, 1, 1)
+
+        self.label_40 = QLabel(self.groupBox_5)
+        self.label_40.setObjectName(u"label_40")
+
+        self.gridLayout_5.addWidget(self.label_40, 2, 0, 1, 1)
+
+        self.outrunner_height_gap_lineedit = QLengthEdit(self.groupBox_5)
+        self.outrunner_height_gap_lineedit.setObjectName(u"outrunner_height_gap_lineedit")
+
+        self.gridLayout_5.addWidget(self.outrunner_height_gap_lineedit, 2, 1, 1, 1)
+
+        self.outrunner_height_gap_lock = LockUnlockButton(self.groupBox_5)
+        self.outrunner_height_gap_lock.setObjectName(u"outrunner_height_gap_lock")
+
+        self.gridLayout_5.addWidget(self.outrunner_height_gap_lock, 2, 2, 1, 1)
 
 
         self.verticalLayout_5.addWidget(self.groupBox_5)
@@ -532,55 +649,72 @@ class Ui_BLDCDialog(object):
         self.tab.setObjectName(u"tab")
         self.gridLayout_9 = QGridLayout(self.tab)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
-        self.label_32 = QLabel(self.tab)
-        self.label_32.setObjectName(u"label_32")
-
-        self.gridLayout_9.addWidget(self.label_32, 7, 0, 1, 1)
-
-        self.label_29 = QLabel(self.tab)
-        self.label_29.setObjectName(u"label_29")
-
-        self.gridLayout_9.addWidget(self.label_29, 6, 0, 1, 1)
-
         self.square_magnet_min_max_display = QLabel(self.tab)
         self.square_magnet_min_max_display.setObjectName(u"square_magnet_min_max_display")
 
         self.gridLayout_9.addWidget(self.square_magnet_min_max_display, 4, 0, 1, 1)
 
-        self.label_24 = QLabel(self.tab)
-        self.label_24.setObjectName(u"label_24")
+        self.square_magnet_dist_from_circle_lineedit = QLengthEdit(self.tab)
+        self.square_magnet_dist_from_circle_lineedit.setObjectName(u"square_magnet_dist_from_circle_lineedit")
+        self.square_magnet_dist_from_circle_lineedit.setEnabled(False)
 
-        self.gridLayout_9.addWidget(self.label_24, 0, 0, 1, 1)
+        self.gridLayout_9.addWidget(self.square_magnet_dist_from_circle_lineedit, 9, 1, 1, 1)
+
+        self.label_32 = QLabel(self.tab)
+        self.label_32.setObjectName(u"label_32")
+
+        self.gridLayout_9.addWidget(self.label_32, 8, 0, 1, 1)
 
         self.num_square_magnets_lineedit = QEvalEdit(self.tab)
         self.num_square_magnets_lineedit.setObjectName(u"num_square_magnets_lineedit")
 
         self.gridLayout_9.addWidget(self.num_square_magnets_lineedit, 0, 1, 1, 1)
 
-        self.label_17 = QLabel(self.tab)
-        self.label_17.setObjectName(u"label_17")
-
-        self.gridLayout_9.addWidget(self.label_17, 2, 0, 1, 1)
-
-        self.square_magnet_rounded_corners = QCheckBox(self.tab)
-        self.square_magnet_rounded_corners.setObjectName(u"square_magnet_rounded_corners")
-
-        self.gridLayout_9.addWidget(self.square_magnet_rounded_corners, 5, 1, 1, 1)
-
         self.square_magnet_width_lineedit = QLengthEdit(self.tab)
         self.square_magnet_width_lineedit.setObjectName(u"square_magnet_width_lineedit")
 
         self.gridLayout_9.addWidget(self.square_magnet_width_lineedit, 3, 1, 1, 1)
 
+        self.square_magnet_thickness_lock = LockUnlockButton(self.tab)
+        self.square_magnet_thickness_lock.setObjectName(u"square_magnet_thickness_lock")
+
+        self.gridLayout_9.addWidget(self.square_magnet_thickness_lock, 2, 2, 1, 1)
+
         self.square_magnet_rounding_radius_lineedit = QLengthEdit(self.tab)
         self.square_magnet_rounding_radius_lineedit.setObjectName(u"square_magnet_rounding_radius_lineedit")
 
-        self.gridLayout_9.addWidget(self.square_magnet_rounding_radius_lineedit, 6, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.square_magnet_rounding_radius_lineedit, 7, 1, 1, 1)
 
-        self.square_magnet_width_lock = LockUnlockButton(self.tab)
-        self.square_magnet_width_lock.setObjectName(u"square_magnet_width_lock")
+        self.square_magnet_dist_between_lineedit = QLengthEdit(self.tab)
+        self.square_magnet_dist_between_lineedit.setObjectName(u"square_magnet_dist_between_lineedit")
+        self.square_magnet_dist_between_lineedit.setEnabled(False)
 
-        self.gridLayout_9.addWidget(self.square_magnet_width_lock, 3, 2, 1, 1)
+        self.gridLayout_9.addWidget(self.square_magnet_dist_between_lineedit, 8, 1, 1, 1)
+
+        self.label_33 = QLabel(self.tab)
+        self.label_33.setObjectName(u"label_33")
+
+        self.gridLayout_9.addWidget(self.label_33, 9, 0, 1, 1)
+
+        self.label_24 = QLabel(self.tab)
+        self.label_24.setObjectName(u"label_24")
+
+        self.gridLayout_9.addWidget(self.label_24, 0, 0, 1, 1)
+
+        self.label_27 = QLabel(self.tab)
+        self.label_27.setObjectName(u"label_27")
+
+        self.gridLayout_9.addWidget(self.label_27, 3, 0, 1, 1)
+
+        self.label_29 = QLabel(self.tab)
+        self.label_29.setObjectName(u"label_29")
+
+        self.gridLayout_9.addWidget(self.label_29, 7, 0, 1, 1)
+
+        self.label_17 = QLabel(self.tab)
+        self.label_17.setObjectName(u"label_17")
+
+        self.gridLayout_9.addWidget(self.label_17, 2, 0, 1, 1)
 
         self.square_magnet_width_slider = FractionalSlider(self.tab)
         self.square_magnet_width_slider.setObjectName(u"square_magnet_width_slider")
@@ -588,47 +722,45 @@ class Ui_BLDCDialog(object):
 
         self.gridLayout_9.addWidget(self.square_magnet_width_slider, 4, 1, 1, 1)
 
-        self.square_magnet_dist_between_lineedit = QLengthEdit(self.tab)
-        self.square_magnet_dist_between_lineedit.setObjectName(u"square_magnet_dist_between_lineedit")
-        self.square_magnet_dist_between_lineedit.setEnabled(False)
-
-        self.gridLayout_9.addWidget(self.square_magnet_dist_between_lineedit, 7, 1, 1, 1)
-
         self.num_square_magnets_lock = LockUnlockButton(self.tab)
         self.num_square_magnets_lock.setObjectName(u"num_square_magnets_lock")
 
         self.gridLayout_9.addWidget(self.num_square_magnets_lock, 0, 2, 1, 1)
+
+        self.square_magnet_width_lock = LockUnlockButton(self.tab)
+        self.square_magnet_width_lock.setObjectName(u"square_magnet_width_lock")
+
+        self.gridLayout_9.addWidget(self.square_magnet_width_lock, 3, 2, 1, 1)
 
         self.square_magnet_thickness_lineedit = QLengthEdit(self.tab)
         self.square_magnet_thickness_lineedit.setObjectName(u"square_magnet_thickness_lineedit")
 
         self.gridLayout_9.addWidget(self.square_magnet_thickness_lineedit, 2, 1, 1, 1)
 
-        self.label_27 = QLabel(self.tab)
-        self.label_27.setObjectName(u"label_27")
-
-        self.gridLayout_9.addWidget(self.label_27, 3, 0, 1, 1)
-
-        self.square_magnet_thickness_lock = LockUnlockButton(self.tab)
-        self.square_magnet_thickness_lock.setObjectName(u"square_magnet_thickness_lock")
-
-        self.gridLayout_9.addWidget(self.square_magnet_thickness_lock, 2, 2, 1, 1)
-
         self.square_magnet_rounding_radius_lock = LockUnlockButton(self.tab)
         self.square_magnet_rounding_radius_lock.setObjectName(u"square_magnet_rounding_radius_lock")
 
-        self.gridLayout_9.addWidget(self.square_magnet_rounding_radius_lock, 6, 2, 1, 1)
+        self.gridLayout_9.addWidget(self.square_magnet_rounding_radius_lock, 7, 2, 1, 1)
 
-        self.square_magnet_dist_from_circle_lineedit = QLengthEdit(self.tab)
-        self.square_magnet_dist_from_circle_lineedit.setObjectName(u"square_magnet_dist_from_circle_lineedit")
-        self.square_magnet_dist_from_circle_lineedit.setEnabled(False)
+        self.square_magnet_rounded_corners = QCheckBox(self.tab)
+        self.square_magnet_rounded_corners.setObjectName(u"square_magnet_rounded_corners")
 
-        self.gridLayout_9.addWidget(self.square_magnet_dist_from_circle_lineedit, 8, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.square_magnet_rounded_corners, 5, 1, 1, 1)
 
-        self.label_33 = QLabel(self.tab)
-        self.label_33.setObjectName(u"label_33")
+        self.label_35 = QLabel(self.tab)
+        self.label_35.setObjectName(u"label_35")
 
-        self.gridLayout_9.addWidget(self.label_33, 8, 0, 1, 1)
+        self.gridLayout_9.addWidget(self.label_35, 6, 0, 1, 1)
+
+        self.square_magnet_height_lineedit = QLengthEdit(self.tab)
+        self.square_magnet_height_lineedit.setObjectName(u"square_magnet_height_lineedit")
+
+        self.gridLayout_9.addWidget(self.square_magnet_height_lineedit, 6, 1, 1, 1)
+
+        self.square_magnet_height_lock = LockUnlockButton(self.tab)
+        self.square_magnet_height_lock.setObjectName(u"square_magnet_height_lock")
+
+        self.gridLayout_9.addWidget(self.square_magnet_height_lock, 6, 2, 1, 1)
 
         self.magnet_tab_widget.addTab(self.tab, "")
         self.tab_6 = QWidget()
@@ -644,7 +776,7 @@ class Ui_BLDCDialog(object):
         self.arc_magnet_dist_between_lineedit.setObjectName(u"arc_magnet_dist_between_lineedit")
         self.arc_magnet_dist_between_lineedit.setEnabled(False)
 
-        self.gridLayout_10.addWidget(self.arc_magnet_dist_between_lineedit, 4, 1, 1, 1)
+        self.gridLayout_10.addWidget(self.arc_magnet_dist_between_lineedit, 5, 1, 1, 1)
 
         self.label_26 = QLabel(self.tab_6)
         self.label_26.setObjectName(u"label_26")
@@ -665,7 +797,7 @@ class Ui_BLDCDialog(object):
         self.label_34 = QLabel(self.tab_6)
         self.label_34.setObjectName(u"label_34")
 
-        self.gridLayout_10.addWidget(self.label_34, 4, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.label_34, 5, 0, 1, 1)
 
         self.arc_magnet_thickness_lineedit = QLengthEdit(self.tab_6)
         self.arc_magnet_thickness_lineedit.setObjectName(u"arc_magnet_thickness_lineedit")
@@ -701,6 +833,21 @@ class Ui_BLDCDialog(object):
         self.arc_magnet_width_lock.setObjectName(u"arc_magnet_width_lock")
 
         self.gridLayout_10.addWidget(self.arc_magnet_width_lock, 2, 2, 1, 1)
+
+        self.label_36 = QLabel(self.tab_6)
+        self.label_36.setObjectName(u"label_36")
+
+        self.gridLayout_10.addWidget(self.label_36, 4, 0, 1, 1)
+
+        self.arc_magnet_height_lineedit = QLengthEdit(self.tab_6)
+        self.arc_magnet_height_lineedit.setObjectName(u"arc_magnet_height_lineedit")
+
+        self.gridLayout_10.addWidget(self.arc_magnet_height_lineedit, 4, 1, 1, 1)
+
+        self.arc_magnet_height_lock = LockUnlockButton(self.tab_6)
+        self.arc_magnet_height_lock.setObjectName(u"arc_magnet_height_lock")
+
+        self.gridLayout_10.addWidget(self.arc_magnet_height_lock, 4, 2, 1, 1)
 
         self.magnet_tab_widget.addTab(self.tab_6, "")
 
@@ -810,6 +957,25 @@ class Ui_BLDCDialog(object):
 
         self.verticalLayout_5.addWidget(self.groupBox_7)
 
+        self.groupBox_10 = QGroupBox(self.scrollAreaWidgetContents)
+        self.groupBox_10.setObjectName(u"groupBox_10")
+        self.gridLayout_11 = QGridLayout(self.groupBox_10)
+        self.gridLayout_11.setObjectName(u"gridLayout_11")
+        self.cancelButton = QPushButton(self.groupBox_10)
+        self.cancelButton.setObjectName(u"cancelButton")
+        self.cancelButton.setStyleSheet(u"")
+
+        self.gridLayout_11.addWidget(self.cancelButton, 0, 0, 1, 1)
+
+        self.finishButton = QPushButton(self.groupBox_10)
+        self.finishButton.setObjectName(u"finishButton")
+        self.finishButton.setStyleSheet(u"background-color: yellow; ")
+
+        self.gridLayout_11.addWidget(self.finishButton, 0, 1, 1, 1)
+
+
+        self.verticalLayout_5.addWidget(self.groupBox_10)
+
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.verticalLayout_4.addWidget(self.scrollArea)
@@ -826,8 +992,8 @@ class Ui_BLDCDialog(object):
 
         self.retranslateUi(BLDCDialog)
 
-        self.tabWidget.setCurrentIndex(1)
-        self.magnet_tab_widget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
+        self.magnet_tab_widget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(BLDCDialog)
@@ -835,14 +1001,14 @@ class Ui_BLDCDialog(object):
 
     def retranslateUi(self, BLDCDialog):
         BLDCDialog.setWindowTitle(QCoreApplication.translate("BLDCDialog", u"Dialog", None))
+        self.display_base_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Base", None))
         self.display_axle_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Axle", None))
         self.display_bearing_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Bearing", None))
         self.display_stator_core_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Stator Core", None))
         self.display_wires_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Wires", None))
         self.display_magnets_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Magnets", None))
         self.display_outrunner_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Outrunner", None))
-        self.display_height_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Height", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.stator_display_tab), QCoreApplication.translate("BLDCDialog", u"Stator", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.stator_display_tab), QCoreApplication.translate("BLDCDialog", u"Views", None))
         self.groupBox_8.setTitle(QCoreApplication.translate("BLDCDialog", u"Display", None))
         self.display_magnet_pitch_factor_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Pitch Factor", None))
         self.display_chording_radio_button.setText(QCoreApplication.translate("BLDCDialog", u"Chording", None))
@@ -861,14 +1027,9 @@ class Ui_BLDCDialog(object):
         self.remove_q_gt_0_5_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"Slot-Pole Ratio>0.5", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("BLDCDialog", u"Slot-Pole", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QCoreApplication.translate("BLDCDialog", u"Graphs", None))
-        self.groupBox_3.setTitle(QCoreApplication.translate("BLDCDialog", u"Default Settings", None))
-        self.default_settings_combobox.setItemText(0, QCoreApplication.translate("BLDCDialog", u"Quadcopter Motor", None))
-        self.default_settings_combobox.setItemText(1, QCoreApplication.translate("BLDCDialog", u"Micro Motor", None))
-        self.default_settings_combobox.setItemText(2, QCoreApplication.translate("BLDCDialog", u"MEMS Motor", None))
-        self.default_settings_combobox.setItemText(3, QCoreApplication.translate("BLDCDialog", u"Car Motor", None))
-        self.default_settings_combobox.setItemText(4, QCoreApplication.translate("BLDCDialog", u"Airplane Motor", None))
-
-        self.default_settings_apply_button.setText(QCoreApplication.translate("BLDCDialog", u"Apply", None))
+        self.groupBox_3.setTitle(QCoreApplication.translate("BLDCDialog", u"Settings", None))
+        self.settings_save_button.setText(QCoreApplication.translate("BLDCDialog", u"Save", None))
+        self.settings_load_button.setText(QCoreApplication.translate("BLDCDialog", u"Load", None))
         self.groupBox.setTitle(QCoreApplication.translate("BLDCDialog", u"Input/Output Properties", None))
         self.label_3.setText(QCoreApplication.translate("BLDCDialog", u"Gearbox Ratio", None))
         self.label_4.setText(QCoreApplication.translate("BLDCDialog", u"Motor Torque", None))
@@ -877,32 +1038,42 @@ class Ui_BLDCDialog(object):
         self.label_2.setText(QCoreApplication.translate("BLDCDialog", u"Output Torque", None))
         self.label.setText(QCoreApplication.translate("BLDCDialog", u"Output RPM", None))
         self.label_7.setText(QCoreApplication.translate("BLDCDialog", u"Max Temp", None))
-        self.groupBox_2.setTitle(QCoreApplication.translate("BLDCDialog", u"Physical Properties", None))
+        self.groupBox_2.setTitle(QCoreApplication.translate("BLDCDialog", u"General", None))
         self.label_11.setText(QCoreApplication.translate("BLDCDialog", u"Air Gap", None))
-        self.label_12.setText(QCoreApplication.translate("BLDCDialog", u"Axle Radius", None))
+        self.label_28.setText(QCoreApplication.translate("BLDCDialog", u"Base Height", None))
+        self.groupBox_11.setTitle(QCoreApplication.translate("BLDCDialog", u"Axle", None))
+        self.label_37.setText(QCoreApplication.translate("BLDCDialog", u"Below Base Len", None))
+        self.label_12.setText(QCoreApplication.translate("BLDCDialog", u"Radius", None))
+        self.label_38.setText(QCoreApplication.translate("BLDCDialog", u"Above Outrunner Len", None))
         self.groupBox_4.setTitle(QCoreApplication.translate("BLDCDialog", u"Stator", None))
         self.label_16.setText(QCoreApplication.translate("BLDCDialog", u"Stator Inner Radius", None))
         self.label_14.setText(QCoreApplication.translate("BLDCDialog", u"Hammerhead Width", None))
         self.label_13.setText(QCoreApplication.translate("BLDCDialog", u"Slot Width", None))
         self.label_15.setText(QCoreApplication.translate("BLDCDialog", u"Hammerhead Length", None))
         self.label_9.setText(QCoreApplication.translate("BLDCDialog", u"Num Slots", None))
+        self.label_31.setText(QCoreApplication.translate("BLDCDialog", u"Height", None))
+        self.label_39.setText(QCoreApplication.translate("BLDCDialog", u"Dist From Base", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("BLDCDialog", u"Outrunner", None))
-        self.label_18.setText(QCoreApplication.translate("BLDCDialog", u"Outrunner Thickness", None))
         self.label_8.setText(QCoreApplication.translate("BLDCDialog", u"Radius", None))
-        self.label_32.setText(QCoreApplication.translate("BLDCDialog", u"Dist Between", None))
-        self.label_29.setText(QCoreApplication.translate("BLDCDialog", u"Rounding Radius", None))
+        self.label_18.setText(QCoreApplication.translate("BLDCDialog", u"Thickness", None))
+        self.label_10.setText(QCoreApplication.translate("BLDCDialog", u"Height", None))
+        self.label_40.setText(QCoreApplication.translate("BLDCDialog", u"Height Gap", None))
         self.square_magnet_min_max_display.setText(QCoreApplication.translate("BLDCDialog", u"[min, max]", None))
+        self.label_32.setText(QCoreApplication.translate("BLDCDialog", u"Dist Between", None))
+        self.label_33.setText(QCoreApplication.translate("BLDCDialog", u"Dist From Circle", None))
         self.label_24.setText(QCoreApplication.translate("BLDCDialog", u"Num Magnets", None))
+        self.label_27.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Width", None))
+        self.label_29.setText(QCoreApplication.translate("BLDCDialog", u"Rounding Radius", None))
         self.label_17.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Thickness", None))
         self.square_magnet_rounded_corners.setText(QCoreApplication.translate("BLDCDialog", u"Rounded Corners", None))
-        self.label_27.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Width", None))
-        self.label_33.setText(QCoreApplication.translate("BLDCDialog", u"Dist From Circle", None))
+        self.label_35.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Height", None))
         self.magnet_tab_widget.setTabText(self.magnet_tab_widget.indexOf(self.tab), QCoreApplication.translate("BLDCDialog", u"Square Magnet", None))
         self.label_30.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Arc Width", None))
         self.label_26.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Thickness", None))
         self.label_34.setText(QCoreApplication.translate("BLDCDialog", u"Dist Between", None))
         self.arc_magnet_min_max_display.setText(QCoreApplication.translate("BLDCDialog", u"[min, max]", None))
         self.label_25.setText(QCoreApplication.translate("BLDCDialog", u"Num Magnets", None))
+        self.label_36.setText(QCoreApplication.translate("BLDCDialog", u"Magnet Height", None))
         self.magnet_tab_widget.setTabText(self.magnet_tab_widget.indexOf(self.tab_6), QCoreApplication.translate("BLDCDialog", u"Arc Magnet", None))
         self.groupBox_6.setTitle(QCoreApplication.translate("BLDCDialog", u"Wire", None))
         self.label_21.setText(QCoreApplication.translate("BLDCDialog", u"Needle Diameter", None))
@@ -914,6 +1085,9 @@ class Ui_BLDCDialog(object):
         self.groupBox_7.setTitle(QCoreApplication.translate("BLDCDialog", u"CNC", None))
         self.label_23.setText(QCoreApplication.translate("BLDCDialog", u"Drill Bit Diameter", None))
         self.cnc_milling_checkbox.setText(QCoreApplication.translate("BLDCDialog", u"CNC Milling", None))
+        self.groupBox_10.setTitle(QCoreApplication.translate("BLDCDialog", u"Generate", None))
+        self.cancelButton.setText(QCoreApplication.translate("BLDCDialog", u"Cancel", None))
+        self.finishButton.setText(QCoreApplication.translate("BLDCDialog", u"Finish", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), QCoreApplication.translate("BLDCDialog", u"Tab 1", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_4), QCoreApplication.translate("BLDCDialog", u"Tab 2", None))
     # retranslateUi

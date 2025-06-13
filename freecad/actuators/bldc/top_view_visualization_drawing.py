@@ -26,6 +26,8 @@ def draw_axle(bldc_window: BLDCWindow, _):
 
 def get_magnet_inner_radius(bldc_window: BLDCWindow):
     magnet_outer_radius = bldc_window.ui.radius_lineedit.get_mm_value() - bldc_window.ui.outrunner_thickness_lineedit.get_mm_value()
+    if magnet_outer_radius==0:
+        return 0,0
     if bldc_window.ui.magnet_tab_widget.currentIndex()==0: # square magnet
         magnet_thickness = bldc_window.ui.square_magnet_thickness_lineedit.get_mm_value()
         magnet_width = bldc_window.ui.square_magnet_width_lineedit.get_mm_value()
@@ -53,6 +55,8 @@ def draw_magnets(bldc_window: BLDCWindow, _):
         # todo: break into own section dependent on num magnets and thickness
         num_magnets = bldc_window.ui.num_square_magnets_lineedit.get_value()
         magnet_thickness = bldc_window.ui.square_magnet_thickness_lineedit.get_mm_value()
+        if magnet_thickness==0 or num_magnets==0:
+            return
 
         if bldc_window.ui.square_magnet_rounded_corners.isChecked():
             rad = bldc_window.ui.square_magnet_rounding_radius_lineedit.get_mm_value()
@@ -190,9 +194,14 @@ def draw_magnets(bldc_window: BLDCWindow, _):
     else:
         # todo: break into own section dependent on num magnets
         num_magnets = bldc_window.ui.num_arc_magnets_lineedit.get_value()
+        if num_magnets==0:
+            return
         #magnet_thickness = bldc_window.ui.arc_magnet_thickness_lineedit.get_mm_value()
         max_arc_width = 360/num_magnets
         magnet_inner_radius, _ = get_magnet_inner_radius(bldc_window)
+
+        if magnet_outer_radius-magnet_inner_radius==0:
+            return
 
         bldc_window.ui.arc_magnet_width_slider.setFractionalSingleStep(max_arc_width/1000)
         bldc_window.ui.arc_magnet_width_slider.setFractionalMinimum(0)
@@ -278,9 +287,10 @@ def draw_stator_core(bldc_window: BLDCWindow, pixel_per_unit):
         all_x.extend(x_slot)
         all_y.extend(y_slot)
 
-    all_x.append(all_x[0])
-    all_y.append(all_y[0])
-    bldc_window.ui.stator_plot_widget.plot(np.array(all_x), np.array(all_y), pen=pen)
+    if all_x:
+        all_x.append(all_x[0])
+        all_y.append(all_y[0])
+        bldc_window.ui.stator_plot_widget.plot(np.array(all_x), np.array(all_y), pen=pen)
 
 def _calculate_slot_points(
     slot_idx,

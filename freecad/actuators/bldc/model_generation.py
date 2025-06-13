@@ -1,6 +1,8 @@
-import FreeCAD
-import FreeCADGui
-import pytest
+from freecad.actuators.bldc.serialize import BLDCParameters
+from freecad.actuators.tests_base import run_in_freecad, show_feature_python_group
+from typing import Any
+
+@run_in_freecad
 def test_generate_bldc_model():
     from freecad.actuators.bldc.top_view_visualization_drawing import _calculate_slot_points
     from freecad.actuators.bldc.serialize import BLDCParameters, load_from_file
@@ -75,9 +77,3 @@ def test_generate_bldc_model():
         doc = FreeCAD.newDocument("BLDCMotor")
     FreeCAD.setActiveDocument("BLDCMotor")
     show_feature_python_group(doc, [stator_shape], "stator_shape", "BLDCGroup")
-FreeCADGui.showMainWindow()
-
-
-test_generate_bldc_model()
-print('Test complete. Press Ctrl+C to close FreeCAD.')
-FreeCADGui.exec_loop()

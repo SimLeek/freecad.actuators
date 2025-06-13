@@ -13,7 +13,7 @@ else:
     from typing import Any
     BLDCWindow = Any
 
-from freecad.actuators.bldc.visualization_drawing import get_magnet_inner_radius
+from freecad.actuators.bldc.top_view_visualization_drawing import get_magnet_inner_radius
 
 def draw_wires(bldc_window: BLDCWindow, pixel_per_unit):
     """Draw the wires in the stator slots as lines between left and right vectors."""
@@ -28,6 +28,9 @@ def draw_wires(bldc_window: BLDCWindow, pixel_per_unit):
             - bldc_window.ui.air_gap_lineedit.get_mm_value()
             - L
     )
+
+    if r_outer-r_inner==0 or wire_diam==0:
+        return
 
     num_turns = int(bldc_window.ui.turns_per_slot_lineedit.get_value())
     cnc_milling = bldc_window.ui.cnc_milling_checkbox.isChecked()
@@ -105,7 +108,7 @@ def draw_wires(bldc_window: BLDCWindow, pixel_per_unit):
                     else:
                         bin_counts_odd[turn] = int((current_layer+1)/2)
                 else:
-                    bin_counts[turn] = current_layer
+                    bin_counts[turn] = current_layer+1
             current_layer +=1
         if tight_pack:
             for r, bc in zip(bin_radii_even, bin_counts_even):
@@ -328,21 +331,22 @@ def _generate_turns_list(current_bin, current_layer, num_turns, tight_pack, bin_
 
         if cnc_milling:
             dr = drill_bit_radius
-            if r > cnc_end_start:
+            if cnc_end_start+dr> r > cnc_end_start:
+                #print(f"sqrt({1 - ((r - cnc_end_start) / dr) ** 2, r, cnc_end_start, dr})")
                 cnc_height = dr - dr * np.sqrt(1 - ((r - cnc_end_start) / dr) ** 2)
                 wire_min_height = current_layer * wire_diam
                 if wire_min_height < cnc_height:
                     if (current_layer+int(swap_dir)) % 2 != 0:
                         turns_list[-1].append(current_bin)
-                        turns_list.append([current_bin])
                         current_bin = len(next_bin_counts)-1
+                        turns_list.append([current_bin])
                         current_layer += 1
                     else:
                         current_bin -= 1
                         turns_list[-1][0] = current_bin  # delay start until good
                     continue
                     # fits_drill = False
-            elif r < cnc_core_start:
+            elif 0 < r < cnc_core_start:
                 cnc_height = dr - dr * np.sqrt(1 - ((r - r_inner - dr) / dr) ** 2)
                 wire_min_height = current_layer * wire_diam
                 if wire_min_height < cnc_height:
@@ -378,14 +382,18 @@ def _generate_turns_list(current_bin, current_layer, num_turns, tight_pack, bin_
             # don't check is_colliding here. We want to keep going out until there's room
             current_bin += 1
             if tight_pack:
-                if current_bin >= len(bin_counts_odd):
+                if (swap_dir and current_bin>=len(bin_counts_even)) or current_bin >= len(bin_counts_odd):
                     # corresponding next position in odd layer should be one behind our prev position:
                     current_bin -= 1
                     current_layer += 1
-                    if current_bin >= len(bin_counts_odd) or is_colliding:
+                    #turn-=1
+                    if (swap_dir and current_bin>=len(bin_counts_even)) or current_bin >= len(bin_counts_odd) or is_colliding:
                         break  # Todo: add warning here: not possible to wind anymore
                     turns_list[-1].append(current_bin + 1)
-                    turns_list.append([len(bin_counts_even) - 1])  # even has different start
+                    if swap_dir:
+                        turns_list.append([len(bin_counts_odd) - 1])  # odd has different start
+                    else:
+                        turns_list.append([len(bin_counts_even) - 1])  # even has different start
             else:
                 if current_bin >= len(bin_counts):
                     current_bin -= 1

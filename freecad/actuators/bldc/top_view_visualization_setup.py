@@ -43,9 +43,6 @@ def connect_display_checkboxes(bldc_window: BLDCWindow):
     bldc_window.ui.display_bearing_checkbox.setChecked(True)
     bldc_window.ui.display_bearing_checkbox.stateChanged.connect(lambda: update_visualization(bldc_window))
 
-    bldc_window.ui.display_height_checkbox.setChecked(True)
-    bldc_window.ui.display_height_checkbox.stateChanged.connect(lambda: update_visualization(bldc_window))
-
 def connect_display_and_parameters(bldc_window: BLDCWindow):
     """Create grouped UI elements for motor parameters."""
     # Plot widget
@@ -54,6 +51,8 @@ def connect_display_and_parameters(bldc_window: BLDCWindow):
     bldc_window.ui.stator_plot_widget.setRange(xRange=[-150, 150], yRange=[-150, 150])
     bldc_window.ui.stator_plot_widget.setBackground("w")
     #bldc_window.ui.stator_display_tab.addWidget(bldc_window.ui.stator_plot_widget, 3)
+
+    bldc_window.ui.stator_plot_widget.sigRangeChanged.connect(lambda: update_visualization_with_cache(bldc_window))
 
     # General Parameters Group
     bldc_window.ui.radius_lineedit.textChanged.connect(lambda: update_visualization(bldc_window))
