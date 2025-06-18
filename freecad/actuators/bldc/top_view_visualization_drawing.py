@@ -46,6 +46,17 @@ def get_magnet_inner_radius(bldc_window: BLDCWindow):
         magnet_inner_radius = magnet_outer_radius - magnet_thickness
     return magnet_inner_radius, dist_from_wall
 
+def xy_groups_to_nan_joined(all_xy):
+    all_x = []
+    all_y = []
+    for xy in all_xy:
+        x, y = xy
+        all_x.append(np.nan)
+        all_y.append(np.nan)
+        all_x.extend(x)
+        all_y.extend(y)
+    return all_x, all_y
+
 def draw_magnets(bldc_window: BLDCWindow, _):
     """Draw magnets on the outrunner with thickness toward the stator."""
     magnet_outer_radius = bldc_window.ui.radius_lineedit.get_mm_value() - bldc_window.ui.outrunner_thickness_lineedit.get_mm_value()
@@ -55,34 +66,33 @@ def draw_magnets(bldc_window: BLDCWindow, _):
         # todo: break into own section dependent on num magnets and thickness
         num_magnets = bldc_window.ui.num_square_magnets_lineedit.get_value()
         magnet_thickness = bldc_window.ui.square_magnet_thickness_lineedit.get_mm_value()
-        if magnet_thickness==0 or num_magnets==0:
+        if magnet_thickness == 0 or num_magnets == 0:
             return
 
         if bldc_window.ui.square_magnet_rounded_corners.isChecked():
-            rad = bldc_window.ui.square_magnet_rounding_radius_lineedit.get_mm_value()
+            rounding_radius = bldc_window.ui.square_magnet_rounding_radius_lineedit.get_mm_value()
         else:
-            rad = 0
+            rounding_radius = 0
 
         magnet_inner_radius, dist_from_wall = get_magnet_inner_radius(bldc_window)
         bldc_window.ui.square_magnet_dist_from_circle_lineedit.set_mm_value(dist_from_wall)
-        theta = (num_magnets-2)*np.pi/(2*num_magnets)
-        no_thickness_width = 2*magnet_outer_radius*np.cos(theta)
-        h = magnet_outer_radius*np.sin(theta) - (magnet_thickness-rad)
-        max_w = 2*h*np.cos(theta)
-        #print(f"h({h}), max_w({max_w}), theta({theta})")
-        bldc_window.ui.square_magnet_width_slider.setFractionalSingleStep(max_w/1000)
+        theta = (num_magnets - 2) * np.pi / (2 * num_magnets)
+        no_thickness_width = 2 * magnet_outer_radius * np.cos(theta)
+        h = magnet_outer_radius * np.sin(theta) - (magnet_thickness - rounding_radius)
+        max_w = 2 * h * np.cos(theta)
+        bldc_window.ui.square_magnet_width_slider.setFractionalSingleStep(max_w / 1000)
         bldc_window.ui.square_magnet_width_slider.setFractionalMinimum(0)
         bldc_window.ui.square_magnet_width_slider.setFractionalMaximum(max_w)
         bldc_window.ui.square_magnet_min_max_display.setText(f"[0mm, {max_w}mm]")
 
         magnet_width = bldc_window.ui.square_magnet_width_lineedit.get_mm_value()
-        dist_from_each_other = max_w-magnet_width
+        dist_from_each_other = max_w - magnet_width
         bldc_window.ui.square_magnet_dist_between_lineedit.set_mm_value(dist_from_each_other)
 
-        if rad*2>magnet_width:
+        if rounding_radius * 2 > magnet_width:
             bldc_window.ui.square_magnet_rounding_radius_lineedit.setStyleSheet("background-color: red;")
             bldc_window.ui.square_magnet_rounding_radius_lineedit.setToolTip("rounding radius cannot be greater than magnet width")
-        elif rad*2>magnet_thickness:
+        elif rounding_radius * 2 > magnet_thickness:
             bldc_window.ui.square_magnet_rounding_radius_lineedit.setStyleSheet("background-color: red;")
             bldc_window.ui.square_magnet_rounding_radius_lineedit.setToolTip("rounding radius cannot be greater than magnet height")
         else:
@@ -90,111 +100,16 @@ def draw_magnets(bldc_window: BLDCWindow, _):
             bldc_window.ui.square_magnet_rounding_radius_lineedit.setToolTip("")
         # todo end
 
-        non_round_width = magnet_width - rad*2
-        non_round_height = magnet_thickness - rad*2
+        all_xy = get_square_magnet_points(num_magnets, magnet_outer_radius, dist_from_wall, rounding_radius, magnet_width, magnet_thickness)
+        all_x, all_y = xy_groups_to_nan_joined(all_xy)
 
-        all_x, all_y = [], []
-        for i in range(int(num_magnets)):
-            q = magnet_angle = i * (2 * np.pi / num_magnets)
-            #start_contact_angle = np.arctan2(-non_round_width/2, magnet_outer_radius-dist_from_wall)
-            #end_contact_angle = np.arctan2(-non_round_width/2, magnet_outer_radius-dist_from_wall)
-
-            r = magnet_outer_radius - dist_from_wall
-
-            if rad!=0:
-                quarter_center_x = (r-rad) * np.cos(q) - (non_round_width / 2) * np.sin(q)
-                quarter_center_y = (r-rad) * np.sin(q) + (non_round_width / 2) * np.cos(q)
-
-                theta_quarter_start = np.linspace(q + 2*np.pi +  np.pi / (2 * 20), q + 3*np.pi/2, 10, endpoint=False)
-                x_quarter = quarter_center_x - (rad * np.sin(theta_quarter_start))
-                y_quarter = quarter_center_y + (rad * np.cos(theta_quarter_start))
-                all_x.extend(x_quarter)
-                all_y.extend(y_quarter)
-
-            x_left = r * np.cos(q) - non_round_width / 2 * np.sin(q)
-            y_left = r * np.sin(q) + non_round_width / 2 * np.cos(q)
-            x_right = r * np.cos(q) + non_round_width / 2 * np.sin(q)
-            y_right = r * np.sin(q) - non_round_width / 2 * np.cos(q)
-
-            all_x.extend([x_left, x_right])
-            all_y.extend([y_left, y_right])
-
-            if rad!=0:
-                quarter_center_x = (r-rad) * np.cos(q) + (non_round_width / 2) * np.sin(q)
-                quarter_center_y = (r-rad) * np.sin(q) - (non_round_width / 2) * np.cos(q)
-
-                theta_quarter_start = np.linspace(q -np.pi/2 + np.pi / (2 * 20), q - np.pi, 10, endpoint=False)
-                x_quarter = quarter_center_x - (rad * np.sin(theta_quarter_start))
-                y_quarter = quarter_center_y + (rad * np.cos(theta_quarter_start))
-                all_x.extend(x_quarter)
-                all_y.extend(y_quarter)
-
-            x_left = (r-rad) * np.cos(q) + magnet_width / 2 * np.sin(q)
-            y_left = (r-rad) * np.sin(q) - magnet_width / 2 * np.cos(q)
-            x_right = (r - rad-non_round_height) * np.cos(q) + magnet_width / 2 * np.sin(q)
-            y_right = (r - rad-non_round_height) * np.sin(q) - magnet_width / 2 * np.cos(q)
-
-            if rad!=0:
-                all_x.extend([x_left, x_right])
-                all_y.extend([y_left, y_right])
-            else:
-                all_x.extend([x_right])
-                all_y.extend([y_right])
-
-            if rad!=0:
-                quarter_center_x = (r-rad-non_round_height) * np.cos(q) + (non_round_width / 2) * np.sin(q)
-                quarter_center_y = (r-rad-non_round_height) * np.sin(q) - (non_round_width / 2) * np.cos(q)
-
-                theta_quarter_start = np.linspace(q + np.pi +  np.pi / (2 * 20), q + np.pi/2, 10, endpoint=False)
-                x_quarter = quarter_center_x - (rad * np.sin(theta_quarter_start))
-                y_quarter = quarter_center_y + (rad * np.cos(theta_quarter_start))
-                all_x.extend(x_quarter)
-                all_y.extend(y_quarter)
-
-            x_left = (r-magnet_thickness) * np.cos(q) + non_round_width / 2 * np.sin(q)
-            y_left = (r-magnet_thickness) * np.sin(q) - non_round_width / 2 * np.cos(q)
-            x_right = (r-magnet_thickness) * np.cos(q) - non_round_width / 2 * np.sin(q)
-            y_right = (r-magnet_thickness) * np.sin(q) + non_round_width / 2 * np.cos(q)
-
-            if rad != 0:
-                all_x.extend([x_left, x_right])
-                all_y.extend([y_left, y_right])
-            else:
-                all_x.extend([x_right])
-                all_y.extend([y_right])
-
-            if rad!=0:
-                quarter_center_x = (r-rad-non_round_height) * np.cos(q) - (non_round_width / 2) * np.sin(q)
-                quarter_center_y = (r-rad-non_round_height) * np.sin(q) + (non_round_width / 2) * np.cos(q)
-
-                theta_quarter_start = np.linspace(q + np.pi/2 + np.pi / (2 * 20), q, 10, endpoint=False)
-                x_quarter = quarter_center_x - (rad * np.sin(theta_quarter_start))
-                y_quarter = quarter_center_y + (rad * np.cos(theta_quarter_start))
-                all_x.extend(x_quarter)
-                all_y.extend(y_quarter)
-
-            x_left = (r - rad - non_round_height) * np.cos(q) - magnet_width / 2 * np.sin(q)
-            y_left = (r - rad - non_round_height) * np.sin(q) + magnet_width / 2 * np.cos(q)
-            x_right = (r - rad) * np.cos(q) - magnet_width / 2 * np.sin(q)
-            y_right = (r - rad) * np.sin(q) + magnet_width / 2 * np.cos(q)
-
-            if rad != 0:
-                all_x.extend([x_left, x_right])
-                all_y.extend([y_left, y_right])
-            else:
-                all_x.extend([x_right])
-                all_y.extend([y_right])
-
-            all_x.append(np.nan)
-            all_y.append(np.nan)
-
-            pen_width = 2
-            bldc_window.ui.stator_plot_widget.plot(all_x, all_y, pen=pg.mkPen("#C0C0C0", width=pen_width))
+        pen_width = 2
+        bldc_window.ui.stator_plot_widget.plot(all_x, all_y, pen=pg.mkPen("#C0C0C0", width=pen_width), fillLevel=0, fillBrush=pg.mkBrush("#E0E0E0"))
 
     else:
         # todo: break into own section dependent on num magnets
         num_magnets = bldc_window.ui.num_arc_magnets_lineedit.get_value()
-        if num_magnets==0:
+        if num_magnets == 0:
             return
         #magnet_thickness = bldc_window.ui.arc_magnet_thickness_lineedit.get_mm_value()
         max_arc_width = 360/num_magnets
@@ -203,37 +118,142 @@ def draw_magnets(bldc_window: BLDCWindow, _):
         if magnet_outer_radius-magnet_inner_radius==0:
             return
 
-        bldc_window.ui.arc_magnet_width_slider.setFractionalSingleStep(max_arc_width/1000)
+        bldc_window.ui.arc_magnet_width_slider.setFractionalSingleStep(max_arc_width / 1000)
         bldc_window.ui.arc_magnet_width_slider.setFractionalMinimum(0)
         bldc_window.ui.arc_magnet_width_slider.setFractionalMaximum(max_arc_width)
         bldc_window.ui.arc_magnet_min_max_display.setText(f"[0°, {max_arc_width}°]")
 
         arc_width = bldc_window.ui.arc_magnet_width_lineedit.get_degrees_value()
-        dist_from_each_other = 2*magnet_inner_radius*np.sin(np.deg2rad(max_arc_width - arc_width)/2)
+        dist_from_each_other = 2 * magnet_inner_radius * np.sin(np.deg2rad(max_arc_width - arc_width) / 2)
         bldc_window.ui.arc_magnet_dist_between_lineedit.set_mm_value(dist_from_each_other)
         # todo end
+        all_xy = get_arc_magnet_points(num_magnets, arc_width, magnet_inner_radius, magnet_outer_radius)
+        all_x, all_y = xy_groups_to_nan_joined(all_xy)
 
-        magnet_arc = 2 * np.pi / num_magnets
-        all_x, all_y = [], []
-        for i in range(int(num_magnets)):
-            magnet_angle = i * (2 * np.pi / num_magnets)
-            start_angle = magnet_angle - np.deg2rad(arc_width)/2
-            end_angle = magnet_angle + np.deg2rad(arc_width)/2
-            theta_magnet = np.linspace(start_angle, end_angle, 20, endpoint=False)
-            x_inner = magnet_inner_radius * np.cos(theta_magnet)
-            y_inner = magnet_inner_radius * np.sin(theta_magnet)
-            x_outer = magnet_outer_radius * np.cos(theta_magnet[::-1])
-            y_outer = magnet_outer_radius * np.sin(theta_magnet[::-1])
-            x_magnet = np.concatenate([x_inner, x_outer])
-            y_magnet = np.concatenate([y_inner, y_outer])
-            x_magnet = np.append(x_magnet, x_magnet[0])
-            y_magnet = np.append(y_magnet, y_magnet[0])
-            all_x.extend(x_magnet)
-            all_y.extend(y_magnet)
-            all_x.append(np.nan)
-            all_y.append(np.nan)
         pen_width = 2
-        bldc_window.ui.stator_plot_widget.plot(all_x, all_y, pen=pg.mkPen("#C0C0C0", width=pen_width))
+        bldc_window.ui.stator_plot_widget.plot(all_x, all_y, pen=pg.mkPen("#C0C0C0", width=pen_width), fillLevel=0, fillBrush=pg.mkBrush("#E0E0E0"))
+
+def get_arc_magnet_points(num_magnets, arc_width, magnet_inner_radius, magnet_outer_radius):
+    magnet_arc = 2 * np.pi / num_magnets
+    all_x, all_y = [], []
+    group_xy = []
+    for i in range(int(num_magnets)):
+        group_xy.append([[], []])
+        magnet_angle = i * (2 * np.pi / num_magnets)
+        start_angle = magnet_angle - np.deg2rad(arc_width) / 2
+        end_angle = magnet_angle + np.deg2rad(arc_width) / 2
+        theta_magnet = np.linspace(start_angle, end_angle, 20, endpoint=False)
+        x_inner = magnet_inner_radius * np.cos(theta_magnet)
+        y_inner = magnet_inner_radius * np.sin(theta_magnet)
+        x_outer = magnet_outer_radius * np.cos(theta_magnet[::-1])
+        y_outer = magnet_outer_radius * np.sin(theta_magnet[::-1])
+        x_magnet = np.concatenate([x_inner, x_outer])
+        y_magnet = np.concatenate([y_inner, y_outer])
+        x_magnet = np.append(x_magnet, x_magnet[0])
+        y_magnet = np.append(y_magnet, y_magnet[0])
+        group_xy[-1][0].extend(x_magnet)
+        group_xy[-1][1].extend(y_magnet)
+        group_xy[-1][0].append(group_xy[-1][0][0])
+        group_xy[-1][1].append(group_xy[-1][1][0])
+        #all_x.append(np.nan)
+        #all_y.append(np.nan)
+    return group_xy
+
+
+def get_square_magnet_points(num_magnets, magnet_outer_radius, dist_from_wall, rounding_radius, magnet_width, magnet_thickness):
+    non_round_width = magnet_width - rounding_radius * 2
+    non_round_height = magnet_thickness - rounding_radius * 2
+
+    group_xy = []
+    for i in range(int(num_magnets)):
+        group_xy.append([[], []])
+        q = i * (2 * np.pi / num_magnets)  # magnet_angle
+
+        r = magnet_outer_radius - dist_from_wall
+
+        if rounding_radius != 0:
+            quarter_center_x = (r - rounding_radius) * np.cos(q) - (non_round_width / 2) * np.sin(q)
+            quarter_center_y = (r - rounding_radius) * np.sin(q) + (non_round_width / 2) * np.cos(q)
+
+            theta_quarter_start = np.linspace(q + 2 * np.pi, q + 3 * np.pi / 2, 10, endpoint=True)
+            x_quarter = quarter_center_x - (rounding_radius * np.sin(theta_quarter_start))
+            y_quarter = quarter_center_y + (rounding_radius * np.cos(theta_quarter_start))
+            #raise(ValueError(f"{group_xy}"))
+            group_xy[-1][0].extend(x_quarter)
+            group_xy[-1][1].extend(y_quarter)
+
+        x_left = r * np.cos(q) - non_round_width / 2 * np.sin(q)
+        y_left = r * np.sin(q) + non_round_width / 2 * np.cos(q)
+        x_right = r * np.cos(q) + non_round_width / 2 * np.sin(q)
+        y_right = r * np.sin(q) - non_round_width / 2 * np.cos(q)
+
+        if rounding_radius == 0:
+            group_xy[-1][0].extend([x_left, x_right])
+            group_xy[-1][1].extend([y_left, y_right])
+            #group_xy[-1][0].extend([x_right])
+            #group_xy[-1][1].extend([y_right])
+
+        if rounding_radius != 0:
+            quarter_center_x = (r - rounding_radius) * np.cos(q) + (non_round_width / 2) * np.sin(q)
+            quarter_center_y = (r - rounding_radius) * np.sin(q) - (non_round_width / 2) * np.cos(q)
+
+            theta_quarter_start = np.linspace(q - np.pi / 2, q - np.pi, 10, endpoint=True)
+            x_quarter = quarter_center_x - (rounding_radius * np.sin(theta_quarter_start))
+            y_quarter = quarter_center_y + (rounding_radius * np.cos(theta_quarter_start))
+            group_xy[-1][0].extend(x_quarter)
+            group_xy[-1][1].extend(y_quarter)
+
+        x_left = (r - rounding_radius) * np.cos(q) + magnet_width / 2 * np.sin(q)
+        y_left = (r - rounding_radius) * np.sin(q) - magnet_width / 2 * np.cos(q)
+        x_right = (r - rounding_radius - non_round_height) * np.cos(q) + magnet_width / 2 * np.sin(q)
+        y_right = (r - rounding_radius - non_round_height) * np.sin(q) - magnet_width / 2 * np.cos(q)
+
+        if rounding_radius==0:
+            group_xy[-1][0].extend([x_right])
+            group_xy[-1][1].extend([y_right])
+
+        if rounding_radius != 0:
+            quarter_center_x = (r - rounding_radius - non_round_height) * np.cos(q) + (non_round_width / 2) * np.sin(q)
+            quarter_center_y = (r - rounding_radius - non_round_height) * np.sin(q) - (non_round_width / 2) * np.cos(q)
+
+            theta_quarter_start = np.linspace(q + np.pi, q + np.pi / 2, 10, endpoint=True)
+            x_quarter = quarter_center_x - (rounding_radius * np.sin(theta_quarter_start))
+            y_quarter = quarter_center_y + (rounding_radius * np.cos(theta_quarter_start))
+            group_xy[-1][0].extend(x_quarter)
+            group_xy[-1][1].extend(y_quarter)
+
+        x_left = (r - magnet_thickness) * np.cos(q) + non_round_width / 2 * np.sin(q)
+        y_left = (r - magnet_thickness) * np.sin(q) - non_round_width / 2 * np.cos(q)
+        x_right = (r - magnet_thickness) * np.cos(q) - non_round_width / 2 * np.sin(q)
+        y_right = (r - magnet_thickness) * np.sin(q) + non_round_width / 2 * np.cos(q)
+
+        if rounding_radius == 0:
+            group_xy[-1][0].extend([x_right])
+            group_xy[-1][1].extend([y_right])
+
+        if rounding_radius != 0:
+            quarter_center_x = (r - rounding_radius - non_round_height) * np.cos(q) - (non_round_width / 2) * np.sin(q)
+            quarter_center_y = (r - rounding_radius - non_round_height) * np.sin(q) + (non_round_width / 2) * np.cos(q)
+
+            theta_quarter_start = np.linspace(q + np.pi / 2, q, 10, endpoint=True)
+            x_quarter = quarter_center_x - (rounding_radius * np.sin(theta_quarter_start))
+            y_quarter = quarter_center_y + (rounding_radius * np.cos(theta_quarter_start))
+            group_xy[-1][0].extend(x_quarter)
+            group_xy[-1][1].extend(y_quarter)
+
+        x_left = (r - rounding_radius - non_round_height) * np.cos(q) - magnet_width / 2 * np.sin(q)
+        y_left = (r - rounding_radius - non_round_height) * np.sin(q) + magnet_width / 2 * np.cos(q)
+        x_right = (r - rounding_radius) * np.cos(q) - magnet_width / 2 * np.sin(q)
+        y_right = (r - rounding_radius) * np.sin(q) + magnet_width / 2 * np.cos(q)
+
+        #if rounding_radius == 0:
+            #group_xy[-1][0].extend([x_right])
+            #group_xy[-1][1].extend([y_right])
+
+        group_xy[-1][0].append(group_xy[-1][0][0])
+        group_xy[-1][1].append(group_xy[-1][1][0])
+
+    return group_xy
 
 def draw_outrunner(bldc_window: BLDCWindow, _):
     """Draw outrunner circles with editable thickness."""

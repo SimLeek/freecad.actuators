@@ -122,6 +122,8 @@ def detect_arc_segments(x_points, y_points, min_points=8, error_threshold=1e-6):
     while i < n:
         # Start with min_points and expand until error increases
         j = i + min_points
+        if j>len(x_points):
+            break
         current_x = x_points[i:j]
         current_y = y_points[i:j]
 
@@ -186,14 +188,14 @@ def to_freecad_arcs_and_lines(x_points, y_points, results=None):
     """
     import FreeCAD, Part
     if results is None:
-        results = detect_arc_segments(x_points, y_points, min_points=8, error_threshold=1e-6)
+        results = detect_arc_segments(x_points, y_points, min_points=8, error_threshold=1e-5)
     edges = []
     p = 0
     r = 0
     last_circ = p
     while p < len(x_points):
         if r < len(results) and p == results[r]['start_index']:
-            if (r == 0 and p > 0) or (last_circ != results[r-1]['start_index'] if r > 0 else False):
+            if (r == 0 and p > 0) or (r>0 and last_circ != p):
                 # Add line segment from p-1 to p
                 v1 = FreeCAD.Vector(x_points[p-1], y_points[p-1], 0)
                 v2 = FreeCAD.Vector(x_points[p], y_points[p], 0)
@@ -217,10 +219,19 @@ def to_freecad_arcs_and_lines(x_points, y_points, results=None):
             r += 1
         else:
             if p > 0:
+                if 0<r < len(results)+1 and p==results[r-1]['end_index']:  # at end of circle. Already drawn.
+                    p+=1
+                    continue
+                if x_points[p-1]==x_points[p] and y_points[p-1]==y_points[p]:
+                    p+=1
+                    continue
                 # Add line segment from p-1 to p
                 v1 = FreeCAD.Vector(x_points[p-1], y_points[p-1], 0)
                 v2 = FreeCAD.Vector(x_points[p], y_points[p], 0)
+                #try:
                 line = Part.LineSegment(v1, v2)
+                #except Part.OCCError:
+                #    raise ValueError(p)
                 edges.append(line.toShape())
             p += 1
     return edges
